@@ -1,0 +1,58 @@
+{% extends 'client/template.html' %}
+{% load static %} 
+{% block title %}
+Validate
+{% endblock %}
+{% block content %}
+<div class=" text-white">
+    <div class="min-h-screen py-16">
+        <form id="codeValidationForm" class="flex flex-col items-center justify-center space-y-4 p-6">
+            <div class="w-full max-w-md mx-auto border border-gray-700 p-10 rounded-lg shadow-md">
+                <div class="py-3">
+                    <label class="inline-flex gap-2 items-center" for="otp">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4 text-white w-6 h-6">
+                                <path fillRule="evenodd" d="M15.75 1.5a6.75 6.75 0 0 0-6.651 7.906c.067.39-.032.717-.221.906l-6.5 6.499a3 3 0 0 0-.878 2.121v2.818c0 .414.336.75.75.75H6a.75.75 0 0 0 .75-.75v-1.5h1.5A.75.75 0 0 0 9 19.5V18h1.5a.75.75 0 0 0 .53-.22l2.658-2.658c.19-.189.517-.288.906-.22A6.75 6.75 0 1 0 15.75 1.5Zm0 3a.75.75 0 0 0 0 1.5A2.25 2.25 0 0 1 18 8.25a.75.75 0 0 0 1.5 0 3.75 3.75 0 0 0-3.75-3.75Z" clipRule="evenodd" />
+                            </svg>
+                        </span>
+                        Enter your code
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                            </svg>
+                        </span>
+                    </label>
+                </div>
+                <div class="flex space-x-2 justify-center">
+                    <input type="text" id="otp0" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="otp1" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="otp2" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="otp3" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="otp4" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="otp5" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="flex flex-col gap-2 py-4 mt-2">
+                    <label for="email">Enter your email</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                            </svg>
+                        </span>
+                        <input type="email" id="email" placeholder="Email" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 focus:outline-none">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="w-full fixed bottom-0 py-6 border-t border-gray-800">
+            <div class="flex justify-center md:justify-end px-12">
+                <button id="submitButton" type="submit" class="w-80 py-4 bg-violet-500 text-white rounded-lg hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50">
+                    Validate
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/validate.js' %}"></script>
+
+</div>
+{% endblock %}

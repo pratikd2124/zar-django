@@ -1,0 +1,225 @@
+{% extends 'client/template.html' %}
+{% load static %} 
+{% block title %}
+Home Owner Registration
+{% endblock %}
+{% block content %}
+<div class=" text-white">
+    <div class="container mx-auto">
+        <form id="serviceForm" onsubmit="handleSubmit(event)">
+            <div id="step1" class="step step-1 max-w-lg md:mx-auto p-6 mx-4 border border-gray-700 rounded-lg mt-8">
+                <h2 class="text-xl text-white mb-6">Basic Information</h2>
+                <div class="mb-4 relative">
+                    <label class="block text-white mb-2">Full Name</label>
+                    <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </span>
+                    <input type="text" name="fullName" placeholder="Enter your full name" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4 relative">
+                    <label class="block text-white mb-2">Contact Number</label>
+                    <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                        </svg>
+                    </span>
+                    <input type="text" name="contactNumber" placeholder="Enter your contact number" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4 relative">
+                    <label class="block text-white mb-2">Email Address</label>
+                    <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                        </svg>
+                    </span>
+                    <input type="email" name="email" placeholder="Enter your email address" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4 relative">
+                    <label class="block text-white mb-2">Firm Name</label>
+                    <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
+                        </svg>
+                    </span>
+                    <input type="text" name="firmName" placeholder="Enter your firm name" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4 relative">
+                    <label class="block text-white mb-2">Firm Address</label>
+                    <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                        </svg>
+                    </span>
+                    <input type="text" name="firmAddress" placeholder="Enter your firm address" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4 relative">
+                    <label class="block text-white mb-2">Country</label>
+                    <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </span>
+                    <select name="country" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Country</option>
+                        <option value="IN">India</option>
+                        <!-- Add more country options here -->
+                    </select>
+                </div>
+                <div class="mb-4 relative">
+                    <label class="block text-white mb-2">State</label>
+                    <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </span>
+                    <select name="state" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select State</option>
+                        <option value="MAH">Maharashtra</option>
+                        <option value="KAR">Karnataka</option>
+                        <option value="RAJ">Rajasthan</option>
+                        <!-- Add more state options here -->
+                    </select>
+                </div>
+                <div class="mb-4 relative">
+                    <label class="block text-white mb-2">City</label>
+                    <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </span>
+                    <select name="city" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select City</option>
+                        <option value="MUM">Mumbai</option>
+                        <!-- Add city options here -->
+                    </select>
+                </div>
+                <div class="mb-4 relative">
+                    <label class="block text-white mb-2">Code</label>
+                    <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" />
+                        </svg>
+                    </span>
+                    <input type="number" name="code" placeholder="e.g. 310023" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+            <div id="step2" class="step step-2 max-w-lg md:mx-auto p-6 mx-4 border border-gray-700 rounded-lg mt-8" style="display:none;">
+                <h2 class="text-xl text-white mb-6">Professional Details</h2>
+                <div class="mb-4 relative">
+                    <label class="block text-white mb-2">Category</label>
+                    <select name="category" class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="" disabled>Select a category</option>
+                        <option value="category1">Category 1</option>
+                        <option value="category2">Category 2</option>
+                        <option value="category3">Category 3</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-white mb-2">Brief Bio</label>
+                    <div class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white" style="min-height: 200px;">
+                        <textarea name="briefBio" placeholder="Write a brief bio" class="w-full h-full resize-none bg-transparent border-none focus:outline-none"></textarea>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-white mb-2">Social Media Links</label>
+                    <div class="flex mb-2 relative">
+                        <span class="absolute inset-y-0 top-0 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                            </svg>
+                        </span>
+                        <input type="text" name="facebook" placeholder="Enter Facebook link" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="flex mb-2 relative">
+                        <span class="absolute inset-y-0 top-0 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                            </svg>
+                        </span>
+                        <input type="text" name="instagram" placeholder="Enter Instagram link" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="flex mb-2 relative">
+                        <span class="absolute inset-y-0 top-0 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                            </svg>
+                        </span>
+                        <input type="text" name="linkedin" placeholder="Enter LinkedIn link" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+            </div>
+
+            <div id="step3" class="step step-3 w-full max-w-7xl mx-auto pt-8 md:px-0 px-6" style="display:none;">
+                <h2 class="text-xl mb-4">Profile Information</h2>
+                <div class='grid lg:grid-cols-2 grid-cols-1 gap-6'>
+                    <div class='flex flex-col space-y-6'>
+                        <div class='lg:flex block gap-2'>
+                            <div class="mb-4 w-full border border-gray-700 rounded-lg p-8">
+                                <label class="block">Add a Profile Picture</label>
+                                <small class='text-xs text-gray-600'>Enter Brand or Profile pic for your display</small>
+                                <div id="profilePicContainer" class="border-dashed mt-2 flex flex-col rounded-lg border-2 border-gray-700 bg-[#171717] p-4 text-center">
+                                    Drag and Drop<br/> or
+                                    <input type="file" accept="image/jpeg, image/png" class="hidden" id="profilePicInput">
+                                    <button type="button" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('profilePicInput').click()">Upload</button>
+                                </div>
+                            </div>
+                            <div class="mb-4 w-full border border-gray-700 rounded-lg p-8">
+                                <label class="block">Add a Brand Logo</label>
+                                <small class='text-xs text-gray-600'>Enter Brand logo for your display</small>
+                                <div id="brandLogoContainer" class="border-dashed mt-2 flex flex-col rounded-lg border-2 border-gray-700 bg-[#171717] p-4 text-center">
+                                    Drag and Drop<br/> or
+                                    <input type="file" accept="image/jpeg, image/png" class="hidden" id="brandLogoInput">
+                                    <button type="button" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('brandLogoInput').click()">Upload</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4 border border-gray-700 rounded-lg p-8">
+                            <label class="block">Profile Document</label>
+                            <small class='text-xs text-gray-600'>Add a PDF document</small>
+                            <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
+                                Drag and Drop<br/> or
+                                <input type="file" accept="application/pdf" class="hidden" id="profileDocInput">
+                                <button type="button" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('profileDocInput').click()">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4 border border-gray-700 rounded-lg p-8 h-full">
+                        <label class="block">Showcase Gallery</label>
+                        <small class='text-xs text-gray-600'>Add up to 10 images to showcase your company, team, and services</small>
+                        <div id="showcaseGalleryContainer" class="border-dashed mt-2 rounded-lg h-[80%] border-2 border-gray-700 bg-[#171717] p-4 text-center">
+                            <input type="file" accept="image/jpeg, image/png, image/jpg" multiple class="hidden" id="showcaseGalleryInput">
+                            <div class='w-full flex flex-col h-full justify-center'>
+                                Drag and Drop<br/> or
+                                <button type="button" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('showcaseGalleryInput').click()">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='w-full mt-16 flex lg:flex-row flex-col lg:justify-between justify-center gap-8 items-center rounded-lg bg-[#171717] p-6'>
+                <div class='lg:w-[33%] w-full text-center text-gray-400'>
+                    <span>Service Provider Details - </span>
+                    <span id="stepLabel">Basic Information</span>
+                </div>
+                <div class='lg:w-[33%] w-full text-center mx-auto flex gap-3'>
+                    <span id="stepIndicator1" class='w-1/3 bg-white rounded-xl h-2'></span>
+                    <span id="stepIndicator2" class='w-1/3 border rounded-xl h-2'></span>
+                    <span id="stepIndicator3" class='w-1/3 border rounded-xl h-2'></span>
+                </div>
+                <div class="lg:w-[33%] w-full flex justify-end gap-4">
+                    <button type="button" id="prevBtn" onclick="prevStep()" class="border border-gray-200 text-sm text-white px-8 py-3 rounded-lg hover:text-black hover:bg-gray-100" style="display:none;">Back</button>
+                    <button type="button" id="nextBtn" onclick="nextStep()" class="bg-purple-700 text-sm text-white px-8 py-3 rounded-lg hover:bg-purple-600">Next</button>
+                    <button type="submit" id="submitBtn" class="bg-purple-700 text-sm text-white px-8 py-3 rounded-lg hover:bg-purple-600" style="display:none;">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% endblock %}
+
+    <script src="{% static 'js/serviceprovider.js' %}"></script>
+

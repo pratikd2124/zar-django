@@ -1,0 +1,77 @@
+{% load static %}
+
+    <header class="bg-black text-white relative">
+        <div class="flex justify-between items-center p-4 px-12 border-b border-gray-800">
+            <a href="/" class="md:block hidden text-xl font-bold">
+                <img src="{% static 'images/zar-logos-2.png' %}" alt="Logo" width="100" height="100">
+            </a>
+            <a href="/" class="md:hidden block text-xl font-bold">
+                <img src="{% static 'images/zar1.jpg' %}" alt="Logo" width="50" height="50">
+            </a>
+            <div class="hidden md:flex items-center space-x-4">
+                {% comment %} {% if not request.path.startswith('/materials') and not request.path.startswith('/services') and not request.path.startswith('/profile') %} {% endcomment %}
+                    <a href="/validate" class="hover:underline">
+                        <span class="px-4 p-2 rounded-lg bg-white text-black text-[0.78rem]">Signup with passcode</span>
+                    </a>
+                    <a href="/signup" class="hover:underline">
+                        <span class="px-4 p-2 rounded-lg bg-white text-black text-sm">Become a Member</span>
+                    </a>
+                    <span class="text-gray-400 inline-flex gap-1.5 text-sm">
+                        Have an account?
+                        <a href="/login" class="hover:underline text-gray-300">
+                            <span class="text-white text-md">Login</span>
+                        </a>
+                    </span>
+                {% comment %} {% endif %} {% endcomment %}
+                {% comment %} {% if request.path.startswith('/materials') or request.path.startswith('/services') or request.path.startswith('/profile') %} {% endcomment %}
+                    <button id="profileButton" class="relative px-4 p-2 rounded-lg bg-white items-center inline-flex gap-2">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXLBPb5pAuO_6a9PUGtyYLzJIDqLNR-8RfoA&s" alt="profile-pic" class="size-6 rounded-full">
+                        <span class="text-black text-sm">Pratik Dhumal</span>
+                    </button>
+                    <div id="dropdownMenu" class="hidden fixed z-50 top-20 right-4 mt-2 w-48 bg-[#0f0f0f] border border-gray-700 shadow-lg rounded-xl">
+                        <div class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900">
+                            <p>Pratik Dhumal</p>
+                            <small>pratikd2124@gmail.com</small>
+                        </div>
+                        <a href="/profile">
+                            <span class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900">Profile</span>
+                        </a>
+                        <button class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900" onclick="console.log('Logout')">Logout</button>
+                    </div>
+                {% comment %} {% endif %} {% endcomment %}
+            </div>
+            <div class="md:hidden flex items-center gap-2">
+                <button id="menuButton" class="focus:outline-none">
+                    <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-white">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+                    </svg>
+                </button>
+                <div class="flex items-center">
+                    <button id="profileDropdownButton" class="relative p-2 bg-gray-800 text-white rounded-full focus:outline-none focus:bg-gray-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
+                    </button>
+                    <div id="profileDropdownMenu" class="hidden fixed z-50 right-4 mt-2 w-48 bg-[#0f0f0f] border border-gray-700 shadow-lg rounded-xl">
+                        <button class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900" onclick="console.log('Email')">
+                            <p>Pratik Dhumal</p>
+                            <small>pratikd2124@gmail.com</small>
+                        </button>
+                        <a href="/terms">
+                            <span class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900">Terms</span>
+                        </a>
+                        <button class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900" onclick="console.log('Logout')">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden absolute z-30 top-full left-0 right-0 bg-white/10 backdrop-blur flex flex-col items-start p-2 space-y-2 border-t border-gray-700">
+            <a href="/signup" class="w-full">
+                <span class="block w-full px-4 p-2 rounded-lg text-white text-sm">Sign In</span>
+            </a>
+            <a href="/login" class="w-full">
+                <span class="block w-full px-4 p-2 rounded-lg text-white text-sm">Login</span>
+            </a>
+        </div>
+    </header>
+    <script src="{% static 'js/navbar.js' %}"></script>
