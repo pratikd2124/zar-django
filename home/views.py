@@ -5,13 +5,25 @@ from django.contrib import messages
 # Create your views here.
 import random
 def all_users(request):
-    users = User.objects.all().exclude(is_superuser=True,is_staff=True)
+    users = User.objects.all().exclude(is_superuser=True,is_staff=True).filter(type='Community User')
     
     community = request.GET.get('community')
     if community:
         users = users.filter(community__code=community)
     
-    return render(request,'dashboard/all-users.html',{'title':'User List','users':users})
+    member_type = 'all_users'
+    
+    member_type = request.GET.get('memberType')
+    if member_type == 'homeOwner':
+        users = users.filter(type='Home Owner')
+        
+    if member_type == 'materialProvider':
+        users = users.filter(type='Material Provider')  
+        
+    if member_type == 'serviceProvider':
+        users = users.filter(type = 'Service Provider')
+    
+    return render(request,'dashboard/all-users.html',{'title':'User List','users':users,'member_type':member_type})
 
 
 

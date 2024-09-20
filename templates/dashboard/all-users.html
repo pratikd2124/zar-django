@@ -10,12 +10,22 @@
                             <div class="card card-table">
                                 <div class="card-body">
                                     <div class="title-header option-title">
+                                        
+                                        {% if member_type == 'materialProvider' %}
+                                            
+                                        <h5>Material Provider</h5>
+                                        {% elif member_type == 'homeOwner' %}
+                                        <h5>Home Owner</h5>
+                                        {% elif member_type == 'serviceProvider' %}
+                                        <h5>Service Providers</h5>
+                                        {% else %}
                                         <h5>All Users</h5>
-                                        <form class="d-inline-flex">
+                                        {% endif %}
+                                        {% comment %} <form class="d-inline-flex">
                                             <a href="" class="align-items-center btn btn-theme d-flex">
                                                 <i data-feather="plus"></i>Add New
                                             </a>
-                                        </form>
+                                        </form> {% endcomment %}
                                     </div>
 
                                     <div class="table-responsive table-product">
@@ -26,6 +36,11 @@
                                                     <th>Phone</th>
                                                     <th>Email</th>
                                                     <th>Joined</th>
+                                                    
+                                                    {% if member_type == 'homeOwner' %}
+                                                    <th>Status</th>
+                                                    {% endif %}
+                                                        
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>
@@ -45,7 +60,9 @@
 
                                                     <td>{{user.email}}</td>
                                                     <td>{{user.date_joined}}</td>
-
+                                                    {% if member_type == 'homeOwner' %}
+                                                    <td>{{user.homeowner.payment_status}}</td>
+                                                    {% endif %}
                                                     <td>
                                                         <ul>
                                                             

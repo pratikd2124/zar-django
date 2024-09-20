@@ -210,7 +210,17 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                             <a href="{% url 'users_list' %}">All Users</a>
                                         </li>
 
-                                
+                                        <li>
+                                            <a href="{% url 'users_list' %}?memberType=homeOwner">Home Owner</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{% url 'users_list' %}?memberType=serviceProvider">Service Provider</a>
+                                        </li>
+                                        
+                                        <li>
+                                            <a href="{% url 'users_list' %}?memberType=materialProvider">Material Provider</a>
+                                        </li>
                                        
                                     </ul>
                                 </li>   

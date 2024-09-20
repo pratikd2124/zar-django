@@ -27,53 +27,55 @@ class Community(models.Model):
     
     # Add any other fields specific to the community
 
+class ProfileGallery(models.Model):
+    image = models.ImageField(upload_to='profile_gallery')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+class ProjectImages(models.Model):
+    image = models.ImageField(upload_to='project_images')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 class User(AbstractUser):
     USER_TYPE_CHOICES = (
-        ('home_owner', 'Home Owner'),
-        ('service_provider', 'Service Provider'),
-        ('material_provider', 'Material Provider'),
+        ('Home Owner', 'Home Owner'),
+        ('Service Provider', 'Service Provider'),
+        ('Material Provider', 'Material Provider'),
+        ('Community User','Community User')
     )
     type = models.CharField(max_length=20, choices=USER_TYPE_CHOICES)
-
-    community = models.ForeignKey(Community, on_delete=models.CASCADE,blank=True, null=True)
-   
-
-
-# HomeOwner Model
-class HomeOwner(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
-    mobile = models.CharField(max_length=15)
-    intrest = models.TextField()
-    payment_status = models.CharField(max_length=100, default='pending')
     
     
-# ServiceProvider Model
-class ServiceProvider(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
+    # Home Owner Fields
     mobile = models.CharField(max_length=15)
-    firm_name = models.CharField(max_length=150)
-    firm_address = models.TextField()
-    bio = models.TextField()
-    category = models.CharField(max_length=100)
-    social_links = models.JSONField()
-    profile_doc = models.FileField(upload_to='profile_docs/')
-    profile_gallery = models.ImageField(upload_to='profile_gallery/', null=True, blank=True)
+    intrest = models.TextField(blank=True, null=True)
+    
+    #Service Provider Fields
+    firm_name = models.CharField(max_length=100,blank=True, null=True)
+    firm_address = models.TextField(blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+    category = models.CharField(max_length=100,blank=True, null=True)
+    social_links = models.JSONField(blank=True, null=True)
+    profile_doc = models.FileField(upload_to='profile_docs/',blank=True, null=True)
     profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+    profile_gallery = models.ManyToManyField(ProfileGallery, blank=True,null=True)
+    
+    #Material Provider Fields
+    brand_name = models.CharField(max_length=100,blank=True, null=True)
+    company_name = models.CharField(max_length=150,blank=True, null=True)
+    company_address = models.TextField(blank=True, null=True)
+    contact_person = models.CharField(max_length=100,blank=True, null=True)
+    mobile = models.CharField(max_length=15,blank=True, null=True)
+    project_img = models.ManyToManyField(ProjectImages, blank=True,null=True)
+    
+    
+    
     payment_status = models.CharField(max_length=100, default='pending')
+    community = models.ForeignKey(Community, on_delete=models.CASCADE,blank=True, null=True)
 
-# MaterialProvider Model
-class MaterialProvider(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    brand_name = models.CharField(max_length=150)
-    company_name = models.CharField(max_length=150)
-    company_address = models.TextField()
-    contact_person = models.CharField(max_length=100)
-    mobile = models.CharField(max_length=15)
-    project_img = models.ImageField(upload_to='project_images/', null=True, blank=True)
-    bio = models.TextField()
-    payment_status = models.CharField(max_length=100, default='pending')
+    def __str__(self):
+        return self.username
 
 
 
