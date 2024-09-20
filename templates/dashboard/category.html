@@ -1,0 +1,202 @@
+{% extends 'dashboard/template.html' %}
+{% block content %}
+
+            <!-- Container-fluid starts-->
+            <div class="page-body">
+                <!-- All User Table Start -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card card-table">
+                                <div class="card-body">
+                                    <div class="title-header option-title">
+                                        <h5>All Category</h5>
+                                        <a href="#" class="align-items-center btn btn-theme d-flex" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                                            <i data-feather="plus-square"></i>Add New
+                                        </a>
+                                    </div>
+
+                                    <div class="table-responsive category-table">
+                                        <div>
+                                            <table class="table all-package theme-table" id="table_id">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Category Name</th>
+                                                        <th>Hierarchy</th>
+
+                                                        <th>Option</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    {% for cat in categories %}
+                                                    <tr>
+                                                        <td>{{cat.name}}</td>
+
+                                                        <td>{{cat.get_category_hierarchy}}</td>
+
+                                                        <td>
+                                                            <ul>
+                                                                
+                                                                <li>
+                                                                    <a href="#" class="align-items-center d-flex" data-bs-toggle="modal" 
+                                                                    data-id="{{ cat.id }}" 
+                                                                    data-name="{{ cat.name }}" 
+                                                                    data-image="{{ cat.image }}" 
+                                                                    data-parent="{% if cat.parent %}{{ cat.parent.id }}{% endif %}" 
+                                                                    data-bs-target="#editCategoryModal">
+                                                                     <i class="ri-pencil-line"></i>
+                                                                 </a> 
+                                                                </li>
+                                                                
+
+                                                                <li>
+                                                                    <a href="{% url 'category_list' %}?type=delete&id={{cat.id}}" >
+                                                                        <i class="ri-delete-bin-line"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- All User Table Ends-->
+
+                
+            </div>
+            <!-- Container-fluid end -->
+    
+        <!-- Page Body End -->
+
+
+
+        <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{% url 'category_list' %}?type=add" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="categoryName" class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="categoryName" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="parentCategory" class="form-label">Parent Category</label>
+                                <select class="form-select" id="parentCategory" name="parent">
+                                    <option value="">Select parent category (optional)</option>
+                                    {% for parent in categories %}
+                                        <option value="{{ parent.id }}">{{ parent.get_category_hierarchy }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="categoryImage" class="form-label">Category Image</label>
+                                <input type="file" class="form-control" id="categoryImage" name="image">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Category</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Category Modal -->
+        <div class="modal fade" id="editCategoryModal" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editCategoryForm" method="POST" enctype="multipart/form-data" action="{% url 'category_list' %}?type=edit">
+                            {% csrf_token %}
+                            <input type="hidden" id="editCategoryId" name="category_id">
+                            
+                            <div class="mb-3">
+                                <label for="categoryName" class="form-label">Category Name</label>
+                                <input type="text" class="form-control" id="categoryName1" name="name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="categoryParent" class="form-label">Parent Category</label>
+                                <select class="form-select" id="categoryParent1" name="parent">
+                                    <option value="">No Parent</option>
+                                    {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="categoryImage" class="form-label">Category Image</label>
+                                <input type="file" class="form-control" id="categoryImage" name="image">
+                                <img id="currentImage1" src="" alt="Current Image" class="img-fluid mt-2" style="max-width: 100px;">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var editCategoryModal = document.getElementById('editCategoryModal');
+                
+                // When the modal is about to be shown
+                editCategoryModal.addEventListener('show.bs.modal', function (event) {
+                    var button = event.relatedTarget;  // Button that triggered the modal
+            
+                    // Extract info from data-* attributes
+                    var categoryId = button.getAttribute('data-id');
+                    var categoryName = button.getAttribute('data-name');
+                    var categoryImage = button.getAttribute('data-image');
+                    var categoryParent = button.getAttribute('data-parent');
+            
+                    // Populate form fields with the extracted data
+                    var categoryIdField = document.getElementById('editCategoryId');
+                    var categoryNameField = document.getElementById('categoryName1');
+                    var categoryParentField = document.getElementById('categoryParent1');
+                    var currentImageField = document.getElementById('currentImage1');
+            
+                    categoryIdField.value = categoryId;
+                    categoryNameField.value = categoryName;
+            
+                    // If a parent category exists, set it as selected, otherwise select "No Parent"
+                    if (categoryParent) {
+                        categoryParentField.value = categoryParent;
+                    } else {
+                        categoryParentField.value = "";  // No parent case
+                    }
+            
+                    // If an image exists, set the src to display the current image
+                    if (categoryImage) {
+                        currentImageField.src = '../../media/'+categoryImage;
+                        currentImageField.style.display = 'block';
+                    } else {
+                        currentImageField.style.display = 'none';  // Hide image if none
+                    }
+                });
+            });
+            
+        </script>
+        
+        {% endblock content %}
+
+  

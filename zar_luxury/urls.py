@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin panel
     path('', include('main_app.urls')),  # Include the URLs from main_app (where your views are)
+    path('dashboard/',include('home.urls'))
 ]
 
 # Serve static and media files during development

@@ -1,0 +1,170 @@
+{% extends 'dashboard/template.html' %}
+{% block content %}
+
+            <!-- Container-fluid starts-->
+            <div class="page-body">
+                <!-- All User Table Start -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card card-table">
+                                <div class="card-body">
+                                    <div class="title-header option-title">
+                                        <h5>All Brands</h5>
+                                        <a href="#" class="align-items-center btn btn-theme d-flex" data-bs-toggle="modal" data-bs-target="#addBrandModal">
+
+                                        <i data-feather="plus-square"></i>Add New
+                                    </a>
+                                    </div>
+
+                                    <div class="table-responsive category-table">
+                                        <div>
+                                            <table class="table all-package theme-table" id="table_id">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Logo</th>
+                                                        <th>Brand Name</th>
+                                                        <th>Category Hierarchy</th>
+                                                        <th>Contact Person</th>
+                                                        <th>Contact Number</th>
+                                                        <th>Email</th>
+                                                        <th>state</th>
+                                                        <th>City</th>
+                                                        <th>Zip Code</th>
+                                                        <th>Country</th>
+
+                                                        <th>Status</th>
+                                                        <th>Option</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    {% for cat in brands %}
+                                                    <tr>
+                                                        <td> 
+                                                        {% if cat.logo %}
+                                                            
+                                                        <img id="currentImage1" src="../../media/{{cat.logo}}" alt="Current Image" class="img-fluid mt-2" style="max-width: 100px;">
+                                                        {% endif %}
+                                                    </td>
+                                                        <td>{{cat.name}}</td>
+                                                        <td>{{cat.category.get_category_hierarchy}}</td>
+                                                        <td>{{cat.contact_person}}</td>
+                                                        <td>{{cat.phone}}</td>
+                                                        <td>{{cat.email}}</td>
+                                                        <td>{{cat.state}}</td>
+                                                        <td>{{cat.city}}</td>
+                                                        <td>{{cat.zip_code}}</td>
+                                                        <td>{{cat.country}}</td>
+                                                        <td>{{cat.status}}</td>
+
+                                                        <td>
+                                                            <ul>
+                                                                
+                                                                <li>
+                                                                    <a href="">
+                                                                        <i class="ri-eye-line"></i>
+                                                                    </a>
+                                                                </li>
+
+                                                                <li>
+                                                                    <a href="" >
+                                                                        <i class="ri-delete-bin-line"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- All User Table Ends-->
+
+                
+            </div>
+            <!-- Container-fluid end -->
+            <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addBrandModalLabel">Add New Brand</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{% url 'brand_list' %}?type=add" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="brandName" class="form-label">Brand Name</label>
+                                    <input type="text" class="form-control" id="brandName" name="name" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="category" class="form-label"> Category</label>
+                                    <select class="form-select" id="category" name="category">
+                                        <option value="">--- Select ---</option>
+                                        {% for category in categories %}
+                                        <option value="{{ category.id }}">{{ category.get_category_hierarchy }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                
+                                <div class="mb-3">
+                                    <label  class="form-label">Contact Person</label>
+                                    <input type="text" class="form-control" id="contact_person" name="contact_person" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label  class="form-label">Contact NO.</label>
+                                    <input type="text" class="form-control" id="phone" name="phone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label  class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label  class="form-label">Address</label>
+                                    <input type="text" class="form-control" id="address" name="address" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label  class="form-label">City</label>
+                                    <input type="text" class="form-control" id="city" name="city" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label  class="form-label">State</label>
+                                    <input type="text" class="form-control" id="state" name="state" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label  class="form-label">Country</label>
+                                    <input type="text" class="form-control" id="country" name="country" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label  class="form-label">Zip Code</label>
+                                    <input type="text" class="form-control" id="zip_code" name="zip_code" required>
+                                </div>
+
+                                
+
+
+                                
+                                <div class="mb-3">
+                                    <label for="logo" class="form-label">brand Image</label>
+                                    <input type="file" class="form-control" id="logo" name="logo" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add brand</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endblock content %}
+
+  
