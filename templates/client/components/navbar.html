@@ -1,45 +1,60 @@
 {% load static %}
-
+{% for message in messages %}
+  <div class="alert alert-dismissible {{ message.tags }}" role="alert">
+    <div>{{ message | safe }}</div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
     <header class="bg-black text-white relative">
         <div class="flex justify-between items-center p-4 px-12 border-b border-gray-800">
             <a href="/" class="md:block hidden text-xl font-bold">
-                <img src="{% static 'images/zar-logos-2.png' %}" alt="Logo" width="100" height="100">
+                <img src="../../static/images/zar-logos-2.webp" alt="Logo" width="100" height="100">
             </a>
             <a href="/" class="md:hidden block text-xl font-bold">
                 <img src="{% static 'images/zar1.jpg' %}" alt="Logo" width="50" height="50">
             </a>
             <div class="hidden md:flex items-center space-x-4">
                 {% comment %} {% if not request.path.startswith('/materials') and not request.path.startswith('/services') and not request.path.startswith('/profile') %} {% endcomment %}
-                    <a href="/validate" class="hover:underline">
+                {% if not request.user.is_authenticated %}
+
+                    <a href="{% url 'validate' %}" class="hover:underline">
                         <span class="px-4 p-2 rounded-lg bg-white text-black text-[0.78rem]">Signup with passcode</span>
                     </a>
-                    <a href="/signup" class="hover:underline">
+                    <a href="{% url 'become_a_member' %}" class="hover:underline">
                         <span class="px-4 p-2 rounded-lg bg-white text-black text-sm">Become a Member</span>
                     </a>
+
                     <span class="text-gray-400 inline-flex gap-1.5 text-sm">
                         Have an account?
-                        <a href="/login" class="hover:underline text-gray-300">
+                        <a href="{% url 'login' %}" class="hover:underline text-gray-300">
                             <span class="text-white text-md">Login</span>
                         </a>
                     </span>
                 {% comment %} {% endif %} {% endcomment %}
                 {% comment %} {% if request.path.startswith('/materials') or request.path.startswith('/services') or request.path.startswith('/profile') %} {% endcomment %}
+                    
+                    {% else %}
+                        
+                        
                     <button id="profileButton" class="relative px-4 p-2 rounded-lg bg-white items-center inline-flex gap-2">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXLBPb5pAuO_6a9PUGtyYLzJIDqLNR-8RfoA&s" alt="profile-pic" class="size-6 rounded-full">
-                        <span class="text-black text-sm">Pratik Dhumal</span>
+                        <span class="text-black text-sm">{{request.user.first_name}} {{request.user.last_name}}</span>
                     </button>
                     <div id="dropdownMenu" class="hidden fixed z-50 top-20 right-4 mt-2 w-48 bg-[#0f0f0f] border border-gray-700 shadow-lg rounded-xl">
                         <div class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900">
-                            <p>Pratik Dhumal</p>
-                            <small>pratikd2124@gmail.com</small>
+                            <p>{{request.user.first_name}} {{request.user.last_name}}</p>
+                            <small>{{request.user.email}}</small>
                         </div>
                         <a href="/profile">
                             <span class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900">Profile</span>
                         </a>
-                        <button class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900" onclick="console.log('Logout')">Logout</button>
+                        <a class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900" href="{% url 'logout' %}">Logout</a>
                     </div>
+                    {% endif %}
+
                 {% comment %} {% endif %} {% endcomment %}
             </div>
+
             <div class="md:hidden flex items-center gap-2">
                 <button id="menuButton" class="focus:outline-none">
                     <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-white">
@@ -54,8 +69,8 @@
                     </button>
                     <div id="profileDropdownMenu" class="hidden fixed z-50 right-4 mt-2 w-48 bg-[#0f0f0f] border border-gray-700 shadow-lg rounded-xl">
                         <button class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900" onclick="console.log('Email')">
-                            <p>Pratik Dhumal</p>
-                            <small>pratikd2124@gmail.com</small>
+                            <p>{{request.user.first_name}} {{request.user.last_name}}</p>
+                            <small>{{request.user.email}}</small>
                         </button>
                         <a href="/terms">
                             <span class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900">Terms</span>

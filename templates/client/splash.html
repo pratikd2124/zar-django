@@ -1,0 +1,42 @@
+{% extends 'client/template.html' %}
+
+{% block content %}
+splash screen
+
+{% load static %}
+
+<style>
+    .fadeIn {
+        opacity: 0;
+        animation: fadeInAnimation 1s forwards;
+      }
+      
+      @keyframes fadeInAnimation {
+        to {
+          opacity: 1;
+        }
+      }
+</style>
+
+<div class="fixed inset-0 flex h-screen min-w-screen items-center bg-black justify-center z-50">
+    <div class="text-center">
+        <h1 class="text-4xl tracking-widest text-gray-300 font-medium mb-12">You are the</h1>
+
+        <div id="animate-text" class='max-w-xl mx-auto flex grid grid-cols-3 justify-center items-center gloock-regular'>
+            <span class="text-lg fadeIn" style="animation-delay: 0s;">
+                <img src="{% static 'images/splashlogo.jpg' %}" width="100" height="100" alt="Ologo" />
+            </span>
+            <span class="text-7xl fadeIn text-white" style="animation-delay: 1s;">N</span>
+            <span class="text-7xl fadeIn text-white" style="animation-delay: 2s;">E</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Redirect to /home after 3 seconds
+    setTimeout(function() {
+        window.location.href = "/";
+    }, 3000);
+</script>
+
+{% endblock content %}

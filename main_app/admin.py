@@ -7,3 +7,5 @@ from .models import *
 # admin.site.register(MaterialProvider)
 admin.site.register(Community)
 admin.site.register(User)
+admin.site.register(ProfileGallery)
+

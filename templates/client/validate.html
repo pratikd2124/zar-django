@@ -1,12 +1,10 @@
 {% extends 'client/template.html' %}
-{% load static %} 
-{% block title %}
-Validate
-{% endblock %}
+
 {% block content %}
 <div class=" text-white">
     <div class="min-h-screen py-16">
-        <form id="codeValidationForm" class="flex flex-col items-center justify-center space-y-4 p-6">
+        <form id="codeValidationForm" action="{% url 'validate' %}" method="POST" class="flex flex-col items-center justify-center space-y-4 p-6">
+            {% csrf_token %}
             <div class="w-full max-w-md mx-auto border border-gray-700 p-10 rounded-lg shadow-md">
                 <div class="py-3">
                     <label class="inline-flex gap-2 items-center" for="otp">
@@ -24,12 +22,12 @@ Validate
                     </label>
                 </div>
                 <div class="flex space-x-2 justify-center">
-                    <input type="text" id="otp0" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="text" id="otp1" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="text" id="otp2" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="text" id="otp3" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="text" id="otp4" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="text" id="otp5" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" name="otp0" id="otp0" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" name="otp1" id="otp1" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" name="otp2" id="otp2" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" name="otp3" id="otp3" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" name="otp4" id="otp4" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" name="otp5" id="otp5" maxlength="1" class="w-14 h-12 p-4 text-center text-sm border border-slate-700 rounded-md bg-gray-100/10 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="flex flex-col gap-2 py-4 mt-2">
                     <label for="email">Enter your email</label>
@@ -39,20 +37,20 @@ Validate
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                             </svg>
                         </span>
-                        <input type="email" id="email" placeholder="Email" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 focus:outline-none">
+                        <input type="email" name="email" id="email" placeholder="Email" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 focus:outline-none">
                     </div>
                 </div>
             </div>
-        </form>
-        <div class="w-full fixed bottom-0 py-6 border-t border-gray-800">
-            <div class="flex justify-center md:justify-end px-12">
-                <button id="submitButton" type="submit" class="w-80 py-4 bg-violet-500 text-white rounded-lg hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50">
-                    Validate
-                </button>
+            <div class="w-full fixed bottom-0 py-6 border-t border-gray-800">
+                <div class="flex justify-center md:justify-end px-12">
+                    <button id="submitButton" type="submit" class="w-80 py-4 bg-violet-500 text-white rounded-lg hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50">
+                        Validate
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
-    <script src="{% static 'js/validate.js' %}"></script>
+    <script src="../../static/js/validate.js"></script>
 
 </div>
 {% endblock %}

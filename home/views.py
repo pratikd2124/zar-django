@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from main_app.models import Community, User
-from .models import Category, Brand
+from .models import Category
 from django.contrib import messages
 # Create your views here.
 import random
@@ -108,28 +108,28 @@ def all_category(request):
     return render(request,'dashboard/category.html',{'title':'Category','categories':categories})
 
 def all_brand(request):
-    brands = Brand.objects.order_by('-id').all()
+    brands = User.objects.order_by('-id').filter(type='Material Provider')
     categories = Category.objects.all()
     
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        category = request.POST.get('category')
-        logo = request.FILES.get('logo')
-        contact_person = request.POST.get('contact_person')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        address = request.POST.get('address')
-        city = request.POST.get('city')
-        state = request.POST.get('state')
-        zip_code = request.POST.get('zip_code')
-        country = request.POST.get('country')
+    # if request.method == 'POST':
+    #     name = request.POST.get('name')
+    #     category = request.POST.get('category')
+    #     logo = request.FILES.get('logo')
+    #     contact_person = request.POST.get('contact_person')
+    #     email = request.POST.get('email')
+    #     phone = request.POST.get('phone')
+    #     address = request.POST.get('address')
+    #     city = request.POST.get('city')
+    #     state = request.POST.get('state')
+    #     zip_code = request.POST.get('zip_code')
+    #     country = request.POST.get('country')
         
         
         
-        brand = Brand.objects.create(name=name,category=Category.objects.get(id=category),logo=logo,contact_person=contact_person,email=email,phone=phone,address=address,city=city,state=state,zip_code=zip_code,country=country)
-        brand.save()
-        messages.success(request, 'Brand created successfully.')
-        return redirect('brand_list')
+    #     brand = Brand.objects.create(name=name,category=Category.objects.get(id=category),logo=logo,contact_person=contact_person,email=email,phone=phone,address=address,city=city,state=state,zip_code=zip_code,country=country)
+    #     brand.save()
+    #     messages.success(request, 'Brand created successfully.')
+    #     return redirect('brand_list')
         
         
         

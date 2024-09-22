@@ -1,0 +1,63 @@
+{% extends 'client/template.html' %}
+
+
+{% block content %}
+
+
+{% load static %}
+
+
+    <div class='max-w-4xl mx-auto'>
+        <div class='flex lg:flex-row flex-col items-center justify-center gap-6 md:mt-0 mt-20'>
+            
+            {% for i in category %}
+                
+                
+            <a href="{% url 'category_view' i.name %}" aria-label="Explore Materials">
+                <section class="relative isolate font-card-title flex flex-col justify-end overflow-hidden rounded-2xl w-80 h-80 mt-0 lg:mt-24 cursor-pointer group">
+                    <img src="../../media/{{i.image}}" alt="Materials" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+                    <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
+                    <div class="absolute inset-0 bg-black bg-opacity-40 "></div>
+                    <div class='absolute z-10 top-5 right-5 '>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 transition-transform duration-500 transform translate-x-0 group-hover:-translate-x-8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                    </div>
+                    <div class='px-5 py-4 transition-transform duration-500 transform translate-y-6 group-hover:translate-y-0 '>
+                        <h3 class="relative py-2 z-10 mt-3 text-xl text-white drop-shadow-xl">{{i.name}}</h3>
+                        <div class="relative z-10 gap-y-1 overflow-hidden text-sm opacity-0 group-hover:opacity-100 leading-6 text-gray-300 ">
+                            {{i.description}}
+                        </div>
+                    </div>
+                </section>
+            </a>
+            {% endfor %}
+
+            
+        </div>
+
+        <div class='mt-32'>
+            <div class='max-w-6xl mx-auto md:mb-0 mb-24 md:p-0 p-4'>
+                <form class="max-w-2xl mx-auto">
+                    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </div>
+                        <input type="search" disabled id="default-search" class="block w-full p-4 ps-10 text-sm border border-gray-800 rounded-lg bg-gray-200/10 focus:outline-none focus:ring-1 focus:ring-blue-800 focus:border-blue-900" placeholder="eg: Stone wall, luxury tiles,Flooring..." required />
+                        <button type="submit" disabled class="text-white absolute end-2.5 bottom-2.5 bg-violet-700 hover:bg-violet-800 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+{% endblock content %}
+    

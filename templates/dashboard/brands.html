@@ -11,7 +11,8 @@
                                 <div class="card-body">
                                     <div class="title-header option-title">
                                         <h5>All Brands</h5>
-                                        <a href="#" class="align-items-center btn btn-theme d-flex" data-bs-toggle="modal" data-bs-target="#addBrandModal">
+                                        {% comment %} <a href="#" class="align-items-center btn btn-theme d-flex" data-bs-toggle="modal" data-bs-target="#addBrandModal"> {% endcomment %}
+                                        <a href="{% url 'submit_material_provider'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
 
                                         <i data-feather="plus-square"></i>Add New
                                     </a>
@@ -44,19 +45,19 @@
                                                         <td> 
                                                         {% if cat.logo %}
                                                             
-                                                        <img id="currentImage1" src="../../media/{{cat.logo}}" alt="Current Image" class="img-fluid mt-2" style="max-width: 100px;">
+                                                        <img id="currentImage1" src="../../media/{{cat.brand_logo}}" alt="Current Image" class="img-fluid mt-2" style="max-width: 100px;">
                                                         {% endif %}
                                                     </td>
-                                                        <td>{{cat.name}}</td>
+                                                        <td>{{cat.brand_name}}</td>
                                                         <td>{{cat.category.get_category_hierarchy}}</td>
                                                         <td>{{cat.contact_person}}</td>
-                                                        <td>{{cat.phone}}</td>
+                                                        <td>{{cat.mobile}}</td>
                                                         <td>{{cat.email}}</td>
                                                         <td>{{cat.state}}</td>
                                                         <td>{{cat.city}}</td>
                                                         <td>{{cat.zip_code}}</td>
                                                         <td>{{cat.country}}</td>
-                                                        <td>{{cat.status}}</td>
+                                                        <td>{{cat.payment_status}}</td>
 
                                                         <td>
                                                             <ul>

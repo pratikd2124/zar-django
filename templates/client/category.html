@@ -1,0 +1,107 @@
+{% extends 'client/template.html' %}
+
+
+{% block content %}
+<div class="font-card-title bg-gray-100/10 text-xs md:text-sm tracking-wider border-b border-gray-600/10 text-white py-4">
+    <div class="max-w-7xl mx-auto flex space-x-2 lg:space-x-6">
+        <a href="{% url 'home' %}"> Home</a> <span>/</span>
+
+        {% for i in nav_list %}
+           <a href="{% url 'category_view' i %}"> {{i}}</a> <span>/</span>
+        {% endfor %}
+            
+
+    </div>
+</div>
+
+<div class="lg:px-[6rem] px-4 flex md:flex-row flex-col bg-gray-200/10 p-6 flex md:justify-between justify-center items-center">
+    <h2 class="text-3xl gloock-regular font-semibold text-white capitalize">{{ category.name }}</h2>
+    <p class="font-card-title text-gray-300 mt-2">Experience unparalleled expertise with our bespoke services</p>
+</div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[3rem] md:px-12 px-4 py-12">
+
+        
+            
+            
+        {% for i in next_categories %}
+            
+            
+        <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-80 h-80 mx-auto cursor-pointer group" onclick="handleCardClick()">
+            <a href="{% url 'category_view' i.name %}">
+            <img src="../../media/{{i.image}}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
+            <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>
+            <div class='absolute z-10 top-5 right-5'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 transition-transform duration-500 transform translate-x-0 group-hover:-translate-x-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </div>
+            <div class='px-5 py-4 transition-transform duration-500 transform group-hover:translate-y-0'>
+                <h3 class="relative py-2 z-10 mt-3 text-xl text-white drop-shadow-xl pb-2">{{ i.name }}</h3>
+                <div class="relative z-10 gap-y-1 overflow-hidden text-sm opacity-0 group-hover:opacity-100 leading-6 text-gray-300">
+                    {{ description }}
+                </div>
+            </div>
+            </a>
+        </section>
+        {% endfor %}
+
+        {% for i in users %}
+            
+        
+        {% if i.type == 'Service Provider' %}
+            
+            
+            
+        <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-80 h-80 mx-auto cursor-pointer group" onclick="handleCardClick()">
+            <a href="{% url 'user_info' i.category.name i.uid %}">
+            <img src="../../media/{{i.profile_pic}}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
+            <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>
+            <div class='absolute z-10 top-5 right-5'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 transition-transform duration-500 transform translate-x-0 group-hover:-translate-x-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </div>
+            <div class='px-5 py-4 transition-transform duration-500 transform group-hover:translate-y-0'>
+                <h3 class="relative py-2 z-10 mt-3 text-xl text-white drop-shadow-xl pb-2">{{ i.first_name }} {{i.last_name}}</h3>
+                <div class="relative z-10 gap-y-1 overflow-hidden text-sm opacity-0 group-hover:opacity-100 leading-6 text-gray-300">
+                    {{ description }}
+                </div>
+            </div>
+            </a>
+        </section>
+
+
+        {% elif i.type == 'Material Provider' %}
+
+            
+            
+        <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-80 h-80 mx-auto cursor-pointer group" onclick="handleCardClick()">
+            <a href="{% url 'brand_info' i.category.name i.uid  %}">
+            <img src="../../media/{{i.brand_logo}}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+            <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
+            <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>
+            <div class='absolute z-10 top-5 right-5'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 transition-transform duration-500 transform translate-x-0 group-hover:-translate-x-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </div>
+            <div class='px-5 py-4 transition-transform duration-500 transform group-hover:translate-y-0'>
+                <h3 class="relative py-2 z-10 mt-3 text-xl text-white drop-shadow-xl pb-2">{{ i.brand_name }} '''''</h3>
+                <div class="relative z-10 gap-y-1 overflow-hidden text-sm opacity-0 group-hover:opacity-100 leading-6 text-gray-300">
+                    {{ description }}
+                </div>
+            </div>
+            </a>
+        </section>
+        {% endif %}
+        {% endfor %}
+
+         
+    </div>
+
+   
+{% endblock content %}
+    
