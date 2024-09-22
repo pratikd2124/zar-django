@@ -3298,14 +3298,14 @@ strong~p {
 }
 
 .alert-success {
-    background-color: rgba(158, 101, 194, 0.8);
-    border-color: rgba(158, 101, 194, 0.9);
+    background-color: rgb(45 187 76 / 90%);
+    border-color: rgb(45 187 76 / 90%);
     color: #fff
 }
 
 .alert-success .progress {
     height: 5px;
-    background-color: #9c61c1;
+    background-color: #2ade8a;
     border-radius: 0
 }
 
@@ -34183,7 +34183,8 @@ body.dark-only .dismiss-text .alert-dismissible .btn-close .bg-light {
 }
 
 body.dark-only .alert-success {
-    background-color: rgba(158, 101, 194, 0.8) !important;
+    background-color: rgb(45 187 76 / 90%);
+    !important;
     border-color: rgba(158, 101, 194, 0.9) !important;
     color: #fff
 }
@@ -46901,7 +46902,7 @@ body[class*="dark-"] .main-white {
     text-align: left;
     -webkit-box-shadow: 0 0 21px 0 rgba(89, 102, 122, 0.1);
     box-shadow: 0 0 21px 0 rgba(89, 102, 122, 0.1);
-    background: linear-gradient(-45deg, #760718, #009289, #ffa53b);
+    background: linear-gradient(-45deg, #000000, #000000, #ffffff);
     background-size: 400% 400%;
     -webkit-animation: gradient 15s ease infinite;
     animation: gradient 15s ease infinite;

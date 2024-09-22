@@ -8,10 +8,10 @@
     <meta name="description"
         content="Fastkart admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
     <meta name="keywords"
-        content="admin template, Fastkart admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="himani'cc.com">
-    <link rel="icon" href="http://demo.zarluxury.com/static/images/zar-logos-2.webp" type="image/x-icon">
-    <link rel="shortcut icon" href="http://demo.zarluxury.com/static/images/zar-logos-2.webp" type="image/x-icon">
+        content="Zar Luxury Admin Dashboard.">
+    <meta name="author" content="zarluxury.com">
+    <link rel="icon" href="../../static/images/splashlogo" type="image/x-icon">
+    <link rel="shortcut icon" href="../../static/images/splashlogo" type="image/x-icon">
     <title>Zar Luxury - {{title}}</title>
 
     <!-- Google font-->
@@ -94,8 +94,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                 <div class="header-logo-wrapper p-0">
                     <div class="logo-wrapper">
                         <a href="">
-                            <img class="img-fluid main-logo" src="http://demo.zarluxury.com/static/images/zar-logos-2.webp" alt="logo">
-                            <img class="img-fluid white-logo" src="http://demo.zarluxury.com/static/images/zar-logos-2.webp" alt="logo">
+                            <img class="img-fluid main-logo" src="../../static/images/logo.png" alt="logo">
+                            <img class="img-fluid white-logo" src="../../static/images/logo.png" alt="logo">
                         </a>
                     </div>
                     <div class="toggle-sidebar">
@@ -144,7 +144,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                
                                 <li>
                                     <a 
-                                        href="">
+                                        href="{% url 'logout' %}">
                                         <i data-feather="log-out"></i>
                                         <span>Log out</span>
                                     </a>
@@ -165,7 +165,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                 <div>
                     <div class="logo-wrapper logo-wrapper-center">
                         <a data-bs-original-title="Zar Luxury" title="Zar Luxury">
-                            <img class="img-fluid for-white" src="http://demo.zarluxury.com/static/images/zar-logos-2.webp" alt="logo">
+                            <img class="img-fluid for-white" src="../../static/images/logo.png" alt="logo">
                         </a>
                         <div class="back-btn">
                             <i class="fa fa-angle-left"></i>
@@ -218,9 +218,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                             <a href="{% url 'users_list' %}?memberType=serviceProvider">Service Provider</a>
                                         </li>
                                         
-                                        <li>
+                                        {% comment %} <li>
                                             <a href="{% url 'users_list' %}?memberType=materialProvider">Material Provider</a>
-                                        </li>
+                                        </li> {% endcomment %}
                                        
                                     </ul>
                                 </li>   
@@ -258,29 +258,29 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'support_ticket' %}">
-                                        <i class="ri-phone-line"></i>
+                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'edit_pages' %}?page=Guide">
+                                        <i class="ri-guide-line"></i>
                                         <span>Guide</span>
                                     </a>
                                 </li>
 
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'support_ticket' %}">
-                                        <i class="ri-phone-line"></i>
+                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'edit_pages' %}?page=FAQ">
+                                        <i class="ri-questionnaire-line"></i>
                                         <span>FAQ</span>
                                     </a>
                                 </li>
 
 
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'support_ticket' %}">
-                                        <i class="ri-phone-line"></i>
+                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'edit_pages' %}?page=Privacy-Policy">
+                                        <i class="ri-file-shield-2-line"></i>
                                         <span>Privacy Policy</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'support_ticket' %}">
-                                        <i class="ri-phone-line"></i>
+                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'edit_pages' %}?page=Terms-and-Condition">
+                                        <i class="ri-pages-line"></i>
                                         <span>Terms & Condition</span>
                                     </a>
                                 </li>

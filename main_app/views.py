@@ -13,21 +13,31 @@ def home(request):
     category = Category.objects.filter(parent=None)
     return render(request, 'client/index.html',{'title':'Home','category':category})  
 
+def get_nav_list(nav):
+    nav_list = []
+    for i in  nav:
+        try:
+            category = Category.objects.get(name=i.strip(' '))
+        except:
+            category = Category.objects.get(name=i.strip(' '),parent__name=nav[nav.index(i)-1].strip(' '))
+        nav_list.append({'category':category.name,'id':category.id})
+        
+    return nav_list
+
 @login_required(login_url='login')
 def category_view(request,category_name):
-    try:
-        category = Category.objects.get(name=category_name.strip(' '))
-        
-        
-    except Exception as e:
-        print(e)
-        category = Category.objects.get(name=category_name)
+    id = request.GET.get('id')
+    
+    category = Category.objects.get(id=id)
         
     next_categories = Category.objects.filter(parent=category)
-    nav_list = category.get_category_hierarchy().split('/')
+    
+    nav = category.get_category_hierarchy().split('/')
+    nav_list = get_nav_list(nav)
     
     users = None
     if not next_categories:
+        # users = User.objects.filter(category=category).filter(payment_status='Success')
         users = User.objects.filter(category=category)
         
         
@@ -127,12 +137,32 @@ def signin(request):
         
         if user is not None:
             login(request, user)
-            messages.success(request, 'Login successful')
-            return redirect('splash')
+            if user.is_superuser:
+                messages.success(request, 'Login successful')
+                return redirect('dashboard')
+            else:
+            
+            
+                messages.success(request, 'Login successful')
+                return redirect('splash')
         else:
             messages.error(request, 'Invalid credentials')
             return redirect('login')
     return render(request,'client/login.html')
+
+
+
+
+def profile(request):
+    return render(request, 'client/profile.html')
+
+
+
+
+
+
+
+
 
 
 def splash(request):
@@ -395,6 +425,7 @@ def brand_info(request,category,uid):
     social_links= user.social_links
     images = user.profile_gallery.all()
     nav_list = user.category.get_category_hierarchy().split('/')
+    nav_list = get_nav_list(nav_list)
 
     return render(request, 'client/brand_info.html',{'nav_list':nav_list,'images':images,'user':user,'title':str(user.brand_name ),'social_links':social_links,})
 
@@ -406,5 +437,46 @@ def user_info(request,category,uid):
     print(social_links)
     images = user.profile_gallery.all()
     nav_list = user.category.get_category_hierarchy().split('/')
+    nav_list = get_nav_list(nav_list)
 
     return render(request, 'client/service_user_info.html',{'user':user,'title':str(user.first_name + ' ' + user.last_name),'social_links':social_links,'images':images,'nav_list':nav_list})
+
+
+
+from django.http import JsonResponse
+
+
+def suggestions(request):
+    if request.method == 'GET':
+        query = request.GET.get('query', '')
+
+        # Fetch categories matching the query
+        categories = [
+                    {'name':category.name,'hierarchy': category.get_category_hierarchy(), 'id': category.id}
+                    for category in Category.objects.filter(name__icontains=query)
+                ]
+        # Fetch brands matching the query
+        brands =[{'name':brand.brand_name,'id':brand.uid,'category':brand.category.name} for brand in User.objects.filter(type="Material Provider").filter(
+            Q(brand_name__icontains=query) | 
+            Q(bio__icontains=query) | 
+            Q(contact_person__icontains=query)
+        )]
+
+        # Fetch services matching the query
+        services = [{'name':service.brand_name,'id':service.uid,'category':service.category.name} for service in User.objects.filter(type="Service Provider").filter(
+            Q(first_name__icontains=query) | 
+            Q(last_name__icontains=query) | 
+            Q(firm_name__icontains=query) | 
+            Q(bio__icontains=query)
+        )]
+
+        # Prepare the response data
+        data = {
+            'categories': categories,
+            'brands': brands,
+            'serviceProviders': services
+        }
+
+        return JsonResponse(data)
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)

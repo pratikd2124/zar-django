@@ -1,0 +1,58 @@
+{% extends "dashboard/template.html" %}
+{% block content %}
+
+            <!-- Container-fluid starts-->
+            <div class="page-body">
+                <!-- All User Table Start -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card card-table">
+                                <div class="card-body">
+                                    <div class="title-header option-title">
+                                        
+                                            {{page}}
+                                        {% comment %} <form class="d-inline-flex">
+                                            <a href="" class="align-items-center btn btn-theme d-flex">
+                                                <i data-feather="plus"></i>Add New
+                                            </a>
+                                        </form> {% endcomment %}
+                                    </div>
+
+                                    <div class="table-responsive table-product">
+                                        
+                                        <form action="{% url 'edit_pages'  %}?page={{page}}" method="POST">
+                                            {% csrf_token %}
+                                            <textarea name="data" id="editor">
+                                                
+                                                {% if page == 'Guide' %}
+                                                {{page_data.guide | safe}}
+
+                                                {% elif page == 'FAQ' %}
+                                                {{page_data.faq | safe}}
+                                                {% elif page == 'Privacy-Policy' %}
+                                                {{page_data.privacy_policy | safe}}
+                                                {% elif page == 'Terms-and-Condition' %}
+                                                {{page_data.terms_and_conditions | safe}}
+                                                    
+                                                {% endif %}
+                                                    
+                                            
+                                            </textarea>
+                                            
+                                            <button type="submit" class="btn btn-theme" > submit </button>
+                                        </form>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    // Make sure CKEditor is initialized after the DOM has loaded
+                        CKEDITOR.replace('editor');
+                    
+                </script>
+{% endblock content %}

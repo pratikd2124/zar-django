@@ -13,7 +13,7 @@
             {% for i in category %}
                 
                 
-            <a href="{% url 'category_view' i.name %}" aria-label="Explore Materials">
+            <a href="{% url 'category_view' i.name %}?id={{i.id}}" aria-label="Explore Materials">
                 <section class="relative isolate font-card-title flex flex-col justify-end overflow-hidden rounded-2xl w-80 h-80 mt-0 lg:mt-24 cursor-pointer group">
                     <img src="../../media/{{i.image}}" alt="Materials" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
                     <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
@@ -38,26 +38,91 @@
 
         <div class='mt-32'>
             <div class='max-w-6xl mx-auto md:mb-0 mb-24 md:p-0 p-4'>
-                <form class="max-w-2xl mx-auto">
+                <form class="max-w-2xl mx-auto" onsubmit="return false;">
                     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                     <div class="relative">
+                        <div id="suggestions" class="absolute z-10 -top-[14rem] mt-2 w-full bg-gray-700 hover:text-black text-white border border-gray-300 rounded-lg shadow-lg hidden" style="    overflow-x: auto;
+    height: 211px;">
+                            
+                            <div id="categories" class="p-2"></div>
+                            <div id="brands" class="p-2"></div>
+                            <div id="service-providers" class="p-2"></div>
+                        </div>
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                         </div>
-                        <input type="search" disabled id="default-search" class="block w-full p-4 ps-10 text-sm border border-gray-800 rounded-lg bg-gray-200/10 focus:outline-none focus:ring-1 focus:ring-blue-800 focus:border-blue-900" placeholder="eg: Stone wall, luxury tiles,Flooring..." required />
-                        <button type="submit" disabled class="text-white absolute end-2.5 bottom-2.5 bg-violet-700 hover:bg-violet-800 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
+                        <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm border border-gray-800 rounded-lg bg-gray-200/10 focus:outline-none focus:ring-1 focus:ring-blue-800 focus:border-blue-900" placeholder="eg: Stone wall, luxury tiles, Flooring..." oninput="fetchSuggestions(this.value)" required />
+                        <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-violet-700 hover:bg-violet-800 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                             </svg>
                         </button>
                     </div>
+                   
                 </form>
             </div>
         </div>
     </div>
 
+    <script>
+        async function fetchSuggestions(query) {
+            if (!query) {
+                document.getElementById('suggestions').classList.add('hidden');
+                return;
+            }
     
+            // Fetch data from your API
+            const response = await fetch(`/api/suggestions?query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+    
+            // Display the suggestions
+            displaySuggestions(data);
+        }
+    
+        function displaySuggestions(data) {
+            const suggestionsDiv = document.getElementById('suggestions');
+            suggestionsDiv.classList.remove('hidden');
+    
+            // Clear previous suggestions
+            document.getElementById('categories').innerHTML = '';
+            document.getElementById('brands').innerHTML = '';
+            document.getElementById('service-providers').innerHTML = '';
+    
+            // Display categories
+            if (data.categories.length) {
+                let categoryHtml = '<h3 class="font-bold">Categories</h3>';
+                data.categories.forEach(cat => {
+                    categoryHtml += `<div class="p-2 hover:bg-gray-100 cursor-pointer"> <a href="/category/${cat.name}?id=${cat.id}"> ${cat.hierarchy}</a></div>`;
+                });
+                document.getElementById('categories').innerHTML = categoryHtml;
+            }
+    
+            // Display brands
+            if (data.brands.length) {
+                let brandHtml = '<h3 class="font-bold">Brands</h3>';
+                data.brands.forEach(brand => {
+                    brandHtml += `<div class="p-2 hover:bg-gray-100 cursor-pointer"><a href="/material-provider/${brand.category}/${brand.id}">${brand.name}</a></div>`;
+                });
+                document.getElementById('brands').innerHTML = brandHtml;
+            }
+    
+            // Display service providers
+            if (data.serviceProviders.length) {
+                let serviceHtml = '<h3 class="font-bold">Service Providers</h3>';
+                data.serviceProviders.forEach(provider => {
+                    serviceHtml += `<div class="p-2 hover:bg-gray-100 cursor-pointer"><a href="/service-provider/${provider.category}/${provider.id}">${provider.name}</a></div>`;
+                });
+                document.getElementById('service-providers').innerHTML = serviceHtml;
+            }
+    
+            // If no suggestions, hide the dropdown
+            if (!data.categories.length && !data.brands.length && !data.serviceProviders.length) {
+                suggestionsDiv.classList.add('hidden');
+            }
+        }
+       
+    </script>
 {% endblock content %}
     

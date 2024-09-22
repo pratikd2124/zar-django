@@ -36,10 +36,11 @@
                                                     <th>Phone</th>
                                                     <th>Email</th>
                                                     <th>Joined</th>
-                                                    
-                                                    {% if member_type == 'homeOwner' %}
+                                                    <th>state</th>
+                                                        <th>City</th>
+                                                        <th>Zip Code</th>
+                                                        <th>Country</th>
                                                     <th>Status</th>
-                                                    {% endif %}
                                                         
                                                     <th>Option</th>
                                                 </tr>
@@ -56,22 +57,39 @@
                                                         </div>
                                                     </td>
 
-                                                    <td>{{user.phone}}</td>
+                                                    <td>{{user.mobile}}</td>
 
                                                     <td>{{user.email}}</td>
                                                     <td>{{user.date_joined}}</td>
-                                                    {% if member_type == 'homeOwner' %}
-                                                    <td>{{user.homeowner.payment_status}}</td>
+
+                                                    <td>{{user.state}}</td>
+                                                        <td>{{user.city}}</td>
+                                                        <td>{{user.zip_code}}</td>
+                                                        <td>{{user.country}}</td>
+
+                                                    {% if user.type != 'Community User' %}
+                                                    <td>{{user.payment_status}}</td>
+                                                    {%else %}
+                                                    <td>Not Applicable</td>
                                                     {% endif %}
                                                     <td>
                                                         <ul>
                                                             
-
-                                                            <li>
-                                                                <a href="=">
-                                                                    <i class="ri-pencil-line"></i>
+                                                          
+                                                          {% if user.payment_status == 'pending'  %}
+                                                            
+                                                          
+                                                          <li>
+                                                            <a href="#" class="align-items-center btn btn-theme d-flex" 
+                                                                data-bs-toggle="modal" 
+                                                                data-email="{{ user.email }}" 
+                                                                data-id="{{ user.uid }}" 
+                                                                data-bs-target="#sendLinkModal" 
+                                                                onclick="setModalData('{{ user.email }}', '{{ user.uid }}')">
+                                                                    <i class="ri-mail-line"></i>
                                                                 </a>
                                                             </li>
+                                                            {% endif %}
 
                                                             <li>
                                                                 <a href="" >
@@ -94,4 +112,39 @@
 
                 
             </div>
+            <div class="modal fade" id="sendLinkModal" tabindex="-1" aria-labelledby="sendLinkModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span>
+
+                                <h5 class="modal-title" id="sendLinkModalLabel">Send Payment Link to</h5>
+                                <h6 class="modal-title" id="sendLinkModalLabelEmail"></h6>  <!-- Update to use JS -->
+                            </span>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{% url 'send_passcode' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" id="hiddenUserId" name="user_id">  <!-- Hidden input for user ID -->
+                                <div class="mb-3">
+                                    <label for="link" class="form-label">Payment Link</label>
+                                    <input type="url" class="form-control" id="link" name="link" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <script>
+                function setModalData(email, id) {
+                    // Set the email and ID in the modal
+                    document.getElementById('sendLinkModalLabelEmail').innerText = email;
+                    // You may want to store the user ID in a hidden input for the form
+                    document.getElementById('hiddenUserId').value = id;
+                }
+            </script>
             {% endblock content %}

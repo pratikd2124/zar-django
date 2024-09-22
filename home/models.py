@@ -1,4 +1,6 @@
 from django.db import models
+from ckeditor.fields import RichTextField
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='category_images', blank=True, null=True)
@@ -43,3 +45,10 @@ class ProjectImages(models.Model):
 
 #     def __str__(self):
 #         return self.name
+
+
+class PagesData(models.Model):
+    terms_and_conditions = RichTextField(blank=True, null=True)
+    privacy_policy = RichTextField(blank=True, null=True)
+    faq = RichTextField(blank=True, null=True)
+    guide = RichTextField(blank=True, null=True)

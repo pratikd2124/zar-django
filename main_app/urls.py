@@ -9,6 +9,7 @@ urlpatterns = [
     path('validate',views.validate,name='validate'),
     path('register',views.register,name='register'),
     path('login',views.signin,name='login'),
+    path('profile',views.profile,name='profile'),
     path('splash',views.splash,name='splash'),
     path('logout',views.signout,name='logout'),
     path('become_a_member',views.become_a_member,name='become_a_member'),
@@ -21,4 +22,7 @@ urlpatterns = [
     path('material-provider/<str:category>/<str:uid>', views.brand_info, name='brand_info'),
     path('service-provider/<str:category>/<str:uid>', views.user_info, name='user_info'),
     path('success', views.success_page, name='success_page'),
+    
+    
+    path('api/suggestions',views.suggestions,name='suggestions'),
 ]   

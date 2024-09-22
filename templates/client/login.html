@@ -16,7 +16,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                         </svg>
                     </span>
-                    <input type="email" name="email" id="email" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email" />
+                    <input type="email" required name="email" id="email" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email" />
                 </div>
                 <div class="relative">
                     <label for="password" class="block text-white text-sm mb-1">Password</label>
@@ -25,7 +25,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
                         </svg>
                     </span>
-                    <input type="password" name="password" id="password" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your password" />
+                    <input type="password" required name="password" id="password" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your password" />
                     <span class="absolute inset-y-0 top-6 right-0 flex items-center pr-3 cursor-pointer text-gray-400" onclick="togglePasswordVisibility()">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5" id="password-icon">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
@@ -33,7 +33,7 @@
                         </svg>
                     </span>
                 </div>
-                <button type="submit" class="w-full py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500">
+                <button type="submit" class="w-full py-3 bg-white text-black rounded-lg hover:bg-black hover:text-white focus:outline-none focus:ring-2 focus:ring-white-500" style="border-radius:0;">
                     Login
                 </button>
             </div>
