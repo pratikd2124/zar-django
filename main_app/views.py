@@ -1,7 +1,7 @@
 # main_app/views.py
 from django.shortcuts import render, redirect
-from home.models import Category
-from .models import User,Community,ProfileGallery
+from home.models import Category,PagesData
+from .models import User,Community,ProfileGallery, SupportTickets
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -57,12 +57,13 @@ def validate(request):
         otp5 = request.POST.get('otp5')
         otp = otp0 + otp1 + otp2 + otp3 + otp4 + otp5
         email = request.POST.get('email')
+        print(otp,email)
         if User.objects.filter(email=request.POST.get('email')).exists():
             user = User.objects.get(email=email)
         
         
         
-            if '012345' == str(otp):
+            if str(user.code) == str(otp):
                 user.is_active = True
                 user.save()
                 request.session['email'] = user.email
@@ -100,6 +101,7 @@ def register(request):
             user.last_name = last_name
             user.mobile = mobile
             user.is_active = True
+            user.payment_status = 'Success'
             user.set_password(password)
             if request.session['type'] == 'New':
                 user.type = 'Community User'
@@ -199,7 +201,7 @@ def home_owner_view(request):
             user.intrest = interest
             user.save()
             messages.info(request, 'Profile is Under Review !')
-            # Send_Welcome_email(user)
+            Send_Welcome_email(user)
             return redirect('holme')
         
 
@@ -293,7 +295,7 @@ def submit_service_provider(request):
             user.profile_gallery.add(image)
             user.save()
         
-        # Send_Welcome_email(user)
+        Send_Welcome_email(user)
         messages.success(request, 'Profile is Under Review !')
         return redirect('home')
             
@@ -387,7 +389,7 @@ def submit_material_provider(request):
         #     user.profile_gallery.add(image)
         #     user.save()
         
-        # Send_Welcome_email(user)
+        Send_Welcome_email(user)
         messages.success(request, 'Profile is Under Review !')
         return redirect('home')
     # Get all categories and recursively filter those whose root ancestor is 'Services'
@@ -419,7 +421,7 @@ def success_page(request):
     return render(request, 'client/success_page.html')
 
 
-
+@login_required(login_url='login')
 def brand_info(request,category,uid):
     user = User.objects.get(uid = uid)
     social_links= user.social_links
@@ -480,3 +482,31 @@ def suggestions(request):
         return JsonResponse(data)
 
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        contact = SupportTickets.objects.create(phone=phone,name=name,email=email,subject=subject,message=message)
+        contact.save()
+        messages.success(request, 'Message Sent Successfully !')
+        return redirect('home')
+    return render(request, 'client/contact-us.html')
+
+def privacy_policy(request):
+    content = PagesData.objects.first().privacy_policy
+    return render(request, 'client/custom-pages.html',{'title':'Privacy Policy','content':content})
+
+def terms_and_conditions(request):
+    content = PagesData.objects.first().terms_and_conditions
+    return render(request, 'client/custom-pages.html',{'title':'Terms and Conditions','content':content})
+
+def faq(request):
+    content = PagesData.objects.first().faq
+    return render(request, 'client/custom-pages.html',{'title':'FAQ','content':content})

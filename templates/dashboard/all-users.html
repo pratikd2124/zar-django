@@ -89,6 +89,18 @@
                                                                     <i class="ri-mail-line"></i>
                                                                 </a>
                                                             </li>
+                                                            {% elif user.payment_status == 'In Progress' %}
+                                                            <li>
+                                                                <a href="#" class="align-items-center btn btn-theme d-flex" 
+                                                                    data-bs-toggle="modal" 
+                                                                    data-email="{{ user.email }}" 
+                                                                    data-id="{{ user.uid }}" 
+                                                                    data-bs-target="#sendLinkModal2" 
+                                                                    onclick="setModalData2('{{ user.email }}', '{{ user.uid }}')">
+                                                                        <i class="ri-mail-line"></i>
+                                                                    </a>
+                                                                </li>
+
                                                             {% endif %}
 
                                                             <li>
@@ -124,13 +136,35 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="{% url 'send_passcode' %}" enctype="multipart/form-data">
+                            <form method="POST" action="{% url 'send_passcode' %}?type=send_payment_link" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" id="hiddenUserId" name="user_id">  <!-- Hidden input for user ID -->
                                 <div class="mb-3">
                                     <label for="link" class="form-label">Payment Link</label>
                                     <input type="url" class="form-control" id="link" name="link" required>
                                 </div>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="sendLinkModal2" tabindex="-1" aria-labelledby="sendLinkModal2Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span>
+
+                                <h5 class="modal-title" id="sendLinkModal2Label">Send Code</h5>
+                                <h6 class="modal-title" id="sendLinkModal2LabelEmail"></h6>  <!-- Update to use JS -->
+                            </span>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{% url 'send_passcode' %}?type=send_code" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" id="hiddenUserId2" name="user_id">  <!-- Hidden input for user ID -->
+                                
                                 <button type="submit" class="btn btn-primary">Send</button>
                             </form>
                         </div>
@@ -145,6 +179,13 @@
                     document.getElementById('sendLinkModalLabelEmail').innerText = email;
                     // You may want to store the user ID in a hidden input for the form
                     document.getElementById('hiddenUserId').value = id;
+                }
+
+                function setModalData2(email, id) {
+                    // Set the email and ID in the modal
+                    document.getElementById('sendLinkModal2LabelEmail').innerText = email;
+                    // You may want to store the user ID in a hidden input for the form
+                    document.getElementById('hiddenUserId2').value = id;
                 }
             </script>
             {% endblock content %}

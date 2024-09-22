@@ -12,7 +12,7 @@ urlpatterns = [
     
     path('send_passcode',views.send_passcode,name='send_passcode'),
     
-    path('support-tickets',views.all_users,name='support_ticket'),
+    path('support-tickets',views.support_ticket,name='support_ticket'),
     path('edit-pages',views.edit_pages,name='edit_pages'),
     
 ]   

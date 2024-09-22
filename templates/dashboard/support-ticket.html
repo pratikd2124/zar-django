@@ -23,6 +23,9 @@
                                                             </div>
                                                         </th>
                                                         <th>
+                                                            <span>Name</span>
+                                                        </th>
+                                                        <th>
                                                             <span>Date</span>
                                                         </th>
                                                         <th>
@@ -37,15 +40,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {% for i in support_tickets %}
+                                                    {% for i in tickets %}
                                                     <tr>
                                                         <td>
                                                             <div class="check-box-contain">
                                                                 <span>#{{i.id}}</span>
                                                             </div>
                                                         </td>
-                                                        <td>{{i.created}}</td>
-                                                        <td>{{i.issue}}</td>
+                                                        <td>{{i.name}}</td>
+                                                        <td>{{i.created_at}}</td>
+                                                        <td>{{i.subject}}</td>
                                                         {% if i.resolved %}
                                                         <td class="status-success">
                                                             <span>Success</span>
@@ -58,7 +62,7 @@
                                                         <td>
                                                             <ul>
                                                                 <li>
-                                                                    <button type="button" class="btn btn-primary" onclick="openModal(event, '{{i.name}}', '{{i.email}}', '{{i.number}}', '{{i.issue}}', '{{i.product}}', '{{i.message}}')">
+                                                                    <button type="button" class="btn btn-primary" onclick="openModal(event, '{{i.name}}', '{{i.email}}', '{{i.phone}}', '{{i.subject}}', '{{i.message}}')">
                                                                         <i class="ri-eye-line"></i>
                                                                     </button>
                                                                 </li>
@@ -75,77 +79,70 @@
                                             </table>
                                             
                                          
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-xxl-6 col-lg-12 col-sm-6">
-                        <div class="mb-md-4 mb-3 custom-form">
-                            <label for="modal-name" class="form-label">Name</label>
-                            <div class="custom-input">
-                                <input type="text" id="modal-name" class="form-control" disabled>
-                            </div>
-                        </div>
-                    </div>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                                                    <div class="mb-md-4 mb-3 custom-form">
+                                                                        <label for="modal-name" class="form-label">Name</label>
+                                                                        <div class="custom-input">
+                                                                            <input type="text" id="modal-name" class="form-control" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                    <div class="col-xxl-6 col-lg-12 col-sm-6">
-                        <div class="mb-md-4 mb-3 custom-form">
-                            <label for="modal-email" class="form-label">email</label>
-                            <div class="custom-input">
-                                <input type="text" id="modal-email" class="form-control" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-6 col-lg-12 col-sm-6">
-                        <div class="mb-md-4 mb-3 custom-form">
-                            <label for="modal-number" class="form-label">number</label>
-                            <div class="custom-input">
-                                <input type="text" id="modal-number" class="form-control" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-6 col-lg-12 col-sm-6">
-                        <div class="mb-md-4 mb-3 custom-form">
-                            <label for="modal-issue" class="form-label">issue</label>
-                            <div class="custom-input">
-                                <input type="text" id="modal-issue" class="form-control" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-6 col-lg-12 col-sm-6">
-                        <div class="mb-md-4 mb-3 custom-form">
-                            <label for="modal-product" class="form-label">product</label>
-                            <div class="custom-input">
-                                <input type="text" id="modal-product" class="form-control" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xxl-6 col-lg-12 col-sm-6">
-                        <div class="mb-md-4 mb-3 custom-form">
-                            <label for="modal-message" class="form-label">message</label>
-                            <div class="custom-input">
-                                <textarea type="text" id="modal-message" class="form-control" disabled></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Other fields -->
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="modal-close-btn" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
+                                                                <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                                                    <div class="mb-md-4 mb-3 custom-form">
+                                                                        <label for="modal-email" class="form-label">email</label>
+                                                                        <div class="custom-input">
+                                                                            <input type="text" id="modal-email" class="form-control" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                                                    <div class="mb-md-4 mb-3 custom-form">
+                                                                        <label for="modal-number" class="form-label">number</label>
+                                                                        <div class="custom-input">
+                                                                            <input type="text" id="modal-number" class="form-control" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                                                    <div class="mb-md-4 mb-3 custom-form">
+                                                                        <label for="modal-issue" class="form-label">Subject</label>
+                                                                        <div class="custom-input">
+                                                                            <input type="text" id="modal-issue" class="form-control" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            
+                                                                <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                                                    <div class="mb-md-4 mb-3 custom-form">
+                                                                        <label for="modal-message" class="form-label">message</label>
+                                                                        <div class="custom-input">
+                                                                            <textarea type="text" id="modal-message" class="form-control" disabled></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Other fields -->
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" id="modal-close-btn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             
                                           
@@ -165,14 +162,13 @@
 
                 
                     <script>
-                        function openModal(event, name, email, number, issue, product, message) {
+                        function openModal(event, name, email, number, issue, message) {
                             event.preventDefault();
                             document.getElementById("modal-name").value = name;
 
                             document.getElementById("modal-email").value = email;
                             document.getElementById("modal-number").value = number;
                             document.getElementById("modal-issue").value = issue;
-                            document.getElementById("modal-product").value = product;
                             document.getElementById("modal-message").value = message;
 
                     

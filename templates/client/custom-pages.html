@@ -1,0 +1,27 @@
+{% extends 'client/template.html' %}
+
+
+{% block content %}
+{% load static %}
+
+    <div class="min-h-screen flex justify-center">
+        <!-- Sidebar -->
+       
+
+        <!-- Main Content -->
+        <div class="max-w-3xl mx-auto md:mx-2 p-8">
+           {{content | safe}}
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+
+{% endblock content %}
+    

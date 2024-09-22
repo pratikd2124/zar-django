@@ -22,6 +22,10 @@ urlpatterns = [
     path('material-provider/<str:category>/<str:uid>', views.brand_info, name='brand_info'),
     path('service-provider/<str:category>/<str:uid>', views.user_info, name='user_info'),
     path('success', views.success_page, name='success_page'),
+    path('contact',views.contact,name='contact_us'),
+    path('privacy-policy',views.privacy_policy,name='privacy_policy'),
+    path('FAQ',views.faq,name='faq'),
+    path('terms-and-conditions',views.terms_and_conditions,name='terms_and_conditions'),
     
     
     path('api/suggestions',views.suggestions,name='suggestions'),

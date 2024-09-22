@@ -1,0 +1,124 @@
+{% extends 'client/template.html' %}
+
+{% block content %}
+    
+{% load static %}
+
+    <div class="w-full font-card-title">
+        <section class="text-white py-16 px-8">
+            <div class="max-w-7xl mx-auto px-7">
+                <h2 class="text-4xl font-semibold mb-4 gloock-regular">We'd love to hear from you.</h2>
+                <small class="text-lg text-gray-400 mb-8">Get in touch</small>
+                <p class="text-gray-400 mb-8 max-w-5xl pt-6">
+                    At Zar, we value your feedback and are always here to assist you. Whether you have a question about our services, need support, or just want to say hello, feel free to reach out to us. Our dedicated team will get back to you as soon as possible.
+                </p>
+            </div>
+            <div class="max-w-7xl mx-auto flex flex-col items-center gap-4 md:flex-row justify-between">
+                <div class="w-full md:w-2/5">
+                    <form id="contactForm" class="w-full mt-8" action="{% url 'contact_us' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="space-y-4 w-full md:max-w-md mx-auto p-6 bg-[#101010] border border-gray-800 rounded-lg shadow-md">
+                            <h2 class='gloock-regular text-center text-xl'>Fill in the Form and we will get back</h2>
+                            <div class="relative">
+                                <label for="name" class="block text-white mb-1">Name</label>
+                                <span class="absolute inset-y-0 top-6 left-0 flex items-center pl-3 text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                </span>
+                                <input type="text" id="name" name="name" placeholder="John Wayne" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <p id="nameError" class="text-red-500 text-sm hidden"></p>
+                            </div>
+
+                            <div class="relative">
+                                <label for="email" class="block text-white mb-1">Email</label>
+                                <span class="absolute inset-y-0 top-6 left-0 flex items-center pl-3 text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                    </svg>
+                                </span>
+                                <input type="email" id="email" name="email" placeholder="john@wayne.com" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <p id="emailError" class="text-red-500 text-sm hidden"></p>
+                            </div>
+
+                            <div class="relative">
+                                <label for="email" class="block text-white mb-1">Phone</label>
+                                <span class="absolute inset-y-0 top-6 left-0 flex items-center pl-3 text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                                    </svg>
+                                </span>
+                                <input type="number" id="phone" name="phone" placeholder="+91 00000 00000" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <p id="emailError" class="text-red-500 text-sm hidden"></p>
+                            </div>
+
+                            <div class="relative">
+                                <label for="subject" class="block text-white mb-1">Subject</label>
+                                <span class="absolute inset-y-0 top-6 left-0 flex items-center pl-3 text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                </span>
+                                <input type="text" id="subject" name="subject" placeholder="Subject" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <p id="subjectError" class="text-red-500 text-sm hidden"></p>
+                            </div>
+
+                            <div class="relative">
+                                <label for="message" class="block text-white mb-1">Message</label>
+                                <span class="absolute top-8 left-0 flex items-start pl-3 pt-3 text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+                                    </svg>
+                                </span>
+                                <textarea id="message" name="message" placeholder="Enter a short message" class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4"></textarea>
+                                <p id="messageError" class="text-red-500 text-sm hidden"></p>
+                            </div>
+                            <div class="w-full">
+                                <button type="submit" class="w-full px-8 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="md:w-3/5 md:flex block rounded-lg border border-gray-700">
+                    <div class="md:w-1/2 md:h-auto h-80">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235.61594262759408!2d72.89252623915675!3d19.114012425788367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9b146e24c39%3A0x41f89e4d5f4217de!2sCommunity%20Coworks%20(Boomerang)!5e0!3m2!1sen!2sin!4v1723562765868!5m2!1sen!2sin" style="border:0; border-radius:10px;" width="100%" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="md:w-1/2 divide-y divide-gray-700">
+                        <div class="mb-4 p-4">
+                            <h3 class="text-lg font-semibold mb-2 gloock-regular">Address:</h3>
+                            <p>Address: A007, Boomerang, Chandivali, Mumbai 400 072, India</p>
+                        </div>
+                        <div class="mb-4 p-4">
+                            <h3 class="text-lg font-semibold mb-2 gloock-regular">Our Office Hours</h3>
+                            <p>Monday to Friday: 9:00 AM - 6:00 PM (IST)</p>
+                        </div>
+                        <div class="mb-4 p-4">
+                            <h3 class="text-lg font-semibold mb-2 gloock-regular">Call Us</h3>
+                            <p>8828452971 / 7900192533</p>
+                        </div>
+                        <div class="mb-4 p-4">
+                            <h3 class="text-lg font-semibold mb-2 gloock-regular">Email</h3>
+                            <p>info@zarluxury.com</p>
+                        </div>
+                        <div class="mb-4 p-4">
+                            <h3 class="text-lg font-semibold mb-2 gloock-regular">Social Media</h3>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+                                <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+                                <a href="#" class="text-gray-400 hover:text-white">Instagram</a>
+                                <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+   
+
+
+{% endblock content %}
+    

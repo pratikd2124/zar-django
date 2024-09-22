@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from main_app.models import Community, User
+from main_app.models import Community, User, SupportTickets
 from .models import Category,PagesData
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+from main_app.funtions import Send_Code_email, Send_Welcome_email, Send_Payment_email
 
 # Create your views here.
 import random
@@ -174,10 +175,17 @@ def all_brand(request):
 def send_passcode(request):
     if request.method =='POST':
         uid =request.POST.get('user_id')
-        print(uid)
         user = User.objects.get(uid=uid)
+        if request.GET.get('type')=='send_code':
+            Send_Code_email(user.code,user.email)
+            user.payment_status = 'Code Sent'
+            user.save()
+            return redirect(request.META.get('HTTP_REFERER', '/dashboard'))
+        
         payment_link = request.POST.get('link')
-        print(payment_link)
+        if request.GET.get('type')=='send_payment_link':
+            Send_Payment_email(payment_link,user.email)
+            
         user.code = user.generate_unique_code()
         user.payment_status = 'In Progress'
         user.save()
@@ -203,3 +211,36 @@ def edit_pages(request):
     
     
     return render(request,'dashboard/edit_pages.html',{'title':'Edit Data','page':page,'page_data':page_data})
+
+
+def support_ticket(request):
+    tickets = SupportTickets.objects.all()
+    if request.method == 'POST':
+        if request.POST.get('type') == 'reply':
+            ticket = SupportTickets.objects.get(id=request.POST.get('ticket_id'))
+            ticket.reply = request.POST.get('reply')
+            ticket.save()
+            messages.success(request, 'Reply sent successfully.')
+            return redirect('support_ticket')
+
+        if request.POST.get('type') == 'delete':
+            ticket = SupportTickets.objects.get(id=request.POST.get('ticket_id'))
+            ticket.delete()
+            messages.success(request, 'Ticket deleted successfully.')
+            return redirect('support_ticket')
+
+        if request.POST.get('type') == 'close':
+            ticket = SupportTickets.objects.get(id=request.POST.get('ticket_id'))
+            ticket.status = 'Closed'
+            ticket.save()
+            messages.success(request, 'Ticket closed successfully.')
+            return redirect('support_ticket')
+
+        if request.POST.get('type') == 'open':
+            ticket = SupportTickets.objects.get(id=request.POST.get('ticket_id'))
+            ticket.status = 'Open'
+            ticket.save()
+            messages.success(request, 'Ticket opened successfully.')
+            return redirect('support_ticket')
+    
+    return render(request,'dashboard/support-ticket.html',{'title':'Support Ticket','tickets':tickets})
