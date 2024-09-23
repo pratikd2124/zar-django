@@ -1,0 +1,104 @@
+{% extends 'client/template.html' %}
+
+{% block content %}
+{% load static %}
+    
+
+    <div class="w-full py-8">
+        <form id="profileForm" class="">
+            <div class='space-y-4 mx-auto max-w-lg border border-gray-800 rounded-xl p-6'>
+                <h1 class="text-2xl">Home Owner Profile</h1>
+                <div class='relative'>
+                    <label class="block mb-1">Name</label>
+                    <span class="absolute inset-y-0 top-6 left-0 flex items-center pl-3 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </span>
+                    <input type="text" name="name" id="name" value="{{ profile.name }}" disabled class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                </div>
+                <div class='relative'>
+                    <label class="block mb-1">Phone Number</label>
+                    <span class="absolute inset-y-0 top-6 left-0 flex items-center pl-3 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                        </svg>
+                    </span>
+                    <input type="tel" name="phoneNumber" id="phoneNumber" value="{{ profile.phoneNumber }}" disabled class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                </div>
+                <div class='relative'>
+                    <label class="block mb-1">Email</label>
+                    <span class="absolute inset-y-0 top-7 left-0 flex items-center pl-3 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                        </svg>
+                    </span>
+                    <input type="email" name="email" id="email" value="{{ profile.email }}" disabled class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                </div>
+                <div class='relative'>
+                    <label class="block mb-1">Address</label>
+                    <span class="absolute top-8 left-0 flex items-start pl-3 pt-3 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+                        </svg>
+                    </span>
+                    <input type="text" name="address" id="address" value="{{ profile.address }}" disabled class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                </div>
+                <div class='relative'>
+                    <label class="block mb-1">Profile Picture</label>
+                    <input type="file" accept="image/*" id="profilePic" disabled class="w-full text-md p-4 pl-10 border border-slate-700 rounded bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <img id="profilePicPreview" src="{{ profile.profilePic }}" alt="Profile Pic" class="mt-4 w-32 h-32 rounded-full object-cover border mx-auto" />
+                </div>
+            </div>
+            <div class='fixed bottom-0 p-4 bg-[#101010] flex justify-end w-full px-6'>
+                <button id="editButton" type="button" class="px-8 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 focus:outline-none focus:ring-1 focus:ring-violet-500">
+                    Edit Profile
+                </button>
+                <button id="saveButton" type="button" class="px-8 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 hidden">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let isEditing = false;
+
+        document.getElementById('editButton').addEventListener('click', () => {
+            isEditing = true;
+            enableInputs();
+            document.getElementById('editButton').classList.add('hidden');
+            document.getElementById('saveButton').classList.remove('hidden');
+        });
+
+        document.getElementById('saveButton').addEventListener('click', () => {
+            isEditing = false;
+            disableInputs();
+            document.getElementById('editButton').classList.remove('hidden');
+            document.getElementById('saveButton').classList.add('hidden');
+            toast.success('Profile updated successfully!');
+        });
+
+        function enableInputs() {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => input.disabled = false);
+        }
+
+        function disableInputs() {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => input.disabled = true);
+        }
+
+        document.getElementById('profilePic').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                document.getElementById('profilePicPreview').src = reader.result;
+            };
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+{% endblock content %}

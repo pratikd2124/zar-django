@@ -37,15 +37,21 @@
                         
                         
                     <button id="profileButton" class="relative px-4 p-2 rounded-lg bg-white items-center inline-flex gap-2">
-                        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-white">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
-                        </svg>
+                        {% if request.user.profile_image_url %}
+                            <img src="{{ request.user.profile_image_url }}" alt="profile-pic" class="size-6 rounded-full">
+                        {% else %}
+                            <!-- Default Profile Image Fallback -->
+                            {% comment %} <img src="https://cdn-icons-png.flaticon.com/512/21/21104.png" alt="default-profile-pic" class="size-6 rounded-full"> {% endcomment %}
+                        {% endif %}
+                        <div class="bg-gray-200 text-blue-900 border border-gray-300 rounded-full w-8 h-8 flex items-center justify-center">
+                            <span class="font-medium">{{ request.user.first_name|slice:":1" }}{{ request.user.last_name|slice:":1" }}</span>
+                        </div>
                         <span class="text-black text-sm">{{request.user.first_name}} {{request.user.last_name}}</span>
                     </button>
                     <div id="dropdownMenu" class="hidden fixed z-50 top-20 right-4 mt-2 w-48 bg-[#0f0f0f] border border-gray-700 shadow-lg rounded-xl">
                         <div class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900">
                             <p>{{request.user.first_name}} {{request.user.last_name}}</p>
-                            <small>{{request.user.email}}</small>
+                            <small>{{request.user.email}}</small>   
                         </div>
                         <a href="/profile">
                             <span class="block w-full py-2 px-4 text-sm text-left hover:bg-gray-900">Profile</span>
