@@ -7,7 +7,7 @@
         <a href="{% url 'home' %}"> Home</a> <span>/</span>
 
         {% for i in nav_list %}
-           <a href="{% url 'category_view' i.category %}?id={{i.id}}"> {{i.category}}</a> <span>/</span>
+           <a href="{% url 'category_view' i.get_category_hierarchy %}?id={{i.id}}"> {{i.name}}</a> <span>/</span>
         {% endfor %}
             
 
@@ -28,7 +28,7 @@
             
             
         <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-80 h-80 mx-auto cursor-pointer group" onclick="handleCardClick()">
-            <a href="{% url 'category_view' i.name %}?id={{i.id}}">
+            <a href="{% url 'category_view' i.get_category_hierarchy %}?id={{i.id}}">
             <img src="../../media/{{i.image}}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
             <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
             <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>
@@ -55,7 +55,7 @@
             
             
         <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-80 h-80 mx-auto cursor-pointer group" onclick="handleCardClick()">
-            <a href="{% url 'user_info' i.category.name i.uid %}">
+            <a href="{% url 'user_info' i.category.get_category_hierarchy i.uid %}">
             <img src="../../media/{{i.profile_pic}}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
             <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
             <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>
@@ -79,7 +79,7 @@
             
             
         <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-80 h-80 mx-auto cursor-pointer group" onclick="handleCardClick()">
-            <a href="{% url 'brand_info' i.category.name i.uid  %}">
+            <a href="{% url 'brand_info' i.category.get_category_hierarchy i.uid  %}">
             <img src="../../media/{{i.brand_logo}}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
             <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
             <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>

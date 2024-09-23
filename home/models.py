@@ -19,7 +19,7 @@ class Category(models.Model):
         while category:
             category_hierarchy.append(category.name)
             category = category.parent
-        return " / ".join(category_hierarchy[::-1])
+        return "/".join(category_hierarchy[::-1])
 
 
 class ProjectImages(models.Model):
