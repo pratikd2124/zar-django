@@ -156,7 +156,7 @@ def signin(request):
 
 
 def profile(request):
-    return render(request, 'client/profile.html')
+    return render(request, 'client/home-owner-profile.html')
 
 
 
