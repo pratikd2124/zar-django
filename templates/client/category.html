@@ -2,7 +2,7 @@
 
 
 {% block content %}
-<div class="font-card-title bg-gray-100/10 text-xs md:text-sm tracking-wider border-b border-gray-600/10 text-white py-4">
+<div class="w-full font-card-title bg-gray-100/10 text-xs md:text-sm tracking-wider border-b border-gray-600/10 text-white py-4">
     <div class="max-w-7xl mx-auto flex space-x-2 lg:space-x-6">
         <a href="{% url 'home' %}"> Home</a> <span>/</span>
 
@@ -14,9 +14,12 @@
     </div>
 </div>
 
-<div class="lg:px-[6rem] px-4 flex md:flex-row flex-col bg-gray-200/10 p-6 flex md:justify-between justify-center items-center">
-    <h2 class="text-3xl gloock-regular font-semibold text-white capitalize">{{ category.name }}</h2>
-    <p class="font-card-title text-gray-300 mt-2">Experience unparalleled expertise with our bespoke services</p>
+<div class="w-full bg-gray-200/10">
+    <div class="max-w-7xl mx-auto flex md:flex-row flex-col  py-6 flex md:justify-between justify-center items-center">
+        <h2 class="text-3xl gloock-regular  text-white capitalize">{{ category.name }}</h2>
+        <p class="font-card-title text-gray-300 mt-2">Experience unparalleled expertise with our bespoke services</p>
+    </div>
+
 </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[3rem] md:px-12 px-4 py-12">

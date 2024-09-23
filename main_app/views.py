@@ -156,7 +156,14 @@ def signin(request):
 
 
 def profile(request):
-    return render(request, 'client/home-owner-profile.html')
+    user_type = request.user.type  # Access the user type from the request
+
+    # Check the user type and render the appropriate template
+    if user_type in ['Home Owner', 'Community User']:
+        return render(request, 'client/home-owner-profile.html')
+    else:
+        return render(request, 'client/material-service-profile.html')
+
 
 
 
