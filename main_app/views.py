@@ -75,7 +75,7 @@ def validate(request):
             if Community.objects.filter(code=otp).exists():
                 
                 community = Community.objects.get(code =otp)
-                user = User.objects.create(email=email,community=community)
+                user = User.objects.create(email=email,community=community,username=email)
                 user.save()
                 request.session['email'] = email 
                 request.session['type'] = 'New'   
