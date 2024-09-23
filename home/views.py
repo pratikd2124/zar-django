@@ -244,3 +244,9 @@ def support_ticket(request):
             return redirect('support_ticket')
     
     return render(request,'dashboard/support-ticket.html',{'title':'Support Ticket','tickets':tickets})
+
+
+def update_brand(request,id):
+    brand = User.objects.get(uid=id)
+    categories = Category.objects.all()
+    return render(request,'dashboard/update-brand.html',{'title':'Update Brand','brand':brand,'categories':categories})

@@ -15,4 +15,5 @@ urlpatterns = [
     path('support-tickets',views.support_ticket,name='support_ticket'),
     path('edit-pages',views.edit_pages,name='edit_pages'),
     
+    path('edit-brand/<int:id>',views.update_brand,name='edit_brand'),
 ]   
