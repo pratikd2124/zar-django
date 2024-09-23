@@ -41,12 +41,11 @@
                 <form class="max-w-2xl mx-auto" onsubmit="return false;">
                     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                     <div class="relative">
-                        <div id="suggestions" class="absolute z-10 -top-[14rem] mt-2 w-full bg-gray-700 hover:text-black text-white border border-gray-300 rounded-lg shadow-lg hidden" style="    overflow-x: auto;
-    height: 211px;">
+                        <div id="suggestions" class="absolute z-10 -top-[14rem] mt-2 w-full bg-[#171717]  text-white border border-gray-700 rounded-lg shadow-lg hidden" style="overflow-x: auto; height: 211px;">
                             
-                            <div id="categories" class="p-2"></div>
-                            <div id="brands" class="p-2"></div>
-                            <div id="service-providers" class="p-2"></div>
+                            <div id="categories" class="p-2 "></div>
+                            <div id="brands" class="p-2 "></div>
+                            <div id="service-providers" class="p-2 "></div>
                         </div>
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -94,7 +93,7 @@
             if (data.categories.length) {
                 let categoryHtml = '<h3 class="font-bold">Categories</h3>';
                 data.categories.forEach(cat => {
-                    categoryHtml += `<div class="p-2 hover:bg-gray-100 cursor-pointer"> <a href="/category/${cat.name}?id=${cat.id}"> ${cat.hierarchy}</a></div>`;
+                    categoryHtml += `<div class="p-2 rounded-lg hover:bg-gray-100 cursor-pointer hover:text-black"> <a href="/category/${cat.name}?id=${cat.id}"> ${cat.hierarchy}</a></div>`;
                 });
                 document.getElementById('categories').innerHTML = categoryHtml;
             }
@@ -103,7 +102,7 @@
             if (data.brands.length) {
                 let brandHtml = '<h3 class="font-bold">Brands</h3>';
                 data.brands.forEach(brand => {
-                    brandHtml += `<div class="p-2 hover:bg-gray-100 cursor-pointer"><a href="/material-provider/${brand.category}/${brand.id}">${brand.name}</a></div>`;
+                    brandHtml += `<div class="p-2 rounded-lg hover:bg-gray-100 cursor-pointer hover:text-black"><a href="/material-provider/${brand.category}/${brand.id}">${brand.name}</a></div>`;
                 });
                 document.getElementById('brands').innerHTML = brandHtml;
             }
@@ -112,7 +111,7 @@
             if (data.serviceProviders.length) {
                 let serviceHtml = '<h3 class="font-bold">Service Providers</h3>';
                 data.serviceProviders.forEach(provider => {
-                    serviceHtml += `<div class="p-2 hover:bg-gray-100 cursor-pointer"><a href="/service-provider/${provider.category}/${provider.id}">${provider.name}</a></div>`;
+                    serviceHtml += `<div class="p-2 rounded-lg hover:bg-gray-100 cursor-pointer hover:text-black"><a href="/service-provider/${provider.category}/${provider.id}">${provider.name}</a></div>`;
                 });
                 document.getElementById('service-providers').innerHTML = serviceHtml;
             }
