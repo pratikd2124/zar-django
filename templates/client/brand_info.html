@@ -25,7 +25,6 @@
         <a href="{% url 'home' %}"> Home</a> <span>/</span>
 
 
-        {{nav_list}}
         <br>
 
         {% for i in nav_list %}
@@ -41,7 +40,7 @@
         <div class="col-span-10 w-full flex min-h-screen">
             <div class="w-3/5">
                 <section class="bg-white p-1 px-12 w-full">
-                    <img src="{{ user.brand_logo.url }}" alt="brand-logo" class="h-20">
+                    <img src="{% if user.brand_logo %} {{ user.brand_logo.url | default_if_none:''}} {% endif %}" alt="brand-logo" class="h-20">
                 </section>
                 <div id="content-brand" class="font-card-title px-12 py-6 text-sm text-gray-300">
                     <h2 class="gloock-regular text-2xl py-6">About {{ user.brand_name }}</h2>
@@ -52,12 +51,12 @@
                 </div>
             </div>
             <div class="min-h-screen w-2/5">
-                <img src="{{ user.profile_pic.url }}" alt="brand-image" class="bg-white p-2 object-cover object-center w-full h-full">
+                <img src="{% if user.profile_pic %}{{ user.profile_pic.url |default_if_none:'' }}{% endif %}" alt="brand-image" class="bg-white p-2 object-cover object-center w-full h-full">
             </div>
         </div>
         <div class="relative col-span-2 min-h-screen w-full">
             <div class="my-6 p-4 mx-auto w-full text-center">
-                <a download href="{{user.profile_doc.url}}" class="py-2.5 px-6 border inline-flex items-center rounded-lg text-xs text-white gap-2 hover:bg-white hover:text-black font-card-title">
+                <a download href="{% if user.profile_doc %}{{user.profile_doc.url}}{% endif %}" class="py-2.5 px-6 border inline-flex items-center rounded-lg text-xs text-white gap-2 hover:bg-white hover:text-black font-card-title">
                     Download Profile
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
@@ -95,10 +94,10 @@
 
     <div class="lg:hidden block">
         <section class="bg-white p-1 px-12 w-full">
-            <img src="{{ user.brand_logo.url }}" alt="brand-logo" class="h-20 mx-auto">
+            <img src="{% if user.brand_logo %}{{ user.brand_logo.url }}{% endif %}" alt="brand-logo" class="h-20 mx-auto">
         </section>
         <div class="w-full h-100">
-            <img src="{{ user.profile_pic.url }}" alt="brand-image" class="border-t border-gray-300 bg-white p-2 object-cover w-full h-full">
+            <img src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% endif %}" alt="brand-image" class="border-t border-gray-300 bg-white p-2 object-cover w-full h-full">
         </div>
         <div id="content-brand" class="font-card-title px-12 py-6 text-sm text-gray-300">
             <h2 class="gloock-regular text-2xl py-6">About {{ user.brand_name }}</h2>
@@ -108,7 +107,7 @@
             </p>
         </div>
         <div class="lg:hidden z-50 fixed bg-[#171717] bottom-0 p-8 pb-4 w-full mx-auto text-center font-card-title space-y-4">
-            <a download href="{{user.profile_doc.url}}" class="py-2.5 px-6 w-full justify-center border inline-flex items-center rounded-lg text-xs text-white gap-2 hover:bg-white hover:text-black font-card-title">
+            <a download href="{% if user.profile_doc %}{{user.profile_doc.url|default:''}}{% endif %}" class="py-2.5 px-6 w-full justify-center border inline-flex items-center rounded-lg text-xs text-white gap-2 hover:bg-white hover:text-black font-card-title">
                 Download Profile
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
@@ -147,7 +146,7 @@
                 {% if images %}
                     {% for image in images %}
                         <div>
-                            <img src="{{ image.image.url }}" alt="Collage {{ forloop.counter }}" class="h-full w-full m-4 transition duration-200 rounded-lg hover:scale-[102%]">
+                            <img src="{{ image.image.url|default_if_none:'' }}" alt="Collage {{ forloop.counter }}" class="h-full w-full m-4 transition duration-200 rounded-lg hover:scale-[102%]">
                         </div>
                     {% endfor %}
                 {% else %}

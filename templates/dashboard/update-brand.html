@@ -1,0 +1,371 @@
+{% extends 'dashboard/template.html' %}
+
+
+{% block content %}
+    
+
+{% load static %}
+<div class="page-body">
+    <!-- All User Table Start -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        <div class="title-header option-title">
+                            <h5>Edit Material Provide - #{{brand.id}}</h5>
+                     
+                        </div>
+                        <div class="container py-5">
+                            <form method="post" enctype="multipart/form-data" class="row g-3">
+                                {% csrf_token %}
+                                <div class="col-md-6">
+                                    <label for="profilePic" class="form-label">Profile Pic</label>
+                                    <input type="file" name="profilepic" id="profilePic" class="form-control" readonly />
+                                    {% if brand.profile_pic %}
+                                        <div class="position-relative mt-2" style="width: 20%;">
+                                            <img src="{{ brand.profile_pic.url }}" id="profilePicimg" alt="Profile Preview" class="img-thumbnail" />
+                                            <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" 
+                                                    onclick="removeImage('profilePic')">X</button>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Brand Logo -->
+                                <div class="col-md-6">
+                                    <label for="brandlogo" class="form-label">Brand Logo</label>
+                                    <input type="file" name="brandlogo" id="brandlogo" class="form-control" readonly />
+                                    {% if brand.brand_logo %}
+                                        <div class="position-relative mt-2" style="width: 50%;">
+                                            <img src="{{ brand.brand_logo.url }}" id="brandlogoimg" alt="Brand Logo Preview" class="img-thumbnail" />
+                                            <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" 
+                                                    onclick="removeImage('brandlogo')">X</button>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Project Showcase -->
+                                <div class="col-md-12">
+                                    <label for="projectShowcase" class="form-label">Project Showcase (up to 10 images)</label>
+                                    <input type="file" name="projectShowcase" id="projectShowcase" class="form-control" readonly multiple />
+                                    <input type="hidden" name="gallery_images" id="gallery_images" value="{% for preview in brand.profile_gallery.all %}{{ preview.id }}{% if not forloop.last %},{% endif %}{% endfor %}">
+                                    {% if brand.profile_gallery.count > 0 %}
+                                        <div class="d-flex flex-wrap mt-2 gap-2" id="galleryPreview">
+                                            {% for preview in brand.profile_gallery.all %}
+                                                <div class="position-relative"  id="img{{preview.id}}">
+                                                    <img src="{{ preview.image.url }}" alt="Project Showcase" class="img-thumbnail" style="width: 100px;" />
+                                                    <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0"
+                                                            onclick="removeGalleryImage('{{ preview.id }}')">X</button>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Full Name -->
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Brand Name</label>
+
+                                    <input
+                                        type="text"
+                                        name="brand_name"
+                                        value="{{ brand.brand_name|default_if_none:'' }}"
+                                        placeholder="Brand Name"
+                                        class="form-control"
+                                        readonly
+                                    />
+                                </div>
+
+                                <!-- Firm Name -->
+                                <!-- Contact Person Name -->
+                                <div class="col-md-6">
+                                    <label for="contact_person_name">Contact Person Name</label>
+                                    <input
+                                        type="text"
+                                        id="contact_person_name"
+                                        name="contact_person_name"
+                                        value="{{ brand.contact_person |default_if_none:'' }}"
+                                        placeholder="Contact Person Name"
+                                        class="form-control"
+                                        readonly
+                                    />
+                                </div>
+
+                                <!-- Contact Number -->
+                                <div class="col-md-6">
+                                    <label for="mobile">Contact Number</label>
+                                    <input
+                                        type="text"
+                                        id="mobile"
+                                        name="mobile"
+                                        value="{{ brand.mobile|default_if_none:'' }}"
+                                        placeholder="Contact Number"
+                                        class="form-control"
+                                        readonly
+                                    />
+                                </div>
+
+                                <!-- Company Email -->
+                                <div class="col-md-6">
+                                    <label for="email">Company Email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value="{{ brand.email.value|default_if_none:'' }}"
+                                        placeholder="Company Email"
+                                        class="form-control"
+                                        readonly
+                                    />
+                                </div>
+
+                                <!-- Designation -->
+                                <div class="col-md-6">
+                                    <label for="designation">Designation</label>
+                                    <input
+                                        type="text"
+                                        id="designation"
+                                        name="designation"
+                                        value="{{ brand.designation|default_if_none:'' }}"
+                                        placeholder="Designation"
+                                        class="form-control"
+                                        readonly
+                                    />
+                                </div>
+
+                                <!-- Firm Address -->
+                                <div class="col-md-6">
+                                    <label for="firm_address">Firm Address</label>
+                                    <textarea
+                                        id="firm_address"
+                                        name="firm_address"
+                                        placeholder="Address"
+                                        class="form-control"
+                                        readonly
+                                    >{{ brand.firm_address|default_if_none:'' }}</textarea>
+                                </div>
+
+                                <!-- Country -->
+                                <div class="col-md-6">
+                                    <label for="country">Country</label>
+                                    <select id="country" name="country" disabled class="form-select">
+                                        <option readonly selected>Select Country</option>
+                                        <!-- Add country options here -->
+                                    </select>
+                                </div>
+
+                                <!-- State -->
+                                <div class="col-md-6">
+                                    <label for="state">State</label>
+                                    <select id="state" name="state" disabled class="form-select">
+                                        <option value="" readonly selected>Select State</option>
+                                        <!-- Add state options here -->
+                                    </select>
+                                </div>
+
+                                <!-- City -->
+                                <div class="col-md-6">
+                                    <label for="city">City</label>
+                                    <select id="city" name="city" disabled class="form-select">
+                                        <option value="" readonly selected>Select City</option>
+                                        <!-- Add city options here -->
+                                    </select>
+                                </div>
+
+                                <!-- Pincode -->
+                                <div class="col-md-6">
+                                    <label for="pincode">Pincode</label>
+                                    <input
+                                        type="text"
+                                        id="pincode"
+                                        name="pincode"
+                                        value="{{ brand.zip_code|default_if_none:'' }}"
+                                        placeholder="Pincode"
+                                        class="form-control"
+                                        readonly
+                                    />
+                                </div>
+
+                                <!-- Category -->
+                                <div class="col-md-6">
+                                    <label for="category">Category</label>
+                                    <select id="category" name="category" class="form-select" disabled>
+                                        {% for category in categories %}
+                                        <option value="{{ category.id }}" 
+                                        {% if brand.category.id == category.id %}
+                                            selected
+                                        {% endif %}
+                                            >{{ category.get_category_hierarchy }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <!-- Bio -->
+                                <div class="col-12">
+                                    <label for="bio-editor">Bio</label>
+                                    <textarea name="bio" class="form-control" id="bio-editor" readonly>{{brand.bio|safe}}</textarea>
+                                </div>
+
+                                <!-- Social Media Links -->
+                                <div class="col-md-4">
+                                    <label for="facebook">Facebook</label>
+                                    <input
+                                        type="text"
+                                        id="facebook"
+                                        name="facebook"
+                                        value="{{ brand.social_links.facebook|default_if_none:'' }}"
+                                        placeholder="Facebook"
+                                        class="form-control"
+                                        readonly
+                                    />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="instagram">Instagram</label>
+                                    <input
+                                        type="text"
+                                        id="instagram"
+                                        name="instagram"
+                                        value="{{ brand.social_links.instagram|default_if_none:'' }}"
+                                        placeholder="Instagram"
+                                        class="form-control"
+                                        readonly
+                                    />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="linkedin">LinkedIn</label>
+                                    <input
+                                        type="text"
+                                        id="linkedin"
+                                        name="linkedin"
+                                        value="{{ brand.social_links.linkedin|default_if_none:'' }}"
+                                        placeholder="LinkedIn"
+                                        class="form-control"
+                                        readonly
+                                    />
+                                </div>
+
+                                <!-- Profile Pic -->
+                                
+                                <!-- Buttons -->
+                                <div class="col-12 d-flex justify-content-end gap-2">
+                                    <button
+                                        type="button"
+                                        onclick="toggleEditMode()"
+                                        class="btn btn-outline-secondary"
+                                    >
+                                        Edit Profile
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- All User Table Ends-->
+
+    
+</div>
+
+    
+
+<script>
+    function toggleEditMode() {
+        // Toggle the readonly attribute for all input fields
+        const inputs = document.querySelectorAll('input[type="file"]');
+        inputs.forEach(input => {
+            input.readOnly = !input.readOnly;
+        });
+    }
+
+    function removeImage(inputId) {
+        // Find the file input and set its value to null
+        const input = document.getElementById(inputId);
+        input.value = '';  // Clear the file input value
+        document.getElementById((inputId+'img')).style.display = 'none';  // Clear the image preview
+    }
+
+    let imageList = document.getElementById('gallery_images').value ? document.getElementById('gallery_images').value.split(',') : [];
+    let newFiles = [];  // Array to hold new file objects
+    
+    // Function to remove an image from the list and the preview
+    function removeGalleryImage(imageId) {
+        // Remove the image from the preview
+        const imgElement = document.getElementById('img' + imageId);
+        if (imgElement) {
+            imgElement.style.display = 'none';  // or imgElement.remove();
+        }
+    
+        // Remove the imageId from the imageList array if it's an existing image
+        imageList = imageList.filter(id => id !== imageId);
+    
+        // Update the hidden input with the new list
+        document.getElementById('gallery_images').value = imageList.join(',');
+    }
+    
+    // Function to handle new image uploads
+    document.getElementById('projectShowcase').addEventListener('change', function(event) {
+        const files = event.target.files;
+        const galleryPreview = document.getElementById('galleryPreview');
+    
+        for (let i = 0; i < files.length; i++) {
+            const newImageId = 'new' + i;  // Temporary unique ID for new images
+    
+            // Create a new div with the image preview and remove button
+            const newImageDiv = document.createElement('div');
+            newImageDiv.classList.add('position-relative');
+            newImageDiv.id = 'img' + newImageId;
+    
+            // Create the image element
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(files[i]);  // Preview the selected image
+            img.alt = 'Project Showcase';
+            img.classList.add('img-thumbnail');
+            img.style.width = '100px';
+    
+            // Create the remove button
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'position-absolute', 'top-0', 'end-0');
+            removeButton.innerText = 'X';
+            removeButton.type = 'button';
+            removeButton.onclick = function() {
+                removeNewFile(newImageId, i);
+            };
+    
+            // Append the image and button to the new div
+            newImageDiv.appendChild(img);
+            newImageDiv.appendChild(removeButton);
+    
+            // Append the new div to the gallery preview
+            galleryPreview.appendChild(newImageDiv);
+    
+            // Add the new file object to the newFiles array
+            newFiles.push(files[i]);
+        }
+    });
+    
+    // Function to remove newly added files
+    function removeNewFile(tempId, fileIndex) {
+        const imgElement = document.getElementById('img' + tempId);
+        if (imgElement) {
+            imgElement.style.display = 'none';  // or imgElement.remove();
+        }
+    
+        // Remove the file from the newFiles array
+        newFiles = newFiles.filter((file, index) => index !== fileIndex);
+    }
+    
+    
+</script>
+
+
+{% endblock content %}
+    

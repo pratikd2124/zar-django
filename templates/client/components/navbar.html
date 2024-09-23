@@ -8,10 +8,10 @@
     <header class="bg-black text-white relative">
         <div class="flex justify-between items-center p-4 px-12 border-b border-gray-800">
             <a href="/" class="md:block hidden text-xl font-bold">
-                <img src="../../static/images/zar-logos-2.webp" alt="Logo" width="100" height="100">
+                <img src="{% static 'images/zar-logos-2.webp' %}" alt="Logo" width="100" height="100">
             </a>
             <a href="/" class="md:hidden block text-xl font-bold">
-                <img src="{% static 'images/zar1.jpg' %}" alt="Logo" width="50" height="50">
+                <img src="{% static 'images/zar-logos-2.webp' %}" alt="Logo" width="50" height="50">
             </a>
             <div class="hidden md:flex items-center space-x-4">
                 {% comment %} {% if not request.path.startswith('/materials') and not request.path.startswith('/services') and not request.path.startswith('/profile') %} {% endcomment %}
@@ -37,7 +37,9 @@
                         
                         
                     <button id="profileButton" class="relative px-4 p-2 rounded-lg bg-white items-center inline-flex gap-2">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXLBPb5pAuO_6a9PUGtyYLzJIDqLNR-8RfoA&s" alt="profile-pic" class="size-6 rounded-full">
+                        <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-white">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+                        </svg>
                         <span class="text-black text-sm">{{request.user.first_name}} {{request.user.last_name}}</span>
                     </button>
                     <div id="dropdownMenu" class="hidden fixed z-50 top-20 right-4 mt-2 w-48 bg-[#0f0f0f] border border-gray-700 shadow-lg rounded-xl">
