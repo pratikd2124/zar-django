@@ -20,12 +20,12 @@ def get_nav_list(nav):
             category = Category.objects.get(name=i.strip(' '))
         except:
             category = Category.objects.get(name=i.strip(' '),parent__name=nav[nav.index(i)-1].strip(' '))
-        nav_list.append({'category':category.name,'id':category.id})
+        nav_list.append({'get_category_hierarchy':category.get_category_hierarchy(),'id':category.id,'name':category.name})
         
     return nav_list
 
 @login_required(login_url='login')
-def category_view(request,category_name):
+def category_view(request,category_path):
     id = request.GET.get('id')
     
     category = Category.objects.get(id=id)
@@ -422,7 +422,7 @@ def success_page(request):
 
 
 @login_required(login_url='login')
-def brand_info(request,category,uid):
+def brand_info(request,category_path,uid):
     user = User.objects.get(uid = uid)
     social_links= user.social_links
     images = user.profile_gallery.all()
@@ -433,7 +433,7 @@ def brand_info(request,category,uid):
 
 
 @login_required(login_url='login')
-def user_info(request,category,uid):
+def user_info(request,category_path,uid):
     user = User.objects.get(uid=uid)
     social_links = user.social_links
     print(social_links)

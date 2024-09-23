@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path('',views.home,name='home'),
-    path('category/<str:category_name>', views.category_view, name='category_view'),
+    path('category/<path:category_path>', views.category_view, name='category_view'),
 
     path('validate',views.validate,name='validate'),
     path('register',views.register,name='register'),
@@ -19,8 +19,8 @@ urlpatterns = [
     path('material-provider', views.submit_material_provider, name='submit_material_provider'),
     
     
-    path('material-provider/<str:category>/<str:uid>', views.brand_info, name='brand_info'),
-    path('service-provider/<str:category>/<str:uid>', views.user_info, name='user_info'),
+    path('material-provider/<path:category_path>/<str:uid>', views.brand_info, name='brand_info'),
+    path('service-provider/<path:category_path>/<str:uid>', views.user_info, name='user_info'),
     path('success', views.success_page, name='success_page'),
     path('contact',views.contact,name='contact_us'),
     path('privacy-policy',views.privacy_policy,name='privacy_policy'),
