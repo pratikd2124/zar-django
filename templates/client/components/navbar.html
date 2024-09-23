@@ -1,8 +1,18 @@
 {% load static %}
 {% for message in messages %}
-  <div class="alert alert-dismissible {{ message.tags }}" role="alert">
-    <div>{{ message | safe }}</div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <div class="alert alert-dismissible {{ message.tags }} animate-slide-down" role="alert" style="    justify-content: center;
+    display: flex;">
+    <div style="    display: flex;
+    justify-content: center;
+    width: 100%;">
+        <span>{{ message | safe }}</span>
+        <button type="button" class="text-gray-600 hover:text-gray-900" onclick="this.parentElement.style.display='none';">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+    </div>
+    
   </div>
 {% endfor %}
     <header class="bg-black text-white relative">

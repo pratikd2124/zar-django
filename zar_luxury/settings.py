@@ -19,12 +19,13 @@ from django.contrib.messages import constants as messages
 
 
 MESSAGE_TAGS = {
-        messages.DEBUG: 'alert-secondary',
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
- }
+    messages.DEBUG: 'text-gray-800 bg-gray-50 dark:bg-gray-800 dark:text-gray-300',
+    messages.INFO: 'text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400',
+    messages.SUCCESS: 'text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400',
+    messages.WARNING: 'text-yellow-800 bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300',
+    messages.ERROR: 'text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400',
+}
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 

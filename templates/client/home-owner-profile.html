@@ -5,7 +5,7 @@
     
 
     <div class="w-full py-8">
-        <form id="profileForm" class="">
+        <form id="profileForm" action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
             <div class='space-y-4 mx-auto max-w-lg border border-gray-800 rounded-xl p-6'>
                 <h1 class="text-2xl">Home Owner Profile</h1>
                 <div class='relative'>
@@ -50,11 +50,11 @@
                     <img id="profilePicPreview" src="{{ profile.profilePic }}" alt="Profile Pic" class="mt-4 w-32 h-32 rounded-full object-cover border mx-auto" />
                 </div>
             </div>
-            <div class='fixed bottom-0 p-4 bg-[#101010] flex justify-end w-full px-6'>
-                <button id="editButton" type="button" class="px-8 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 focus:outline-none focus:ring-1 focus:ring-violet-500">
+            <div class=' p-4 bg-[#101010] flex justify-end w-full px-6'>
+                <button id="editButton" type="button" class="px-8 py-3 bg-white text-black rounded-lg hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-1 focus:ring-violet-500" style="border-radius:0px">
                     Edit Profile
                 </button>
-                <button id="saveButton" type="button" class="px-8 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 hidden">
+                <button id="saveButton" type="button" class="px-8 py-3 bg-white text-black rounded-lg hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white-500 hidden" style="border-radius:0px">
                     Save Changes
                 </button>
             </div>
