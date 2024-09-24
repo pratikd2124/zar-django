@@ -44,7 +44,14 @@
                 {% comment %} {% if request.path.startswith('/materials') or request.path.startswith('/services') or request.path.startswith('/profile') %} {% endcomment %}
                     
                     {% else %}
+                    
+                    {% if request.user.is_superuser %}
                         
+                    <a href="{% url 'dashboard' %}" class="hover:underline">
+                        <span class="px-4 p-2 rounded-lg bg-white text-black text-[0.78rem]">Admin Dashboard</span>
+                    </a>
+                        
+                    {% endif %}
                         
                     <button id="profileButton" class="relative px-4 p-2 rounded-lg bg-white items-center inline-flex gap-2">
                         {% if request.user.profile_image_url %}

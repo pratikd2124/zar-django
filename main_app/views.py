@@ -159,7 +159,16 @@ def signin(request):
 
 def profile(request):
     user_type = request.user.type  # Access the user type from the request
+    user = User.objects.get(email=request.user.email)
 
+    
+    if request.GET.get('action') == 'delete':
+        if request.GET.get('image_id'):
+            img = ProfileGallery.objects.get(id=request.GET.get('image_id'))
+            img.delete()
+            messages.success(request, 'Profile updated successfully')
+            return redirect(request.META.get('HTTP_REFERER', '/home'))
+    
     # Check the user type and render the appropriate template
     if user_type in ['Home Owner', 'Community User']:
         if request.method == 'POST':
@@ -168,7 +177,6 @@ def profile(request):
             mobile = request.POST.get('mobile')
             email = request.POST.get('email')
             interest = request.POST.get('interest')
-            user = User.objects.get(email=request.user.email)
             user.first_name = first_name
             user.last_name = last_name
             user.mobile = mobile
@@ -181,7 +189,77 @@ def profile(request):
         
         return render(request, 'client/home-owner-profile.html')
     else:
-        return render(request, 'client/material-service-profile.html')
+        if request.method == 'POST':
+            if request.GET.get('type') == 'basic_info':
+                first_name = request.POST.get('first_name')
+                last_name = request.POST.get('last_name')
+                mobile = request.POST.get('mobile')
+                email = request.POST.get('email')
+                firm_name = request.POST.get('firmName')
+                firm_address = request.POST.get('firmAddress')
+                country = request.POST.get('country')
+                state = request.POST.get('state')
+                city = request.POST.get('city')
+                pincode = request.POST.get('pincode')
+                
+                user.first_name = first_name
+                user.last_name = last_name
+                user.mobile = mobile
+                
+                user.firm_name = firm_name
+                user.firm_address = firm_address
+                user.country = country
+                user.state = state
+                user.city = city
+                user.zip_code = pincode
+                user.save()
+                
+                messages.success(request, 'Profile updated successfully')
+                return redirect(request.META.get('HTTP_REFERER', '/home'))
+            if  request.GET.get('type') == 'professional':
+                category = request.POST.get('category')
+                bio = request.POST.get('bio')
+                facebook = request.POST.get('facebook')
+                instagram = request.POST.get('instagram')
+                linkedin = request.POST.get('linkedin')
+                
+                profilepic = request.FILES.get('profilepic')
+                brandlogo = request.FILES.get('brandlogo')
+                profileDoc = request.FILES.get('profileDocInput')
+                
+                user.category = Category.objects.get(id=category)
+                user.bio = bio
+                user.social_links ={
+                    'facebook':facebook,
+                    'instagram':instagram,
+                    'linkedin':linkedin,
+                }
+                print("@@@@@@@@@@@@@@@",profilepic)
+                
+                if profilepic:
+                    user.profile_pic = profilepic
+                if brandlogo:
+                    user.brand_logo = brandlogo
+                if profileDoc:
+                    user.profile_doc = profileDoc
+                    
+                user.save()
+                messages.success(request, 'Profile updated successfully')
+                return redirect(request.META.get('HTTP_REFERER', '/home'))
+            if request.GET.get('type') == 'gallery':
+                
+                
+                gallery_images = request.FILES.get('img')
+                
+                img = ProfileGallery.objects.create(image=gallery_images)
+                img.save()
+                user.profile_gallery.add(img)
+                user.save()
+                messages.success(request, 'Profile updated successfully')
+                return redirect(request.META.get('HTTP_REFERER', '/home'))
+        
+        categories = Category.objects.all()
+        return render(request, 'client/material-service-profile.html',{'title':'Profile','categories':categories})
 
 
 
