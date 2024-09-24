@@ -10,4 +10,3 @@ admin.site.register(User)
 admin.site.register(ProfileGallery)
 
 admin.site.register(SupportTickets)
-admin.site.register(UserActivity)
