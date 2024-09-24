@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
 # from .forms import HomeOwnerForm, ServiceProviderForm, MaterialProviderForm
 
@@ -270,8 +271,8 @@ def profile(request):
                 messages.success(request, 'Profile updated successfully')
                 return redirect(request.META.get('HTTP_REFERER', '/home'))
         
-        categories = Category.objects.all()
-        return render(request, 'client/material-service-profile.html',{'title':'Profile','categories':categories})
+        end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
+        return render(request, 'client/material-service-profile.html',{'title':'Profile','categories':end_nodes})
 
 
 
@@ -419,11 +420,11 @@ def submit_service_provider(request):
 
 
     # Get all categories and recursively filter those whose root ancestor is 'Services'
-    all_categories = Category.objects.all()
+    end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
 
 
     
-    return render(request, 'client/service-provider.html',{'categories':all_categories} )
+    return render(request, 'client/service-provider.html',{'categories':end_nodes} )
 
 def submit_material_provider(request):
   
@@ -512,8 +513,8 @@ def submit_material_provider(request):
             })
 
     # Build the tree hierarchy for the filtered categories
-    category_hierarchy = get_category_hierarchy(categories)
-    return render(request, 'client/material_provider_form.html',{'categories':category_hierarchy,'title':'Material Provider'} )
+    end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
+    return render(request, 'client/material_provider_form.html',{'categories':end_nodes,'title':'Material Provider'} )
 
 
 

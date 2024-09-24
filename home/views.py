@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from main_app.funtions import Send_Code_email, Send_Welcome_email, Send_Payment_email
+from django.db.models import Count
 
 # Create your views here.
 import random
@@ -298,7 +299,7 @@ def support_ticket(request):
 
 def update_brand(request,id):
     brand = User.objects.get(uid=id)
-    categories = Category.objects.all()
+    end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
     
     if request.method == 'POST':
         brand_name = request.POST.get('brand_name')
@@ -361,7 +362,7 @@ def update_brand(request,id):
 
     
     
-    return render(request,'dashboard/update-brand.html',{'title':'Update Brand','brand':brand,'categories':categories})
+    return render(request,'dashboard/update-brand.html',{'title':'Update Brand','brand':brand,'categories':end_nodes})
 
 
 
@@ -370,7 +371,7 @@ def update_brand(request,id):
 
 def update_service(request,id):
     brand = User.objects.get(uid=id)
-    categories = Category.objects.all()
+    end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
     
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
@@ -425,7 +426,7 @@ def update_service(request,id):
         return redirect(request.META.get('HTTP_REFERER'))
     
     
-    return render(request,'dashboard/update-service.html',{'title':'Update Brand','brand':brand,'categories':categories})
+    return render(request,'dashboard/update-service.html',{'title':'Update Brand','brand':brand,'categories':end_nodes})
 
 
 
