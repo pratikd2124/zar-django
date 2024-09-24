@@ -1,7 +1,8 @@
 import logging
-from logging import FileHandler  # FileHandler is in logging, not logging.handlers
+from logging import FileHandler
 import json
 import os
+import requests
 from django.utils.timezone import now
 from django.conf import settings
 
@@ -19,9 +20,9 @@ class UserActivityMiddleware:
         # Define the log file path
         log_file_path = os.path.join(self.log_dir, 'user_activity.log')
 
-        # Configure the file handler (set limit to 200MB, no backup or deletion)
-        handler = FileHandler(log_file_path)  # Fixed import here
-        formatter = logging.Formatter('%(message)s')  # Simple format for JSON entries
+        # Configure the file handler
+        handler = FileHandler(log_file_path)
+        formatter = logging.Formatter('%(message)s')
         handler.setFormatter(formatter)
 
         # Add the handler to the logger
@@ -46,11 +47,15 @@ class UserActivityMiddleware:
         path = request.path
         time_visited = now().isoformat()  # Use ISO format for timestamps
 
+        # Get the user's country based on their IP address
+        country = self.get_country(request)
+
         # Create a log entry in JSON format for easy parsing
         log_entry = {
             "user": user,
             "path": path,
-            "time_visited": time_visited
+            "time_visited": time_visited,
+            "country": country  # Include country in the log entry
         }
 
         # Ensure log file does not exceed 200 MB
@@ -58,6 +63,24 @@ class UserActivityMiddleware:
 
         # Log the data as a JSON string
         self.logger.info(json.dumps(log_entry))
+
+    def get_country(self, request):
+        # Try to get the user's IP address
+        ip = request.META.get('HTTP_X_FORWARDED_FOR', request.META.get('REMOTE_ADDR'))
+        if ip:
+            try:
+                # If multiple IPs are present, get the first one
+                ip = ip.split(',')[0].strip()
+                response = requests.get(f'http://ip-api.com/json/{ip}')
+                data = response.json()
+                if data['status'] == 'success':
+                    return data['country']  # Return the country name
+                else:
+                    return 'Unknown'
+            except Exception as e:
+                print(f"Error getting country for IP {ip}: {e}")
+                return 'Unknown'
+        return 'Unknown'
 
     def _check_log_size(self):
         log_file_path = os.path.join(self.log_dir, 'user_activity.log')

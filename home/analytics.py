@@ -15,7 +15,13 @@ def parse_log_file(filepath):
                 timestamp = datetime.fromisoformat(log_info['time_visited'])
                 user_id = log_info['user']
                 page_visited = log_info['path']
-                activity_data.append({'user': user_id, 'page_visited': page_visited, 'timestamp': timestamp})
+                country = log_info.get('country', 'Unknown')  # Get country info if present
+                activity_data.append({
+                    'user': user_id,
+                    'page_visited': page_visited,
+                    'timestamp': timestamp,
+                    'country': country  # Add country to the activity data
+                })
             except Exception as e:
                 print(f"Error parsing line in file {filepath}: {line.strip()} - {e}")
                 continue
@@ -57,13 +63,26 @@ def analyze_user_activity_from_logs():
         category = log['page_visited']  # Assuming page_visited corresponds to a category
         category_wise_visited_users_count[category].add(log['user'])  # Add unique user to the set for the category
 
+    # Country-wise visited users count
+    country_wise_users_count = defaultdict(set)  # Use a set to ensure unique users per country
+    for log in logs:
+        country = log['country']  # Get country from log
+        if country == 'Unknown':
+            country = 'India'
+        country_wise_users_count[country].add(log['user'])  # Add unique user to the set for the country
+
     # Convert sets to their lengths (count of unique users)
     monthly_active_users_count = {month: len(users) for month, users in monthly_active_users_list.items()}
     last_week_active_users_count = {day: len(users) for day, users in last_week_active_users_list.items()}
     category_wise_users_count = {category: len(users) for category, users in category_wise_visited_users_count.items()}
+    
+    print(country_wise_users_count)
+    
+    country_wise_users_count = {country: len(users) for country, users in country_wise_users_count.items()}  # Convert to count
 
     return (
         monthly_active_users_count,  # Monthly active users data
         last_week_active_users_count,  # Weekly active users data
-        category_wise_users_count  # Category-wise unique user visits
+        category_wise_users_count,  # Category-wise unique user visits
+        country_wise_users_count  # Country-wise unique user visits
     )

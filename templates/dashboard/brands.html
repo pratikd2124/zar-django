@@ -1,191 +1,132 @@
 {% extends 'dashboard/template.html' %}
 {% block content %}
-
-            <!-- Container-fluid starts-->
-            <div class="page-body">
-                <!-- All User Table Start -->
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card card-table">
-                                <div class="card-body">
-                                    <div class="title-header option-title">
-                                        <h5>All Brands</h5>
-                                        {% comment %} <a href="#" class="align-items-center btn btn-theme d-flex" data-bs-toggle="modal" data-bs-target="#addBrandModal"> {% endcomment %}
-                                        <a href="{% url 'submit_material_provider'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
-
-                                        <i data-feather="plus-square"></i>Add New
-                                    </a>
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    .page-button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+    }
+    
+    .page-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+        <div class="page-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <div class="title-header option-title">
+                                    <h5>Material Providers</h5>
+                                    <div class="d-inline-flex">
+                                        <input type="text" id="searchInput" class="form-control" placeholder="Search..." onkeyup="filterRows()">
+                                        <a href="{% url 'submit_material_provider' %}" target="_blank" class="align-items-center btn btn-theme d-flex">
+                                            <i data-feather="plus-square"></i>Add New
+                                        </a>
                                     </div>
+                                </div>
 
-                                    <div class="table-responsive category-table">
-                                        <div>
-                                            <table class="table all-package theme-table" id="table_id">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Logo</th>
-                                                        <th>Brand Name</th>
-                                                        <th>Category Hierarchy</th>
-                                                        <th>Contact Person</th>
-                                                        <th>Contact Number</th>
-                                                        <th>Email</th>
-                                                        <th>state</th>
-                                                        <th>City</th>
-                                                        <th>Zip Code</th>
-                                                        <th>Country</th>
+                                <div class="table-responsive category-table">
+                                    <div>
+                                        <table class="table all-package theme-table" id="table_id">
+                                            <thead>
+                                                <tr>
+                                                    <th>Logo</th>
+                                                    <th>Brand Name</th>
+                                                    <th>Category Hierarchy</th>
+                                                    <th>Contact Person</th>
+                                                    <th>Contact Number</th>
+                                                    <th>Email</th>
+                                                    <th>State</th>
+                                                    <th>City</th>
+                                                    <th>Zip Code</th>
+                                                    <th>Country</th>
+                                                    <th>Status</th>
+                                                    <th>Option</th>
+                                                </tr>
+                                            </thead>
 
-                                                        <th>Status</th>
-                                                        <th>Option</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    {% for cat in brands %}
-                                                    <tr>
-                                                        <td> 
+                                            <tbody id="tableBody">
+                                                {% for cat in brands %}
+                                                <tr>
+                                                    <td>
                                                         {% if cat.brand_logo %}
-                                                            
-                                                        <img id="currentImage1" src=" 
-                                                        {% if cat.brand_logo %}
-                                                            
-                                                        {{cat.brand_logo.url}}
-                                                        {% endif %}
-                                                        " 
-                                                             alt="Current Image" class="img-fluid mt-2" style="max-width: 100px;">
+                                                        <img src="{{ cat.brand_logo.url }}" alt="Current Image" class="img-fluid mt-2" style="max-width: 100px;">
                                                         {% endif %}
                                                     </td>
-                                                        <td>{{cat.brand_name}}</td>
-                                                        <td>{{cat.category.get_category_hierarchy}}</td>
-                                                        <td>{{cat.contact_person}}</td>
-                                                        <td>{{cat.mobile}}</td>
-                                                        <td>{{cat.email}}</td>
-                                                        <td>{{cat.state}}</td>
-                                                        <td>{{cat.city}}</td>
-                                                        <td>{{cat.zip_code}}</td>
-                                                        <td>{{cat.country}}</td>
-                                                        <td>{{cat.payment_status}}</td>
-
-                                                        <td>
-                                                            <ul>
-                                                                
-                                                                {% if cat.payment_status == 'pending' %}
-                                                                    
-                                                                    
-                                                                <li>
-                                                                    <a href="#" class="align-items-center btn btn-theme d-flex" 
-                                                                data-bs-toggle="modal" 
-                                                                data-email="{{ cat.email }}" 
-                                                                data-id="{{ cat.uid }}" 
-                                                                data-bs-target="#sendLinkModal" 
-                                                                onclick="setModalData('{{ cat.email }}', '{{ cat.uid }}')">
-                                                                    <i class="ri-mail-line"></i>
+                                                    <td>{{ cat.brand_name }}</td>
+                                                    <td>{{ cat.category.get_category_hierarchy }}</td>
+                                                    <td>{{ cat.contact_person }}</td>
+                                                    <td>{{ cat.mobile }}</td>
+                                                    <td>{{ cat.email }}</td>
+                                                    <td>{{ cat.state }}</td>
+                                                    <td>{{ cat.city }}</td>
+                                                    <td>{{ cat.zip_code }}</td>
+                                                    <td>{{ cat.country }}</td>
+                                                    <td>{{ cat.payment_status }}</td>
+                                                    <td>
+                                                        <ul>
+                                                            {% if cat.payment_status == 'pending'  %}
+                                                            
+                                                          
+                                                            <li>
+                                                              <a href="#" class="align-items-center btn btn-theme d-flex" 
+                                                                  data-bs-toggle="modal" 
+                                                                  data-email="{{ cat.email }}" 
+                                                                  data-id="{{ cat.uid }}" 
+                                                                  data-bs-target="#sendLinkModal" 
+                                                                  onclick="setModalData('{{ cat.email }}', '{{ cat.uid }}')">
+                                                                      <i class="ri-mail-line"></i>
+                                                                  </a>
+                                                              </li>
+                                                              {% elif cat.payment_status == 'In Progress' %}
+                                                              <li>
+                                                                  <a href="#" class="align-items-center btn btn-theme d-flex" 
+                                                                      data-bs-toggle="modal" 
+                                                                      data-email="{{ cat.email }}" 
+                                                                      data-id="{{ cat.uid }}" 
+                                                                      data-bs-target="#sendLinkModal2" 
+                                                                      onclick="setModalData2('{{ cat.email }}', '{{ cat.uid }}')">
+                                                                          <i class="ri-mail-line"></i>
+                                                                      </a>
+                                                                  </li>
+                                                              {% endif %}
+                                                            <li>
+                                                                <a href="{% url 'edit_brand' cat.uid %}">
+                                                                    <i class="ri-pencil-line"></i>
                                                                 </a>
-                                                                </li>
-                                                                {% endif %}
-
-                                                                <li>
-                                                                    <a href="{% url 'edit_brand' cat.uid %}" >
-                                                                        <i class="ri-pencil-line"></i>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="" >
-                                                                        <i class="ri-delete-bin-line"></i>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                            </li>
+                                                            <li>
+                                                                <a href="">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- All User Table Ends-->
-
-                
             </div>
+            <div id="pagination" class="pagination"></div>
+        </div>
             <!-- Container-fluid end -->
-            <div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addBrandModalLabel">Add New Brand</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="POST" action="{% url 'brand_list' %}?type=add" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <div class="mb-3">
-                                    <label for="brandName" class="form-label">Brand Name</label>
-                                    <input type="text" class="form-control" id="brandName" name="name" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="category" class="form-label"> Category</label>
-                                    <select class="form-select" id="category" name="category">
-                                        <option value="">--- Select ---</option>
-                                        {% for category in categories %}
-                                        <option value="{{ category.id }}">{{ category.get_category_hierarchy }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-                                
-                                <div class="mb-3">
-                                    <label  class="form-label">Contact Person</label>
-                                    <input type="text" class="form-control" id="contact_person" name="contact_person" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label  class="form-label">Contact NO.</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label  class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label  class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label  class="form-label">City</label>
-                                    <input type="text" class="form-control" id="city" name="city" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label  class="form-label">State</label>
-                                    <input type="text" class="form-control" id="state" name="state" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label  class="form-label">Country</label>
-                                    <input type="text" class="form-control" id="country" name="country" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label  class="form-label">Zip Code</label>
-                                    <input type="text" class="form-control" id="zip_code" name="zip_code" required>
-                                </div>
-
-                                
-
-
-                                
-                                <div class="mb-3">
-                                    <label for="logo" class="form-label">brand Image</label>
-                                    <input type="file" class="form-control" id="logo" name="logo" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Add brand</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="modal fade" id="sendLinkModal" tabindex="-1" aria-labelledby="sendLinkModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -198,7 +139,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="{% url 'send_passcode' %}" enctype="multipart/form-data">
+                            <form method="POST" action="{% url 'send_passcode' %}?type=send_payment_link" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" id="hiddenUserId" name="user_id">  <!-- Hidden input for user ID -->
                                 <div class="mb-3">
@@ -211,6 +152,29 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="sendLinkModal2" tabindex="-1" aria-labelledby="sendLinkModal2Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span>
+
+                                <h5 class="modal-title" id="sendLinkModal2Label">Send Code</h5>
+                                <h6 class="modal-title" id="sendLinkModal2LabelEmail"></h6>  <!-- Update to use JS -->
+                            </span>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{% url 'send_passcode' %}?type=send_code" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" id="hiddenUserId2" name="user_id">  <!-- Hidden input for user ID -->
+                                
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <script>
                 function setModalData(email, id) {
                     // Set the email and ID in the modal
@@ -219,7 +183,146 @@
                     document.getElementById('hiddenUserId').value = id;
                 }
             </script>
+            
+            <script>
+                function setModalData(email, id) {
+                    // Set the email and ID in the modal
+                    document.getElementById('sendLinkModalLabelEmail').innerText = email;
+                    // You may want to store the user ID in a hidden input for the form
+                    document.getElementById('hiddenUserId').value = id;
+                }
 
+                function setModalData2(email, id) {
+                    // Set the email and ID in the modal
+                    document.getElementById('sendLinkModal2LabelEmail').innerText = email;
+                    // You may want to store the user ID in a hidden input for the form
+                    document.getElementById('hiddenUserId2').value = id;
+                }
+            </script>
+
+
+
+             <script>
+        const itemsPerPage = 10;
+        let currentPage = 1;
+        const rows = document.querySelectorAll("#tableBody tr");
+        const totalPages = Math.ceil(rows.length / itemsPerPage);
+
+        function showPage(page) {
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+
+            rows.forEach((row, index) => {
+                if (index >= start && index < end) {
+                    row.classList.remove("hidden");
+                } else {
+                    row.classList.add("hidden");
+                }
+            });
+        }
+
+        function setupPagination() {
+            const paginationElement = document.getElementById("pagination");
+            paginationElement.innerHTML = "";
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement("button");
+                button.innerHTML = i;
+                button.classList.add("page-button");
+                if (i === currentPage) {
+                    button.classList.add("active");
+                }
+
+                button.addEventListener("click", () => {
+                    currentPage = i;
+                    showPage(currentPage);
+                    updatePaginationButtons();
+                });
+
+                paginationElement.appendChild(button);
+            }
+        }
+
+        function updatePaginationButtons() {
+            const buttons = document.querySelectorAll(".page-button");
+            buttons.forEach((button, index) => {
+                if (index + 1 === currentPage) {
+                    button.classList.add("active");
+                } else {
+                    button.classList.remove("active");
+                }
+            });
+        }
+
+        function filterRows() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            let visibleRows = 0;
+
+            rows.forEach(row => {
+                const brandName = row.cells[1].textContent.toLowerCase();
+                const contactPerson = row.cells[3].textContent.toLowerCase();
+                const contactNumber = row.cells[4].textContent.toLowerCase();
+                const email = row.cells[5].textContent.toLowerCase();
+                const state = row.cells[6].textContent.toLowerCase();
+                const city = row.cells[7].textContent.toLowerCase();
+                const country = row.cells[9].textContent.toLowerCase();
+                const status = row.cells[10].textContent.toLowerCase();
+
+                if (brandName.includes(filter) || 
+                    contactPerson.includes(filter) || 
+                    contactNumber.includes(filter) || 
+                    email.includes(filter) || 
+                    state.includes(filter) || 
+                    city.includes(filter) || 
+                    country.includes(filter) || 
+                    status.includes(filter)) {
+                    row.style.display = "";
+                    visibleRows++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            currentPage = 1;
+            updatePagination(visibleRows);
+        }
+
+        function updatePagination(visibleRows) {
+            const newTotalPages = Math.ceil(visibleRows / itemsPerPage);
+            const paginationElement = document.getElementById("pagination");
+            paginationElement.innerHTML = "";
+
+            for (let i = 1; i <= newTotalPages; i++) {
+                const button = document.createElement("button");
+                button.innerHTML = i;
+                button.classList.add("page-button");
+                if (i === currentPage) {
+                    button.classList.add("active");
+                }
+
+                button.addEventListener("click", () => {
+                    currentPage = i;
+                    showPage(currentPage);
+                    updatePaginationButtons();
+                });
+
+                paginationElement.appendChild(button);
+            }
+
+            showPage(currentPage);
+        }
+
+        // Initial setup
+        showPage(currentPage);
+        setupPagination();
+
+        // Add event listener for search input
+        document.getElementById("searchInput").addEventListener("keyup", filterRows);
+    </script>
+            
+   
+            
             {% endblock content %}
 
   

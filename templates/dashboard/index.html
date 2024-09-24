@@ -142,6 +142,25 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card o-hidden card-hover">
+                                <div class="card-header card-header-top card-header--2 px-0 pt-0">
+                                    <div class="card-header-title">
+                                        <h4>Country  Wise</h4>
+                                    </div>
+
+                            
+                                </div>
+
+                                <div class="card-body p-0">
+                                    <div id="report">
+                                        <canvas id="countryWise" style="width:100%;max-width:"></canvas>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Best Selling Product End -->
 
 
@@ -164,12 +183,13 @@
             <!-- index body end -->
 
             <script>
-                console.log({{ last_week_active_users_list|safe }});
+                console.log({{ country_wise_users_count|safe }});
                 console.log({{ category_wise_visited_users_count|safe }});
             
                 const lastWeekActiveUsers = JSON.parse('{{ last_week_active_users_list|safe }}');
                 const category_wise_visited_users_count = JSON.parse('{{ category_wise_visited_users_count|safe }}');
                 const monthly_active_users = JSON.parse('{{ monthly_active_users|safe }}');
+                const country_wise_users_count = JSON.parse('{{ country_wise_users_count|safe }}');
             
                 // Weekly Active Data
                 const weeklyActiveData = {
@@ -201,6 +221,17 @@
                     datasets: [{
                         label: 'Visits',
                         data: Object.values(category_wise_visited_users_count),  // Data on X-axis
+                        backgroundColor: 'rgba(255, 159, 64, 0.6)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    }]
+                };
+                // Category Visits Data (for horizontal bar chart)
+                const catcountryData = {
+                    labels: Object.keys(country_wise_users_count),  // Labels on Y-axis
+                    datasets: [{
+                        label: 'Visits',
+                        data: Object.values(country_wise_users_count),  // Data on X-axis
                         backgroundColor: 'rgba(255, 159, 64, 0.6)',
                         borderColor: 'rgba(255, 159, 64, 1)',
                         borderWidth: 1
@@ -249,6 +280,10 @@
             
                     const categoryCtx = document.getElementById('categoryVisitsChart').getContext('2d');
                     createChart(categoryCtx, categoryVisitsData, 'Category Visits', true);  // Pass 'true' to make it horizontal
+
+
+                    const countryCtx = document.getElementById('countryWise').getContext('2d');
+                    createChart(countryCtx, catcountryData, 'Country Wise Users', true);  // Pass 'true' to make it horizontal
                 };
             
             </script>

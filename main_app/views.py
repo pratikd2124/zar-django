@@ -106,6 +106,8 @@ def register(request):
             if request.session['type'] == 'New':
                 user.type = 'Community User'
             user.save()
+            
+            Send_Welcome_email(user.email)
             return redirect('login')
         else:
             return redirect('register')
@@ -160,6 +162,23 @@ def profile(request):
 
     # Check the user type and render the appropriate template
     if user_type in ['Home Owner', 'Community User']:
+        if request.method == 'POST':
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            mobile = request.POST.get('mobile')
+            email = request.POST.get('email')
+            interest = request.POST.get('interest')
+            user = User.objects.get(email=request.user.email)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.mobile = mobile
+            user.email = email
+            user.intrest = interest
+            user.save()
+            messages.success(request, 'Profile updated successfully')
+            return redirect(request.META.get('HTTP_REFERER', '/home'))
+
+        
         return render(request, 'client/home-owner-profile.html')
     else:
         return render(request, 'client/material-service-profile.html')

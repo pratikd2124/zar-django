@@ -18,10 +18,12 @@ def dashboard(request):
     users = User.objects.all().exclude(is_superuser=True, is_staff=True)
     
     # Get analytics data from log files
-    monthly_active_users_list, last_week_active_users_list, category_wise_visited_users_count = analyze_user_activity_from_logs()
+    monthly_active_users_list, last_week_active_users_list, category_wise_visited_users_count,country_wise_users_count = analyze_user_activity_from_logs()
     last_week_active_users_list_json = json.dumps(last_week_active_users_list)
     monthly_active_users_list_json = json.dumps(monthly_active_users_list)
     category_wise_visited_users_count_json = json.dumps(category_wise_visited_users_count)
+    country_wise_users_count = json.dumps(country_wise_users_count)
+    
     material_provider_count = User.objects.filter(type='Material Provider').count()
 
     
@@ -34,7 +36,8 @@ def dashboard(request):
         'users': users,
         'last_week_active_users_list': last_week_active_users_list_json,
         'monthly_active_users': monthly_active_users_list_json,
-        'category_wise_visited_users_count': category_wise_visited_users_count_json
+        'category_wise_visited_users_count': category_wise_visited_users_count_json,
+        'country_wise_users_count':country_wise_users_count
     })
 
 
@@ -46,27 +49,44 @@ def dashboard(request):
 
 @login_required(login_url='login')
 def all_users(request):
+    
+    if request.GET.get('action') == 'delete':
+        id = request.GET.get('id')
+        user = User.objects.get(uid=id)
+        user.delete()
+        messages.success(request, 'User deleted successfully.')
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+    
+    
     users = User.objects.all().exclude(is_superuser=True,is_staff=True)
     
     community = request.GET.get('community')
-    member_type = 'Community User'
-    if community:
-        users = users.filter(community__code=community)
+    member_type = request.GET.get('memberType')
     
-    else:
-        member_type = request.GET.get('memberType')
+    if community or member_type:
+        if community:
+            users = users.filter(community__code=community)
         
-        if member_type == 'homeOwner':
-            users = users.filter(type='Home Owner')
-            
-        elif member_type == 'materialProvider':
-            users = users.filter(type='Material Provider')  
-            
-        elif member_type == 'serviceProvider':
-            users = users.filter(type = 'Service Provider')
         else:
-            users = users.filter(type='Community User')
-    
+            
+            if member_type == 'homeOwner':
+                users = users.filter(type='Home Owner')
+                
+            elif member_type == 'materialProvider':
+                users = users.filter(type='Material Provider')  
+                
+            elif member_type == 'serviceProvider':
+                users = users.filter(type = 'Service Provider')
+            else:
+                users = users.filter(type='Community User')
+    else:
+        users = users.filter(type__in= ['Home Owner', 'Community User', 'Service Provider'])
+        member_type = 'all'
+        
+        
+        
+        
     return render(request,'dashboard/all-users.html',{'title':'User List','users':users,'member_type':member_type})
 
 
@@ -439,3 +459,23 @@ def update_gallery(request,id):
         
         
     return render(request,'dashboard/update-gallery.html',{'title':'Update Gallery','gallery':gallery,'user':user})
+
+
+
+
+def update_user_info(request,id):
+    user = User.objects.get(uid=id)
+
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        mobile = request.POST.get('contact')
+        email = request.POST.get('email')       
+        user.first_name = first_name
+        user.last_name = last_name
+        user.mobile = mobile
+        user.email = email
+        user.save()
+        messages.success(request, 'Information updated successfully.')
+        return redirect(request.META.get('HTTP_REFERER'))
+    return render(request,'dashboard/user-edit.html',{'title':'Update User Info','user':user})
