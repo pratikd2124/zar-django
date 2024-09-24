@@ -6,85 +6,152 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome to ZAR Luxury</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Red+Rose:wght@300&display=swap" rel="stylesheet">
-  
-</head>
-<style>
-    @font-face {
-      font-family: 'Gloock', serif;;
-      src: url('https://www.zarluxury.com/static/fonts/Gloock-Regular.woff') format('woff'),
-      font-weight: normal;
-      font-style: normal;
+  <style>
+    /* Basic Styles for the Email */
+    body {
+        margin: 0;
+        padding: 0;
+        background: #000; /* Fallback color */
+        color: #fff;
+        font-family: 'Arial', sans-serif; /* Fallback font */
     }
     
-    @font-face {
-      font-family: 'Red Rose', sans-serif;
-      src: url('https://www.zarluxury.com/static/fonts/RedRose-Light.woff') format('woff'),
-      font-weight: 300;
-      font-style: normal;
+    /* Container Styles */
+    .container {
+        max-width: 45rem;
+        margin: auto;
+        padding: 1rem;
+        color: #fff;
     }
-  
-    body {
-        font-family: 'Red Rose', sans-serif;
+
+    .hero {
+        position: relative;
+        overflow: hidden;
+        color: white;
+        padding-top: 0.1
+        
+    }
+
+    .overlay {
+        position: absolute; z-index: 2; top: 0; left: 0;
+        padding: 5px;
+        height: 4rem;
+        text-align: center;
+        background: black;
+        width: 100%;
+        opacity: 1;
+    }
+
+    h1, h2, h3, p {
+        margin: 0;
+        padding: 0.5rem 0;
+    }
+
+    h1, h2 {
+        font-family: 'Gloock', serif; /* Use a default font if it fails */
+    }
+
+    /* Footer Styles */
+    .footer {
+        text-align: center;
+        margin-top: 3rem;
+    }
+
+    /* Partner Card Styles */
+    /* Partner Card Styles */
+  .partner-card {
+      position: relative;
+      width: 240px; /* Fixed width for each card */
+      height: 250px; /* Fixed height for each card */
+      border-radius: 1rem;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      
+  }
+
+  .partner-card img {
+      width: 100%; /* Make the image fill the width of the card */
+      height: 150px; /* Fixed height for images */
+      object-fit: cover; /* Ensure the image covers the area without stretching */
+  }
+
+  .partner-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 32, 44, 0.4);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+  }
+   /* Centering Styles */
+    .partner-container {
+        display: flex;
+        justify-content: center; /* Center the cards horizontally */
+        flex-wrap: wrap; /* Allow wrapping to the next line */
+        gap: 1rem; /* Space between cards */
+        max-width: 80rem; /* Max width of the container */
+        margin: auto; /* Center the container itself */
     }
   </style>
-<body style="font-family: 'Red Rose', sans-serif; font-weight: 300; background-color: black; color: white; margin: 0; padding: 0;">
-  <div style="max-width: 42rem; margin-left: auto; margin-right: auto; padding: 1rem;">
-    <div style="position: relative; background-image: linear-gradient(to bottom, #000, #2563eb); color: white; overflow: hidden;">
-      <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 560px;">
-        <img src="https://images.pexels.com/photos/3701455/pexels-photo-3701455.jpeg?cs=srgb&dl=pexels-bruceclarkinoc-3701455.jpg&fm=jpg" alt="Background Image" style="object-fit: cover; object-position: center; width: 100%; height: 100%;" />
-        <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.8), transparent); opacity: 1;"></div>
-      </div>
-      <!-- Logo Image at Top Right Corner -->
-      <div style="position: absolute; top: 1rem; left: 1rem;">
-        <img src="https://www.zarluxury.com/static/images/zar-logos-2.webp" alt="Logo" style="width: auto; height: 4rem;" />
-      </div>
-      <div style="height: 560px; position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; text-align: left; padding-left: 2rem; padding-right: 2rem;">
-        <h1 style="font-size: 3rem; margin-bottom: 1rem; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Connecting Excellence</h1>
-        <p style="font-size: 1.125rem; color: #d1d5db; margin-bottom: 1rem;">in Luxury Living and Design</p>
-      </div>
+</head>
+<body>
+  <div class="container" style="background: black;color:#fff">
+    <div class="overlay">
+        <img src="https://www.zarluxury.com/static/images/zar-logos-2.webp" alt="Logo" style=" width: auto; height: 4rem;" />
     </div>
-    <div style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);">
-      <h1 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 1rem; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Welcome to ZAR Luxury</h1>
-      <p style="font-size: 1.125rem; margin-bottom: 1rem;">Dear <span style="font-weight: 600;">{{email}}</span>,</p>
-      <p style="font-size: 1.125rem; margin-bottom: 1rem;">Thank you for choosing ZAR Luxury and taking the time to complete your sign-up.</p>
-      <p style="font-size: 1.125rem; margin-bottom: 1rem;">We have successfully received your request, and your profile is currently under review. Our team is carefully assessing the details, and we will notify you once the review process is complete.</p>
-      <p style="font-size: 1.125rem; margin-bottom: 1rem;">If you have any questions in the meantime, please don’t hesitate to contact us.</p>
-      <p style="font-size: 1.125rem;">Regards,</p>
-      <p style="font-size: 1.125rem; font-weight: 600; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">ZAR Luxury Team</p>
+    <div class="hero">
+      <img src="https://raw.githubusercontent.com/pratikd2124/images-zar/refs/heads/master/Emailer-ZAR-cropped.png" width="100%" height="auto"/>
     </div>
-    <h2 style="font-size: 1.5rem; text-align: center; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Our Partners</h2>
-    <div style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 1rem; max-width: 80rem; margin-left: auto; margin-right: auto; margin-top: 6rem;">
+    
+    <div style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+      <h1 style="font-size: 1.875rem; font-weight: bold;">Welcome to ZAR Luxury</h1>
+      <p>Dear <span style="font-weight: 600;">{{email}}</span>,</p>
+      <p>Thank you for choosing ZAR Luxury and taking the time to complete your sign-up.</p>
+      <p>We have successfully received your request, and your profile is currently under review. Our team is carefully assessing the details, and we will notify you once the review process is complete.</p>
+      <p>If you have any questions in the meantime, please don’t hesitate to contact us.</p>
+      <p>Regards,</p>
+      <p style="font-weight: 600;">ZAR Luxury Team</p>
+    </div>
+
+    <h2 style="font-size: 1.5rem; text-align: center;">Our Partners</h2>
+    <div class="partner-container">
+    
+    <div style="display: flex; justify-content: center; gap: 1rem; max-width: 80rem; margin: auto;">
       <!-- Architect Card -->
-      <article style="position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; border-radius: 1rem; padding: 2rem; padding-top: 10rem;">
-        <img src="https://images.pexels.com/photos/157811/pexels-photo-157811.jpeg?cs=srgb&dl=pexels-yentl-jacobs-43020-157811.jpg&fm=jpg" alt="Architects" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 100%; width: 100%; object-fit: cover;">
-        <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-image: linear-gradient(to top, #1a202c, rgba(26, 32, 44, 0.4));"></div>
-        <h3 style="z-index: 10; margin-top: 0.75rem; font-size: 1.875rem; font-weight: bold; color: white; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Architects</h3>
-        <div style="z-index: 10; gap-y-1 overflow-hidden text-sm leading-6 text-gray-300;">Crafting spaces</div>
-      </article>
+      <div class="partner-card">
+        <img src="https://images.pexels.com/photos/157811/pexels-photo-157811.jpeg?cs=srgb&dl=pexels-yentl-jacobs-43020-157811.jpg&fm=jpg" alt="Architects" />
+        <div class="partner-info">
+          <h3>Architects</h3>
+          <p>Crafting spaces</p>
+        </div>
+      </div>
       <!-- Designers Card -->
-      <article style="position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; border-radius: 1rem; padding: 2rem; padding-top: 10rem;">
-        <img src="https://images.pexels.com/photos/3797991/pexels-photo-3797991.jpeg?cs=srgb&dl=pexels-houzlook-3797991.jpg&fm=jpg" alt="Designers" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 100%; width: 100%; object-fit: cover;">
-        <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-image: linear-gradient(to top, #1a202c, rgba(26, 32, 44, 0.4));"></div>
-        <h3 style="z-index: 10; margin-top: 0.75rem; font-size: 1.875rem; font-weight: bold; color: white; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Designers</h3>
-        <div style="z-index: 10; gap-y-1 overflow-hidden text-sm leading-6 text-gray-300;">Shaping aesthetics</div>
-      </article>
+      <div class="partner-card">
+        <img src="https://images.pexels.com/photos/3797991/pexels-photo-3797991.jpeg?cs=srgb&dl=pexels-houzlook-3797991.jpg&fm=jpg" alt="Designers" />
+        <div class="partner-info">
+          <h3>Designers</h3>
+          <p>Shaping aesthetics</p>
+        </div>
+      </div>
       <!-- Consultants Card -->
-      <article style="position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; border-radius: 1rem; padding: 2rem; padding-top: 10rem;">
-        <img src="https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Consultants" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 100%; width: 100%; object-fit: cover;">
-        <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-image: linear-gradient(to top, #1a202c, rgba(26, 32, 44, 0.4));"></div>
-        <h3 style="z-index: 10; margin-top: 0.75rem; font-size: 1.875rem; font-weight: bold; color: white; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Consultants</h3>
-        <div style="z-index: 10; gap-y-1 overflow-hidden text-sm leading-6 text-gray-300;">Providing insights</div>
-      </article>
+      <div class="partner-card">
+        <img src="https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Consultants" />
+        <div class="partner-info">
+          <h3>Consultants</h3>
+          <p>Providing insights</p>
+        </div>
+      </div>
+    </div>
+
     </div>
     <!-- Bottom Heading and Contact Information -->
-    <div style="margin-top: 3rem; text-align: center;">
-      <h2 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 1rem;">Curating Finest Design</h2>
-      <p style="font-size: 0.875rem; color: #d1d5db;">
-        <a href="http://www.zarluxury.com" style="text-decoration: none; color: white;">www.zarluxury.com</a> | <a href="mailto:info@zarluxury.com" style="text-decoration: none; color: white;">info@zarluxury.com</a>
+    <div class="footer">
+      <h2 style="font-size: 1.875rem; font-weight: bold;">Curating Finest Design</h2>
+      <p>
+        <a href="http://www.zarluxury.com" style="text-decoration: none; color: white;">www.zarluxury.com</a> | 
+        <a href="mailto:info@zarluxury.com" style="text-decoration: none; color: white;">info@zarluxury.com</a>
       </p>
     </div>
   </div>
