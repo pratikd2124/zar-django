@@ -154,7 +154,7 @@ def signin(request):
                 messages.success(request, 'Login successful')
                 return redirect('splash')
         else:
-            messages.error(request, 'Invalid credentials')
+            messages.error(request, 'Invalid credentials! Please Check email and password')
             return redirect('login')
     return render(request,'client/login.html')
 
@@ -320,7 +320,7 @@ def home_owner_view(request):
             user.last_name = last_name
             user.intrest = interest
             user.save()
-            messages.info(request, 'Profile is Under Review !')
+            messages.info(request, 'Form Submitted! Your Profile is Under Review !')
             Send_Welcome_email(user)
             return redirect('home')
         

@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Rose:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Red+Rose:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
      <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WPDGJRHB9B"></script>
     <script>   
@@ -140,6 +141,32 @@
         }
     </script>
     {% endif %}
+ <!-- Include Toastify JS -->
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+ <script>
+    // Check if there are any Django messages
+    {% if messages %}
+    {% for message in messages %}
+        Toastify({
+            text: "{{ message }}", // Display the message
+            duration: 4000,        // Duration the toast stays visible
+            close: true,           // Show close button
+            gravity: "top",        // Position of the toast ('top' or 'bottom')
+            position: "center",    // Position of the toast ('left', 'center', or 'right')
+            style: {
+                background: "black", // Set background to black or dark color
+                color: "white",      // Text color for better visibility
+                fontSize: "20px",    // Increase the font size
+                padding: "15px 30px",// Adjust padding for larger size
+                borderRadius: "8px", // Add rounded corners for better look
+                width: "fit-content",// Make width fit content
+                textAlign: "center"  // Center align the text
+                
+            }
+        }).showToast();
+    {% endfor %}
+{% endif %}
 
+</script>
 </body>
 </html>

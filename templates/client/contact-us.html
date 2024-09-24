@@ -3,6 +3,7 @@
 {% block content %}
     
 {% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <div class="w-full font-card-title">
         <section class="text-white py-16 px-8">
@@ -74,7 +75,7 @@
                                 <p id="messageError" class="text-red-500 text-sm hidden"></p>
                             </div>
                             <div class="w-full">
-                                <button type="submit" class="w-full px-8 py-3 bg-white text-black rounded-lg hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white-500" style="border-radius:0;">
+                                <button type="submit" class="w-full px-8 py-3 bg-violet-700 text-white rounded-lg hover:bg-violet-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-white-500" >
                                     Submit
                                 </button>
                             </div>
@@ -105,10 +106,15 @@
                         <div class="mb-4 p-4">
                             <h3 class="text-lg font-semibold mb-2 gloock-regular">Social Media</h3>
                             <div class="flex space-x-4">
-                                <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+                                <a href="https://facebook.com" target="_blank" class="fa fa-facebook text-gray-400 hover:text-white"></a>
+                                <a href="https://twitter.com" target="_blank" class="fa fa-twitter text-gray-400 hover:text-white"></a>
+                                <a href="https://instagram.com" target="_blank" class="fa fa-instagram text-gray-400 hover:text-white"></a>
+                                <a href="https://linkedin.com" target="_blank" class="fa fa-linkedin text-gray-400 hover:text-white"></a>
+
+                                {% comment %} <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
                                 <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
                                 <a href="#" class="text-gray-400 hover:text-white">Instagram</a>
-                                <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a>
+                                <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a> {% endcomment %}
                             </div>
                         </div>
                     </div>

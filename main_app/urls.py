@@ -23,9 +23,9 @@ urlpatterns = [
     path('service-provider/<path:category_path>/<str:uid>', views.user_info, name='user_info'),
     path('success', views.success_page, name='success_page'),
     path('contact',views.contact,name='contact_us'),
-    path('privacy-policy',views.privacy_policy,name='privacy_policy'),
-    path('FAQ',views.faq,name='faq'),
-    path('terms-and-conditions',views.terms_and_conditions,name='terms_and_conditions'),
+    path('privacy',views.privacy_policy,name='privacy_policy'),
+    path('faq',views.faq,name='faq'),
+    path('terms',views.terms_and_conditions,name='terms_and_conditions'),
     
     
     path('api/suggestions',views.suggestions,name='suggestions'),

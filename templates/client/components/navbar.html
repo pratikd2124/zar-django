@@ -1,5 +1,5 @@
 {% load static %}
-{% for message in messages %}
+{% comment %} {% for message in messages %}
   <div class="alert alert-dismissible {{ message.tags }} animate-slide-down" role="alert" style="    justify-content: center;
     display: flex;padding:5x">
     <div style="    display: flex;
@@ -14,7 +14,7 @@
     </div>
     
   </div>
-{% endfor %}
+{% endfor %} {% endcomment %}
     <header class="bg-black text-white relative">
         <div class="flex justify-between items-center p-4 px-12 border-b border-gray-800">
             <a href="/" class="md:block hidden text-xl font-bold">

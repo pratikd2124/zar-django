@@ -1,7 +1,7 @@
 {% extends 'client/template.html' %}
 {% load static %} 
 {% block title %}
-Home Owner Registration
+
 {% endblock %}
 {% block content %}
 
@@ -12,7 +12,7 @@ Home Owner Registration
 </style>
 
 <div class=" text-white">
-    <div class="container mx-auto">
+    <div class="w-full">
         <form id="serviceForm" action="{% url 'service_provider' %}" method="POST" class="space-y-4" enctype="multipart/form-data">
             {% csrf_token %}
             <div id="step1" class="step step-1 max-w-lg md:mx-auto p-6 mx-4 border border-gray-700 rounded-lg mt-8">
@@ -215,7 +215,7 @@ Home Owner Registration
                 </div>
             </div>
 
-            <div class='w-full mt-16 flex lg:flex-row flex-col lg:justify-between justify-center gap-8 items-center rounded-lg bg-[#171717] p-6'>
+            <div class='w-full xl:mt-24 2xl:mt-48 mt-16 flex lg:flex-row flex-col lg:justify-between justify-center gap-8 items-center rounded-lg bg-[#171717] p-6'>
                 <div class='lg:w-[33%] w-full text-center text-gray-400'>
                     <span>Service Provider Details - </span>
                     <span id="stepLabel">Basic Information</span>
