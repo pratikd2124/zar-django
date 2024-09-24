@@ -193,6 +193,10 @@ def profile(request):
             if request.GET.get('type') == 'basic_info':
                 first_name = request.POST.get('first_name')
                 last_name = request.POST.get('last_name')
+                
+                brand_name = request.POST.get('brandName')
+                designation = request.POST.get('designation')
+                contact_person = request.POST.get('contactPerson')
                 mobile = request.POST.get('mobile')
                 email = request.POST.get('email')
                 firm_name = request.POST.get('firmName')
@@ -202,11 +206,17 @@ def profile(request):
                 city = request.POST.get('city')
                 pincode = request.POST.get('pincode')
                 
-                user.first_name = first_name
-                user.last_name = last_name
-                user.mobile = mobile
                 
-                user.firm_name = firm_name
+                user.mobile = mobile
+                if user.type == 'Service Provide':
+                    user.firm_name = firm_name
+                    user.first_name = first_name
+                    user.last_name = last_name
+                if user.type == 'Material Provider':
+                    user.brand_name = brand_name
+                    user.designation = designation
+                    user.contact_person = contact_person
+                
                 user.firm_address = firm_address
                 user.country = country
                 user.state = state
