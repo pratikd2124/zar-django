@@ -63,17 +63,17 @@
                     </svg>
                 </a>
                 <div class="flex gap-4 justify-center mx-auto py-4">
-                    <button class="text-xs" onclick="window.location.href='{{social_links.facebook}}'" target="_blank">
+                    <a href="{{social_links.facebook}}" target="_blank" class="text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
                             <path d="M12 2.163C6.477 2.163 2 6.64 2 12.163c0 4.992 3.657 9.12 8.438 9.88v-6.988H7.897v-2.893h2.54V9.768c0-2.509 1.492-3.89 3.771-3.89 1.094 0 2.24.194 2.24.194v2.47h-1.262c-1.243 0-1.63.773-1.63 1.563v1.872h2.773l-.443 2.893h-2.33v6.988C18.343 21.284 22 17.154 22 12.163 22 6.64 17.523 2.163 12 2.163z"/>
                         </svg>
-                    </button>
-                    <button class="text-xs" onclick="window.location.href='{{social_links.instagram}}'" target="_blank">
+                    </a>
+                    <a href="{{social_links.instagram}}" target="_blank" class="text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-5 h-5">
                             <path d="M12 2.163c3.205 0 3.584.012 4.85.07 1.17.054 1.95.24 2.403.405a4.914 4.914 0 0 1 1.782 1.106 4.914 4.914 0 0 1 1.106 1.782c.166.453.351 1.233.405 2.403.058 1.266.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.95-.405 2.403a4.914 4.914 0 0 1-1.106 1.782 4.914 4.914 0 0 1-1.782 1.106c-.453.166-1.233.351-2.403.405-1.266.058-1.645.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.95-.24-2.403-.405a4.914 4.914 0 0 1-1.782-1.106 4.914 4.914 0 0 1-1.106-1.782c-.166-.453-.351-1.233-.405-2.403-.058-1.266-.07-1.645-.07-4.85s.012-3.584.07-4.85c.054-1.17.24-1.95.405-2.403a4.914 4.914 0 0 1 1.106-1.782 4.914 4.914 0 0 1 1.782-1.106c.453-.166 1.233-.351 2.403-.405 1.266-.058 1.645-.07 4.85-.07M12 0C8.741 0 8.332.014 7.052.072 5.773.129 4.67.306 3.718.631 2.796.943 2.02 1.366 1.366 2.02.712 2.674.289 3.45.084 4.372.306 5.67.129 6.773.072 8.052.014 8.741 0 9.332 0 12c0 2.668.014 3.259.072 4.548.057 1.279.234 2.383.547 3.335.312.922.735 1.698 1.389 2.352.654.654 1.43 1.077 2.352 1.389.952.313 2.056.49 3.335.547C8.741 23.986 8.332 24 12 24c2.668 0 3.259-.014 4.548-.072 1.279-.057 2.383-.234 3.335-.547.922-.312 1.698-.735 2.352-1.389.654-.654 1.077-1.43 1.389-2.352.313-.952.49-2.056.547-3.335C23.986 15.259 24 14.668 24 12c0-2.668-.014-3.259-.072-4.548-.057-1.279-.234-2.383-.547-3.335-.312-.922-.735-1.698-1.389-2.352-.654-.654-1.43-1.077-2.352-1.389-.952-.313-2.056-.49-3.335-.547C15.259.014 14.668 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324A6.162 6.162 0 0 0 12 5.838zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/>
                         </svg>
-                    </button>
-                    <button class="text-xs" onclick="window.location.href='{{social_links.linkedin}}' "target="_blank">
+                    </a>
+                    <a href="{{social_links.linkedin}}" target="_blank" class="text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" width="20px" height="20px" xml:space="preserve">
                             <g>
                                 <rect fill="#ffffff" height="23" width="7" y="9" />
@@ -81,11 +81,12 @@
                                 <circle cx="3.5" cy="3.5" fill="#ffffff" r="3.5" />
                             </g>
                         </svg>
-                    </button>
+                    </a>
+                    
                 </div>
             </div>
             <div class="absolute bg-[#171717] bottom-0 p-8 w-full mx-auto text-center font-card-title">
-                <button class="bg-[#86198f] w-full px-6 py-3 text-xs rounded-lg" onclick="openModal()">
+                <button class="bg-[#86198f] w-full px-6 py-3 text-xs rounded-lg" onclick="openSidebar()">
                     Connect
                 </button>
             </div>
@@ -113,21 +114,21 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
             </a>
-            <button class="bg-[#86198f] w-full px-6 py-3 text-xs rounded-lg" onclick="openModal()"> 
+            <button class="bg-[#86198f] w-full px-6 py-3 text-xs rounded-lg" onclick="openSidebar()"> 
                 Connect
             </button>
             <div class="flex gap-4 justify-center mx-auto py-4">
-                <button class="text-xs" onclick="window.location.href='{{social_links.facebook}}'">
+                <a href="{{social_links.facebook}}" target="_blank" class="text-xs">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
                         <path d="M12 2.163C6.477 2.163 2 6.64 2 12.163c0 4.992 3.657 9.12 8.438 9.88v-6.988H7.897v-2.893h2.54V9.768c0-2.509 1.492-3.89 3.771-3.89 1.094 0 2.24.194 2.24.194v2.47h-1.262c-1.243 0-1.63.773-1.63 1.563v1.872h2.773l-.443 2.893h-2.33v6.988C18.343 21.284 22 17.154 22 12.163 22 6.64 17.523 2.163 12 2.163z"/>
                     </svg>
-                </button>
-                <button class="text-xs" onclick="window.location.href='{{social_links.instagram}}'">
+                </a>
+                <a href="{{social_links.instagram}}" target="_blank" class="text-xs">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-5 h-5">
                         <path d="M12 2.163c3.205 0 3.584.012 4.85.07 1.17.054 1.95.24 2.403.405a4.914 4.914 0 0 1 1.782 1.106 4.914 4.914 0 0 1 1.106 1.782c.166.453.351 1.233.405 2.403.058 1.266.07 1.645.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.95-.405 2.403a4.914 4.914 0 0 1-1.106 1.782 4.914 4.914 0 0 1-1.782 1.106c-.453.166-1.233.351-2.403.405-1.266.058-1.645.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.95-.24-2.403-.405a4.914 4.914 0 0 1-1.782-1.106 4.914 4.914 0 0 1-1.106-1.782c-.166-.453-.351-1.233-.405-2.403-.058-1.266-.07-1.645-.07-4.85s.012-3.584.07-4.85c.054-1.17.24-1.95.405-2.403a4.914 4.914 0 0 1 1.106-1.782 4.914 4.914 0 0 1 1.782-1.106c.453-.166 1.233-.351 2.403-.405 1.266-.058 1.645-.07 4.85-.07M12 0C8.741 0 8.332.014 7.052.072 5.773.129 4.67.306 3.718.631 2.796.943 2.02 1.366 1.366 2.02.712 2.674.289 3.45.084 4.372.306 5.67.129 6.773.072 8.052.014 8.741 0 9.332 0 12c0 2.668.014 3.259.072 4.548.057 1.279.234 2.383.547 3.335.312.922.735 1.698 1.389 2.352.654.654 1.43 1.077 2.352 1.389.952.313 2.056.49 3.335.547C8.741 23.986 8.332 24 12 24c2.668 0 3.259-.014 4.548-.072 1.279-.057 2.383-.234 3.335-.547.922-.312 1.698-.735 2.352-1.389.654-.654 1.077-1.43 1.389-2.352.313-.952.49-2.056.547-3.335C23.986 15.259 24 14.668 24 12c0-2.668-.014-3.259-.072-4.548-.057-1.279-.234-2.383-.547-3.335-.312-.922-.735-1.698-1.389-2.352-.654-.654-1.43-1.077-2.352-1.389-.952-.313-2.056-.49-3.335-.547C15.259.014 14.668 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324A6.162 6.162 0 0 0 12 5.838zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/>
                     </svg>
-                </button>
-                <button class="text-xs" onclick="window.location.href='{{social_links.linkedin}}'">
+                </a>
+                <a href="{{social_links.linkedin}}" target="_blank" class="text-xs">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" width="20px" height="20px" xml:space="preserve">
                         <g>
                             <rect fill="#ffffff" height="23" width="7" y="9" />
@@ -135,7 +136,8 @@
                             <circle cx="3.5" cy="3.5" fill="#ffffff" r="3.5" />
                         </g>
                     </svg>
-                </button>
+                </a>
+                
             </div>
         </div>
     </div>
@@ -207,7 +209,54 @@
     </div>
 </div>
 
+<div id="sidebar" class="fixed left-0 top-0 h-screen w-80 bg-[#171717] text-white transform -translate-x-full transition-transform duration-300 z-50">
+    <!-- Sidebar content here -->
+    <div class="p-4 my-8">
+        <!-- Modal Content -->
+        <h2 class="text-lg font-bold mb-4" >Contact Information</h2>
 
+        <!-- Contact Info -->
+        
+        {% if user.firm_name %}
+            
+        
+        <div class="mb-4">
+            <label class="block ">Brand Name:</label>
+            <p class="text-gray-200">{{ user.brand_name }}</p>
+        </div>
+        {% endif %}
+        <div class="mb-4">
+            <label class="block ">Contact Person:</label>
+            <p class="text-gray-200">{{ user.contact_person }} </p>
+        </div>
+        <div class="mb-4">
+            <label class="block ">Designation:</label>
+            <p class="text-gray-200">{{ user.designation }}</p>
+        </div>
+        <div class="mb-4">
+            <label class="block ">Contact Number:</label>
+            <p class="text-gray-200">{{ user.mobile }}</p>
+        </div>
+        <div class="mb-4">
+            <label class="block ">Email:</label>
+            <p class="text-gray-200">{{ user.email }}</p>
+        </div>
+        
+        <div class="mb-4">
+            <label class="block ">Location:</label>
+            <p class="text-gray-200">{{ user.firm_address }}, {{ user.city }}, {{ user.state }}, {{ user.country }} - {{ user.zip_code }}</p>
+        </div>
+       
+
+        <button onclick="closeSidebar()" class=" bg-gray-600  text-white p-2 fixed top-2 right-8 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+              
+        </button>
+
+    </div>
+</div>
 
 <script>
     // Function to open the modal
@@ -218,6 +267,14 @@
     // Function to close the modal
     function closeModal() {
         document.getElementById('connectModal').classList.add('hidden');
+    }
+    function openSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("-translate-x-full");
+    }
+    function closeSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("-translate-x-full");
     }
 
     // Optional: Close modal when clicking outside the content
