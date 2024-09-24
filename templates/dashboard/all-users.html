@@ -16,8 +16,16 @@
                                         <h5>Material Provider</h5>
                                         {% elif member_type == 'homeOwner' %}
                                         <h5>Home Owner</h5>
+                                        <a href="{% url 'home_owner'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
+
+                                            <i data-feather="plus-square"></i>Add New
+                                        </a>
                                         {% elif member_type == 'serviceProvider' %}
                                         <h5>Service Providers</h5>
+                                        <a href="{% url 'service_provider'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
+
+                                            <i data-feather="plus-square"></i>Add New
+                                        </a>
                                         {% else %}
                                         <h5>All Users</h5>
                                         {% endif %}
@@ -32,6 +40,14 @@
                                         <table class="table all-package theme-table" id="table_id">
                                             <thead>
                                                 <tr>
+                                                    
+                                                    {% if member_type == 'materialProvider' or member_type == 'homeOwner' or member_type == 'serviceProvider' %}
+
+                                                    {% else %}
+                                                    <th>Type</th>
+
+                                                    {% endif %}
+                                                        
                                                     <th>Name</th>
                                                     <th>Phone</th>
                                                     <th>Email</th>
@@ -49,7 +65,12 @@
                                             <tbody>
                                                 {% for user in users %}
                                                 <tr>
-                                                    
+                                                    {% if member_type == 'materialProvider' or member_type == 'homeOwner' or member_type == 'serviceProvider' %}
+
+                                                    {% else %}
+                                                    <td>{{user.type}}</td>
+
+                                                    {% endif %}
 
                                                     <td>
                                                         <div class="user-name">
@@ -100,9 +121,21 @@
                                                                         <i class="ri-mail-line"></i>
                                                                     </a>
                                                                 </li>
-
+                                                            {% else %}
+                                                            <li>
+                                                                <a class="align-items-center btn btn-success d-flex" 
+                                                                    >
+                                                                        <i class="ri-check-double-line"></i>
+                                                                    </a>
+                                                                </li>
                                                             {% endif %}
-
+                                                            {% if member_type == 'serviceProvider' %}
+                                                            <li>
+                                                                <a href="{% url 'update_service' user.uid %}" >
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+                                                                {% endif %}
                                                             <li>
                                                                 <a href="" >
                                                                     <i class="ri-delete-bin-line"></i>

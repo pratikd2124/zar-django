@@ -201,15 +201,15 @@ def home_owner_view(request):
         if User.objects.filter(email=email).exists():
             messages.error(request, 'Email already exists')
         else:
-            user = User.objects.create(email=email, mobile=mobile, type='Home Owner')
-            user.username = email
+            user = User.objects.create(username=email, mobile=mobile, type='Home Owner')
+            user.email = email
             user.first_name = first_name
             user.last_name = last_name
             user.intrest = interest
             user.save()
             messages.info(request, 'Profile is Under Review !')
             Send_Welcome_email(user)
-            return redirect('holme')
+            return redirect('home')
         
 
         # Redirect to a success page or wherever after submission
@@ -308,25 +308,13 @@ def submit_service_provider(request):
             
     
 
-    # Get all categories and recursively filter those whose root ancestor is 'Services'
-    services_root = Category.objects.get(name__icontains='services')
 
     # Get all categories and recursively filter those whose root ancestor is 'Services'
     all_categories = Category.objects.all()
 
-    categories = []
-    for category in all_categories:
-        if get_root_category(category) == services_root:
-            categories.append({
-                'id': category.id,
-                'name': category.name,
-                'parent_id': category.parent_id
-            })
 
-    # Build the tree hierarchy for the filtered categories
-    category_hierarchy = get_category_hierarchy(categories)
     
-    return render(request, 'client/service-provider.html',{'categories':category_hierarchy} )
+    return render(request, 'client/service-provider.html',{'categories':all_categories} )
 
 def submit_material_provider(request):
   
@@ -376,12 +364,12 @@ def submit_material_provider(request):
                     bio=bio
                 )
         user.type = 'Material Provider'
-        # if profilepic:
-        #     user.profile_pic = profilepic
-        # if brandlogo:
-        #     user.brand_logo = brandlogo
-        # if profileDoc:
-        #     user.profile_doc = profileDoc
+        if profilepic:
+            user.profile_pic = profilepic
+        if brandlogo:
+            user.brand_logo = brandlogo
+        if profileDoc:
+            user.profile_doc = profileDoc
         if facebook or instagram or linkedin:
             user.social_links = {
                 'facebook': facebook,
@@ -390,11 +378,11 @@ def submit_material_provider(request):
             }
         user.category = Category.objects.get(id=category)
         user.save()
-        # for i in gallery_images:
-        #     image= ProfileGallery.objects.create( image=i)
-        #     image.save()
-        #     user.profile_gallery.add(image)
-        #     user.save()
+        for i in gallery_images:
+            image= ProfileGallery.objects.create( image=i)
+            image.save()
+            user.profile_gallery.add(image)
+            user.save()
         
         Send_Welcome_email(user)
         messages.success(request, 'Profile is Under Review !')

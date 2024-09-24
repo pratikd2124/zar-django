@@ -43,9 +43,15 @@
                                                     {% for cat in brands %}
                                                     <tr>
                                                         <td> 
-                                                        {% if cat.logo %}
+                                                        {% if cat.brand_logo %}
                                                             
-                                                        <img id="currentImage1" src="../../media/{{cat.brand_logo}}" alt="Current Image" class="img-fluid mt-2" style="max-width: 100px;">
+                                                        <img id="currentImage1" src=" 
+                                                        {% if cat.brand_logo %}
+                                                            
+                                                        {{cat.brand_logo.url}}
+                                                        {% endif %}
+                                                        " 
+                                                             alt="Current Image" class="img-fluid mt-2" style="max-width: 100px;">
                                                         {% endif %}
                                                     </td>
                                                         <td>{{cat.brand_name}}</td>

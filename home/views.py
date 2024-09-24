@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from main_app.models import Community, User, SupportTickets
+from main_app.models import Community, User, SupportTickets,ProfileGallery
 from .models import Category,PagesData
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,41 @@ from main_app.funtions import Send_Code_email, Send_Welcome_email, Send_Payment_
 
 # Create your views here.
 import random
+from .analytics import *
+import json
+
+
+@login_required(login_url='login')
+def dashboard(request):
+    categories = Category.objects.all()
+    users = User.objects.all().exclude(is_superuser=True, is_staff=True)
+    
+    # Get analytics data from log files
+    monthly_active_users_list, last_week_active_users_list, category_wise_visited_users_count = analyze_user_activity_from_logs()
+    last_week_active_users_list_json = json.dumps(last_week_active_users_list)
+    monthly_active_users_list_json = json.dumps(monthly_active_users_list)
+    category_wise_visited_users_count_json = json.dumps(category_wise_visited_users_count)
+    material_provider_count = User.objects.filter(type='Material Provider').count()
+
+    
+    return render(request, 'dashboard/index.html', {
+        'title': 'Dashboard',
+        'categories': categories,
+        'material_provider_count':material_provider_count,
+        'Service_Provider_count':users.filter(type='Service Provider').count(),
+        'Home_Owner_count':users.filter(type__in=['Home Owner', 'Community User']).count(),
+        'users': users,
+        'last_week_active_users_list': last_week_active_users_list_json,
+        'monthly_active_users': monthly_active_users_list_json,
+        'category_wise_visited_users_count': category_wise_visited_users_count_json
+    })
+
+
+
+
+
+
+
 
 @login_required(login_url='login')
 def all_users(request):
@@ -35,11 +70,6 @@ def all_users(request):
     return render(request,'dashboard/all-users.html',{'title':'User List','users':users,'member_type':member_type})
 
 
-
-@login_required(login_url='login')
-def dashboard(request):
-    
-    return render(request,'dashboard/index.html',{'title':'Dashboard'})
 
 
 # def login(request):
@@ -249,4 +279,163 @@ def support_ticket(request):
 def update_brand(request,id):
     brand = User.objects.get(uid=id)
     categories = Category.objects.all()
+    
+    if request.method == 'POST':
+        brand_name = request.POST.get('brand_name')
+        contact_person_name = request.POST.get('contact_person_name')
+        mobile = request.POST.get('mobile')
+        email = request.POST.get('email')
+        designation = request.POST.get('designation')
+        firm_address = request.POST.get('firm_address')
+        country = request.POST.get('country')
+        state = request.POST.get('state')
+        city = request.POST.get('city')
+        pincode = request.POST.get('pincode')
+        
+        category = request.POST.get('category')
+        bio = request.POST.get('bio')
+        facebook = request.POST.get('facebook')
+        instagram = request.POST.get('instagram')
+        linkedin = request.POST.get('linkedin')
+        
+        profilepic = request.FILES.get('profilepic')
+        brandlogo = request.FILES.get('brandlogo')
+        profileDoc = request.FILES.get('profileDocInput')
+
+        brand.brand_name = brand_name
+        brand.contact_person = contact_person_name
+        brand.mobile = mobile
+        brand.email = email
+        brand.designation = designation
+        brand.firm_address = firm_address
+        brand.country =country
+        brand.state = state
+        brand.city = city
+        brand.zip_code = pincode
+        if category:
+            brand.category = Category.objects.get(id=category)
+        brand.bio = bio
+        brand.social_links = {
+            'facebook': facebook,
+            'instagram': instagram,
+            'linkedin': linkedin
+        }
+        if profilepic:
+            brand.profile_pic = profilepic
+        
+        if brandlogo:
+            brand.brand_logo = brandlogo
+        
+        if profileDoc:
+            brand.profile_doc = profileDoc
+        
+        brand.save()
+        messages.success(request, 'Brand updated successfully.')
+        return redirect('brand_list')
+        
+        
+        
+        
+        
+        
+
+    
+    
     return render(request,'dashboard/update-brand.html',{'title':'Update Brand','brand':brand,'categories':categories})
+
+
+
+
+
+
+def update_service(request,id):
+    brand = User.objects.get(uid=id)
+    categories = Category.objects.all()
+    
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        mobile = request.POST.get('mobile')
+        email = request.POST.get('email')
+        firm_name = request.POST.get('firmName')
+        firm_address = request.POST.get('firmAddress')
+        country = request.POST.get('country')
+        state = request.POST.get('state')
+        city = request.POST.get('city')
+        pincode = request.POST.get('pincode')
+        
+        category = request.POST.get('category')
+        bio = request.POST.get('bio')
+        facebook = request.POST.get('facebook')
+        instagram = request.POST.get('instagram')
+        linkedin = request.POST.get('linkedin')
+        
+        profilepic = request.FILES.get('profilepic')
+        brandlogo = request.FILES.get('brandlogo')
+        profileDoc = request.FILES.get('profileDocInput')
+        brand.firm_name = firm_name
+        brand.first_name = first_name
+        brand.mobile = mobile
+        brand.email = email
+        brand.last_name = last_name
+        brand.firm_address = firm_address
+        brand.country =country
+        brand.state = state
+        brand.city = city
+        brand.zip_code = pincode
+        if category:
+            brand.category = Category.objects.get(id=category)
+        brand.bio = bio
+        brand.social_links = {
+            'facebook': facebook,
+            'instagram': instagram,
+            'linkedin': linkedin
+        }
+        if profilepic:
+            brand.profile_pic = profilepic
+        
+        if brandlogo:
+            brand.brand_logo = brandlogo
+        
+        if profileDoc:
+            brand.profile_doc = profileDoc
+        
+        brand.save()
+        messages.success(request, 'Information updated successfully.')
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+    
+    return render(request,'dashboard/update-service.html',{'title':'Update Brand','brand':brand,'categories':categories})
+
+
+
+def update_gallery(request,id):
+    user = User.objects.get(uid=id)
+    gallery = ProfileGallery.objects.filter(user = user)
+    
+    if request.GET.get('type') == 'delete':
+            gallery = ProfileGallery.objects.get(id=request.GET.get('img_id'))
+            gallery.delete()
+            messages.success(request, 'image deleted successfully.')
+            return redirect(request.META.get('HTTP_REFERER'))
+    
+    if request.method == 'POST':
+        
+        
+        
+        
+        if request.GET.get('type') == 'Add':
+
+            img = request.FILES.get('img')
+            if img:
+                gallery = ProfileGallery.objects.create(user=user,image=img)
+                gallery.save()
+                user.profile_gallery.add(gallery)
+                user.save()
+                messages.success(request, 'Gallery updated successfully.')
+                return redirect(request.META.get('HTTP_REFERER'))
+            
+         
+        
+        
+    return render(request,'dashboard/update-gallery.html',{'title':'Update Gallery','gallery':gallery,'user':user})
