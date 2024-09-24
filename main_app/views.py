@@ -97,9 +97,10 @@ def register(request):
         confirm_password = request.POST.get('confirm_password')
         if password == confirm_password:
             user = User.objects.get(email=email)
+            if first_name and last_name :
+                user.first_name = first_name
+                user.last_name = last_name
             user.username = email
-            user.first_name = first_name
-            user.last_name = last_name
             user.mobile = mobile
             user.is_active = True
             user.payment_status = 'Success'
@@ -109,8 +110,10 @@ def register(request):
             user.save()
             
             Send_Welcome_email(user.email)
+            messages.success(request, 'Your account has been created successfully.')
             return redirect('login')
         else:
+            messages.error(request, 'Password and confirm password does not match.')
             return redirect('register')
     try:
         print(request.session['email'],"!!!!!")

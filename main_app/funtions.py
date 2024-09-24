@@ -93,11 +93,14 @@ def Send_Payment_email(link,email):
 )
 
 
-
+    context ={
+        'link':link,
+        'email':email
+    }
     subject = f"Payment Link from Zar Luxury"
 
     # Use a raw string (r"""...""") to avoid formatting issues with curly braces
-    body = render_to_string('email_templates/payment-template.html')
+    body = render_to_string('email_templates/payment-template.html',context)
 
     recipients = [email]
 
