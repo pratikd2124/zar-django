@@ -39,7 +39,7 @@ def category_view(request,category_path):
     users = None
     if not next_categories:
         # users = User.objects.filter(category=category).filter(payment_status='Success')
-        users = User.objects.filter(category=category)
+        users = User.objects.filter(is_active=True,payment_status='Success').filter(category=category)
         
         
     return render(request, 'client/category.html', {'users':users,'category': category, 'nav_list':nav_list ,'title':category.name,'next_categories':next_categories})
