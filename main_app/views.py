@@ -248,7 +248,9 @@ def profile(request):
                 return redirect(request.META.get('HTTP_REFERER', '/home'))
             if request.GET.get('type') == 'gallery':
                 
-                
+                if user.profile_gallery.count() >= 10:
+                    messages.error(request, 'You have reached the maximum limit of 10 images.')
+                    return redirect(request.META.get('HTTP_REFERER', '/home'))
                 gallery_images = request.FILES.get('img')
                 
                 img = ProfileGallery.objects.create(image=gallery_images)
