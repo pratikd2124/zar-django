@@ -25,174 +25,116 @@ def Send_Welcome_email(user):
     # Use a raw string (r"""...""") to avoid formatting issues with curly braces
     body = r"""
         <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>ZAR Luxury Email</title>
-            <style>
-                @import url('https://fonts.googleapis.com/css2?family=Red+Rose&display=swap');
-                body {
-                    font-family: 'Red Rose', sans-serif;
-                    margin: 0;
-                    padding: 0;
-                    color: #ffffff;
-                    background-color: #000000;
-                }
-                .container {
-                    max-width: 600px;
-                    margin: 0 auto;
-                }
-                .hero {
-                    position: relative;
-                    height: 400px;
-                }
-                .hero img {
-                    width: 100%;
-                    height: 400px;
-                    object-fit: cover;
-                    border-radius: 10px;
-                }
-                .logo img {
-                    position: absolute;
-                    top: 20px;
-                    left: 20px;
-                    width: 100px;
-                    height: auto;
-                }
-                .hero-overlay {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: linear-gradient(
-                      to bottom,
-                      rgba(0, 0, 0, 1) 0%,
-                      rgba(0, 0, 0, 0) 100%
-                    );
-                }
-                .hero-content {
-                    position: absolute;
-                    top: 100px;
-                    left: 50px;
-                }
-                .hero-content h1 {
-                    font-family: "Times New Roman", Times, serif;
-                    font-size: 36px;
-                    margin: 0 0 10px 0;
-                }
-                .hero-content p {
-                    font-size: 18px;
-                    margin: 0;
-                }
-                .content {
-                    padding: 0 20px;
-                }
-                .content h2 {
-                    text-align: center;
-                }
-                .content p {
-                    text-align: center;
-                    padding-inline: 2rem;
-                }
-                .partners {
-                    display: flex;
-                    gap: 10px;
-                }
-                .partner-card {
-                    text-align: center;
-                }
-                .partner-img {
-                    width: 100%;
-                    height: 250px;
-                    max-width: 180px;
-                    margin-bottom: 10px;
-                    border-radius: 10px;
-                }
-                section {
-                    margin-bottom: 3rem;
-                    margin-top: 3rem;
-                }
-                .partner-title {
-                    font-size: 14px;
-                    font-weight: bold;
-                }
-                h2 {
-                    text-align: center;
-                }
-                footer {
-                    text-align: center;
-                    font-size: 14px;
-                    padding: 20px 0;
-                }
-                .bg-image-header {
-                    filter: saturate(0);
-                }
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <header class="hero">
-                    <img
-                        class="bg-image-header"
-                        src="https://images.unsplash.com/photo-1599696848652-f0ff23bc911f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Luxury Chair"
-                    />
-                    <div class="hero-overlay"></div>
-                    <div class="logo">
-                        <img
-                            src="https://www.zarluxury.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fzar-logos-2.a14a82bb.png&w=128&q=75"
-                            alt="ZAR Logo"
-                        />
-                    </div>
-                    <div class="hero-content">
-                        <h1>Connecting Excellence</h1>
-                        <p>in Luxury Living and Design</p>
-                    </div>
-                </header>
-
-                <main class="content">
-                    <section>
-                        <h2>Welcome to the world of ZAR Luxury Pvt. Ltd.</h2>
-                        <p>At ZAR Luxury, we pride ourselves on delivering unparalleled
-                        experiences to our discerning clientele.</p>
-                        <p>Our mission is to bridge the gap between luxury brands, developers,
-                        home buyers, architects, and interior designers by providing
-                        unparalleled access to high-quality products and services.</p>
-                    </section>
-
-                    <section>
-                        <h2>OUR PARTNERS</h2>
-                        <div class="partners">
-                            <div class="partner-card">
-                                <img class="partner-img" src="https://via.placeholder.com/180" alt="Architects"/>
-                                <p class="partner-title">Architects</p>
-                            </div>
-                            <div class="partner-card">
-                                <img class="partner-img" src="https://via.placeholder.com/180" alt="Designers"/>
-                                <p class="partner-title">Designers</p>
-                            </div>
-                            <div class="partner-card">
-                                <img class="partner-img" src="https://via.placeholder.com/180" alt="Builders"/>
-                                <p class="partner-title">Builders</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h2 style="font-family: serif;">Curating the finest</h2>
-                        <p style="text-align: center"><em>in design and living</em></p>
-                    </section>
-                </main>
-
-                <footer>
-                    <p>www.zarluxury.com | info@zarluxury.com</p>
-                </footer>
-            </div>
-        </body>
-        </html>
-    """
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to ZAR Luxury</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Red+Rose:wght@300&display=swap" rel="stylesheet">
+</head>
+ <style>
+    @font-face{{
+      font-family: 'Gloock';
+      src: url('https://fonts.googleapis.com/css2?family=Gloock&display=swap') ,
+           
+      font-weight: 400;
+      font-style: normal;
+    }}
+    @font-face{{
+      font-family: 'Red Rose';
+      src: url('https://fonts.googleapis.com/css2?family=Red+Rose:wght@300&display=swap') ,
+           
+      font-weight: 300;
+      font-style: normal;
+    }}
+  </style>
+<body style="font-family: 'Red Rose', sans-serif; font-weight: 300; background-color: black; color: white; margin: 0; padding: 0;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+    <tr>
+      <td align="center" style="padding: 1rem;">
+        <table role="presentation" width="90%" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color: black; color: white;">
+          <tr>
+            <td>
+              <div style="position: relative; background-image: linear-gradient(to bottom, #000, #2563eb); color: white; overflow: hidden;">
+                <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 560px;">
+                  <img src="https://images.pexels.com/photos/3701455/pexels-photo-3701455.jpeg?cs=srgb&dl=pexels-bruceclarkinoc-3701455.jpg&fm=jpg" alt="Background Image" style="object-fit: cover; object-position: center; width: 100%; height: 100%;" />
+                  <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.8), transparent); opacity: 1;"></div>
+                </div>
+                <!-- Logo Image at Top Right Corner -->
+                <div style="position: absolute; top: 1rem; left: 1rem;">
+                  <img src="https://www.zarluxury.com/static/images/zar-logos-2.webp" alt="Logo" style="width: auto; height: 4rem;" />
+                </div>
+                <div style="height: 560px; position: relative; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; text-align: left; padding-left: 2rem; padding-right: 2rem;">
+                  <h1 style="font-size: 3rem; margin-bottom: 1rem; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Connecting Excellence</h1>
+                  <p style="font-size: 1.125rem; color: #d1d5db; margin-bottom: 1rem;">in Luxury Living and Design</p>
+                </div>
+              </div>
+              <div style="padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);">
+                <h1 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 1rem; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Welcome to ZAR Luxury</h1>
+                <p style="font-size: 1.125rem; margin-bottom: 1rem;">Dear <span style="font-weight: 600;">({email})</span>,</p>
+                <p style="font-size: 1.125rem; margin-bottom: 1rem;">Thank you for choosing ZAR Luxury and taking the time to complete your sign-up.</p>
+                <p style="font-size: 1.125rem; margin-bottom: 1rem;">We have successfully received your request, and your profile is currently under review. Our team is carefully assessing the details, and we will notify you once the review process is complete.</p>
+                <p style="font-size: 1.125rem; margin-bottom: 1rem;">If you have any questions in the meantime, please don’t hesitate to contact us.</p>
+                <p style="font-size: 1.125rem;">Regards,</p>
+                <p style="font-size: 1.125rem; font-weight: 600; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">ZAR Luxury Team</p>
+              </div>
+              <h2 style="font-size: 1.5rem; text-align: center; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Our Partners</h2>
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" align="center" style="display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 1rem; max-width: 80rem; margin-left: auto; margin-right: auto; margin-top: 6rem;">
+                <!-- Architect Card -->
+                <tr>
+                  <td>
+                    <article style="position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; border-radius: 1rem; padding: 2rem; padding-top: 10rem;">
+                      <img src="https://images.pexels.com/photos/157811/pexels-photo-157811.jpeg?cs=srgb&dl=pexels-yentl-jacobs-43020-157811.jpg&fm=jpg" alt="Architects" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 100%; width: 100%; object-fit: cover;">
+                      <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-image: linear-gradient(to top, #1a202c, rgba(26, 32, 44, 0.4));"></div>
+                      <h3 style="z-index: 10; margin-top: 0.75rem; font-size: 1.875rem; font-weight: bold; color: white; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Architects</h3>
+                      <div style="z-index: 10; gap-y-1 overflow-hidden text-sm leading-6 text-gray-300;">Crafting spaces</div>
+                    </article>
+                  </td>
+                </tr>
+                <!-- Designers Card -->
+                <tr>
+                  <td>
+                    <article style="position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; border-radius: 1rem; padding: 2rem; padding-top: 10rem;">
+                      <img src="https://images.pexels.com/photos/3797991/pexels-photo-3797991.jpeg?cs=srgb&dl=pexels-houzlook-3797991.jpg&fm=jpg" alt="Designers" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 100%; width: 100%; object-fit: cover;">
+                      <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-image: linear-gradient(to top, #1a202c, rgba(26, 32, 44, 0.4));"></div>
+                      <h3 style="z-index: 10; margin-top: 0.75rem; font-size: 1.875rem; font-weight: bold; color: white; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Designers</h3>
+                      <div style="z-index: 10; gap-y-1 overflow-hidden text-sm leading-6 text-gray-300;">Shaping aesthetics</div>
+                    </article>
+                  </td>
+                </tr>
+                <!-- Consultants Card -->
+                <tr>
+                  <td>
+                    <article style="position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; border-radius: 1rem; padding: 2rem; padding-top: 10rem;">
+                      <img src="https://images.pexels.com/photos/667838/pexels-photo-667838.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Consultants" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; height: 100%; width: 100%; object-fit: cover;">
+                      <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; background-image: linear-gradient(to top, #1a202c, rgba(26, 32, 44, 0.4));"></div>
+                      <h3 style="z-index: 10; margin-top: 0.75rem; font-size: 1.875rem; font-weight: bold; color: white; font-family: 'Gloock', serif; font-weight: 400; font-style: normal;">Consultants</h3>
+                      <div style="z-index: 10; gap-y-1 overflow-hidden text-sm leading-6 text-gray-300;">Providing insights</div>
+                    </article>
+                  </td>
+                </tr>
+              </table>
+              <!-- Bottom Heading and Contact Information -->
+              <div style="margin-top: 3rem; text-align: center;">
+                <h2 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 1rem;">Curating Finest Design</h2>
+                <p style="font-size: 0.875rem; color: #d1d5db;">
+                  <a href="http://www.zarluxury.com" style="text-decoration: none; color: white;">www.zarluxury.com</a> | <a href="mailto:info@zarluxury.com" style="text-decoration: none; color: white;">info@zarluxury.com</a>
+                </p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+    """.format(
+        email=user,
+    )
 
     recipients = [user]
 
@@ -227,94 +169,72 @@ def Send_Code_email(code, email):
     # Use an f-string for body formatting
     body = f"""
     <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Welcome to ZAR Luxury – You're the ONE</title>
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Red+Rose:wght@300&display=swap');
-        body {{
-          font-family: 'Red Rose', sans-serif;
-          background-color: #1a1a1a;
-          margin: 0;
-          padding: 0;
-          color: #fff;
-        }}
-        .container {{
-          max-width: 600px;
-          margin: 0 auto;
-          padding: 20px;
-          background-color: #2a2a2a;
-          border: 1px solid #444;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }}
-        .header {{
-          background-color: #333;
-          color: #fff;
-          padding: 10px 0;
-          text-align: center;
-        }}
-        .content {{
-          padding: 20px;
-          line-height: 1.6;
-        }}
-        .passcode {{
-          font-size: 24px;
-          font-weight: bold;
-          color: #fff;
-          background-color: #333;
-          padding: 10px;
-          border: 1px solid #555;
-          text-align: center;
-          margin: 20px 0;
-        }}
-        .footer {{
-          text-align: center;
-          padding: 10px;
-          font-size: 12px;
-          color: #bbb;
-        }}
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h1>Welcome to ZAR Luxury</h1>
-          <p>You're the ONE</p>
-        </div>
-        <div class="content">
-          <p>Dear {email},</p>
-          <p>Welcome to the distinguished circle of ZAR Luxury, where luxury meets exclusivity.</p>
-          <p>Your membership has been successfully activated, and we are pleased to provide you with your unique passcode key. This key is your gateway to a realm of unparalleled elegance and bespoke experiences.</p>
-          <div class="passcode">
-            {code}
-          </div>
-          <p>With this key, you can unlock a world designed for the discerning few—offering you access to carefully curated materials, personalized services, and a network of the finest brands and designers.</p>
-          <p>We invite you to step into the world of ZAR, where every detail is crafted to meet your highest expectations. Your journey into a world beyond the ordinary begins now.</p>
-          <p>If you have any inquiries or require assistance, our dedicated concierge team is here to serve you. For us, you are not just a member—you are the ONE.</p>
-          <p>Regards,</p>
-          <p>ZAR Luxury Team</p>
-        </div>
-        <div class="footer">
-          <p>ZAR Luxury - Where Luxury Meets Exclusivity</p>
-        </div>
-      </div>
-    </body>
-    </html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to ZAR Luxury – You're the ONE</title>
+</head>
+<body style="background-color: #000000; color: #ffffff; margin: 0; padding: 0; font-family: 'Arial', sans-serif;">
+  <table role="presentation" style="width: 100%; background-color: #000000;" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td align="center">
+        <table role="presentation" style="max-width: 600px; width: 100%; background-color: #1a1a1a; color: #ffffff; padding: 20px; border-collapse: collapse;" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="center" style="padding: 20px;">
+              <img src="https://www.zarluxury.com/static/images/zar-logos-2.webp" alt="ZAR Luxury Logo" style="width: 150px; height: auto;">
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="font-family: 'Gloock', serif; font-size: 24px; font-weight: bold; padding-bottom: 10px; color: #ffffff;">
+              Welcome to ZAR Luxury
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="font-size: 16px; font-family: 'Arial', sans-serif; color: #ffffff;">
+              <p style="margin: 0;">You're the ONE</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 20px; text-align: left; line-height: 1.6; font-size: 16px; color: #ffffff;">
+              <p>Dear Member,</p>
+              <p>Welcome to the distinguished circle of ZAR Luxury, where luxury meets exclusivity.</p>
+              <p>Your membership has been successfully activated, and we are pleased to provide you with your unique passcode key.</p>
+              <div style="font-size: 24px; font-weight: bold; background-color: #333333; padding: 10px; text-align: center; margin: 20px 0; border: 1px solid #555555; color: #ffffff;">
+                {code}
+              </div>
+              <p>With this key, you can unlock a world designed for the discerning few—offering you access to carefully curated materials, personalized services, and a network of the finest brands and designers.</p>
+              <p>We invite you to step into the world of ZAR, where every detail is crafted to meet your highest expectations.</p>
+              <p>If you have any inquiries or require assistance, our dedicated concierge team is here to serve you. For us, you are not just a member—you are the ONE.</p>
+              <p>Regards,</p>
+              <p>ZAR Luxury Team</p>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding: 20px; font-size: 12px; color: #bbbbbb;">
+              <p>ZAR Luxury - Where Luxury Meets Exclusivity</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
     """
 
     recipients = [email]
 
-    email = EmailMessage(
+    email_message = EmailMessage(
         subject=subject,
         body=body,
         from_email=EMAIL_HOST_USER,
         to=recipients,
         connection=email_backend,
     )
-    email.content_subtype = "html"  # Sending HTML email
-    email.send()
+    email_message.content_subtype = "html"  # Sending HTML email
+    email_message.send()
+
 
 def Send_Payment_email(link,email):
     EMAIL_HOST_USER = 'admin@zarluxury.com'

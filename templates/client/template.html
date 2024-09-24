@@ -50,7 +50,86 @@
     </main>
     {% include 'client/components/footer.html' %}
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchCountries();
+        });
     
+        function fetchCountries() {
+            fetch('https://countriesnow.space/api/v0.1/countries') // This URL provides country data
+                .then(response => response.json())
+                .then(data => {
+                    const countrySelect = document.getElementById('country');
+                    data.data.forEach(country => {
+                        const option = document.createElement('option');
+                        option.value = country.country;
+                        option.text = country.country;
+                        countrySelect.appendChild(option);
+                    });
+                    countrySelect.disabled = false;
+                })
+                .catch(error => console.error('Error fetching countries:', error));
+        }
+    
+        function fetchStates() {
+            const country = document.getElementById('country').value;
+            if (!country) return;
+    
+            fetch('https://countriesnow.space/api/v0.1/countries/states', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    country: country
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const stateSelect = document.getElementById('state');
+                stateSelect.innerHTML = '<option readonly selected>Select State</option>';
+                data.data.states.forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state.name;
+                    option.text = state.name;
+                    stateSelect.appendChild(option);
+                });
+                stateSelect.disabled = false;
+                document.getElementById('city').disabled = true;
+            })
+            .catch(error => console.error('Error fetching states:', error));
+        }
+    
+        function fetchCities() {
+            const country = document.getElementById('country').value;
+            const state = document.getElementById('state').value;
+            if (!state || !country) return;
+    
+            fetch('https://countriesnow.space/api/v0.1/countries/state/cities', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    country: country,
+                    state: state
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const citySelect = document.getElementById('city');
+                citySelect.innerHTML = '<option readonly selected>Select City</option>';
+                data.data.forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.text = city;
+                    citySelect.appendChild(option);
+                });
+                citySelect.disabled = false;
+            })
+            .catch(error => console.error('Error fetching cities:', error));
+        }
+    </script>
 
 </body>
 </html>

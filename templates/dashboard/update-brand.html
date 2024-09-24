@@ -17,49 +17,47 @@
                      
                         </div>
                         <div class="container py-5">
-                            <form method="post" enctype="multipart/form-data" class="row g-3">
+                            <form method="POST" action="{% url 'edit_brand' brand.uid %}"  enctype="multipart/form-data" class="row g-3">
                                 {% csrf_token %}
                                 <div class="col-md-6">
                                     <label for="profilePic" class="form-label">Profile Pic</label>
-                                    <input type="file" name="profilepic" id="profilePic" class="form-control" readonly />
-                                    {% if brand.profile_pic %}
-                                        <div class="position-relative mt-2" style="width: 20%;">
-                                            <img src="{{ brand.profile_pic.url }}" id="profilePicimg" alt="Profile Preview" class="img-thumbnail" />
+                                    <input type="file" name="profilepic" id="profilePic" class="form-control" onchange="previewImage('profilePic', 'profilePicimg')" />
+                                    <div class="position-relative mt-2" id="profilePicimg" style="width: 20%;">
+                                        {% if brand.profile_pic %}
+                                            <img src="{{ brand.profile_pic.url }}" alt="Profile Preview" class="img-thumbnail" />
                                             <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" 
                                                     onclick="removeImage('profilePic')">X</button>
-                                        </div>
-                                    {% endif %}
+                                        {% endif %}
+                                    </div>
                                 </div>
-                            
+                                
                                 <!-- Brand Logo -->
                                 <div class="col-md-6">
                                     <label for="brandlogo" class="form-label">Brand Logo</label>
-                                    <input type="file" name="brandlogo" id="brandlogo" class="form-control" readonly />
-                                    {% if brand.brand_logo %}
-                                        <div class="position-relative mt-2" style="width: 50%;">
-                                            <img src="{{ brand.brand_logo.url }}" id="brandlogoimg" alt="Brand Logo Preview" class="img-thumbnail" />
+                                    <input type="file" name="brandlogo" id="brandlogo" class="form-control" onchange="previewImage('brandlogo', 'brandlogoimg')" />
+                                    <div class="position-relative mt-2" id="brandlogoimg" style="width: 50%;">
+                                        {% if brand.brand_logo %}
+                                            <img src="{{ brand.brand_logo.url }}" alt="Brand Logo Preview" class="img-thumbnail" />
                                             <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" 
                                                     onclick="removeImage('brandlogo')">X</button>
-                                        </div>
-                                    {% endif %}
+                                        {% endif %}
+                                    </div>
                                 </div>
                             
                                 <!-- Project Showcase -->
                                 <div class="col-md-12">
                                     <label for="projectShowcase" class="form-label">Project Showcase (up to 10 images)</label>
-                                    <input type="file" name="projectShowcase" id="projectShowcase" class="form-control" readonly multiple />
-                                    <input type="hidden" name="gallery_images" id="gallery_images" value="{% for preview in brand.profile_gallery.all %}{{ preview.id }}{% if not forloop.last %},{% endif %}{% endfor %}">
                                     {% if brand.profile_gallery.count > 0 %}
                                         <div class="d-flex flex-wrap mt-2 gap-2" id="galleryPreview">
                                             {% for preview in brand.profile_gallery.all %}
                                                 <div class="position-relative"  id="img{{preview.id}}">
                                                     <img src="{{ preview.image.url }}" alt="Project Showcase" class="img-thumbnail" style="width: 100px;" />
-                                                    <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0"
-                                                            onclick="removeGalleryImage('{{ preview.id }}')">X</button>
+                                                    
                                                 </div>
                                             {% endfor %}
                                         </div>
                                     {% endif %}
+                                    <a href='{% url "update_gallery" brand.uid %}' target="_blank" class=" btn btn-secondary" style="width:20%;" >Edit Gallery</a>
                                 </div>
 
                                 <!-- Full Name -->
@@ -112,7 +110,7 @@
                                         type="email"
                                         id="email"
                                         name="email"
-                                        value="{{ brand.email.value|default_if_none:'' }}"
+                                        value="{{ brand.email|default_if_none:'' }}"
                                         placeholder="Company Email"
                                         class="form-control"
                                         readonly
@@ -142,35 +140,36 @@
                                         placeholder="Address"
                                         class="form-control"
                                         readonly
-                                    >{{ brand.firm_address|default_if_none:'' }}</textarea>
+                                    >{{ brand.firm_address |default_if_none:'' }}</textarea>
                                 </div>
 
                                 <!-- Country -->
                                 <div class="col-md-6">
                                     <label for="country">Country</label>
-                                    <select id="country" name="country" disabled class="form-select">
+                                    <select id="country" name="country" class="form-select" disabled onchange="fetchStates()">
                                         <option readonly selected>Select Country</option>
-                                        <!-- Add country options here -->
+                                        <!-- Country options will be dynamically loaded here -->
                                     </select>
                                 </div>
 
                                 <!-- State -->
                                 <div class="col-md-6">
                                     <label for="state">State</label>
-                                    <select id="state" name="state" disabled class="form-select">
+                                    <select id="state" name="state" class="form-select" disabled onchange="fetchCities()">
                                         <option value="" readonly selected>Select State</option>
-                                        <!-- Add state options here -->
+                                        <!-- State options will be dynamically loaded here -->
                                     </select>
                                 </div>
 
                                 <!-- City -->
                                 <div class="col-md-6">
                                     <label for="city">City</label>
-                                    <select id="city" name="city" disabled class="form-select">
+                                    <select id="city" name="city" class="form-select" disabled>
                                         <option value="" readonly selected>Select City</option>
-                                        <!-- Add city options here -->
+                                        <!-- City options will be dynamically loaded here -->
                                     </select>
                                 </div>
+
 
                                 <!-- Pincode -->
                                 <div class="col-md-6">
@@ -189,7 +188,7 @@
                                 <!-- Category -->
                                 <div class="col-md-6">
                                     <label for="category">Category</label>
-                                    <select id="category" name="category" class="form-select" disabled>
+                                    <select id="category" name="category" class="form-select" >
                                         {% for category in categories %}
                                         <option value="{{ category.id }}" 
                                         {% if brand.category.id == category.id %}
@@ -280,89 +279,153 @@
 <script>
     function toggleEditMode() {
         // Toggle the readonly attribute for all input fields
-        const inputs = document.querySelectorAll('input[type="file"]');
+        const inputs = document.querySelectorAll('input[type="text"], textarea');
         inputs.forEach(input => {
             input.readOnly = !input.readOnly;
         });
+        const inputs1 = document.querySelectorAll('input[type="select"]');
+        inputs1.forEach(inputs => {
+            inputs.disabled = !inputs.disabled;
+        });
     }
 
-    function removeImage(inputId) {
-        // Find the file input and set its value to null
+    function previewImage(inputId, imgContainerId) {
         const input = document.getElementById(inputId);
-        input.value = '';  // Clear the file input value
-        document.getElementById((inputId+'img')).style.display = 'none';  // Clear the image preview
+        const imgContainer = document.getElementById(imgContainerId);
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                // Clear the previous image
+                imgContainer.innerHTML = '';
+                
+                // Add new image
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = 'Preview';
+                img.classList.add('img-thumbnail');
+
+                // Add remove button
+                const btn = document.createElement('button');
+                btn.classList.add('btn', 'btn-danger', 'btn-sm', 'position-absolute', 'top-0', 'end-0');
+                btn.innerHTML = 'X';
+                btn.onclick = function() {
+                    removeImage(inputId);
+                };
+
+                // Append the new image and remove button to the container
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(btn);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
     }
 
-    let imageList = document.getElementById('gallery_images').value ? document.getElementById('gallery_images').value.split(',') : [];
-    let newFiles = [];  // Array to hold new file objects
-    
-    // Function to remove an image from the list and the preview
-    function removeGalleryImage(imageId) {
-        // Remove the image from the preview
-        const imgElement = document.getElementById('img' + imageId);
-        if (imgElement) {
-            imgElement.style.display = 'none';  // or imgElement.remove();
-        }
-    
-        // Remove the imageId from the imageList array if it's an existing image
-        imageList = imageList.filter(id => id !== imageId);
-    
-        // Update the hidden input with the new list
-        document.getElementById('gallery_images').value = imageList.join(',');
+    // Function to remove the image preview
+    function removeImage(inputId) {
+        const input = document.getElementById(inputId);
+        const imgContainer = document.getElementById(inputId + 'img');
+        
+        // Clear the image container
+        imgContainer.innerHTML = '';
+        
+        // Clear the file input
+        input.value = '';
     }
-    
-    // Function to handle new image uploads
-    document.getElementById('projectShowcase').addEventListener('change', function(event) {
-        const files = event.target.files;
-        const galleryPreview = document.getElementById('galleryPreview');
-    
-        for (let i = 0; i < files.length; i++) {
-            const newImageId = 'new' + i;  // Temporary unique ID for new images
-    
-            // Create a new div with the image preview and remove button
-            const newImageDiv = document.createElement('div');
-            newImageDiv.classList.add('position-relative');
-            newImageDiv.id = 'img' + newImageId;
-    
-            // Create the image element
-            const img = document.createElement('img');
-            img.src = URL.createObjectURL(files[i]);  // Preview the selected image
-            img.alt = 'Project Showcase';
-            img.classList.add('img-thumbnail');
-            img.style.width = '100px';
-    
-            // Create the remove button
-            const removeButton = document.createElement('button');
-            removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'position-absolute', 'top-0', 'end-0');
-            removeButton.innerText = 'X';
-            removeButton.type = 'button';
-            removeButton.onclick = function() {
-                removeNewFile(newImageId, i);
-            };
-    
-            // Append the image and button to the new div
-            newImageDiv.appendChild(img);
-            newImageDiv.appendChild(removeButton);
-    
-            // Append the new div to the gallery preview
-            galleryPreview.appendChild(newImageDiv);
-    
-            // Add the new file object to the newFiles array
-            newFiles.push(files[i]);
-        }
+    CKEDITOR.replace('bio-editor');
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetchCountries();
     });
     
-    // Function to remove newly added files
-    function removeNewFile(tempId, fileIndex) {
-        const imgElement = document.getElementById('img' + tempId);
-        if (imgElement) {
-            imgElement.style.display = 'none';  // or imgElement.remove();
-        }
+    function fetchCountries() {
+        fetch('https://countriesnow.space/api/v0.1/countries')
+            .then(response => response.json())
+            .then(data => {
+                const countrySelect = document.getElementById('country');
+                data.data.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.country;
+                    option.text = country.country;
+                    countrySelect.appendChild(option);
+                });
+                countrySelect.disabled = false;
     
-        // Remove the file from the newFiles array
-        newFiles = newFiles.filter((file, index) => index !== fileIndex);
+                // Set default selected country
+                countrySelect.value = '{{brand.country}}';
+                fetchStates(); // Fetch states for the selected country
+            })
+            .catch(error => console.error('Error fetching countries:', error));
     }
     
+    function fetchStates() {
+        const country = document.getElementById('country').value;
+        if (!country) return;
+    
+        fetch('https://countriesnow.space/api/v0.1/countries/states', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                country: country
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const stateSelect = document.getElementById('state');
+            stateSelect.innerHTML = '<option readonly selected>Select State</option>';
+            data.data.states.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state.name;
+                option.text = state.name;
+                stateSelect.appendChild(option);
+            });
+            stateSelect.disabled = false;
+    
+            // Set default selected state
+            stateSelect.value = '{{brand.state}}';
+            fetchCities(); // Fetch cities for the selected state
+        })
+        .catch(error => console.error('Error fetching states:', error));
+    }
+    
+    function fetchCities() {
+        const country = document.getElementById('country').value;
+        const state = document.getElementById('state').value;
+        if (!state || !country) return;
+    
+        fetch('https://countriesnow.space/api/v0.1/countries/state/cities', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                country: country,
+                state: state
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            const citySelect = document.getElementById('city');
+            citySelect.innerHTML = '<option readonly selected>Select City</option>';
+            data.data.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.text = city;
+                citySelect.appendChild(option);
+            });
+            citySelect.disabled = false;
+    
+            // Set default selected city
+            citySelect.value = '{{brand.city}}';
+        })
+        .catch(error => console.error('Error fetching cities:', error));
+    }
     
 </script>
 

@@ -11,27 +11,47 @@
                                 <div class="card-body">
                                     <div class="title-header option-title">
                                         
-                                        {% if member_type == 'materialProvider' %}
-                                            
-                                        <h5>Material Provider</h5>
-                                        {% elif member_type == 'homeOwner' %}
-                                        <h5>Home Owner</h5>
-                                        {% elif member_type == 'serviceProvider' %}
-                                        <h5>Service Providers</h5>
-                                        {% else %}
-                                        <h5>All Users</h5>
-                                        {% endif %}
-                                        {% comment %} <form class="d-inline-flex">
-                                            <a href="" class="align-items-center btn btn-theme d-flex">
-                                                <i data-feather="plus"></i>Add New
-                                            </a>
-                                        </form> {% endcomment %}
+                                        {% if member_type == 'homeOwner' %}
+                            <h5>Home Owner</h5>
+                            <div class="d-inline-flex">
+
+                                <input type="text" id="searchInput" class="form-control" placeholder="Search..." onkeyup="filterRows()">
+                            </div>
+                            <a href="{% url 'home_owner'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
+
+                                <i data-feather="plus-square"></i>Add New
+                            </a>
+                            {% elif member_type == 'serviceProvider' %}
+                            <h5>Service Providers</h5>
+                            <div class="d-inline-flex">
+
+                                <input type="text" id="searchInput" class="form-control" placeholder="Search..." onkeyup="filterRows()">
+                            </div>
+
+                            <a href="{% url 'service_provider'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
+
+                                <i data-feather="plus-square"></i>Add New
+                            </a>
+                            {% else %}
+                            <h5>All Users</h5>
+                            <div class="d-inline-flex">
+
+                                <input type="text" id="searchInput" class="form-control" placeholder="Search..." onkeyup="filterRows()">
+                            </div>
+                            {% endif %} 
                                     </div>
 
                                     <div class="table-responsive table-product">
                                         <table class="table all-package theme-table" id="table_id">
                                             <thead>
                                                 <tr>
+                                                    
+                                                    {% if member_type == 'all'  %}
+
+                                                    <th>Type</th>
+
+                                                    {% endif %}
+                                                        
                                                     <th>Name</th>
                                                     <th>Phone</th>
                                                     <th>Email</th>
@@ -49,7 +69,11 @@
                                             <tbody>
                                                 {% for user in users %}
                                                 <tr>
-                                                    
+                                                    {% if member_type == 'all' %}
+
+                                                    <td>{{user.type}}</td>
+
+                                                    {% endif %}
 
                                                     <td>
                                                         <div class="user-name">
@@ -100,11 +124,33 @@
                                                                         <i class="ri-mail-line"></i>
                                                                     </a>
                                                                 </li>
-
+                                                            {% else %}
+                                                            <li>
+                                                                <a class="align-items-center btn btn-success d-flex" 
+                                                                    >
+                                                                        <i class="ri-check-double-line"></i>
+                                                                    </a>
+                                                                </li>
+                                                            {% endif %}
+                                                            {% if user.type == 'Service Provider' %}
+                                                            <li>
+                                                                <a href="{% url 'update_service' user.uid %}" >
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
                                                             {% endif %}
 
+                                                            {% if user.type == 'Home Owner' or user.type == 'Community User' %}
                                                             <li>
-                                                                <a href="" >
+                                                                <a href="{% url 'update_user_info' user.uid %}" >
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            
+                                                            
+                                                            {% endif %}
+                                                            <li>
+                                                                <a href="{% url 'users_list' %}?action=delete&id={{ user.uid }}" onclick="confirmDelete(event, '{{ user.uid }}')">
                                                                     <i class="ri-delete-bin-line"></i>
                                                                 </a>
                                                             </li>
@@ -188,4 +234,120 @@
                     document.getElementById('hiddenUserId2').value = id;
                 }
             </script>
+            <script>
+                function confirmDelete(event, userId) {
+                    // Prevent the default link behavior
+                    event.preventDefault();
+            
+                    // Show confirmation dialog
+                    const userConfirmed = confirm('Are you sure you want to delete user with ID: ' + userId + '?');
+            
+                    // If the user clicks "OK", redirect to the delete URL
+                    if (userConfirmed) {
+                        const deleteUrl = "{% url 'users_list' %}?action=delete&id=" + userId;
+                        window.location.href = deleteUrl;
+                    }
+                }
+            </script>
+            <script>
+                // Global Variables
+                let current_page = 1;
+                let rows_per_page = 5; // Set number of rows per page
+                const table = document.getElementById("table_id");
+                const paginationElement = document.getElementById("pagination");
+            
+                // Function to filter rows
+                function filterRows() {
+                    const query = document.getElementById("searchInput").value.toLowerCase();
+                    const rows = table.getElementsByTagName("tr");
+                    const filteredRows = [];
+            
+                    for (let i = 1; i < rows.length; i++) { // Start from 1 to skip header
+                        const row = rows[i];
+                        const cells = row.getElementsByTagName("td");
+            
+                        // Check if the row matches the search query
+                        const matches = Array.from(cells).some(cell => {
+                            return cell.innerText.toLowerCase().includes(query);
+                        });
+            
+                        if (matches) {
+                            filteredRows.push(row);
+                        }
+                    }
+            
+                    // Hide all rows first
+                    for (let i = 1; i < rows.length; i++) {
+                        rows[i].style.display = "none";
+                    }
+            
+                    // Display filtered rows
+                    filteredRows.forEach(row => {
+                        row.style.display = "";
+                    });
+            
+                    // Update pagination based on filtered results
+                    updatePagination(filteredRows.length);
+                }
+            
+                // Function to display rows
+                function displayRows(page) {
+                    const rows = table.getElementsByTagName("tr");
+                    const totalRows = rows.length - 1; // Exclude header row
+                    const start = (page - 1) * rows_per_page + 1;
+                    const end = start + rows_per_page - 1;
+            
+                    for (let i = 1; i < rows.length; i++) {
+                        if (i >= start && i <= end) {
+                            rows[i].style.display = "";
+                        } else {
+                            rows[i].style.display = "none";
+                        }
+                    }
+            
+                    // Update pagination
+                    updatePagination(totalRows);
+                }
+            
+                // Function to update pagination
+                function updatePagination(totalRows) {
+                    paginationElement.innerHTML = "";
+                    const totalPages = Math.ceil(totalRows / rows_per_page);
+            
+                    for (let i = 1; i <= totalPages; i++) {
+                        const button = document.createElement("button");
+                        button.innerText = i;
+                        button.classList.add("page-button");
+                        button.onclick = () => {
+                            current_page = i;
+                            displayRows(current_page);
+                        };
+                        paginationElement.appendChild(button);
+                    }
+                }
+            
+                // Function to sort table
+                function sortTable(columnIndex) {
+                    const rows = Array.from(table.rows).slice(1); // Exclude header
+                    const sortedRows = rows.sort((a, b) => {
+                        const aText = a.cells[columnIndex].innerText.toLowerCase();
+                        const bText = b.cells[columnIndex].innerText.toLowerCase();
+                        return aText.localeCompare(bText);
+                    });
+            
+                    // Append sorted rows back to the table
+                    sortedRows.forEach(row => table.appendChild(row));
+                    displayRows(current_page); // Re-display rows after sorting
+                }
+            
+                // Add click listeners to headers for sorting
+                const headers = table.getElementsByTagName("th");
+                for (let i = 0; i < headers.length; i++) {
+                    headers[i].onclick = () => sortTable(i);
+                }
+            
+                // Initial display
+                displayRows(current_page);
+            </script>
+            
             {% endblock content %}
