@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 
 # from .forms import HomeOwnerForm, ServiceProviderForm, MaterialProviderForm
 
@@ -38,7 +39,7 @@ def category_view(request,category_path):
     users = None
     if not next_categories:
         # users = User.objects.filter(category=category).filter(payment_status='Success')
-        users = User.objects.filter(category=category)
+        users = User.objects.filter(is_active=True,payment_status='Success').filter(category=category)
         
         
     return render(request, 'client/category.html', {'users':users,'category': category, 'nav_list':nav_list ,'title':category.name,'next_categories':next_categories})
@@ -96,9 +97,10 @@ def register(request):
         confirm_password = request.POST.get('confirm_password')
         if password == confirm_password:
             user = User.objects.get(email=email)
+            if first_name and last_name :
+                user.first_name = first_name
+                user.last_name = last_name
             user.username = email
-            user.first_name = first_name
-            user.last_name = last_name
             user.mobile = mobile
             user.is_active = True
             user.payment_status = 'Success'
@@ -108,8 +110,10 @@ def register(request):
             user.save()
             
             Send_Welcome_email(user.email)
+            messages.success(request, 'Your account has been created successfully.')
             return redirect('login')
         else:
+            messages.error(request, 'Password and confirm password does not match.')
             return redirect('register')
     try:
         print(request.session['email'],"!!!!!")
@@ -270,8 +274,8 @@ def profile(request):
                 messages.success(request, 'Profile updated successfully')
                 return redirect(request.META.get('HTTP_REFERER', '/home'))
         
-        categories = Category.objects.all()
-        return render(request, 'client/material-service-profile.html',{'title':'Profile','categories':categories})
+        end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
+        return render(request, 'client/material-service-profile.html',{'title':'Profile','categories':end_nodes})
 
 
 
@@ -419,11 +423,11 @@ def submit_service_provider(request):
 
 
     # Get all categories and recursively filter those whose root ancestor is 'Services'
-    all_categories = Category.objects.all()
+    end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
 
 
     
-    return render(request, 'client/service-provider.html',{'categories':all_categories} )
+    return render(request, 'client/service-provider.html',{'categories':end_nodes} )
 
 def submit_material_provider(request):
   
@@ -512,8 +516,8 @@ def submit_material_provider(request):
             })
 
     # Build the tree hierarchy for the filtered categories
-    category_hierarchy = get_category_hierarchy(categories)
-    return render(request, 'client/material_provider_form.html',{'categories':category_hierarchy,'title':'Material Provider'} )
+    end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
+    return render(request, 'client/material_provider_form.html',{'categories':end_nodes,'title':'Material Provider'} )
 
 
 
