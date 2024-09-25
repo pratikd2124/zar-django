@@ -7,14 +7,25 @@ LOG_DIR = '/home/ubuntu/zar-django/logs/user_activity'  # Update with your log f
 
 def parse_log_file(filepath):
     activity_data = []
-    
+    image_extensions = ('.jpg', '.png', '.webp', '.jpeg' ,'.ico','.pdf','.jfif')  # Extensions to exclude
+    admin_paths = ['/admin', '/dashboard', '/splash','/profiletype']  # Admin and dashboard paths to exclude
+
     with open(filepath, 'r') as file:
         for line in file:
             try:
                 log_info = ast.literal_eval(line.strip())  # Parse the log line safely
+                page_visited = log_info['path']
+
+                # Skip logs that end with image file extensions
+                if page_visited.lower().endswith(image_extensions):
+                    continue
+
+                # Skip logs related to admin or dashboard
+                if any(admin_path in page_visited for admin_path in admin_paths):
+                    continue
+
                 timestamp = datetime.fromisoformat(log_info['time_visited'])
                 user_id = log_info['user']
-                page_visited = log_info['path']
                 country = log_info.get('country', 'Unknown')  # Get country info if present
                 activity_data.append({
                     'user': user_id,
@@ -26,6 +37,7 @@ def parse_log_file(filepath):
                 print(f"Error parsing line in file {filepath}: {line.strip()} - {e}")
                 continue
     return activity_data
+
 
 def get_all_user_activity_logs():
     all_logs = []
