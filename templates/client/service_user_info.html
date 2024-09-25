@@ -150,14 +150,16 @@
             <div class="columns-1 gap-8 md:columns-2 space-y-4 [&>img:not(:first-child)]:mt-6">
                 {% if images %}
                     {% for image in images %}
-                        <div>
+                        <div class="">
                             <img src="/media/{{ image.image }}" alt="Collage {{ forloop.counter }}" class="h-full w-full m-4 transition duration-200 rounded-lg hover:scale-[102%]">
                         </div>
+                        
                     {% endfor %}
                 {% else %}
                     <p>No images available</p>
                 {% endif %}
             </div>
+            
         </div>
     </div>
 <!-- Modal Structure -->
@@ -213,8 +215,8 @@
         {% endif %}
     </div>
 </div>
-
-<div id="sidebar" class="fixed left-0 top-0 h-screen w-80 bg-[#171717] text-white transform -translate-x-full transition-transform duration-300 z-50">
+<div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden z-40"></div>
+<div id="sidebar" class="fixed right-0 top-0 h-screen w-80 bg-[#171717] text-white transform translate-x-full transition-transform duration-300 z-50">
     <!-- Sidebar content here -->
     <div class="p-4 my-8">
         <!-- Modal Content -->
@@ -232,7 +234,7 @@
         {% endif %}
         <div class="mb-4">
             <label class="block ">Contact Person:</label>
-            <p class="text-gray-200">{{ user.first_name }} {{ user.first_name }}</p>
+            <p class="text-gray-200">{{ user.first_name }} {{ user.last_name }}</p>
         </div>
         <div class="mb-4">
             <label class="block ">Contact Number:</label>
@@ -262,11 +264,18 @@
 <script>
     function openSidebar() {
         const sidebar = document.getElementById("sidebar");
-        sidebar.classList.toggle("-translate-x-full");
+        sidebar.classList.toggle("translate-x-full");
+
+        const overlay = document.getElementById("overlay");
+        overlay.classList.remove("hidden"); // Show the overlay
+
     }
     function closeSidebar() {
         const sidebar = document.getElementById("sidebar");
-        sidebar.classList.toggle("-translate-x-full");
+        sidebar.classList.toggle("translate-x-full");
+
+        const overlay = document.getElementById("overlay");
+        overlay.classList.add("hidden"); // Hide the overlay
     }
 
     // Function to open the modal
