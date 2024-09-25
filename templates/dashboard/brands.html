@@ -46,6 +46,7 @@
                                                     <th>Category Hierarchy</th>
                                                     <th>Contact Person</th>
                                                     <th>Contact Number</th>
+                                                    <th>Impressions</th>
                                                     <th>Email</th>
                                                     <th>State</th>
                                                     <th>City</th>
@@ -68,6 +69,7 @@
                                                     <td>{{ cat.category.get_category_hierarchy }}</td>
                                                     <td>{{ cat.contact_person }}</td>
                                                     <td>{{ cat.mobile }}</td>
+                                                    <td>{{ cat.impress_brand.all.count }}</td>
                                                     <td>{{ cat.email }}</td>
                                                     <td>{{ cat.state }}</td>
                                                     <td>{{ cat.city }}</td>

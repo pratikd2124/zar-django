@@ -269,6 +269,38 @@
         const overlay = document.getElementById("overlay");
         overlay.classList.remove("hidden"); // Show the overlay
 
+
+        var brandId = {{user.uid}}; // Replace with the actual brand ID you want to send
+
+        // Function to send the impression using GET
+        function sendImpression(brandId) {
+            // Construct the URL for the API endpoint, including query parameters
+            var url = `/connect-impression/${brandId}`;
+        
+            // Sending a GET request to the Django view
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status) {
+                    console.log('Impression sent successfully!');
+                } else {
+                    console.log('Failed to send impression.');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+        
+        // Call the function with the desired brand ID
+        sendImpression(brandId);  
+
+
     }
     function closeSidebar() {
         const sidebar = document.getElementById("sidebar");

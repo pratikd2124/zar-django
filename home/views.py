@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from main_app.models import Community, User, SupportTickets,ProfileGallery
+from main_app.models import Community, User, SupportTickets,ProfileGallery,ConnectImpress
 from .models import Category,PagesData
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -15,6 +15,10 @@ import json
 
 @login_required(login_url='login')
 def dashboard(request):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
+    
     categories = Category.objects.all()
     users = User.objects.all().exclude(is_superuser=True, is_staff=True)
     
@@ -50,6 +54,9 @@ def dashboard(request):
 
 @login_required(login_url='login')
 def all_users(request):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
     
     if request.GET.get('action') == 'delete':
         id = request.GET.get('id')
@@ -85,7 +92,7 @@ def all_users(request):
         users = users.filter(type__in= ['Home Owner', 'Community User', 'Service Provider'])
         member_type = 'all'
         
-        
+    
         
         
     return render(request,'dashboard/all-users.html',{'title':'User List','users':users,'member_type':member_type})
@@ -149,6 +156,10 @@ def all_community(request):
 
 @login_required(login_url='login')
 def all_category(request):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
+    
     categories = Category.objects.order_by('-id').all()
     
     if request.method == 'POST':
@@ -194,6 +205,10 @@ def all_category(request):
 
 @login_required(login_url='login')
 def all_brand(request):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
+    
     brands = User.objects.order_by('-id').filter(type='Material Provider')
     categories = Category.objects.all()
     
@@ -222,8 +237,12 @@ def all_brand(request):
     return render(request,'dashboard/brands.html',{'title':'Brand','brands':brands,'categories':categories})
 
 
-
+@login_required(login_url='login')
 def send_passcode(request):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
+    
     if request.method =='POST':
         uid =request.POST.get('user_id')
         user = User.objects.get(uid=uid)
@@ -244,7 +263,12 @@ def send_passcode(request):
     return redirect(request.META.get('HTTP_REFERER', '/dashboard'))
 
 
+@login_required(login_url='login')
 def edit_pages(request):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
+    
     page = request.GET.get('page')
     page_data = PagesData.objects.first()
     if request.method == 'POST':
@@ -264,7 +288,12 @@ def edit_pages(request):
     return render(request,'dashboard/edit_pages.html',{'title':'Edit Data','page':page,'page_data':page_data})
 
 
+@login_required(login_url='login')
 def support_ticket(request):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
+    
     tickets = SupportTickets.objects.all()
     if request.method == 'POST':
         if request.POST.get('type') == 'reply':
@@ -297,7 +326,13 @@ def support_ticket(request):
     return render(request,'dashboard/support-ticket.html',{'title':'Support Ticket','tickets':tickets})
 
 
+
+@login_required(login_url='login')
 def update_brand(request,id):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
+    
     brand = User.objects.get(uid=id)
     end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
     
@@ -368,8 +403,11 @@ def update_brand(request,id):
 
 
 
-
+@login_required(login_url='login')
 def update_service(request,id):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
     brand = User.objects.get(uid=id)
     end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
     
@@ -429,8 +467,12 @@ def update_service(request,id):
     return render(request,'dashboard/update-service.html',{'title':'Update Brand','brand':brand,'categories':end_nodes})
 
 
-
+@login_required(login_url='login')
 def update_gallery(request,id):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
+    
     user = User.objects.get(uid=id)
     gallery = ProfileGallery.objects.filter(user = user)
     
@@ -463,8 +505,11 @@ def update_gallery(request,id):
 
 
 
-
+@login_required(login_url='login')
 def update_user_info(request,id):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
     user = User.objects.get(uid=id)
 
     if request.method == 'POST':
@@ -483,7 +528,11 @@ def update_user_info(request,id):
 
 
 from main_app.models import ContactPageDetails
+@login_required(login_url='login')
 def contact_page(request):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
     if request.method == 'POST':
         email = request.POST.get('email')
         contact_number = request.POST.get('mobile')

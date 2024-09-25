@@ -679,9 +679,11 @@ from main_app.models import ConnectImpress
 
 def connect_impression(request, brand_id):
     try:
+        if ConnectImpress.objects.filter(user = request.user,brand = User.objects.get(uid=brand_id)).exists():
+            return JsonResponse({'status':True})
+        
         impression = ConnectImpress.objects.create(user = request.user,
-                                                brand = User.objects.get(uid=brand_id),
-                                                )
+                                                brand = User.objects.get(uid=brand_id),   )
         impression.save()
     except:
         pass
