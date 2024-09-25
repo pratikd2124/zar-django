@@ -20,7 +20,7 @@
 
  </style>
  <div class="font-card-title bg-gray-100/10 text-xs md:text-sm tracking-wider border-b border-gray-600/10 text-white py-4">
-    <div class="max-w-7xl mx-auto flex space-x-2 lg:space-x-6">
+    <div class="px-[5.8rem]  flex space-x-2 lg:space-x-6">
         <a href="{% url 'home' %}"> Home</a> <span>/</span>
 
         {% for i in nav_list %}
@@ -41,7 +41,9 @@
         <div class="col-span-10 w-full flex min-h-screen">
             <div class="w-3/5">
                 <section class="bg-white p-1 px-12 w-full">
-                    <img src="/media/{{ user.brand_logo }}" alt="brand-logo" class="h-20">
+                    
+                    <img src="/media/{{ user.brand_logo }}" alt="brand-logo" class=" h-24">
+                    
                 </section>
                 <div id="content-brand" class="font-card-title px-12 py-6 text-sm text-gray-300">
                     <h2 class="gloock-regular text-2xl py-6">About {{ user.first_name }} {{user.last_name}}</h2>

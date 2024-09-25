@@ -36,7 +36,37 @@
         font-weight: 300;
         font-style: normal;
       }
-      
+      /* Toastify custom classes */
+.toast-debug {
+    background: #e0e0e0;
+    color: #333;
+    border-left: 4px solid #999;
+}
+
+.toast-info {
+    background: #d0e8ff;
+    color: #007bff;
+    border-left: 4px solid #007bff;
+}
+
+.toast-success {
+    background: #d4edda;
+    color: #28a745;
+    border-left: 4px solid #28a745;
+}
+
+.toast-warning {
+    background: #fff3cd;
+    color: #856404;
+    border-left: 4px solid #856404;
+}
+
+.toast-error {
+    background: #f8d7da;
+    color: #dc3545;
+    border-left: 4px solid #dc3545;
+}
+
 </style>
 <body class="bg-[#0a0a0a] text-white">
 
@@ -153,16 +183,8 @@
             close: true,           // Show close button
             gravity: "top",        // Position of the toast ('top' or 'bottom')
             position: "center",    // Position of the toast ('left', 'center', or 'right')
-            style: {
-                background: "black", // Set background to black or dark color
-                color: "white",      // Text color for better visibility
-                fontSize: "20px",    // Increase the font size
-                padding: "15px 30px",// Adjust padding for larger size
-                borderRadius: "8px", // Add rounded corners for better look
-                width: "fit-content",// Make width fit content
-                textAlign: "center"  // Center align the text
-                
-            }
+            className: "{{message.tags}}",
+
         }).showToast();
     {% endfor %}
 {% endif %}
