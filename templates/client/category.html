@@ -33,7 +33,7 @@
         <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-80 h-80 mx-auto cursor-pointer group" onclick="handleCardClick()">
             <a href="{% url 'category_view' i.get_category_hierarchy %}?id={{i.id}}">
             <img src="{% if i.image %}
-{{i.image.url|default_if_none:''}} {% endif %}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+                {{i.image.url|default_if_none:''}} {% endif %}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
             <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
             <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>
             <div class='absolute z-10 top-5 right-5'>
@@ -61,7 +61,11 @@
         <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-[18rem] h-[24rem] mx-auto cursor-pointer group" onclick="handleCardClick()">
             <a href="{% url 'user_info' i.category.get_category_hierarchy i.uid %}">
             <img src="{% if i.profile_pic %}
+<<<<<<< HEAD
+                    {{i.profile_pic.url|default:''}} {% endif %}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+=======
                 {{i.profile_pic.url|default:''}} {% endif %}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+>>>>>>> 0015d34a187d5645012f82968630547d5dc212b1
             <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
             <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>
             <div class='absolute z-10 top-5 right-5'>

@@ -56,12 +56,13 @@
         </div>
         <div class="relative col-span-2 min-h-screen w-full">
             <div class="my-6 p-4 mx-auto w-full text-center">
-                <a download href="{% if user.profile_doc %}{{user.profile_doc.url}}{% endif %}" class="py-2.5 px-6 border inline-flex items-center rounded-lg text-xs text-white gap-2 hover:bg-white hover:text-black font-card-title">
+                {% if user.profile_doc %}  <a download href="{{user.profile_doc.url}}" class="py-2.5 px-6 border inline-flex items-center rounded-lg text-xs text-white gap-2 hover:bg-white hover:text-black font-card-title">
                     Download Profile
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                     </svg>
                 </a>
+                {% endif %} 
                 <div class="flex gap-4 justify-center mx-auto py-4">
                     <a href="{{social_links.facebook}}" target="_blank" class="text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
@@ -108,12 +109,13 @@
             </p>
         </div>
         <div class="lg:hidden z-50 fixed bg-[#171717] bottom-0 p-8 pb-4 w-full mx-auto text-center font-card-title space-y-4">
-            <a download href="{% if user.profile_doc %}{{user.profile_doc.url|default:''}}{% endif %}" class="py-2.5 px-6 w-full justify-center border inline-flex items-center rounded-lg text-xs text-white gap-2 hover:bg-white hover:text-black font-card-title">
+            {% if user.profile_doc %}   <a  download href="{{user.profile_doc.url}}"class="py-2.5 px-6 w-full justify-center border inline-flex items-center rounded-lg text-xs text-white gap-2 hover:bg-white hover:text-black font-card-title">
                 Download Profile
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
             </a>
+            {% endif %} 
             <button class="bg-[#86198f] w-full px-6 py-3 text-xs rounded-lg" onclick="openSidebar()"> 
                 Connect
             </button>

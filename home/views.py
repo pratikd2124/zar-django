@@ -480,3 +480,36 @@ def update_user_info(request,id):
         messages.success(request, 'Information updated successfully.')
         return redirect(request.META.get('HTTP_REFERER'))
     return render(request,'dashboard/user-edit.html',{'title':'Update User Info','user':user})
+
+
+from main_app.models import ContactPageDetails
+def contact_page(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        contact_number = request.POST.get('mobile')
+        address = request.POST.get('address')
+        twitter = request.POST.get('twitter')
+        facebook = request.POST.get('facebook')
+        instagram = request.POST.get('instagram')
+        linkedin = request.POST.get('linkedin')
+        contact = ContactPageDetails.objects.first()
+        if contact:
+            contact.email = email
+            contact.phone = contact_number
+            contact.address = address
+            contact.facebook = facebook
+            contact.twitter = twitter
+            contact.instagram = instagram
+            contact.linkedin = linkedin
+            contact.save()
+        else:
+            contact = ContactPageDetails.objects.create(email=email,phone=contact_number,address=address,facebook=facebook,twitter=twitter,instagram=instagram,linkedin=linkedin)
+            contact.save()
+            messages.success(request, 'Information updated successfully.')
+            return redirect(request.META.get('HTTP_REFERER'))
+        messages.success(request, 'Message sent successfully.')
+        return redirect(request.META.get('HTTP_REFERER'))
+    
+    
+    contact = ContactPageDetails.objects.first()
+    return render(request,'dashboard/contact-page.html',{'title':'Contact Page','contact':contact})

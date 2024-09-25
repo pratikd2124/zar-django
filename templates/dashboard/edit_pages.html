@@ -23,7 +23,7 @@
                                         
                                         <form action="{% url 'edit_pages'  %}?page={{page}}" method="POST">
                                             {% csrf_token %}
-                                            <textarea name="data" id="editor">
+                                            <textarea  id="editor" name="data">
                                                 
                                                 {% if page == 'Guide' %}
                                                 {{page_data.guide | safe}}
@@ -50,9 +50,11 @@
                         </div>
                     </div>
                 </div>
+                <script src="https://cdn.ckeditor.com/4.24.0-lts/standard/ckeditor.js"></script>
+
                 <script>
                     // Make sure CKEditor is initialized after the DOM has loaded
-                        CKEDITOR.replace('editor');
+                    CKEDITOR.replace( 'editor' );
                     
                 </script>
 {% endblock content %}

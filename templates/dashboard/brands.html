@@ -101,6 +101,11 @@
                                                                       </a>
                                                                   </li>
                                                               {% endif %}
+                                                              <li>
+                                                                <a href="{% url 'brand_info' cat.category.get_category_hierarchy cat.uid %}" target="_blank">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
                                                             <li>
                                                                 <a href="{% url 'edit_brand' cat.uid %}">
                                                                     <i class="ri-pencil-line"></i>

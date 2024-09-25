@@ -19,4 +19,6 @@ urlpatterns = [
     path('edit-service-provide/<int:id>',views.update_service,name='update_service'),
     path('edit-gallery/<int:id>',views.update_gallery,name='update_gallery'),
     path('edit-user-info/<int:id>',views.update_user_info,name='update_user_info'),
+    
+    path('contact_page',views.contact_page,name='contact_page'),
 ]   

@@ -87,29 +87,62 @@
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235.61594262759408!2d72.89252623915675!3d19.114012425788367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9b146e24c39%3A0x41f89e4d5f4217de!2sCommunity%20Coworks%20(Boomerang)!5e0!3m2!1sen!2sin!4v1723562765868!5m2!1sen!2sin" style="border:0; border-radius:10px;" width="100%" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div class="md:w-1/2 divide-y divide-gray-700">
+                        
+                        {% if details.address %}
+                            
+                        
                         <div class="mb-4 p-4">
                             <h3 class="text-lg font-semibold mb-2 gloock-regular">Address:</h3>
-                            <p>Address: A007, Boomerang, Chandivali, Mumbai 400 072, India</p>
+                            <p>{{details.address}}</p>
                         </div>
-                        <div class="mb-4 p-4">
-                            <h3 class="text-lg font-semibold mb-2 gloock-regular">Our Office Hours</h3>
-                            <p>Monday to Friday: 9:00 AM - 6:00 PM (IST)</p>
-                        </div>
+                        {% endif %}
+                        
+                        
+                        {% if details.phone %}
+                            
+                        
                         <div class="mb-4 p-4">
                             <h3 class="text-lg font-semibold mb-2 gloock-regular">Call Us</h3>
-                            <p>8828452971 / 7900192533</p>
+                            <p>{{details.phone}}</p>
                         </div>
+                        {% endif %}
+
+                        
+                        {% if details.email %}
+                            
+                        
                         <div class="mb-4 p-4">
                             <h3 class="text-lg font-semibold mb-2 gloock-regular">Email</h3>
-                            <p>info@zarluxury.com</p>
+                            <p> {{details.email}} </p>
                         </div>
+                        {% endif %}
                         <div class="mb-4 p-4">
                             <h3 class="text-lg font-semibold mb-2 gloock-regular">Social Media</h3>
                             <div class="flex space-x-4">
-                                <a href="https://facebook.com" target="_blank" class="fa fa-facebook text-gray-400 hover:text-white"></a>
-                                <a href="https://twitter.com" target="_blank" class="fa fa-twitter text-gray-400 hover:text-white"></a>
-                                <a href="https://instagram.com" target="_blank" class="fa fa-instagram text-gray-400 hover:text-white"></a>
-                                <a href="https://linkedin.com" target="_blank" class="fa fa-linkedin text-gray-400 hover:text-white"></a>
+                                
+                                {% if details.facebook %}
+                                <a href="{{details.facebook}}" target="_blank" class="fa fa-facebook text-gray-400 hover:text-white"></a>
+                                    
+                                {% endif %}
+                                    
+                                    {% if details.twitter %}
+                                    <a href="{{details.twitter}}" target="_blank" class="fa fa-twitter text-gray-400 hover:text-white"></a>
+                                        
+                                    {% endif %}
+                                    
+                                
+                                {% if details.instagram %}
+                                    
+                                
+                                <a href="{{details.instagram}}" target="_blank" class="fa fa-instagram text-gray-400 hover:text-white"></a>
+                                
+                                {% endif %}
+                                
+                                {% if details.linkedin %}
+                                    
+                                
+                                <a href="{{details.linkedin}}" target="_blank" class="fa fa-linkedin text-gray-400 hover:text-white"></a>
+                                {% endif %}
 
                                 {% comment %} <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
                                 <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
