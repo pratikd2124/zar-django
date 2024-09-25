@@ -109,4 +109,15 @@ class SupportTickets(models.Model):
     
     
     
-
+class ContactPageDetails(models.Model):
+    email = models.CharField(max_length=500,blank=True, null=True)
+    phone = models.CharField(max_length=100,blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    facebook = models.CharField(max_length=100,blank=True, null=True)
+    instagram = models.CharField(max_length=100,blank=True, null=True)
+    linkedin = models.CharField(max_length=100,blank=True, null=True)
+    twitter = models.CharField(max_length=100,blank=True, null=True)
+    
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

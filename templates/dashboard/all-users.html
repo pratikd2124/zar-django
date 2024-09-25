@@ -138,6 +138,11 @@
                                                                     <i class="ri-pencil-line"></i>
                                                                 </a>
                                                             </li>
+                                                            <li>
+                                                                <a href="{% url 'user_info' user.category.get_category_hierarchy user.uid %}" target="_blank">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
                                                             {% endif %}
 
                                                             {% if user.type == 'Home Owner' or user.type == 'Community User' %}

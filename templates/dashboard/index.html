@@ -1,6 +1,22 @@
 {% extends 'dashboard/template.html' %}
 {% block content %}
-
+<style>
+    .chartWrapper {
+        position: relative;
+      }
+      
+      .chartWrapper > canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+      }
+      
+      .chartAreaWrapper {
+        height: 1500px;
+        overflow-y: scroll;
+      }
+</style>
             <!-- index body start -->
             <div class="page-body">
                 <div class="container-fluid">
@@ -80,23 +96,33 @@
                             </div>
                         </div>
 
-                        
+                        <div class="col-xl-4 mb-2">
+                            
+                        </div>
 
                      <!-- Recent orders start-->
                      <div class="col-xl-12">
                         <div class="card o-hidden card-hover">
                             <div class="card-header card-header-top card-header--2 px-0 pt-0">
-                                <div class="card-header-title">
-                                    <h4>Category Visits Chart</h4>
+                                <div class="card-header-title d-flex" style="align-items: center;">
+                                    <h4 >Category Visits Chart</h4>
+                                    <button type="button" class="btn btn-primary" onclick="window.location.reload()" >Reset</button>
                                 </div>
-
-                               
+                                
+                                <!-- Filter buttons -->
+                                <div class="btn-group" role="group" aria-label="Sort Buttons">
+                                    <button id="top10" class="btn btn-primary">Top 10</button>
+                                    <button id="top20" class="btn btn-primary">Top 20</button>
+                                    <button id="top30" class="btn btn-primary">Top 30</button>
+                                    <button id="low10" class="btn btn-secondary">Lowest 10</button>
+                                    <button id="low20" class="btn btn-secondary">Lowest 20</button>
+                                    <button id="low30" class="btn btn-secondary">Lowest 30</button>
+                                </div>
                             </div>
-
-                            <div class="card-body p-0">
-                                <div id="report">
-                                    <canvas id="categoryVisitsChart" style="width:100%;max-width:"></canvas>
-
+                    
+                            <div class="card-body p-0 chartWrapper">
+                                <div id="report" class="chartAreaWrapper"> <!-- Scrollable Container -->
+                                    <canvas id="categoryVisitsChart" height="1500" width="100"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -187,7 +213,6 @@
                 console.log({{ category_wise_visited_users_count|safe }});
             
                 const lastWeekActiveUsers = JSON.parse('{{ last_week_active_users_list|safe }}');
-                const category_wise_visited_users_count = JSON.parse('{{ category_wise_visited_users_count|safe }}');
                 const monthly_active_users = JSON.parse('{{ monthly_active_users|safe }}');
                 const country_wise_users_count = JSON.parse('{{ country_wise_users_count|safe }}');
             
@@ -215,18 +240,8 @@
                     }]
                 };
             
-                // Category Visits Data (for horizontal bar chart)
-                const categoryVisitsData = {
-                    labels: Object.keys(category_wise_visited_users_count),  // Labels on Y-axis
-                    datasets: [{
-                        label: 'Visits',
-                        data: Object.values(category_wise_visited_users_count),  // Data on X-axis
-                        backgroundColor: 'rgba(255, 159, 64, 0.6)',
-                        borderColor: 'rgba(255, 159, 64, 1)',
-                        borderWidth: 1
-                    }]
-                };
-                // Category Visits Data (for horizontal bar chart)
+
+
                 const catcountryData = {
                     labels: Object.keys(country_wise_users_count),  // Labels on Y-axis
                     datasets: [{
@@ -238,7 +253,6 @@
                     }]
                 };
             
-                // Function to create charts
                 function createChart(ctx, data, title, isHorizontal = false) {
                     new Chart(ctx, {
                         type: 'bar',
@@ -246,6 +260,7 @@
                         options: {
                             indexAxis: isHorizontal ? 'y' : 'x',  // Switch to horizontal if necessary
                             responsive: true,
+                            maintainAspectRatio: true,  // Allow chart height to adjust dynamically
                             scales: {
                                 x: {
                                     beginAtZero: true
@@ -272,22 +287,142 @@
             
                 // Initialize charts on window load
                 window.onload = function() {
+
                     const weeklyCtx = document.getElementById('weeklyActiveUsersChart').getContext('2d');
                     createChart(weeklyCtx, weeklyActiveData, 'Weekly Active Users');
             
                     const monthlyCtx = document.getElementById('monthlyActiveUsersChart').getContext('2d');
                     createChart(monthlyCtx, monthlyActiveData, 'Monthly Active Users');
             
-                    const categoryCtx = document.getElementById('categoryVisitsChart').getContext('2d');
-                    createChart(categoryCtx, categoryVisitsData, 'Category Visits', true);  // Pass 'true' to make it horizontal
-
-
+                    
                     const countryCtx = document.getElementById('countryWise').getContext('2d');
                     createChart(countryCtx, catcountryData, 'Country Wise Users', true);  // Pass 'true' to make it horizontal
                 };
             
             </script>
             
+
+            
+<script>
+    // Simulating the data (you already have this as a Django template variable)
+    let categoryWiseVisitedUsersCount = JSON.parse('{{ category_wise_visited_users_count|safe }}');
+
+    // Function to update chart with filtered data
+    function updateChart(chart, labels, dataValues) {
+        chart.data.labels = labels;
+        chart.data.datasets[0].data = dataValues;
+        chart.update();
+    }
+
+    // Function to sort and filter data based on selection
+    function filterData(order, count) {
+        const entries = Object.entries(categoryWiseVisitedUsersCount);
+
+        if (order === 'highest') {
+            entries.sort((a, b) => b[1] - a[1]); // Sort descending
+        } else if (order === 'lowest') {
+            entries.sort((a, b) => a[1] - b[1]); // Sort ascending
+        }
+
+        const filteredEntries = entries.slice(0, count); // Get top/bottom 'count' items
+        return {
+            labels: filteredEntries.map(entry => entry[0]), // Category paths
+            data: filteredEntries.map(entry => entry[1])    // Visit counts
+        };
+    }
+
+    // Initial data for chart (full data by default)
+    const initialData = filterData('highest', Object.keys(categoryWiseVisitedUsersCount).length);
+    const ctx = document.getElementById('categoryVisitsChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: initialData.labels,
+            datasets: [{
+                label: 'Number of Visits',
+                data: initialData.data,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        autoSkip: false,
+                        font: {
+                            size: function(context) {
+                                const numLabels = initialData.labels.length;
+                                return numLabels > 10 ? 10 : 14;
+                            }
+                        }
+                    }
+                },
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Visits'
+                    }
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+            layout: {
+                padding: {
+                    top: 20,
+                    bottom: 20,
+                    left: 20,
+                    right: 20
+                }
+            }
+        }
+    });
+
+    // Event listeners for buttons
+    document.getElementById('top10').addEventListener('click', function () {
+        const sortedData = filterData('highest', 10);
+        updateChart(chart, sortedData.labels, sortedData.data);
+    });
+
+    document.getElementById('top20').addEventListener('click', function () {
+        const sortedData = filterData('highest', 20);
+        updateChart(chart, sortedData.labels, sortedData.data);
+    });
+
+    document.getElementById('top30').addEventListener('click', function () {
+        const sortedData = filterData('highest', 30);
+        updateChart(chart, sortedData.labels, sortedData.data);
+    });
+
+    document.getElementById('low10').addEventListener('click', function () {
+        const sortedData = filterData('lowest', 10);
+        updateChart(chart, sortedData.labels, sortedData.data);
+    });
+
+    document.getElementById('low20').addEventListener('click', function () {
+        const sortedData = filterData('lowest', 20);
+        updateChart(chart, sortedData.labels, sortedData.data);
+    });
+
+    document.getElementById('low30').addEventListener('click', function () {
+        const sortedData = filterData('lowest', 30);
+        updateChart(chart, sortedData.labels, sortedData.data);
+    });
+</script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
             {% endblock content %}
