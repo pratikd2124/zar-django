@@ -107,6 +107,8 @@ def register(request):
             user.set_password(password)
             if request.session['type'] == 'New':
                 user.type = 'Community User'
+
+                
             user.save()
             
             Send_Welcome_email(user.email)
@@ -116,7 +118,6 @@ def register(request):
             messages.error(request, 'Password and confirm password does not match.')
             return redirect('register')
     try:
-        print(request.session['email'],"!!!!!")
         user = User.objects.get(email=request.session['email'])
     except Exception as e:
         print(e)
@@ -618,3 +619,50 @@ def terms_and_conditions(request):
 def faq(request):
     content = PagesData.objects.first().faq
     return render(request, 'client/custom-pages.html',{'title':'FAQ','content':content})
+
+import random
+
+def reset_password(request):
+    if request.GET.get('action')=='resend_otp':
+        user = User.objects.get(email=request.session['reset_email'])
+        Send_Code_email(user.code,user.email)
+        messages.success(request, 'OTP re-sent successfully!')
+        return redirect('reset_password')
+    
+    
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        
+        if not User.objects.filter(email=email).exists():
+            messages.error(request, 'Email not found. Please enter a valid email address.')
+            return redirect('reset_password')
+        user = User.objects.get(email=email)
+        
+        if request.GET.get('action')=='validate':
+            otp0 = request.POST.get('otp0')
+            otp1 = request.POST.get('otp1')
+            otp2= request.POST.get('otp2')
+            otp3 = request.POST.get('otp3')
+            otp4 = request.POST.get('otp4')
+            otp5 = request.POST.get('otp5')
+            otp = otp0 + otp1 + otp2 + otp3 + otp4 + otp5
+            if str(otp) == str(user.code):
+                user.set_password(request.POST.get('password'))
+                user.save()
+                messages.success(request, 'Password reset successfully!')
+                return redirect('login')
+        
+        
+        if user.is_active:
+            # Generate a reset token and send it to the user's email
+            otp = random.randint(100000, 999999)
+            user.code = otp
+            user.save()
+            Send_Code_email(otp,user)
+            request.session['reset_email'] = email
+            messages.success(request, 'A reset code has been sent to your email.')
+            return redirect('reset_password')
+        else:
+            
+            messages.error(request, 'Sorry, your account is inactive. Please contact support.')
+    return render(request, 'client/reset_password.html')

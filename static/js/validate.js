@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // });
 
     // Update submit button state on input change
-    otpInputs.forEach(input => {
+    Array.from(document.querySelectorAll('input')).forEach(input => {
         input.addEventListener('input', updateSubmitButtonState);
     });
     emailInput.addEventListener('input', updateSubmitButtonState);
