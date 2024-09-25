@@ -1326,6 +1326,7 @@
 {"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T14:56:19.874036+00:00", "country": "India"}
 {"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T14:56:23.115817+00:00", "country": "India"}
 {"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T14:56:26.023497+00:00", "country": "India"}
+<<<<<<< HEAD
 {"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-25T14:58:51.055142+00:00", "country": "India"}
 {"user": "admin@admin.com", "path": "/category/Materials", "time_visited": "2024-09-25T14:58:53.023269+00:00", "country": "India"}
 {"user": "admin@admin.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-25T14:58:55.700026+00:00", "country": "India"}
@@ -1556,3 +1557,296 @@
 {"user": "admin@admin.com", "path": "/contact", "time_visited": "2024-09-25T19:27:59.533183+00:00", "country": "India"}
 {"user": "admin@admin.com", "path": "/dashboard/", "time_visited": "2024-09-25T19:28:21.368748+00:00", "country": "India"}
 {"user": "admin@admin.com", "path": "/dashboard/users", "time_visited": "2024-09-25T19:28:56.009337+00:00", "country": "India"}
+=======
+{"user": "admin@admin.com", "path": "/login", "time_visited": "2024-09-25T15:17:41.101758+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/dashboard/", "time_visited": "2024-09-25T15:17:41.861007+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-25T15:17:48.313000+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/services-img.jpg", "time_visited": "2024-09-25T15:17:48.819989+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/materials-img.jpg", "time_visited": "2024-09-25T15:17:48.795790+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/login", "time_visited": "2024-09-25T15:27:10.645430+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/dashboard/", "time_visited": "2024-09-25T15:27:11.500633+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-25T15:27:15.077815+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T15:27:59.123974+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/int-design.png", "time_visited": "2024-09-25T15:28:00.504355+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/architect.png", "time_visited": "2024-09-25T15:28:00.573597+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/consult.png", "time_visited": "2024-09-25T15:28:00.634262+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:28:02.161320+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/commer.png", "time_visited": "2024-09-25T15:28:02.728024+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/hospi.png", "time_visited": "2024-09-25T15:28:02.721578+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/land.png", "time_visited": "2024-09-25T15:28:02.854991+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/resid.jfif", "time_visited": "2024-09-25T15:28:02.885834+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/retail.jfif", "time_visited": "2024-09-25T15:28:02.889477+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:28:05.709301+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/sanjayb.png", "time_visited": "2024-09-25T15:28:06.681442+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:29:35.757354+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:30:02.582659+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:30:49.800543+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:30:56.478190+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Residential", "time_visited": "2024-09-25T15:31:00.849478+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/RESIZED_ANJALI_RAWAT_PROFILE_PICTURE.png", "time_visited": "2024-09-25T15:31:01.691893+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:31:09.159567+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T15:31:28.644389+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/architect.png", "time_visited": "2024-09-25T15:31:29.321629+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/int-design.png", "time_visited": "2024-09-25T15:31:29.294646+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/consult.png", "time_visited": "2024-09-25T15:31:29.407261+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-25T15:31:32.034971+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/retail_gYiUbrs.jfif", "time_visited": "2024-09-25T15:31:32.804569+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/commer_o0YzmXX.png", "time_visited": "2024-09-25T15:31:32.853838+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/resid_RX5AiSV.jfif", "time_visited": "2024-09-25T15:31:32.868831+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/hospi_t7fn5fg.png", "time_visited": "2024-09-25T15:31:32.857019+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/land_eRvyU0a.png", "time_visited": "2024-09-25T15:31:32.855962+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer/Residential", "time_visited": "2024-09-25T15:32:02.029417+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/WhatsApp_Image_2024-08-07_at_5.12.32_PM_1.jpeg", "time_visited": "2024-09-25T15:32:02.712380+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T15:32:47.997772+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/logo_white_2.jpg", "time_visited": "2024-09-25T15:32:48.903078+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141422.png", "time_visited": "2024-09-25T15:32:48.905456+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141620.png", "time_visited": "2024-09-25T15:32:49.032187+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141647.png", "time_visited": "2024-09-25T15:32:49.051389+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141710.png", "time_visited": "2024-09-25T15:32:49.072905+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141734.png", "time_visited": "2024-09-25T15:32:49.724851+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-25T15:36:57.717082+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/commer_o0YzmXX.png", "time_visited": "2024-09-25T15:36:58.250301+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/hospi_t7fn5fg.png", "time_visited": "2024-09-25T15:36:58.285058+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/retail_gYiUbrs.jfif", "time_visited": "2024-09-25T15:36:58.408203+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/resid_RX5AiSV.jfif", "time_visited": "2024-09-25T15:36:58.352785+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/land_eRvyU0a.png", "time_visited": "2024-09-25T15:36:58.394056+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer/Residential", "time_visited": "2024-09-25T15:37:14.694613+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/WhatsApp_Image_2024-08-07_at_5.12.32_PM_1.jpeg", "time_visited": "2024-09-25T15:37:15.302087+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T15:37:24.873700+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/architect.png", "time_visited": "2024-09-25T15:37:25.522395+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/consult.png", "time_visited": "2024-09-25T15:37:25.540141+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/int-design.png", "time_visited": "2024-09-25T15:37:25.502533+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:37:29.835826+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/hospi.png", "time_visited": "2024-09-25T15:37:30.489433+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/commer.png", "time_visited": "2024-09-25T15:37:30.475031+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/land.png", "time_visited": "2024-09-25T15:37:30.560751+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/resid.jfif", "time_visited": "2024-09-25T15:37:30.596614+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/retail.jfif", "time_visited": "2024-09-25T15:37:30.586910+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:37:34.563409+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/sanjayb.png", "time_visited": "2024-09-25T15:37:35.152515+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:38:21.751751+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:38:55.446678+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:39:05.013730+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:39:59.136436+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:40:12.825348+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Elements_Glass_writeup-Division_Space_-_Sanjay_B.jpg", "time_visited": "2024-09-25T15:40:13.627718+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Two_page_layout_Divispace-Sanjay_Zar.jpg", "time_visited": "2024-09-25T15:40:13.670397+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Architecture_Residential_writeup-_Division_Sapce_-_Sanjay_B.jpg", "time_visited": "2024-09-25T15:40:13.589855+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/Screenshot_2024-08-13_143430.png", "time_visited": "2024-09-25T15:40:13.675816+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:40:45.409057+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:40:59.769163+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:41:57.368126+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:42:18.059616+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:43:11.680401+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:43:59.778193+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:45:04.493621+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:45:15.682238+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-25T15:45:21.764271+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/materials-img.jpg", "time_visited": "2024-09-25T15:45:22.323704+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/services-img.jpg", "time_visited": "2024-09-25T15:45:22.337038+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Materials", "time_visited": "2024-09-25T15:45:27.189363+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/furniture.jpg", "time_visited": "2024-09-25T15:45:27.872448+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/home-decor.png", "time_visited": "2024-09-25T15:45:27.908005+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/flooring.jpg", "time_visited": "2024-09-25T15:45:27.928725+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-25T15:45:33.545392+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/rugs.jpg", "time_visited": "2024-09-25T15:45:34.236985+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Materials/Home decor/Rugs", "time_visited": "2024-09-25T15:45:42.215213+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/higher_Resolution_ib94sCR.png", "time_visited": "2024-09-25T15:45:42.942276+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Materials/Furniture", "time_visited": "2024-09-25T15:45:47.444905+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/internas.jfif", "time_visited": "2024-09-25T15:45:48.049210+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/bespoke.jfif", "time_visited": "2024-09-25T15:45:48.102990+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Materials/Furniture/Bespoke", "time_visited": "2024-09-25T15:45:53.491529+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/Logo.png", "time_visited": "2024-09-25T15:45:54.064394+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/falcon_cloak_design.png", "time_visited": "2024-09-25T15:45:54.133568+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/material-provider/Materials/Furniture/Bespoke/961350", "time_visited": "2024-09-25T15:46:01.131782+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/Screenshot_2024-08-13_160322.png", "time_visited": "2024-09-25T15:46:01.743258+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/FalconCloak_May_24_0214_copy.jpg", "time_visited": "2024-09-25T15:46:01.818202+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/FalconCloak_Dec_23_1054_JRhK5Lz.jpg", "time_visited": "2024-09-25T15:46:01.842447+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/FalconCloak_May_24_0168.jpg", "time_visited": "2024-09-25T15:46:01.906270+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T15:46:22.690277+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-25T15:47:04.420755+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer/Residential", "time_visited": "2024-09-25T15:47:10.270368+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/WhatsApp_Image_2024-08-07_at_5.12.32_PM_1.jpeg", "time_visited": "2024-09-25T15:47:10.875688+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer/Residential", "time_visited": "2024-09-25T15:48:03.955544+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-25T15:48:14.353151+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer/Landscape", "time_visited": "2024-09-25T15:48:19.287630+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T15:48:27.767943+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:48:30.941867+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:48:35.250204+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:48:46.625947+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Residential", "time_visited": "2024-09-25T15:48:53.197918+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/RESIZED_ANJALI_RAWAT_PROFILE_PICTURE.png", "time_visited": "2024-09-25T15:48:53.739254+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:48:59.819354+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/Screenshot_2024-08-13_150248.png", "time_visited": "2024-09-25T15:49:00.562511+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/712A4050.jpg", "time_visited": "2024-09-25T15:49:00.584278+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/IMG_0002.jpg", "time_visited": "2024-09-25T15:49:00.670170+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Copy_of_IMG_3193.JPG", "time_visited": "2024-09-25T15:49:00.600005+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/E_PHX_3897_FS.jpg", "time_visited": "2024-09-25T15:49:00.646025+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:50:38.701647+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Residential", "time_visited": "2024-09-25T15:51:18.255994+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:51:22.374908+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:51:36.981129+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:51:57.543118+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:52:04.363154+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:52:15.825234+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:53:47.799700+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/RESIZED_ANJALI_RAWAT_PROFILE_PICTURE.png", "time_visited": "2024-09-25T15:53:48.429684+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/Screenshot_2024-08-13_150248.png", "time_visited": "2024-09-25T15:53:48.431813+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/IMG_0002.jpg", "time_visited": "2024-09-25T15:53:48.536828+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Copy_of_IMG_3193.JPG", "time_visited": "2024-09-25T15:53:48.530567+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/E_PHX_3897_FS.jpg", "time_visited": "2024-09-25T15:53:48.534647+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/712A4050.jpg", "time_visited": "2024-09-25T15:53:48.504597+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:54:21.361683+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T15:54:26.056657+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:54:28.321595+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:54:36.338701+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:54:49.609477+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:55:13.996749+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:55:27.749142+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:56:43.713846+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:57:07.474080+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:57:20.702752+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:57:29.844210+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:58:00.580102+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:58:15.425853+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:58:32.183122+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:58:39.890356+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T15:58:53.943875+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T15:59:04.610876+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Residential", "time_visited": "2024-09-25T15:59:08.329270+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/RESIZED_ANJALI_RAWAT_PROFILE_PICTURE.png", "time_visited": "2024-09-25T15:59:08.951511+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:59:11.378146+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/Screenshot_2024-08-13_150248.png", "time_visited": "2024-09-25T15:59:11.920333+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/712A4050.jpg", "time_visited": "2024-09-25T15:59:11.956065+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Copy_of_IMG_3193.JPG", "time_visited": "2024-09-25T15:59:11.992514+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/E_PHX_3897_FS.jpg", "time_visited": "2024-09-25T15:59:12.130814+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/IMG_0002.jpg", "time_visited": "2024-09-25T15:59:12.110020+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:59:22.430163+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T15:59:49.445348+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T16:00:02.997165+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-25T16:00:05.792034+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer/Residential", "time_visited": "2024-09-25T16:00:11.156672+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/WhatsApp_Image_2024-08-07_at_5.12.32_PM_1.jpeg", "time_visited": "2024-09-25T16:00:11.743081+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:00:13.966424+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/logo_white_2.jpg", "time_visited": "2024-09-25T16:00:14.523804+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141422.png", "time_visited": "2024-09-25T16:00:14.537380+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141647.png", "time_visited": "2024-09-25T16:00:14.631318+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141710.png", "time_visited": "2024-09-25T16:00:14.668704+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141620.png", "time_visited": "2024-09-25T16:00:14.633938+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141734.png", "time_visited": "2024-09-25T16:00:14.674757+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:00:44.289580+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:02:05.178676+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:02:26.673981+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:02:40.989374+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T16:03:02.679927+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/int-design.png", "time_visited": "2024-09-25T16:03:03.364208+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/architect.png", "time_visited": "2024-09-25T16:03:03.379130+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/consult.png", "time_visited": "2024-09-25T16:03:03.396908+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T16:03:05.986753+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/commer.png", "time_visited": "2024-09-25T16:03:06.686722+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/land.png", "time_visited": "2024-09-25T16:03:06.717385+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/hospi.png", "time_visited": "2024-09-25T16:03:06.719668+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/retail.jfif", "time_visited": "2024-09-25T16:03:06.779712+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/resid.jfif", "time_visited": "2024-09-25T16:03:06.743265+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Landscape", "time_visited": "2024-09-25T16:03:10.205003+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/RESIZED_RAVI_PUNDE_PROFILE_PICTURE.png", "time_visited": "2024-09-25T16:03:11.621584+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Landscape/601610", "time_visited": "2024-09-25T16:03:13.758064+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/Screenshot_2024-08-13_144941.png", "time_visited": "2024-09-25T16:03:14.647302+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_145805.png", "time_visited": "2024-09-25T16:03:14.880761+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_145518.png", "time_visited": "2024-09-25T16:03:14.972769+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_145552.png", "time_visited": "2024-09-25T16:03:15.087253+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_145506.png", "time_visited": "2024-09-25T16:03:15.081427+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_145406.png", "time_visited": "2024-09-25T16:03:15.083930+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Residential", "time_visited": "2024-09-25T16:03:32.578054+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/RESIZED_ANJALI_RAWAT_PROFILE_PICTURE.png", "time_visited": "2024-09-25T16:03:33.118212+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T16:03:35.736067+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/712A4050.jpg", "time_visited": "2024-09-25T16:03:36.353286+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/Screenshot_2024-08-13_150248.png", "time_visited": "2024-09-25T16:03:36.344414+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Copy_of_IMG_3193.JPG", "time_visited": "2024-09-25T16:03:36.409914+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/E_PHX_3897_FS.jpg", "time_visited": "2024-09-25T16:03:36.429059+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/IMG_0002.jpg", "time_visited": "2024-09-25T16:03:36.405074+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T16:04:05.162589+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T16:04:15.023661+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T16:04:42.880653+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-25T16:04:46.149611+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/commer_o0YzmXX.png", "time_visited": "2024-09-25T16:04:46.826933+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/land_eRvyU0a.png", "time_visited": "2024-09-25T16:04:46.859840+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/resid_RX5AiSV.jfif", "time_visited": "2024-09-25T16:04:46.861652+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/hospi_t7fn5fg.png", "time_visited": "2024-09-25T16:04:46.870755+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/category_images/retail_gYiUbrs.jfif", "time_visited": "2024-09-25T16:04:46.871737+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer/Landscape", "time_visited": "2024-09-25T16:04:51.953634+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer/Residential", "time_visited": "2024-09-25T16:04:56.981047+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:05:00.310429+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T16:05:28.308927+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T16:05:32.021889+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T16:05:36.178355+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/sanjayb.png", "time_visited": "2024-09-25T16:05:36.777589+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-25T16:05:38.323983+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/Screenshot_2024-08-13_143430.png", "time_visited": "2024-09-25T16:05:38.894537+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Elements_Glass_writeup-Division_Space_-_Sanjay_B.jpg", "time_visited": "2024-09-25T16:05:40.691392+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Architecture_Residential_writeup-_Division_Sapce_-_Sanjay_B.jpg", "time_visited": "2024-09-25T16:05:38.937288+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Two_page_layout_Divispace-Sanjay_Zar.jpg", "time_visited": "2024-09-25T16:05:40.702495+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Residential", "time_visited": "2024-09-25T16:05:48.667200+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T16:05:51.007821+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/Screenshot_2024-08-13_150248.png", "time_visited": "2024-09-25T16:05:52.938167+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/712A4050.jpg", "time_visited": "2024-09-25T16:05:52.956509+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/E_PHX_3897_FS.jpg", "time_visited": "2024-09-25T16:05:52.984141+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T16:06:12.328639+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T16:06:21.199846+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T16:07:21.590242+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T16:07:25.059744+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T16:07:32.292735+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-25T16:07:35.178054+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer/Residential", "time_visited": "2024-09-25T16:07:38.756991+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/WhatsApp_Image_2024-08-07_at_5.12.32_PM_1.jpeg", "time_visited": "2024-09-25T16:07:39.317165+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:07:41.542524+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/logo_white_2.jpg", "time_visited": "2024-09-25T16:07:42.145646+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141422.png", "time_visited": "2024-09-25T16:07:42.161927+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141710.png", "time_visited": "2024-09-25T16:07:42.256552+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141734.png", "time_visited": "2024-09-25T16:07:42.276109+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141620.png", "time_visited": "2024-09-25T16:07:42.274108+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141647.png", "time_visited": "2024-09-25T16:07:42.225372+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:08:50.374312+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:09:01.305756+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:09:04.823850+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:09:14.736213+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:09:29.907321+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:09:39.798920+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:10:06.335241+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:10:18.219375+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T16:10:48.922633+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T16:10:53.877889+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/category/Services/Architect/Residential", "time_visited": "2024-09-25T16:10:56.970617+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/RESIZED_ANJALI_RAWAT_PROFILE_PICTURE.png", "time_visited": "2024-09-25T16:10:57.484856+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-25T16:10:59.230375+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/712A4050.jpg", "time_visited": "2024-09-25T16:10:59.844224+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Copy_of_IMG_3193.JPG", "time_visited": "2024-09-25T16:10:59.905809+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/E_PHX_3897_FS.jpg", "time_visited": "2024-09-25T16:10:59.921093+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/IMG_0002.jpg", "time_visited": "2024-09-25T16:10:59.939202+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/service-provider/Services/Interior Designer/Residential/999313", "time_visited": "2024-09-25T16:14:18.646510+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_pics/WhatsApp_Image_2024-08-07_at_5.12.32_PM_1.jpeg", "time_visited": "2024-09-25T16:14:19.289378+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/brand_logos/logo_white_2.jpg", "time_visited": "2024-09-25T16:14:19.273335+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141422.png", "time_visited": "2024-09-25T16:14:19.393927+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141647.png", "time_visited": "2024-09-25T16:14:19.397378+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141620.png", "time_visited": "2024-09-25T16:14:19.375655+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141710.png", "time_visited": "2024-09-25T16:14:19.435503+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/media/profile_gallery/Screenshot_2024-08-13_141734.png", "time_visited": "2024-09-25T16:14:19.761197+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/admin/login/", "time_visited": "2024-09-25T16:16:35.294822+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/admin/", "time_visited": "2024-09-25T16:16:35.935392+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/", "time_visited": "2024-09-25T16:16:41.105491+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-25T16:16:43.245245+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/26/change/", "time_visited": "2024-09-25T16:17:29.614614+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-25T16:17:30.242946+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/26/change/", "time_visited": "2024-09-25T16:18:49.213192+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/", "time_visited": "2024-09-25T16:18:49.935735+00:00", "country": "Unknown"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-25T16:18:50.576230+00:00", "country": "Unknown"}
+{"user": "pratikd2124@gmail.com", "path": "/login", "time_visited": "2024-09-25T16:21:33.278317+00:00", "country": "Unknown"}
+{"user": "pratikd2124@gmail.com", "path": "/splash", "time_visited": "2024-09-25T16:21:35.711632+00:00", "country": "Unknown"}
+{"user": "pratikd2124@gmail.com", "path": "/", "time_visited": "2024-09-25T16:21:39.880150+00:00", "country": "Unknown"}
+{"user": "pratikd2124@gmail.com", "path": "/profile", "time_visited": "2024-09-25T16:21:54.835694+00:00", "country": "Unknown"}
+{"user": "pratikd2124@gmail.com", "path": "/media/profile_gallery/create-a-logo-title-for-memes-now-india-for-which--9y_491zzQQK2-Uq-Ff8v_EXX6jlF.jpeg", "time_visited": "2024-09-25T16:21:55.559855+00:00", "country": "Unknown"}
+{"user": "pratikd2124@gmail.com", "path": "/media/profile_pics/new.jpeg", "time_visited": "2024-09-25T16:21:55.539839+00:00", "country": "Unknown"}
+{"user": "pratikd2124@gmail.com", "path": "/media/profile_gallery/create-a-minimalist-dynamic-moden-logo-for-zenrevo-cEVccD-wTBqYCVyiuiLn_yMllhk8.jpeg", "time_visited": "2024-09-25T16:21:55.674099+00:00", "country": "Unknown"}
+{"user": "pratikd2124@gmail.com", "path": "/media/brand_logos/ZAR-icon.png", "time_visited": "2024-09-25T16:21:55.746124+00:00", "country": "Unknown"}
+{"user": "pratikd2124@gmail.com", "path": "/media/profile_gallery/zar-logos-2.png", "time_visited": "2024-09-25T16:21:55.747167+00:00", "country": "Unknown"}
+>>>>>>> 0015d34a187d5645012f82968630547d5dc212b1

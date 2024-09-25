@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="w-full font-card-title bg-gray-100/10 text-xs md:text-sm tracking-wider border-b border-gray-600/10 text-white py-4">
-    <div class="max-w-7xl mx-auto flex space-x-2 lg:space-x-6">
+    <div class="px-[5.6rem]  flex space-x-2 lg:space-x-6">
         <a href="{% url 'home' %}"> Home</a> <span>/</span>
 
         {% for i in nav_list %}
@@ -15,7 +15,7 @@
 </div>
 
 <div class="w-full bg-gray-200/10">
-    <div class="max-w-7xl mx-auto flex md:flex-row flex-col  py-6 flex md:justify-between justify-center items-center">
+    <div class="px-[5.6rem] flex md:flex-row flex-col  py-6 flex md:justify-between justify-center items-center">
         <h2 class="text-3xl gloock-regular  text-white capitalize">{{ category.name }}</h2>
         <p class="font-card-title text-gray-300 mt-2">Experience unparalleled expertise with our bespoke services</p>
     </div>
@@ -58,10 +58,14 @@
             
             
             
-        <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-80 h-80 mx-auto cursor-pointer group" onclick="handleCardClick()">
+        <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-[18rem] h-[24rem] mx-auto cursor-pointer group" onclick="handleCardClick()">
             <a href="{% url 'user_info' i.category.get_category_hierarchy i.uid %}">
             <img src="{% if i.profile_pic %}
+<<<<<<< HEAD
                     {{i.profile_pic.url|default:''}} {% endif %}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+=======
+                {{i.profile_pic.url|default:''}} {% endif %}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+>>>>>>> 0015d34a187d5645012f82968630547d5dc212b1
             <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
             <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>
             <div class='absolute z-10 top-5 right-5'>
