@@ -1326,3 +1326,28 @@
 {"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-25T14:56:19.874036+00:00", "country": "India"}
 {"user": "admin@admin.com", "path": "/category/Services/Architect", "time_visited": "2024-09-25T14:56:23.115817+00:00", "country": "India"}
 {"user": "admin@admin.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-25T14:56:26.023497+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-25T14:58:51.055142+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials", "time_visited": "2024-09-25T14:58:53.023269+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-25T14:58:55.700026+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials/Home decor/Rugs", "time_visited": "2024-09-25T14:58:57.628151+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-25T14:59:05.005919+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials", "time_visited": "2024-09-25T14:59:07.678899+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-25T15:00:25.461082+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/service-provider", "time_visited": "2024-09-25T15:00:33.906409+00:00", "country": "India"}
+{"user": "hrithikhadawale73@gmail.com", "path": "/", "time_visited": "2024-09-25T15:36:45.724739+00:00", "country": "India"}
+{"user": "hrithikhadawale73@gmail.com", "path": "/media/category_images/services-img.jpg", "time_visited": "2024-09-25T15:36:46.290564+00:00", "country": "India"}
+{"user": "hrithikhadawale73@gmail.com", "path": "/media/category_images/materials-img.jpg", "time_visited": "2024-09-25T15:36:46.251534+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/login/", "time_visited": "2024-09-25T15:41:19.994110+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/", "time_visited": "2024-09-25T15:41:20.416824+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/", "time_visited": "2024-09-25T15:41:22.969260+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-25T15:41:23.374301+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/54/change/", "time_visited": "2024-09-25T15:41:27.977553+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-25T15:41:28.662619+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/54/change/", "time_visited": "2024-09-25T15:41:36.169913+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/", "time_visited": "2024-09-25T15:41:36.578244+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-25T15:41:37.027996+00:00", "country": "India"}
+{"user": "hrithikhadawale75@gmail.com", "path": "/login", "time_visited": "2024-09-25T16:04:22.090787+00:00", "country": "India"}
+{"user": "hrithikhadawale75@gmail.com", "path": "/splash", "time_visited": "2024-09-25T16:04:22.534496+00:00", "country": "India"}
+{"user": "hrithikhadawale75@gmail.com", "path": "/", "time_visited": "2024-09-25T16:04:26.252143+00:00", "country": "India"}
+{"user": "hrithikhadawale75@gmail.com", "path": "/media/category_images/services-img.jpg", "time_visited": "2024-09-25T16:04:26.699522+00:00", "country": "India"}
+{"user": "hrithikhadawale75@gmail.com", "path": "/media/category_images/materials-img.jpg", "time_visited": "2024-09-25T16:04:26.693806+00:00", "country": "India"}

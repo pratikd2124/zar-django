@@ -29,4 +29,6 @@ urlpatterns = [
     
     
     path('api/suggestions',views.suggestions,name='suggestions'),
+    
+    path('reset-password',views.reset_password,name='reset_password'),
 ]   
