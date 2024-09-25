@@ -338,7 +338,7 @@ option{
                     <form method="POST" action="{% url 'profile' %}?type=gallery" style="display: flex; flex-direction: column;justify-content: center;" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
-                            <input type="file" name="img" accept="image/**" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer"  id="profileDocInput">
+                            <input type="file" name="img" multiple accept="image/**" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer"  id="profileDocInput">
                                 
                         </div>
                         <button type="submit" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" >Save </button>
