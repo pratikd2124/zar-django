@@ -249,7 +249,6 @@ def profile(request):
                     'instagram':instagram,
                     'linkedin':linkedin,
                 }
-                print("@@@@@@@@@@@@@@@",profilepic)
                 
                 if profilepic:
                     user.profile_pic = profilepic
@@ -266,12 +265,12 @@ def profile(request):
                 if user.profile_gallery.count() >= 10:
                     messages.error(request, 'You have reached the maximum limit of 10 images.')
                     return redirect(request.META.get('HTTP_REFERER', '/home'))
-                gallery_images = request.FILES.get('img')
-                
-                img = ProfileGallery.objects.create(image=gallery_images)
-                img.save()
-                user.profile_gallery.add(img)
-                user.save()
+                gallery_images = request.FILES.getlist('img')
+                for gallery_image in gallery_images:
+                    img = ProfileGallery.objects.create(image=gallery_image)
+                    img.save()
+                    user.profile_gallery.add(img)
+                    user.save()
                 messages.success(request, 'Profile updated successfully')
                 return redirect(request.META.get('HTTP_REFERER', '/home'))
         
@@ -574,7 +573,7 @@ def suggestions(request):
         )]
 
         # Fetch services matching the query
-        services = [{'name':service.brand_name,'id':service.uid,'category':service.category.name} for service in User.objects.filter(type="Service Provider").filter(
+        services = [{'name':(service.first_name +' '+service.last_name)  ,'id':service.uid,'category':service.category.name} for service in User.objects.filter(type="Service Provider").filter(
             Q(first_name__icontains=query) | 
             Q(last_name__icontains=query) | 
             Q(firm_name__icontains=query) | 
@@ -675,3 +674,15 @@ def reset_password(request):
         messages.error(request, 'Sorry, your account is inactive. Please contact support.')
 
         return redirect('login')
+    
+from main_app.models import ConnectImpress
+
+def connect_impression(request, brand_id):
+    try:
+        impression = ConnectImpress.objects.create(user = request.user,
+                                                brand = User.objects.get(uid=brand_id),
+                                                )
+        impression.save()
+    except:
+        pass
+    return JsonResponse({'status':True})

@@ -31,4 +31,8 @@ urlpatterns = [
     path('api/suggestions',views.suggestions,name='suggestions'),
     
     path('reset-password',views.reset_password,name='reset_password'),
+    
+    
+    
+    path('connect-impression/<str:brand_id>',views.connect_impression,name='connect_impression'),
 ]   
