@@ -115,6 +115,10 @@
                         <span class="block w-full px-4 p-2 rounded-lg text-white text-sm">Login</span>
                     </a>
                 </div>
+                
+                {% if request.user.is_authenticated %}
+                    
+                    
                 <div class="flex items-center">
                     <button id="profileDropdownButton" class="relative p-2 bg-gray-800 text-white rounded-full focus:outline-none focus:bg-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -133,6 +137,8 @@
 
                     </div>
                 </div>
+                {% endif %}
+
             </div>
         </div>
         

@@ -2514,3 +2514,252 @@
 {"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T03:37:43.343213+00:00", "country": "Unknown"}
 {"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T03:39:01.891350+00:00", "country": "Unknown"}
 >>>>>>> 63b7136f5927cebd680948db19f50e3c82103f15
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T05:43:42.240995+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/", "time_visited": "2024-09-26T05:43:48.162056+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/users", "time_visited": "2024-09-26T05:44:13.608640+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/brand", "time_visited": "2024-09-26T05:44:23.325705+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/", "time_visited": "2024-09-26T05:48:31.076898+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials", "time_visited": "2024-09-26T05:48:35.114687+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T05:48:59.486517+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Home decor/Rugs", "time_visited": "2024-09-26T05:49:01.282963+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Home decor/Rugs/265964", "time_visited": "2024-09-26T05:49:02.835311+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/265964", "time_visited": "2024-09-26T05:49:39.737082+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T05:52:11.486380+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials", "time_visited": "2024-09-26T05:52:13.288107+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/265964", "time_visited": "2024-09-26T05:54:22.072438+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T05:55:11.440296+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture", "time_visited": "2024-09-26T05:55:15.500605+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture/Bespoke", "time_visited": "2024-09-26T05:55:17.643272+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/Bespoke/961350", "time_visited": "2024-09-26T05:56:17.648937+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/Bespoke/961350", "time_visited": "2024-09-26T05:57:52.067904+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/Bespoke/961350", "time_visited": "2024-09-26T05:57:55.459420+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/Bespoke/961350", "time_visited": "2024-09-26T05:58:01.810663+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/Bespoke/961350", "time_visited": "2024-09-26T05:58:07.963531+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/961350", "time_visited": "2024-09-26T05:59:07.052961+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/961350", "time_visited": "2024-09-26T06:01:31.177731+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/Bespoke/715438", "time_visited": "2024-09-26T06:02:35.432225+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/Bespoke/715438", "time_visited": "2024-09-26T06:02:35.634921+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/Bespoke/715438", "time_visited": "2024-09-26T06:04:14.286621+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/Bespoke/715438", "time_visited": "2024-09-26T06:04:18.300741+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/Bespoke/715438", "time_visited": "2024-09-26T06:04:22.180987+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/715438", "time_visited": "2024-09-26T06:04:26.947117+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/login", "time_visited": "2024-09-26T06:04:55.527583+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/splash", "time_visited": "2024-09-26T06:04:56.107814+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/", "time_visited": "2024-09-26T06:05:00.173086+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/category/Materials", "time_visited": "2024-09-26T06:05:02.733290+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T06:05:03.580937+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/715438", "time_visited": "2024-09-26T06:05:07.068985+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/category/Materials/Home decor/Rugs", "time_visited": "2024-09-26T06:05:09.515499+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/material-provider/Materials/Home decor/Rugs/265964", "time_visited": "2024-09-26T06:05:11.079732+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/715438", "time_visited": "2024-09-26T06:05:55.094272+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/connect-impression/265964", "time_visited": "2024-09-26T06:06:01.820100+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/", "time_visited": "2024-09-26T06:06:11.222683+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/", "time_visited": "2024-09-26T06:06:13.168272+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/category/Services", "time_visited": "2024-09-26T06:06:17.321079+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-26T06:06:18.806687+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/category/Services/Interior Designer/Commercial", "time_visited": "2024-09-26T06:06:19.620065+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/category/Services/Interior Designer/Hospitality", "time_visited": "2024-09-26T06:06:23.934962+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/category/Services", "time_visited": "2024-09-26T06:06:28.785275+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/", "time_visited": "2024-09-26T06:06:32.267445+00:00", "country": "India"}
+{"user": "jomin37@gmail.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T06:06:35.096322+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture", "time_visited": "2024-09-26T06:07:48.564146+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials", "time_visited": "2024-09-26T06:07:50.192619+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture", "time_visited": "2024-09-26T06:07:53.164803+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture", "time_visited": "2024-09-26T06:07:53.362907+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture/International", "time_visited": "2024-09-26T06:07:55.239577+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture/International/China", "time_visited": "2024-09-26T06:07:57.143290+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/International/China/562976", "time_visited": "2024-09-26T06:08:57.975801+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/International/China/562976", "time_visited": "2024-09-26T06:08:58.207912+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/562976", "time_visited": "2024-09-26T06:09:09.311602+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/562976", "time_visited": "2024-09-26T06:10:44.391621+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/562976", "time_visited": "2024-09-26T06:10:58.802371+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/International/China/562976", "time_visited": "2024-09-26T06:12:43.684350+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/International/China/562976", "time_visited": "2024-09-26T06:12:47.010678+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Furniture/International/China/562976", "time_visited": "2024-09-26T06:12:49.347504+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/562976", "time_visited": "2024-09-26T06:12:56.518079+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture/International/European", "time_visited": "2024-09-26T06:16:51.261958+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture/International", "time_visited": "2024-09-26T06:47:26.429049+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture", "time_visited": "2024-09-26T06:47:29.630694+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials", "time_visited": "2024-09-26T06:47:33.017012+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Flooring", "time_visited": "2024-09-26T06:47:35.232190+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Flooring", "time_visited": "2024-09-26T06:47:35.434634+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Flooring/Carpet", "time_visited": "2024-09-26T06:47:38.633873+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Carpet/343872", "time_visited": "2024-09-26T06:47:41.913168+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Carpet/343872", "time_visited": "2024-09-26T06:47:42.101578+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Flooring/Marble", "time_visited": "2024-09-26T06:47:48.215166+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Marble/149391", "time_visited": "2024-09-26T06:48:48.417585+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Marble/149391", "time_visited": "2024-09-26T06:48:48.647074+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/149391", "time_visited": "2024-09-26T06:49:08.498333+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Marble/149391", "time_visited": "2024-09-26T06:49:17.296185+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/149391", "time_visited": "2024-09-26T06:50:35.073963+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Marble/698498", "time_visited": "2024-09-26T06:55:43.048915+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Marble/698498", "time_visited": "2024-09-26T06:55:44.393918+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Marble/698498", "time_visited": "2024-09-26T06:55:45.136542+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Marble/698498", "time_visited": "2024-09-26T06:55:45.353397+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Marble/698498", "time_visited": "2024-09-26T06:56:18.822990+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Flooring/Marble/698498", "time_visited": "2024-09-26T06:57:03.887982+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/698498", "time_visited": "2024-09-26T06:57:07.190176+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/698498", "time_visited": "2024-09-26T06:58:41.463698+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Flooring", "time_visited": "2024-09-26T07:01:45.332687+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Flooring/Wood", "time_visited": "2024-09-26T07:01:48.079867+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials", "time_visited": "2024-09-26T07:04:21.059308+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T07:04:25.008242+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Home decor/Rugs", "time_visited": "2024-09-26T07:04:26.503703+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Furniture", "time_visited": "2024-09-26T07:04:30.594400+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Flooring", "time_visited": "2024-09-26T07:04:34.167232+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/", "time_visited": "2024-09-26T07:04:36.812633+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials", "time_visited": "2024-09-26T07:04:39.095856+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services", "time_visited": "2024-09-26T07:04:42.812889+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-26T07:04:45.017695+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials", "time_visited": "2024-09-26T07:08:08.273096+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T07:08:22.666693+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/login", "time_visited": "2024-09-26T07:35:11.227142+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/", "time_visited": "2024-09-26T07:35:11.774954+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/", "time_visited": "2024-09-26T07:35:41.321220+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T07:35:47.756384+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/profile", "time_visited": "2024-09-26T07:36:02.103318+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials", "time_visited": "2024-09-26T07:43:46.602059+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/", "time_visited": "2024-09-26T07:43:49.122333+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials", "time_visited": "2024-09-26T07:44:01.521311+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T07:54:47.133696+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/", "time_visited": "2024-09-26T07:55:52.025677+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services", "time_visited": "2024-09-26T07:55:54.274878+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-26T07:56:01.154312+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Architect", "time_visited": "2024-09-26T07:56:34.127719+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Architect/Commercial", "time_visited": "2024-09-26T07:56:40.796256+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-26T07:56:42.694414+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/297670", "time_visited": "2024-09-26T07:59:51.763174+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/", "time_visited": "2024-09-26T08:02:17.812859+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials", "time_visited": "2024-09-26T08:02:19.601051+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T08:02:21.627463+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Materials/Home decor/Rugs", "time_visited": "2024-09-26T08:02:22.828225+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/material-provider/Materials/Home decor/Rugs/265964", "time_visited": "2024-09-26T08:02:24.754553+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-26T08:02:42.541685+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/login", "time_visited": "2024-09-26T08:03:07.767096+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/", "time_visited": "2024-09-26T08:03:08.249651+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/users", "time_visited": "2024-09-26T08:03:24.682791+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/service-provider", "time_visited": "2024-09-26T08:03:27.830423+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T08:04:23.982583+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-26T08:04:27.187796+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-26T08:04:35.795007+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Services/Interior Designer/Residential", "time_visited": "2024-09-26T08:04:42.314358+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-26T08:05:30.296996+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/service-provider/Services/Architect/Commercial/297670", "time_visited": "2024-09-26T08:05:33.525475+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T08:05:56.148561+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:05:59.004621+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:05:59.303537+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:06:00.135710+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:06:00.430521+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/service-provider/Commercial/297670", "time_visited": "2024-09-26T08:06:01.533197+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:06:19.910869+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:06:20.484988+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:06:20.691978+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:07:12.958186+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:07:13.264595+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:07:14.033317+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/material-provider/China/562976", "time_visited": "2024-09-26T08:07:15.589518+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/297670", "time_visited": "2024-09-26T08:07:17.447283+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/connect-impression/562976", "time_visited": "2024-09-26T08:07:23.831067+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Architect", "time_visited": "2024-09-26T08:08:09.401559+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Architect/Hospitality", "time_visited": "2024-09-26T08:08:11.500646+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/service-provider/Services/Architect/Hospitality/112265", "time_visited": "2024-09-26T08:08:13.521270+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/brand", "time_visited": "2024-09-26T08:09:21.374590+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/edit-brand/562976", "time_visited": "2024-09-26T08:09:29.055799+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/112265", "time_visited": "2024-09-26T08:09:51.269655+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/edit-brand/562976", "time_visited": "2024-09-26T08:10:39.057224+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/brand", "time_visited": "2024-09-26T08:10:39.417468+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/service-provider/Services/Architect/Hospitality/112265", "time_visited": "2024-09-26T08:10:51.805397+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/112265", "time_visited": "2024-09-26T08:12:01.133091+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/material-provider/China/562976", "time_visited": "2024-09-26T08:14:08.466277+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/connect-impression/562976", "time_visited": "2024-09-26T08:14:12.548976+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/112265", "time_visited": "2024-09-26T08:14:53.600074+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/connect-impression/562976", "time_visited": "2024-09-26T08:18:33.112164+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/material-provider/China/562976", "time_visited": "2024-09-26T08:19:26.808972+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/material-provider/China/562976", "time_visited": "2024-09-26T08:19:48.902796+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/connect-impression/562976", "time_visited": "2024-09-26T08:20:49.710685+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T08:20:55.850491+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials", "time_visited": "2024-09-26T08:22:26.222140+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T08:22:52.659098+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials/Home decor/Rugs", "time_visited": "2024-09-26T08:22:54.925395+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/material-provider/Materials/Home decor/Rugs/265964", "time_visited": "2024-09-26T08:22:57.567201+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/edit-brand/562976", "time_visited": "2024-09-26T08:23:38.200624+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T08:25:08.706056+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials/Home decor/Rugs", "time_visited": "2024-09-26T08:25:14.765701+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/material-provider/Materials/Home decor/Rugs/265964", "time_visited": "2024-09-26T08:25:25.931378+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/users", "time_visited": "2024-09-26T08:25:55.052249+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/edit-service-provide/297670", "time_visited": "2024-09-26T08:25:59.380258+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/edit-service-provide/297670", "time_visited": "2024-09-26T08:26:40.778626+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/edit-service-provide/297670", "time_visited": "2024-09-26T08:26:41.192543+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T08:26:59.334653+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:27:02.688534+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:27:02.898742+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:27:03.679124+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:27:03.871591+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/service-provider/Commercial/297670", "time_visited": "2024-09-26T08:27:05.491694+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/connect-impression/297670", "time_visited": "2024-09-26T08:27:33.319246+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Architect/Hospitality", "time_visited": "2024-09-26T08:28:03.291953+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/edit-service-provide/297670", "time_visited": "2024-09-26T08:28:13.764940+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/edit-service-provide/297670", "time_visited": "2024-09-26T08:28:14.182427+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Architect", "time_visited": "2024-09-26T08:28:17.752769+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Architect/Landscape", "time_visited": "2024-09-26T08:28:22.937421+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/service-provider/Services/Architect/Landscape/601610", "time_visited": "2024-09-26T08:28:25.353007+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/service-provider/Commercial/297670", "time_visited": "2024-09-26T08:29:14.126680+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/connect-impression/297670", "time_visited": "2024-09-26T08:29:20.810364+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/601610", "time_visited": "2024-09-26T08:29:58.054314+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/edit-service-provide/297670", "time_visited": "2024-09-26T08:30:15.063422+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/brand", "time_visited": "2024-09-26T08:31:18.534565+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/material-provider", "time_visited": "2024-09-26T08:31:28.595881+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T08:31:44.061005+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials", "time_visited": "2024-09-26T08:31:46.394981+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/service-provider/Services/Architect/Landscape/601610", "time_visited": "2024-09-26T08:32:26.672964+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:32:45.118328+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:32:45.409859+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:32:45.823271+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:32:46.894291+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/service-provider/Landscape/601610", "time_visited": "2024-09-26T08:32:49.848376+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/service-provider/Landscape/601610", "time_visited": "2024-09-26T08:32:54.837148+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/service-provider/Landscape/601610", "time_visited": "2024-09-26T08:33:22.808775+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:33:58.764889+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:34:25.617922+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:34:26.115365+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T08:34:44.053786+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:34:49.111197+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:34:49.384926+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:34:50.136028+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/api/suggestions", "time_visited": "2024-09-26T08:34:50.292025+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/service-provider/Landscape/601610", "time_visited": "2024-09-26T08:34:52.527466+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/connect-impression/601610", "time_visited": "2024-09-26T08:34:57.958265+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/service-provider/Landscape/601610", "time_visited": "2024-09-26T08:35:01.352607+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/601610", "time_visited": "2024-09-26T08:35:17.337027+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:36:25.728405+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:36:26.184487+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T08:36:31.424196+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials", "time_visited": "2024-09-26T08:36:33.557399+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Architect/Residential", "time_visited": "2024-09-26T08:37:08.850518+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-26T08:37:53.002213+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/service-provider/Services/Architect/Residential/472807", "time_visited": "2024-09-26T08:38:19.449263+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/472807", "time_visited": "2024-09-26T08:38:24.163141+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/connect-impression/472807", "time_visited": "2024-09-26T08:38:31.450943+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:39:45.297918+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:39:45.712101+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Architect/Retail", "time_visited": "2024-09-26T08:41:04.339441+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:42:03.531817+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:42:03.973853+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-26T08:42:13.129929+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Services", "time_visited": "2024-09-26T08:42:15.665035+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials", "time_visited": "2024-09-26T08:42:25.364963+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/category/Materials/Home decor", "time_visited": "2024-09-26T08:42:51.652392+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:45:46.081886+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:45:46.520370+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services", "time_visited": "2024-09-26T08:46:01.526090+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Architect", "time_visited": "2024-09-26T08:46:06.657782+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-26T08:46:10.480273+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Interior Designer/Commercial", "time_visited": "2024-09-26T08:46:12.126397+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:46:13.509747+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/dashboard/category", "time_visited": "2024-09-26T08:46:13.951332+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Interior Designer/Hospitality", "time_visited": "2024-09-26T08:46:15.292059+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Interior Designer/Landscape", "time_visited": "2024-09-26T08:46:18.132383+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Interior Designer/Residential", "time_visited": "2024-09-26T08:46:21.767786+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Interior Designer/Retail", "time_visited": "2024-09-26T08:46:27.657746+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Interior Designer", "time_visited": "2024-09-26T08:47:00.883070+00:00", "country": "India"}
+{"user": "miti@ebcoriginals.com", "path": "/category/Services/Interior Designer/Hospitality", "time_visited": "2024-09-26T08:47:03.686425+00:00", "country": "India"}
