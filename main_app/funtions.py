@@ -27,7 +27,7 @@ def Send_Welcome_email(user):
     context = {
         'email': user
     }
-    body = render_to_string('email_templates/welcome_email.html', context)
+    body = render_to_string('email_templates/welcome-email-new.html', context)
     recipients = [user]
     from_email = '"ZAR Luxury" <admin@zarluxury.com>'
 
@@ -63,7 +63,7 @@ def Send_Code_email(code, email):
             'code':code,
         }
     # Use an f-string for body formatting
-    body = render_to_string('email_templates/passcode-template.html', context)
+    body = render_to_string('email_templates/passcode-new.html', context)
 
     recipients = [email]
     from_email = '"ZAR Luxury" <admin@zarluxury.com>'
@@ -100,7 +100,7 @@ def Send_Payment_email(link,email):
     subject = f"Payment Link from Zar Luxury"
 
     # Use a raw string (r"""...""") to avoid formatting issues with curly braces
-    body = render_to_string('email_templates/payment-template.html',context)
+    body = render_to_string('email_templates/payment-new.html',context)
 
     recipients = [email]
 
