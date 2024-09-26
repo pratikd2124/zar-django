@@ -38,9 +38,9 @@
 
                                 <div class="table-responsive category-table">
                                     <div>
-                                        <table class="table all-package theme-table" id="table_id">
+                                        <table class="table all-package theme-table sortable" id="table_id">
                                             <thead>
-                                                <tr>
+                                                <tr class="item">
                                                     <th>Logo</th>
                                                     <th>Brand Name</th>
                                                     <th>Category Hierarchy</th>
@@ -59,23 +59,23 @@
 
                                             <tbody id="tableBody">
                                                 {% for cat in brands %}
-                                                <tr>
+                                                <tr class="item">
                                                     <td>
                                                         {% if cat.brand_logo %}
                                                         <img src="{{ cat.brand_logo.url }}" alt="Current Image" class="img-fluid mt-2" style="max-width: 100px;">
                                                         {% endif %}
                                                     </td>
-                                                    <td>{{ cat.brand_name }}</td>
+                                                    <td class="brand-name">{{ cat.brand_name }}</td>
                                                     <td>{{ cat.category.get_category_hierarchy }}</td>
-                                                    <td>{{ cat.contact_person }}</td>
-                                                    <td>{{ cat.mobile }}</td>
+                                                    <td class="contact-person">{{ cat.contact_person }}</td>
+                                                    <td class="mobile">{{ cat.mobile }}</td>
                                                     <td>{{ cat.impress_brand.all.count }}</td>
-                                                    <td>{{ cat.email }}</td>
-                                                    <td>{{ cat.state }}</td>
-                                                    <td>{{ cat.city }}</td>
+                                                    <td class="email">{{ cat.email }}</td>
+                                                    <td class="state">{{ cat.state }}</td>
+                                                    <td class="city">{{ cat.city }}</td>
                                                     <td>{{ cat.zip_code }}</td>
-                                                    <td>{{ cat.country }}</td>
-                                                    <td>{{ cat.payment_status }}</td>
+                                                    <td class="country">{{ cat.country }}</td>
+                                                    <td class="payment-status">{{ cat.payment_status }}</td>
                                                     <td>
                                                         <ul>
                                                             {% if cat.payment_status == 'pending'  %}
@@ -209,123 +209,35 @@
 
 
 
-             <script>
-        const itemsPerPage = 10;
-        let currentPage = 1;
-        const rows = document.querySelectorAll("#tableBody tr");
-        const totalPages = Math.ceil(rows.length / itemsPerPage);
-
-        function showPage(page) {
-            const start = (page - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-
-            rows.forEach((row, index) => {
-                if (index >= start && index < end) {
-                    row.classList.remove("hidden");
-                } else {
-                    row.classList.add("hidden");
-                }
-            });
-        }
-
-        function setupPagination() {
-            const paginationElement = document.getElementById("pagination");
-            paginationElement.innerHTML = "";
-
-            for (let i = 1; i <= totalPages; i++) {
-                const button = document.createElement("button");
-                button.innerHTML = i;
-                button.classList.add("page-button");
-                if (i === currentPage) {
-                    button.classList.add("active");
-                }
-
-                button.addEventListener("click", () => {
-                    currentPage = i;
-                    showPage(currentPage);
-                    updatePaginationButtons();
-                });
-
-                paginationElement.appendChild(button);
+<script>
+    function filterRows() {
+        const query = document.getElementById("searchInput").value.toLowerCase();
+        const rows = document.querySelectorAll("#tableBody .item");
+    
+        rows.forEach(row => {
+            const brandName = row.querySelector(".brand-name").textContent.toLowerCase();
+            const contactPerson = row.querySelector(".contact-person").textContent.toLowerCase();
+            const mobile = row.querySelector(".mobile").textContent.toLowerCase();
+            const email = row.querySelector(".email").textContent.toLowerCase();
+            const city = row.querySelector(".city").textContent.toLowerCase();
+            const state = row.querySelector(".state").textContent.toLowerCase();
+            const country = row.querySelector(".country").textContent.toLowerCase();
+            const paymentStatus = row.querySelector(".payment-status").textContent.toLowerCase();
+    
+            if (brandName.includes(query) || 
+                contactPerson.includes(query) || 
+                mobile.includes(query) || 
+                email.includes(query) || 
+                city.includes(query) || 
+                state.includes(query) || 
+                country.includes(query) || 
+                paymentStatus.includes(query)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
             }
-        }
-
-        function updatePaginationButtons() {
-            const buttons = document.querySelectorAll(".page-button");
-            buttons.forEach((button, index) => {
-                if (index + 1 === currentPage) {
-                    button.classList.add("active");
-                } else {
-                    button.classList.remove("active");
-                }
-            });
-        }
-
-        function filterRows() {
-            const input = document.getElementById("searchInput");
-            const filter = input.value.toLowerCase();
-            let visibleRows = 0;
-
-            rows.forEach(row => {
-                const brandName = row.cells[1].textContent.toLowerCase();
-                const contactPerson = row.cells[3].textContent.toLowerCase();
-                const contactNumber = row.cells[4].textContent.toLowerCase();
-                const email = row.cells[5].textContent.toLowerCase();
-                const state = row.cells[6].textContent.toLowerCase();
-                const city = row.cells[7].textContent.toLowerCase();
-                const country = row.cells[9].textContent.toLowerCase();
-                const status = row.cells[10].textContent.toLowerCase();
-
-                if (brandName.includes(filter) || 
-                    contactPerson.includes(filter) || 
-                    contactNumber.includes(filter) || 
-                    email.includes(filter) || 
-                    state.includes(filter) || 
-                    city.includes(filter) || 
-                    country.includes(filter) || 
-                    status.includes(filter)) {
-                    row.style.display = "";
-                    visibleRows++;
-                } else {
-                    row.style.display = "none";
-                }
-            });
-
-            currentPage = 1;
-            updatePagination(visibleRows);
-        }
-
-        function updatePagination(visibleRows) {
-            const newTotalPages = Math.ceil(visibleRows / itemsPerPage);
-            const paginationElement = document.getElementById("pagination");
-            paginationElement.innerHTML = "";
-
-            for (let i = 1; i <= newTotalPages; i++) {
-                const button = document.createElement("button");
-                button.innerHTML = i;
-                button.classList.add("page-button");
-                if (i === currentPage) {
-                    button.classList.add("active");
-                }
-
-                button.addEventListener("click", () => {
-                    currentPage = i;
-                    showPage(currentPage);
-                    updatePaginationButtons();
-                });
-
-                paginationElement.appendChild(button);
-            }
-
-            showPage(currentPage);
-        }
-
-        // Initial setup
-        showPage(currentPage);
-        setupPagination();
-
-        // Add event listener for search input
-        document.getElementById("searchInput").addEventListener("keyup", filterRows);
+        });
+    }
     </script>
             
    

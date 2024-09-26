@@ -378,7 +378,9 @@ def submit_service_provider(request):
 
         print(profilepic,brandlogo,profileDoc,gallery_images)
         
-        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already exists')
+            return redirect(request.META.get('HTTP_REFERER', '/home'))
         user = User.objects.create(
                     username=email,
                     email=email,
