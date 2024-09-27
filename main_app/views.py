@@ -81,7 +81,7 @@ def validate(request):
                 request.session['email'] = email 
                 request.session['type'] = 'New'   
             return redirect('register')
-    return render(request,'client/validate.html')
+    return render(request,'client/validate.html',{'title':'Validate'})
 
 def register(request):
     if request.user.is_authenticated:
@@ -608,7 +608,7 @@ def contact(request):
     
     details = ContactPageDetails.objects.first()
     
-    return render(request, 'client/contact-us.html',{'details':details})
+    return render(request, 'client/contact-us.html',{'title':'Contact Us','details':details})
 
 def privacy_policy(request):
     content = PagesData.objects.first().privacy_policy

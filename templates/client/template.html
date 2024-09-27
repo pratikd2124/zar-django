@@ -5,10 +5,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>  Zar Luxury {{title}}</title>
+    {% comment %} <title>  Zar Luxury {{title}}</title> {% endcomment %}
+
+    {% if title == 'Home' %}
+    <title>ZAR Luxury | Your Gateway to Luxury Living and Premium Services</title>
+
+    <!-- Meta Description -->
+    <meta name="description" content="ZAR Luxury connects you with premium materials and top-notch service providers for luxury living.">
+
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="Luxury Living, Premium Services, ZAR Luxury">
+
+    <!-- Open Graph (OG) Meta Tags -->
+    <meta property="og:title" content="ZAR Luxury | Luxury Living and Premium Services">
+    <meta property="og:description" content="ZAR Luxury is your gateway to luxury living, connecting discerning homeowners with top-tier material and service providers.">
+    <meta property="og:image" content="/static/images/zar1.jpg">
+    <meta property="og:url" content="https://zarluxury.com/"> <!-- Make sure to dynamically generate this URL -->
+
+    {% elif title == 'Privacy Policy' %}
+        <title>Privacy Policy | ZAR Luxury</title>
+        <meta name="description" content="Read about our privacy policy and how ZAR Luxury handles your personal information with care and responsibility.">
+        <meta name="keywords" content="Privacy Policy, Data Protection, ZAR Luxury">
+        <meta property="og:title" content="Privacy Policy | ZAR Luxury">
+        <meta property="og:description" content="Learn how ZAR Luxury ensures the privacy of your data with our comprehensive privacy policy.">
+        <meta property="og:image" content="/static/images/privacy-policy.jpg">
+        <meta property="og:url" content="https://zarluxury.com/privacy-policy">
+
+    {% elif title == 'Terms and Conditions' %}
+        <title>Terms and Conditions | ZAR Luxury</title>
+        <meta name="description" content="Review the terms and conditions governing the use of ZAR Luxury's services.">
+        <meta name="keywords" content="Terms and Conditions, Service Agreement, ZAR Luxury">
+        <meta property="og:title" content="Terms and Conditions | ZAR Luxury">
+        <meta property="og:description" content="By using ZAR Luxury, you agree to abide by our terms and conditions. Review them in full here.">
+        <meta property="og:image" content="/static/images/terms.jpg">
+        <meta property="og:url" content="https://zarluxury.com/terms-and-conditions">
+
+    {% elif title == 'Contact Us' %}
+        <title>Contact Us | ZAR Luxury</title>
+        <meta name="description" content="Get in touch with ZAR Luxury for inquiries or support. We're here to help.">
+        <meta name="keywords" content="Contact, Support, ZAR Luxury">
+        <meta property="og:title" content="Contact Us | ZAR Luxury">
+        <meta property="og:description" content="Reach out to ZAR Luxury for assistance or information about our premium services.">
+        <meta property="og:image" content="/static/images/contact.jpg">
+        <meta property="og:url" content="https://zarluxury.com/contact">
+
+    {% elif title == 'FAQ' %}
+        <title>Frequently Asked Questions | ZAR Luxury</title>
+        <meta name="description" content="Find answers to common questions about ZAR Luxury's services and offerings.">
+        <meta name="keywords" content="FAQ, Frequently Asked Questions, ZAR Luxury">
+        <meta property="og:title" content="FAQ | ZAR Luxury">
+        <meta property="og:description" content="Browse through our frequently asked questions to learn more about ZAR Luxury's services.">
+        <meta property="og:image" content="/static/images/faq.jpg">
+        <meta property="og:url" content="https://zarluxury.com/faq">
+
+         <!-- Category Page Meta Tags -->
+    {% elif title == category.name %}
+        <title>{{ title }} | ZAR Luxury</title>
+        <meta name="description" content="Explore premium services and materials for {{ title }} at ZAR Luxury.">
+        <meta name="keywords" content="{{ title }}, Luxury Services, ZAR Luxury">
+        <meta property="og:title" content="{{ title }} | ZAR Luxury">
+        <meta property="og:description" content="Discover {{ title }} services and materials with ZAR Luxury.">
+        <meta property="og:image" content="/static/images/category_default.jpg">
+        <meta property="og:url" content="{{ request.build_absolute_uri }}">
+        
+        {% elif title == 'Validate' %}
+        <title>ZAR Luxury | Validate Your Account</title>
+        <meta name="description" content="Validate your ZAR Luxury account to access premium services and materials.">
+        <meta name="keywords" content="Validate, ZAR Luxury, Premium Services">
+        <meta property="og:title" content="ZAR Luxury | Validate Account">
+        <meta property="og:description" content="Complete the validation of your ZAR Luxury account and get started with luxury living services.">
+        <meta property="og:image" content="/static/images/validate.jpg">
+        <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    
+    {% else %}
+        <title>{{ title }} | ZAR Luxury</title>
+        <meta name="description" content="Discover ZAR Luxury - premium living solutions for discerning homeowners.">
+        <meta name="keywords" content="Luxury Living, Premium Services, ZAR Luxury">
+        <meta property="og:title" content="{{ title }} | ZAR Luxury">
+        <meta property="og:description" content="Explore ZAR Luxury for premium living solutions and top-tier services.">
+        <meta property="og:image" content="/static/images/zar1.jpg">
+        <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    {% endif %}
+
+    
+
+
 
     <link rel="icon" href="{% static 'images/ZAR-icon.ico' %}" type="image/x-icon" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    {% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
+    <script src="{% static 'js/tailwindcss.js' %}"></script>
+
     <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +107,63 @@
     <script>   
         window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());    gtag('config', 'G-WPDGJRHB9B'); 
     </script> 
+    <!-- Global meta tags -->
+    <meta name="robots" content="index, follow">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@zarluxury">
+    <meta name="twitter:creator" content="@zarluxury">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/zar1.jpg' %}">
+
+    {% comment %} <link rel="canonical" href="{{ request.build_absolute_uri }}"> {% endcomment %}
+
+
+    
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "ZAR Luxury",
+            "alternateName": "ZAR Luxury Living",
+            "url": "https://www.zarluxury.com",
+            "logo": "https://www.zarluxury.com/zar1.jpg",
+            "description": "ZAR Luxury is your gateway to the finest in luxury living, connecting discerning homeowners with top-tier material and service providers.",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "A007, Boomerang, Chandivali",
+                "addressLocality": "Mumbai",
+                "addressRegion": "Maharashtra",
+                "postalCode": "400072",
+                "addressCountry": "IN"
+            },
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+91-8828452971",
+                    "contactType": "customer service",
+                    "areaServed": "IN",
+                    "availableLanguage": "English"
+                },
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+91-7900192533",
+                    "contactType": "customer service",
+                    "areaServed": "IN",
+                    "availableLanguage": "English"
+                }
+            ],
+            "email": "info@zarluxury.com",
+            "openingHours": "Mo-Fr 09:00-18:00",
+            "sameAs": [
+                "https://www.facebook.com/zarluxury",
+                "https://www.twitter.com/zarluxury",
+                "https://www.instagram.com/zarluxury"
+            ]
+        }
+    </script>
 </head>
 <style>
     * {

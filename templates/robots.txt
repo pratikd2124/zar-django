@@ -1,0 +1,15 @@
+# Global directives
+User-agent: *
+Allow: /
+Disallow: /api/*
+Disallow: /admin/*
+Disallow: /private/*
+
+# Specific bot blocking
+User-agent: black-listed-bot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://www.zarluxury.com/sitemap.xml
+Sitemap: https://www.zarluxury.com/my-custom-sitemap-1.xml
+Sitemap: https://www.zarluxury.com/my-custom-sitemap-2.xml
