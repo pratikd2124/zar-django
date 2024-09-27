@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_app',
     'home',
-    'ckeditor'
+    'ckeditor',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
