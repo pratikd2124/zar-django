@@ -67,7 +67,7 @@ def all_users(request):
     
     
     
-    users = User.objects.all().exclude(is_superuser=True,is_staff=True)
+    users = User.objects.order_by('-id').all().exclude(is_superuser=True,is_staff=True)
     
     community = request.GET.get('community')
     member_type = request.GET.get('memberType')
@@ -122,7 +122,7 @@ def all_users(request):
 
 @login_required(login_url='login')
 def all_community(request):
-    community = Community.objects.all()
+    community = Community.objects.order_by('-id').all()
     if request.method == 'POST':
         
         name = request.POST.get('name')
@@ -210,7 +210,7 @@ def all_brand(request):
         return redirect('home')
     
     brands = User.objects.order_by('-id').filter(type='Material Provider')
-    categories = Category.objects.all()
+    categories = Category.objects.order_by('-id').all()
     
     # if request.method == 'POST':
     #     name = request.POST.get('name')
@@ -294,7 +294,7 @@ def support_ticket(request):
         messages.error(request, 'You are not authorized to access this page.')
         return redirect('home')
     
-    tickets = SupportTickets.objects.all()
+    tickets = SupportTickets.objects.order_by('-id').all()
     if request.method == 'POST':
         if request.POST.get('type') == 'reply':
             ticket = SupportTickets.objects.get(id=request.POST.get('ticket_id'))
