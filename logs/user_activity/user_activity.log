@@ -3591,7 +3591,11 @@
 {"user": "admin@admin.com", "path": "/dashboard/brand", "time_visited": "2024-09-27T19:43:50.932298+00:00", "country": "India"}
 =======
 >>>>>>> 13245273f032e101717c1baa6195d7ac3e900430
+<<<<<<< HEAD
+{"user": "admin@admin.com", "path": "/sitemap.xml", "time_visited": "2024-09-27T15:19:52.579668+00:00", "country": "Unknown"}
+=======
 >>>>>>> 705881d492933a244deb60b2c46d551b3245071b
+<<<<<<< HEAD
 {"user": "admin@admin.com", "path": "/admin/", "time_visited": "2024-09-27T19:48:07.955132+00:00", "country": "India"}
 {"user": "admin@admin.com", "path": "/", "time_visited": "2024-09-27T19:48:10.570077+00:00", "country": "India"}
 {"user": "pratikd2124@gmail.com", "path": "/login", "time_visited": "2024-09-27T20:34:23.983776+00:00", "country": "India"}
@@ -3720,3 +3724,6 @@
 {"user": "pratikd2124@gmail.com", "path": "/category/Materials/Home decor/Glass", "time_visited": "2024-09-28T14:13:28.167865+00:00", "country": "India"}
 {"user": "pratikd2124@gmail.com", "path": "/material-provider/Materials/Home decor/Glass/105479", "time_visited": "2024-09-28T14:13:31.556809+00:00", "country": "India"}
 {"user": "pratikd2124@gmail.com", "path": "/connect-impression/105479", "time_visited": "2024-09-28T14:13:48.657701+00:00", "country": "India"}
+=======
+>>>>>>> 97ccbfca85dc291ab93f036c4803b62bd2186011
+>>>>>>> 7992982c2ef3cb6d81d10f2d47a3ccf90b65c2c4

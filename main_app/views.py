@@ -157,7 +157,7 @@ def signin(request):
         else:
             messages.error(request, 'Invalid credentials! Please Check email and password')
             return redirect('login')
-    return render(request,'client/login.html')
+    return render(request,'client/login.html',{'title':'Login'})
 
 
 
