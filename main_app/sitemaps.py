@@ -41,6 +41,6 @@ class UserSitemap(Sitemap):
     def location(self, obj):
         # Generate dynamic URLs for users
         if obj.user_type == 'Service Provider':
-            return reverse('user_info', kwargs={'category_path': obj.category.get_category_hierarchy(), 'uid': obj.id})
+            return reverse('user_info', kwargs={'category_path': obj.category.get_slugified_hierarchy(), 'uid': obj.id})
         elif obj.user_type == 'Material Provider':
-            return reverse('brand_info', kwargs={'category_path': obj.category.get_category_hierarchy(), 'uid': obj.id})
+            return reverse('brand_info', kwargs={'category_path': obj.category.get_slugified_hierarchy(), 'uid': obj.id})

@@ -230,12 +230,29 @@ option{
                     <!-- Category Field -->
                     <div class="relative w-[100%]">
                         <label class="block mb-1">Category</label>
-                        <select name="category" class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                            {% for category in categories %}
-
-                            <option value="{{ category.id }}" {% if category.id == user.category.id %} selected {% endif %}  >{{ category.get_category_hierarchy }}</option>
+                    
+                        <!-- Hidden input to hold the list of selected categories -->
+                        <input type="hidden" name="selected_categories" id="selected_categories" value="{% for i in user.category.all %}{{i.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
+                        
+                        <!-- Container for category dropdowns -->
+                        <div id="category-container">
+                            <!-- Loop through existing categories to display them -->
+                            {% for selected_category in user.category.all %}
+                            <div class="category-row">
+                                <select name="category" class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 category-select">
+                                    {% for category in categories %}
+                                    <option value="{{ category.id }}" {% if category.id == selected_category.id %} selected {% endif %}>
+                                        {{ category.get_category_hierarchy }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                <button type="button" class="btn delete-category-btn">Delete</button>
+                            </div>
                             {% endfor %}
-                    </select>
+                        </div>
+                    
+                        <!-- Button to add a new category dropdown -->
+                        <button type="button" class="btn btn-primary mt-3" id="add-category-btn">Add Category</button>
                     </div>
 
                     <!-- Social Links Fields -->
@@ -484,4 +501,60 @@ option{
         
     </script>
 
+
+    
+<script>
+    // Function to update the hidden input field with selected category IDs
+    function updateSelectedCategories() {
+        let selectedCategories = [];
+        document.querySelectorAll('.category-select').forEach(function(select) {
+            selectedCategories.push(select.value);
+        });
+        document.getElementById('selected_categories').value = selectedCategories.join(',');
+    }
+    
+    // Event listener for "Delete" buttons
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('delete-category-btn')) {
+            // Remove the category row
+            event.target.closest('.category-row').remove();
+            // Update hidden input field
+            updateSelectedCategories();
+        }
+    });
+    
+    // Event listener for "Add Category" button
+    document.getElementById('add-category-btn').addEventListener('click', function() {
+        // Get the category dropdown HTML
+        const categoryDropdownHTML = `
+        <div class="category-row">
+            <select name="category" class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 category-select">
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.get_category_hierarchy }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" class="btn delete-category-btn">Delete</button>
+        </div>
+        `;
+        
+        // Append new dropdown to the category container
+        document.getElementById('category-container').insertAdjacentHTML('beforeend', categoryDropdownHTML);
+        
+        // Update hidden input field
+        updateSelectedCategories();
+    });
+    
+    // Event listener for changes in category dropdowns
+    document.addEventListener('change', function(event) {
+        if (event.target.classList.contains('category-select')) {
+            // Update hidden input field when a new category is selected
+            updateSelectedCategories();
+        }
+    });
+    
+    // On page load, update the hidden input field with the initially selected categories
+    window.addEventListener('load', function() {
+        updateSelectedCategories();
+    });
+    </script>
 {% endblock content %}

@@ -14,6 +14,9 @@ sitemaps = {
 urlpatterns = [
     path('', views.home, name='home'),
     path('category/<path:category_path>', views.category_view, name='category_view'),
+    
+    
+    
     path('validate', views.validate, name='validate'),
     path('register', views.register, name='register'),
     path('login', views.signin, name='login'),
@@ -22,12 +25,16 @@ urlpatterns = [
     path('logout', views.signout, name='logout'),
     path('become_a_member', views.become_a_member, name='become_a_member'),
     
+    
     path('home-owner', views.home_owner_view, name='home_owner'),
     path('service-provider', views.submit_service_provider, name='service_provider'),
     path('material-provider', views.submit_material_provider, name='submit_material_provider'),
     
+    
     path('material-provider/<path:category_path>/<str:uid>', views.brand_info, name='brand_info'),
     path('service-provider/<path:category_path>/<str:uid>', views.user_info, name='user_info'),
+    
+    
     path('success', views.success_page, name='success_page'),
     path('contact', views.contact, name='contact_us'),
     path('privacy', views.privacy_policy, name='privacy_policy'),
