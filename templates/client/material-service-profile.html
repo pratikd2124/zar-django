@@ -32,6 +32,7 @@ option{
             </aside>
         </div>
         <div class="md:w-3/5 w-full p-4 mb-12">
+            
             <form method="POST" action="{% url 'profile' %}?type=basic_info"  class="w-full" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div id="basic-info" class="mb-4 space-y-4 border border-gray-800 rounded-xl p-6 grid lg:grid-cols-2 grid-cols-1 gap-6" style="">
@@ -239,7 +240,7 @@ option{
                         <div id="category-container">
                             <!-- Loop through existing categories to display them -->
                             {% for selected_category in user.category.all %}
-                            <div class="category-row">
+                            <div class="category-row flex items-center gap-2 mb-2">
                                 <select name="category" class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 category-select">
                                     {% for category in categories %}
                                     <option value="{{ category.id }}" {% if category.id == selected_category.id %} selected {% endif %}>
@@ -247,13 +248,23 @@ option{
                                     </option>
                                     {% endfor %}
                                 </select>
-                                <button type="button" class="btn delete-category-btn">Delete</button>
+                                <button type="button" class="rounded-lg bg-red-600 p-2 px-4 hover:bg-red-500 transition-all ease-in-out btn delete-category-btn">
+                                    Delete
+                                </button>
+                                {% if user.category.all.count > 0 %}
+                                    <a href="{% url 'user_info' selected_category.get_category_hierarchy user.uid %}" target="_blank" class="">
+                                        <button type="button" class="text-xs my-2 rounded-lg bg-white text-black p-2 px-4 hover:bg-[#171717] hover:text-white transition-all duration-200 delay-200 border border-gray-700 ease-in-out btn delete-category-btn">
+                                            View
+                                        </button>
+                                    </a>
+                                
+                                {% endif %}
                             </div>
                             {% endfor %}
                         </div>
                     
                         <!-- Button to add a new category dropdown -->
-                        <button type="button" class="btn btn-primary mt-3" id="add-category-btn">Add Category</button>
+                        <button type="button" class="rounded-lg bg-violet-700 p-2 px-4 hover:bg-violet-600 btn btn-primary mt-3" id="add-category-btn">Add Category</button>
                     </div>
                     
                     <div class="grid lg:grid-cols-3 grid-cols-1 gap-4">
@@ -388,9 +399,7 @@ option{
                     </div>
                 </div>
                         
-                <div class=" bottom-0 p-4 left-0 right-0 bg-black border-t border-slate-700">
-                   
-                </div>
+               
         </div>
                             
     </div>
@@ -537,13 +546,13 @@ option{
     document.getElementById('add-category-btn').addEventListener('click', function() {
         // Get the category dropdown HTML
         const categoryDropdownHTML = `
-        <div class="category-row">
+        <div class="category-row flex items-center gap-2 mb-2">
             <select name="category" class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 category-select">
                 {% for category in categories %}
                 <option value="{{ category.id }}">{{ category.get_category_hierarchy }}</option>
                 {% endfor %}
             </select>
-            <button type="button" class="btn delete-category-btn">Delete</button>
+            <button type="button" class="rounded-lg bg-red-600 p-2 px-4 hover:bg-red-500 transition-all ease-in-out btn delete-category-btn">Delete</button>
         </div>
         `;
         
