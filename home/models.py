@@ -32,24 +32,6 @@ class ProjectImages(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     
-# class Brand(models.Model):
-#     name = models.CharField(max_length=100)
-#     contact_person = models.CharField(max_length=100, blank=True, null=True)
-#     phone = models.CharField(max_length=15, blank=True, null=True)
-#     address = models.TextField(blank=True, null=True)
-  
-#     city = models.CharField(max_length=100, blank=True, null=True)
-#     state = models.CharField(max_length=100, blank=True, null=True)
-#     zip_code = models.CharField(max_length=10, blank=True, null=True)
-#     country = models.CharField(max_length=100, blank=True, null=True)
-    
-#     status = models.CharField(max_length=10, default='Pending')
-#     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='brands')
-#     project_img = models.ManyToManyField(ProjectImages, blank=True,null=True)
-
-#     def __str__(self):
-#         return self.name
-
 
 class PagesData(models.Model):
     terms_and_conditions = RichTextField(blank=True, null=True)

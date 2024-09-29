@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /dashboard/
+
+Sitemap: https://zarluxury.com/sitemap.xml

@@ -2,14 +2,7 @@
 from django.urls import path
 from . import views
 from django.contrib.sitemaps.views import sitemap
-from .sitemaps import StaticViewSitemap, CategorySitemap, UserSitemap
 
-# Define the sitemaps dictionary
-sitemaps = {
-    'static': StaticViewSitemap,
-    'categories': CategorySitemap,
-    'users': UserSitemap,
-}
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -46,6 +39,4 @@ urlpatterns = [
     
     path('connect-impression/<str:brand_id>', views.connect_impression, name='connect_impression'),
 
-    # Sitemap URL
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]

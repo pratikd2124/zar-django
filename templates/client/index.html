@@ -102,24 +102,40 @@
                 document.getElementById('categories').innerHTML = categoryHtml;
             }
     
-            // Display brands
+           // Display brands
             if (data.brands.length) {
                 let brandHtml = '<h3 class="font-bold">Brands</h3>';
                 data.brands.forEach(brand => {
-                    brandHtml += `<div class="p-2 rounded-lg hover:bg-gray-100 cursor-pointer hover:text-black"><a href="/material-provider/${brand.category}/${brand.id}">${brand.name}</a></div>`;
+                    // Show brand name (non-clickable)
+                    brandHtml += `<div class="p-2 rounded-lg"><span class="font-bold">${brand.name}</span>`;
+                    
+                    // List the categories under the brand name
+                    brand.categories.forEach(category => {
+                        brandHtml += `<div class="ml-4">-- <a href="/category/${category.path}/${brand.id}">${category.path}/${brand.name}</a></div>`;
+                    });
+
+                    brandHtml += `</div>`; // Closing the brand container
                 });
                 document.getElementById('brands').innerHTML = brandHtml;
             }
-    
+
             // Display service providers
             if (data.serviceProviders.length) {
                 let serviceHtml = '<h3 class="font-bold">Service Providers</h3>';
                 data.serviceProviders.forEach(provider => {
-                    serviceHtml += `<div class="p-2 rounded-lg hover:bg-gray-100 cursor-pointer hover:text-black"><a href="/service-provider/${provider.category}/${provider.id}">${provider.name}</a></div>`;
+                    // Show service provider name (non-clickable)
+                    serviceHtml += `<div class="p-2 rounded-lg"><span class="font-bold">${provider.name}</span>`;
+
+                    // List the categories under the service provider name
+                    provider.categories.forEach(category => {
+                        serviceHtml += `<div class="ml-4">-- <a href="/category/${category.path}/${provider.id}">${category.path}/${provider.name}</a></div>`;
+                    });
+
+                    serviceHtml += `</div>`; // Closing the service provider container
                 });
                 document.getElementById('service-providers').innerHTML = serviceHtml;
             }
-    
+
             // If no suggestions, hide the dropdown
             if (!data.categories.length && !data.brands.length && !data.serviceProviders.length) {
                 suggestionsDiv.classList.add('hidden');

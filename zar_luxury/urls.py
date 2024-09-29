@@ -19,12 +19,23 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import handler404, handler500
+from main_app.sitemaps import StaticViewSitemap, CategorySitemap, BrandSitemap, ServiceProviderSitemap
+from django.contrib.sitemaps.views import sitemap
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'categories': CategorySitemap,
+    'brands': BrandSitemap,
+    'service_providers': ServiceProviderSitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),  # Admin panel
     path('', include('main_app.urls')),  # Include the URLs from main_app (where your views are)
     path('dashboard/',include('home.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+        path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+
     
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

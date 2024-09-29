@@ -581,14 +581,14 @@ def suggestions(request):
                     for category in Category.objects.filter(name__icontains=query)
                 ]
         # Fetch brands matching the query
-        brands =[{'name':brand.brand_name,'id':brand.uid,'category':brand.category.name} for brand in User.objects.filter(type="Material Provider").filter(
+        brands =[{'name':brand.brand_name,'id':brand.uid,'categories':[{'name':i.name,'path':i.get_category_hierarchy() } for i in brand.category.all()]} for brand in User.objects.filter(type="Material Provider").filter(
             Q(brand_name__icontains=query) | 
             Q(bio__icontains=query) | 
             Q(contact_person__icontains=query)
         )]
 
         # Fetch services matching the query
-        services = [{'name':(service.first_name +' '+service.last_name)  ,'id':service.uid,'category':service.category.name} for service in User.objects.filter(type="Service Provider").filter(
+        services = [{'name':(service.first_name +' '+service.last_name)  ,'id':service.uid,'categories':[{'name':i.name,'path':i.get_category_hierarchy() } for i in service.category.all()]} for service in User.objects.filter(type="Service Provider").filter(
             Q(first_name__icontains=query) | 
             Q(last_name__icontains=query) | 
             Q(firm_name__icontains=query) | 
@@ -601,6 +601,7 @@ def suggestions(request):
             'brands': brands,
             'serviceProviders': services
         }
+        
 
         return JsonResponse(data)
 
