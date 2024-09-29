@@ -32,6 +32,8 @@ def dashboard(request):
     material_provider_count = User.objects.filter(type='Material Provider').count()
 
     
+    
+    
     return render(request, 'dashboard/index.html', {
         'title': 'Dashboard',
         'categories': categories,
@@ -93,7 +95,7 @@ def all_users(request):
         member_type = 'all'
         
     
-        
+    print(member_type)
         
     return render(request,'dashboard/all-users.html',{'title':'User List','users':users,'member_type':member_type})
 
@@ -335,6 +337,13 @@ def update_brand(request,id):
     
     brand = User.objects.get(uid=id)
     end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
+    selected_categories = brand.category.all()
+    
+    if request.GET.get('type') == 'delete':
+        brand.delete()
+        messages.success(request, 'Brand deleted successfully.')
+        return redirect('brand_list')
+    
     
     if request.method == 'POST':
         brand_name = request.POST.get('brand_name')
@@ -348,7 +357,7 @@ def update_brand(request,id):
         city = request.POST.get('city')
         pincode = request.POST.get('pincode')
         
-        category = request.POST.get('category')
+        categories = request.POST.get('selected_categories')
         bio = request.POST.get('bio')
         facebook = request.POST.get('facebook')
         instagram = request.POST.get('instagram')
@@ -368,8 +377,12 @@ def update_brand(request,id):
         brand.state = state
         brand.city = city
         brand.zip_code = pincode
-        if category:
-            brand.category = Category.objects.get(id=category)
+        
+        if categories:
+            
+            brand.category.clear()
+            for category in categories.split(','):
+                brand.category.add( Category.objects.get(id=category))
         brand.bio = bio
         brand.social_links = {
             'facebook': facebook,
@@ -397,7 +410,7 @@ def update_brand(request,id):
 
     
     
-    return render(request,'dashboard/update-brand.html',{'title':'Update Brand','brand':brand,'categories':end_nodes})
+    return render(request,'dashboard/update-brand.html',{'selected_categories':selected_categories,'title':'Update Brand','brand':brand,'categories':end_nodes})
 
 
 
@@ -423,7 +436,7 @@ def update_service(request,id):
         city = request.POST.get('city')
         pincode = request.POST.get('pincode')
         
-        category = request.POST.get('category')
+        categories = request.POST.get('selected_categories')
         bio = request.POST.get('bio')
         facebook = request.POST.get('facebook')
         instagram = request.POST.get('instagram')
@@ -432,6 +445,7 @@ def update_service(request,id):
         profilepic = request.FILES.get('profilepic')
         brandlogo = request.FILES.get('brandlogo')
         profileDoc = request.FILES.get('profileDocInput')
+        
         brand.firm_name = firm_name
         brand.first_name = first_name
         brand.mobile = mobile
@@ -442,8 +456,10 @@ def update_service(request,id):
         brand.state = state
         brand.city = city
         brand.zip_code = pincode
-        if category:
-            brand.category = Category.objects.get(id=category)
+        if categories:
+            brand.category.clear()
+            for category in categories.split(','):
+                brand.category.add( Category.objects.get(id=category))
         brand.bio = bio
         brand.social_links = {
             'facebook': facebook,

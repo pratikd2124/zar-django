@@ -64,7 +64,7 @@ class User(AbstractUser):
     brand_name =  models.CharField(max_length=100,blank=True, null=True)
     designation = models.CharField(max_length=100,blank=True, null=True)
     bio = RichTextField(blank=True, null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    category = models.ManyToManyField(Category,  null=True, blank=True)
     social_links = models.JSONField(blank=True, null=True)
     profile_doc = models.FileField(upload_to='profile_docs/',blank=True, null=True)
     profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
@@ -131,3 +131,14 @@ class ConnectImpress(models.Model):
     
     def __str__(self):
         return f"{self.id}"
+    
+    
+# class PaymentStatus(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     category= models.ForeignKey(Category, on_delete=models.CASCADE)
+#     status = models.CharField(max_length=100, default='pending')
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+
+#     def __str__(self):
+#         return f"{self.id}"

@@ -28,7 +28,7 @@
         <br>
 
         {% for i in nav_list %}
-        <a href="{% url 'category_view' i.get_category_hierarchy %}?id={{i.id}}"> {{i.name}}</a> <span>/</span>
+        <a href="{% url 'category_view' i.get_category_hierarchy %}"> {{i.name}}</a> <span>/</span>
         {% endfor %}
             
         <a > {{user.brand_name}}</a> 

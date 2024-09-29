@@ -123,12 +123,25 @@ Home Owner Registration
                 <h2 class="text-xl text-white mb-6">Professional Details</h2>
                 <div class="mb-4 relative">
                     <label class="block text-white mb-2">Category</label>
-                    <select name="category" class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                        <option value="" > -- Select --</option>
-                        {% for category in categories %}
-                        <option value="{{ category.id }}">{{ category.get_category_hierarchy }}</option>
-                    {% endfor %}
-                </select>
+                    
+                    <!-- Container for category dropdowns -->
+                    <div id="category-select-container">
+                        <div class="category-select mb-2">
+                            <select name="category[]" class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 category-dropdown" required>
+                                <option value="" disabled selected>Select Category</option>
+                                {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.get_category_hierarchy }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="button" class="remove-category bg-red-500 text-white px-4 py-2 rounded-lg ml-2 hidden">Remove</button>
+                        </div>
+                    </div>
+                
+                    <!-- Button to add new category dropdown -->
+                    <button type="button" id="add-category" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg">Add Category</button>
+                
+                    <!-- Hidden input to store selected category IDs as a list -->
+                    <input type="hidden" name="selected_categories" id="selected_categories" value="">
                 </div>
                 <div class="mb-4">
                     <label class="block text-white mb-2">Brief Bio</label>
@@ -307,6 +320,69 @@ Home Owner Registration
             uploadedFiles.splice(index, 1);
             imgPreview.remove();
         }
+    </script>
+
+
+    <script>
+        // Add new category dropdown
+        document.getElementById('add-category').addEventListener('click', function() {
+            const container = document.getElementById('category-select-container');
+            const firstDropdown = container.querySelector('.category-select').cloneNode(true);
+            
+            // Clear the cloned dropdown and remove the remove button initially
+            const selectElement = firstDropdown.querySelector('select');
+            selectElement.value = ""; // Reset the selected value
+            firstDropdown.querySelector('.remove-category').classList.remove('hidden'); // Show the remove button for new dropdowns
+            
+            container.appendChild(firstDropdown);
+            updateHiddenInput();
+        });
+    
+        // Remove category dropdown and update hidden input
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-category')) {
+                event.target.closest('.category-select').remove();
+                updateHiddenInput();
+            }
+        });
+    
+        // Update hidden input and filter options
+        document.addEventListener('change', function(event) {
+            if (event.target.classList.contains('category-dropdown')) {
+                updateHiddenInput();
+                updateDropdownOptions();
+            }
+        });
+    
+        function updateHiddenInput() {
+            const selectedCategories = Array.from(document.querySelectorAll('.category-dropdown'))
+                .map(select => select.value)
+                .filter(value => value); // Filter out empty selections
+    
+            document.getElementById('selected_categories').value = selectedCategories.join(',');
+        }
+    
+        function updateDropdownOptions() {
+            const selectedValues = Array.from(document.querySelectorAll('.category-dropdown'))
+                .map(select => select.value)
+                .filter(value => value);
+    
+            document.querySelectorAll('.category-dropdown').forEach(dropdown => {
+                const currentValue = dropdown.value;
+    
+                // Disable already selected options in all dropdowns
+                dropdown.querySelectorAll('option').forEach(option => {
+                    if (selectedValues.includes(option.value) && option.value !== currentValue) {
+                        option.disabled = true;
+                    } else {
+                        option.disabled = false;
+                    }
+                });
+            });
+        }
+    
+        // Initialize hidden input and dropdowns
+        updateHiddenInput();
     </script>
     {% endblock %}
 

@@ -17,7 +17,7 @@
             {% for i in category %}
                 
                 
-            <a href="{% url 'category_view' i.get_category_hierarchy %}?id={{i.id}}" aria-label="Explore Materials">
+            <a href="{% url 'category_view' i.get_category_hierarchy %}" aria-label="Explore Materials">
                 <section class="relative isolate font-card-title flex flex-col justify-end overflow-hidden rounded-2xl w-80 h-80 mt-0 lg:mt-24 cursor-pointer group">
                     <img src="../../media/{{i.image}}" alt="Materials" class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
                     <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>

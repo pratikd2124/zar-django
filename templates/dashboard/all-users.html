@@ -42,10 +42,10 @@
                                     </div>
 
                                     <div class="table-responsive table-product">
-                                        <table class="table all-package theme-table sortable" id="table_id">
+                                        <table class="table all-package theme-table sortable" id="table">
                                             <thead>
                                                 <tr class="item">
-                                                    
+
                                                     {% if member_type == 'all'  %}
 
                                                     <th>Type</th>
@@ -53,6 +53,9 @@
                                                     {% endif %}
                                                         
                                                     <th>Name</th>
+                                                    {% if member_type == 'serviceProvider' %}
+                                                    <th>Category</th>
+                                                    {% endif %}
                                                     <th>Phone</th>
                                                     <th>Email</th>
                                                     <th>Joined</th>
@@ -70,6 +73,8 @@
                                             <tbody>
                                                 {% for user in users %}
                                                 <tr class="item">
+
+                                                 
                                                     {% if member_type == 'all' %}
 
                                                     <td>{{user.type}}</td>
@@ -81,6 +86,24 @@
                                                             <span>{{user.first_name}} {{user.last_name}}</span>
                                                         </div>
                                                     </td>
+                                                    {% if member_type == 'serviceProvider' %}
+                                                    <td>
+
+                                                        {% for i in user.category.all %}
+                                                        <div style="display: flex;align-items: center;" >
+                                                            
+                                                            <span>
+                                                                {{ i.get_category_hierarchy }} 
+                                                            </span> 
+                                                            <a href="{% url 'user_info' i.get_category_hierarchy user.uid %}" target="_blank">
+                                                                <i class="ri-eye-line"></i>
+                                                            </a> 
+                                                        </div> 
+                                                        {% endfor %}
+                                                    </td>
+                                                        
+                                                    {% endif %}
+                                                        
 
                                                     <td>{{user.mobile}}</td>
 
@@ -140,11 +163,7 @@
                                                                     <i class="ri-pencil-line"></i>
                                                                 </a>
                                                             </li>
-                                                            <li>
-                                                                <a href="{% url 'user_info' user.category.get_category_hierarchy user.uid %}" target="_blank">
-                                                                    <i class="ri-eye-line"></i>
-                                                                </a>
-                                                            </li>
+                                                            
                                                             {% endif %}
 
                                                             {% if user.type == 'Home Owner' or user.type == 'Community User' %}
@@ -262,6 +281,7 @@
                 // Function to filter rows
                 function filterRows() {
                     const query = document.getElementById("searchInput").value.toLowerCase();
+                    const table = document.getElementById("table");
                     const rows = table.getElementsByTagName("tr");
                     const filteredRows = [];
             

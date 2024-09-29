@@ -10,6 +10,8 @@ from django.db.models import Count
 
 # from .forms import HomeOwnerForm, ServiceProviderForm, MaterialProviderForm
 
+
+
 def home(request):
     category = Category.objects.filter(parent=None)
     return render(request, 'client/index.html',{'title':'Home','category':category})  
@@ -25,23 +27,27 @@ def get_nav_list(nav):
         
     return nav_list
 
+
 @login_required(login_url='login')
 def category_view(request,category_path):
-    id = request.GET.get('id')
-    
-    category = Category.objects.get(id=id)
+    name = category_path.split('/')[-1]
+    try:
+        category = Category.objects.get(name=name)
+    except:
+        category = Category.objects.get(name=name,parent__name=category_path.split('/')[-2])
+        
         
     next_categories = Category.objects.filter(parent=category)
     
     nav = category.get_category_hierarchy().split('/')
+    print(nav)
+    
     nav_list = get_nav_list(nav)
     
     users = None
     if not next_categories:
         # users = User.objects.filter(category=category).filter(payment_status='Success')
-        users = User.objects.filter(is_active=True,payment_status='Success').filter(category=category)
-        
-        
+        users = User.objects.filter(is_active=True, payment_status='Success', category__in=[category])
     return render(request, 'client/category.html', {'users':users,'category': category, 'nav_list':nav_list ,'title':category.name,'next_categories':next_categories})
 
 
@@ -232,7 +238,7 @@ def profile(request):
                 messages.success(request, 'Profile updated successfully')
                 return redirect(request.META.get('HTTP_REFERER', '/home'))
             if  request.GET.get('type') == 'professional':
-                category = request.POST.get('category')
+                categories = request.POST.getlist('selected_categories')
                 bio = request.POST.get('bio')
                 facebook = request.POST.get('facebook')
                 instagram = request.POST.get('instagram')
@@ -242,7 +248,12 @@ def profile(request):
                 brandlogo = request.FILES.get('brandlogo')
                 profileDoc = request.FILES.get('profileDocInput')
                 
-                user.category = Category.objects.get(id=category)
+                if categories:
+                    user.category.clear()
+                    for category in categories:
+                        user.category.add(Category.objects.get(id=category))
+               
+                    
                 user.bio = bio
                 user.social_links ={
                     'facebook':facebook,
@@ -364,7 +375,7 @@ def submit_service_provider(request):
         city = request.POST.get('city')
         pincode = request.POST.get('pincode')
         
-        category = request.POST.get('category')
+        categories = request.POST.getlist('selected_categories')
         bio = request.POST.get('bio')
         facebook = request.POST.get('facebook')
         instagram = request.POST.get('instagram')
@@ -374,7 +385,7 @@ def submit_service_provider(request):
         brandlogo = request.FILES.get('brandlogo')
         profileDoc = request.FILES.get('profileDocInput')
 
-        gallery_images = request.FILES.getlist('gallery_images')
+        gallery_images = request.FILES.get('gallery_images')
 
         print(profilepic,brandlogo,profileDoc,gallery_images)
         
@@ -408,14 +419,15 @@ def submit_service_provider(request):
                 'instagram': instagram,
                 'linkedin': linkedin
             }
-        user.category = Category.objects.get(id=category)
+        for  category in categories[0].split(','):
+            user.category.add(Category.objects.get(id=category))
         user.save()
-        for i in gallery_images:
-            image= ProfileGallery.objects.create( image=i)
-            image.save()
+        # for i in gallery_images:
+        #     image= ProfileGallery.objects.create(image=i)
+        #     image.save()
 
-            user.profile_gallery.add(image)
-            user.save()
+        #     user.profile_gallery.add(image)
+        #     user.save()
         
         Send_Welcome_email(user)
         messages.success(request, 'Profile is Under Review !')
@@ -445,7 +457,7 @@ def submit_material_provider(request):
         city = request.POST.get('city')
         pincode = request.POST.get('pincode')
         
-        category = request.POST.get('category')
+        categories = request.POST.getlist('selected_categories')
         bio = request.POST.get('bio')
         facebook = request.POST.get('facebook')
         instagram = request.POST.get('instagram')
@@ -491,7 +503,8 @@ def submit_material_provider(request):
                 'instagram': instagram,
                 'linkedin': linkedin
             }
-        user.category = Category.objects.get(id=category)
+        for  category in categories[0].split(','):
+            user.category.add(Category.objects.get(id=category))
         user.save()
         for i in gallery_images:
             image= ProfileGallery.objects.create( image=i)
@@ -536,7 +549,7 @@ def brand_info(request,category_path,uid):
     user = User.objects.get(uid = uid)
     social_links= user.social_links
     images = user.profile_gallery.all()
-    nav_list = user.category.get_category_hierarchy().split('/')
+    nav_list = category_path.split('/')
     nav_list = get_nav_list(nav_list)
 
     return render(request, 'client/brand_info.html',{'nav_list':nav_list,'images':images,'user':user,'title':str(user.brand_name ),'social_links':social_links,})
@@ -546,9 +559,9 @@ def brand_info(request,category_path,uid):
 def user_info(request,category_path,uid):
     user = User.objects.get(uid=uid)
     social_links = user.social_links
-    print(social_links)
+
     images = user.profile_gallery.all()
-    nav_list = user.category.get_category_hierarchy().split('/')
+    nav_list = category_path.split('/')
     nav_list = get_nav_list(nav_list)
 
     return render(request, 'client/service_user_info.html',{'user':user,'title':str(user.first_name + ' ' + user.last_name),'social_links':social_links,'images':images,'nav_list':nav_list})

@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from django.utils.text import slugify
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -20,6 +21,9 @@ class Category(models.Model):
             category_hierarchy.append(category.name)
             category = category.parent
         return "/".join(category_hierarchy[::-1])
+    
+    def __str__(self):
+        return self.get_category_hierarchy()
 
 
 class ProjectImages(models.Model):
