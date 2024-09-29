@@ -219,10 +219,12 @@ def profile(request):
                 
                 
                 user.mobile = mobile
-                if user.type == 'Service Provide':
+                if user.type == 'Service Provider':
                     user.firm_name = firm_name
                     user.first_name = first_name
                     user.last_name = last_name
+                    
+                    
                 if user.type == 'Material Provider':
                     user.brand_name = brand_name
                     user.designation = designation
@@ -250,7 +252,7 @@ def profile(request):
                 
                 if categories:
                     user.category.clear()
-                    for category in categories:
+                    for category in categories[0].split(','):
                         user.category.add(Category.objects.get(id=category))
                
                     
