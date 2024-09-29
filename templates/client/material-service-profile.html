@@ -31,16 +31,16 @@ option{
                 </div>
             </aside>
         </div>
-        <div class="md:w-/5 w-[70%] mb-12">
+        <div class="md:w-3/5 w-full p-4 mb-12">
             <form method="POST" action="{% url 'profile' %}?type=basic_info"  class="w-full" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div id="basic-info" class="mb-4 space-y-4 border border-gray-800 rounded-xl p-6" style="display: flex;flex-wrap: wrap;align-content: center;justify-content: space-between;align-items: flex-end;">
+                <div id="basic-info" class="mb-4 space-y-4 border border-gray-800 rounded-xl p-6 grid lg:grid-cols-2 grid-cols-1 gap-6" style="">
                     <!-- Name Field -->
                     
                     {% if user.type == 'Service Provider' %}
                         
                         
-                    <div class="relative w-[30%] ">
+                    <div class="relative w-full ">
                         <label class="block mb-1">First Name</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -50,7 +50,7 @@ option{
                         <input type="text" name="first_name" value="{{ user.first_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
 
-                    <div class="relative w-[30%] ">
+                    <div class="relative w-full ">
                         <label class="block mb-1">Last Name</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -60,7 +60,7 @@ option{
                         <input type="text" name="last_name" value="{{ user.last_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
                     {% else %}
-                    <div class="relative w-[30%] ">
+                    <div class="relative w-full ">
                         <label class="block mb-1">Brand Name</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -70,7 +70,7 @@ option{
                         <input type="text" name="brand_name" value="{{ user.brand_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
 
-                    <div class="relative w-[30%] ">
+                    <div class="relative w-full ">
                         <label class="block mb-1">Contact Person Name</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -83,7 +83,7 @@ option{
                     {% endif %}
 
                     <!-- Email Field -->
-                    <div class="relative w-[30%]">
+                    <div class="relative w-full">
                         <label class="block mb-1" title="Can't Change">Email <span style="color:red;font-size:10px">* Can't Edit *</span>  </label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -95,7 +95,7 @@ option{
                     </div>
 
                     <!-- Phone Field -->
-                    <div class="relative w-[30%]">
+                    <div class="relative w-full">
                         <label class="block mb-1">Phone Number</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -110,7 +110,7 @@ option{
                         
                         
                     <!-- Firm Name Field -->
-                    <div class="relative w-[30%]">
+                    <div class="relative w-full">
                         <label class="block mb-1">Firm Name</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -121,7 +121,7 @@ option{
                     </div>
 
                     <!-- Address Field -->
-                    <div class="relative w-[30%]">
+                    <div class="relative w-full">
                         <label class="block mb-1">Firm Address</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -135,7 +135,7 @@ option{
                         
                         
                     <!-- Firm Name Field -->
-                    <div class="relative w-[30%]">
+                    <div class="relative w-full">
                         <label class="block mb-1">Designation</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -146,7 +146,7 @@ option{
                     </div>
 
                     <!-- Address Field -->
-                    <div class="relative w-[30%]">
+                    <div class="relative w-full">
                         <label class="block mb-1">Company Address</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -159,7 +159,7 @@ option{
                     {% endif %}
 
                     <!-- Country Select Field -->
-                    <div class="relative mt-4 w-[30%]">
+                    <div class="relative  mt-4  w-full">
                         <label class="block mb-1">Country</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -173,7 +173,7 @@ option{
                     </div>
 
                     <!-- State Select Field -->
-                    <div class="relative mt-4 w-[30%]">
+                    <div class="relative  mt-4  w-full">
                         <label class="block mb-1">State</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -187,7 +187,7 @@ option{
                     </div>
 
                     <!-- City Select Field -->
-                    <div class="relative mt-4 w-[30%]">
+                    <div class="relative  mt-4  w-full">
                         <label class="block mb-1">City</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -201,7 +201,7 @@ option{
                     </div>
 
                     <!-- Code Input Field -->
-                    <div class="relative mt-4 w-[30%]">
+                    <div class="relative  mt-4  w-full">
                         <label class="block mb-1">Code</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -210,7 +210,8 @@ option{
                         </span>
                         <input type="number" name="pincode" value="{{ user.zip_code }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
-                    <div class="flex justify-end space-x-2">
+                    <div></div>
+                    <div class="w-full  flex justify-end space-x-2">
                         <button type="submit" class="px-8 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">
                             Update Profile
                         </button>
@@ -220,7 +221,7 @@ option{
 
             <form method="POST" action="{% url 'profile' %}?type=professional" class="w-full"  enctype="multipart/form-data">
                 {% csrf_token %}
-                <div id="additional-info" class="mb-4 space-y-4  border border-gray-800 rounded-xl p-6" style="display: flex;flex-wrap: wrap;align-content: center;justify-content: space-between;align-items: flex-end;">
+                <div id="additional-info" class="mb-4 space-y-4  border border-gray-800 rounded-xl p-6 grid  grid-cols-1" style="">
                     <!-- Brief Bio Field -->
                     <div class="mb-4 w-[100%]">
                         <label class="block text-white mb-2">Brief Bio</label>
@@ -237,73 +238,79 @@ option{
                             {% endfor %}
                     </select>
                     </div>
+                    
+                    <div class="grid lg:grid-cols-3 grid-cols-1 gap-4">
+                        <!-- Social Links Fields -->
+                        <div class="relative w-full">
+                            <label class="block mb-1">Facebook</label>
+                            <input type="url" name="facebook" value="{{ user.social_links.facebook }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="relative w-full">
+                            <label class="block mb-1">Instagram</label>
+    
+                            <input type="url" name="instagram" value="{{ user.social_links.instagram }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="relative w-full">
+                            <label class="block mb-1">LinkedIn</label>
+    
+                            <input type="url" name="linkedin" value="{{ user.social_links.linkedin }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
 
-                    <!-- Social Links Fields -->
-                    <div class="relative w-[30%]">
-                        <label class="block mb-1">Facebook</label>
-                        <input type="url" name="facebook" value="{{ user.social_links.facebook }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
-                    <div class="relative w-[30%]">
-                        <label class="block mb-1">Instagram</label>
-
-                        <input type="url" name="instagram" value="{{ user.social_links.instagram }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div class="relative w-[30%]">
-                        <label class="block mb-1">LinkedIn</label>
-
-                        <input type="url" name="linkedin" value="{{ user.social_links.linkedin }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div class="relative w-[30%]">
-                        <label class="block mb-1">Profile Picture</label>
-                        <input type="file" name="profilepic" accept="image/*" class="hidden" id="profilePicInput" onchange="previewImage(event, 'profilePicPreview')">
-                        <div class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010]">
-                            <img id="profilePicPreview" src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% endif %}" alt="Profile Pic" class="mt-4  object-cover border mx-auto">
-                            <div class="absolute right-2 bottom-2">
-                                <div class="flex gap-1">
-                                    <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('profilePicInput').click();">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2Z" />
-                                        </svg>
-                                    </button>
+                    <div class="my-4 border border-gray-700 rounded-lg h-auto md:h-80 p-2 grid lg:grid-cols-3 grid-cols-1 gap-4">
+                        <div class="relative w-full">
+                            <label class="block mb-1">Profile Picture</label>
+                            <input type="file" name="profilepic" accept="image/*" class="hidden" id="profilePicInput" onchange="previewImage(event, 'profilePicPreview')">
+                            <div class="relative border border-dashed border-gray-500  h-64 rounded-lg bg-[#101010]">
+                                <img id="profilePicPreview" src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% endif %}" alt="Profile Pic" class="mt-4 h-56 border mx-auto">
+                                <div class="absolute right-2 bottom-2">
+                                    <div class="flex gap-1">
+                                        <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('profilePicInput').click();">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                                <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2Z" />
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Brand Picture Field -->
-                    <div class="relative w-[30%]">
-                        <label class="block mb-1">Brand Logo</label>
-                        <input type="file" name="brandlogo" accept="image/*" class="hidden" id="brandPicInput" onchange="previewImage(event, 'brandPicPreview')">
-                        <div class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010]">
-                            <img id="brandPicPreview" src="{% if user.brand_logo %}{{ user.brand_logo.url }}{% endif %}" alt="Brand Pic" class="mt-4 w-auto h-32 rounded-md object-fit border mx-auto">
-                            <div class="absolute right-2 bottom-2">
-                                <div class="flex gap-1">
-                                    <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('brandPicInput').click();">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2Z" />
-                                        </svg>
-                                    </button>
+                        
+                        <!-- Brand Picture Field -->
+                        <div class="relative w-full">
+                            <label class="block mb-1">Brand Logo</label>
+                            <input type="file" name="brandlogo" accept="image/*" class="hidden" id="brandPicInput" onchange="previewImage(event, 'brandPicPreview')">
+                            <div class="relative border border-dashed border-gray-500 h-64 rounded-lg bg-[#101010]">
+                                <img id="brandPicPreview" src="{% if user.brand_logo %}{{ user.brand_logo.url }}{% endif %}" alt="Brand Pic" class="mt-4 w-auto h-32 rounded-md object-fit border mx-auto">
+                                <div class="absolute right-2 bottom-2">
+                                    <div class="flex gap-1">
+                                        <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('brandPicInput').click();">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                                                <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2Z" />
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                        <div class="relative w-[30%]">
-                            <a {% if user.profile_doc %} href="{{ user.profile_doc.url }}"  download {% else %} href="#" {% endif %} class="p-2 rounded-md border">
-                                Download
-                            </a>
-                            <label class="block mt-2">Profile Document</label>
-                            <small class='text-xs text-gray-600'>Add a PDF document</small>
-
-                            <input type="file" name="profileDocInput" accept="application/pdf" class="hidden" id="profileDocInput">
-                            <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
+                        
+                            <div class="relative w-full">
                                 
-                                <button type="button" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('profileDocInput').click()">Upload</button>
+                                <label class="block mt-2">Profile Document</label>
+                                <small class='text-xs text-gray-600'>Add a PDF document</small>
+                                <input type="file" name="profileDocInput" accept="application/pdf" class="hidden" id="profileDocInput">
+                                <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
+                                    <a {% if user.profile_doc %} href="{{ user.profile_doc.url }}"  download {% else %} href="#" {% endif %} class="p-2 rounded-md text-xs bg-white text-black border">
+                                        {{ user.profile_doc.name }}
+                                    </a>
+                                    
+                                    <button type="button" class="w-fit my-2 mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('profileDocInput').click()">Upload</button>
+                                </div>
                             </div>
-                        </div>
+
+                    </div>
 
                     <!-- Brand Picture Field -->
-                    {% comment %} <div class="relative w-[30%]">
+                    {% comment %} <div class="relative w-full">
                         <label class="block">Profile Document</label>
                         <input type="file" name="profileDocInput" accept="application/pdf" class="hidden" id="profileDocInput">
                         <div class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010]">
@@ -349,10 +356,13 @@ option{
                             <div class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010]">
                                 <div class="mt-4 flex flex-wrap gap-2">
                                     {% for image in user.profile_gallery.all %}
-                                        <div class="relative">
-                                            <img src="{{ image.image.url }}" alt="Showcase" class="object-cover border rounded">
+                                    <div class="flex flex-wrap">
+                                        <div class="relative ">
+                                            <img src="{{ image.image.url }}" alt="Showcase" class="object-cover h-40 border rounded">
                                             <a class="absolute top-0 right-0 bg-black/50  p-1.5 px-3" href="{% url 'profile' %}?action=delete&image_id={{image.id}}">x</a>
                                         </div>
+
+                                    </div>
                                     {% endfor %}
                                 </div>
                                                         
