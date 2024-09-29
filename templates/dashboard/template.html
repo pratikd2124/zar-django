@@ -352,6 +352,11 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
             "pageLength": 10,       // Set the number of rows per page
         });
     });
+    // ckeditor/config.js
+
+CKEDITOR.editorConfig = function( config ) {
+    config.versionCheck = false;
+};
     </script>
 <!-- latest js -->
 <script src="../../static/backend_assets/assets/js/jquery-3.6.0.min.js"></script>
