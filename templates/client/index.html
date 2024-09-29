@@ -111,7 +111,7 @@
                     
                     // List the categories under the brand name
                     brand.categories.forEach(category => {
-                        brandHtml += `<div class="ml-4">-- <a href="/category/${category.path}/${brand.id}">${category.path}/${brand.name}</a></div>`;
+                        brandHtml += `<div class="ml-4">-- <a href="/material-provider/${category.path}/${brand.id}">${category.path}/${brand.name}</a></div>`;
                     });
 
                     brandHtml += `</div>`; // Closing the brand container
@@ -128,7 +128,7 @@
 
                     // List the categories under the service provider name
                     provider.categories.forEach(category => {
-                        serviceHtml += `<div class="ml-4">-- <a href="/category/${category.path}/${provider.id}">${category.path}/${provider.name}</a></div>`;
+                        serviceHtml += `<div class="ml-4">-- <a href="/service-provider/${category.path}/${provider.id}">${category.path}/${provider.name}</a></div>`;
                     });
 
                     serviceHtml += `</div>`; // Closing the service provider container
