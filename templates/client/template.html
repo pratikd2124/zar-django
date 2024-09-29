@@ -330,7 +330,13 @@
         }).showToast();
     {% endfor %}
 {% endif %}
+// ckeditor/config.js
 
+CKEDITOR.editorConfig = function( config ) {
+    config.versionCheck = false;
+};
 </script>
+
+
 </body>
 </html>
