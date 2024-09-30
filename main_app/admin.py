@@ -8,6 +8,7 @@ from .models import *
 admin.site.register(Community)
 admin.site.register(User)
 admin.site.register(ProfileGallery)
+admin.site.register(ProfileInfo)
 
 admin.site.register(SupportTickets)
 admin.site.register(ContactPageDetails)

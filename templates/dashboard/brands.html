@@ -68,13 +68,13 @@
                                                     <td class="brand-name">{{ cat.brand_name }}</td>
                                                     
                                                     <td>
-                                                    {% for i in cat.category.all %}
+                                                    {% for i in cat.profile.all %}
                                                     <div style="display: flex;align-items: center;" >
 
                                                         <span>
-                                                            {{ i.get_category_hierarchy }} 
+                                                            {{ i.category.get_category_hierarchy }} 
                                                         </span> 
-                                                        <a href="{% url 'brand_info' i.get_category_hierarchy cat.uid %}" target="_blank">
+                                                        <a href="{% url 'brand_info' i.category.get_category_hierarchy cat.uid %}" target="_blank">
                                                             <i class="ri-eye-line"></i>
                                                         </a> 
                                                     </div> 

@@ -83,15 +83,10 @@ def all_users(request):
             if member_type == 'homeOwner':
                 users = users.filter(type='Home Owner')
                 
-            elif member_type == 'materialProvider':
-                users = users.filter(type='Material Provider')  
-                
-            elif member_type == 'serviceProvider':
-                users = users.filter(type = 'Service Provider')
             else:
                 users = users.filter(type='Community User')
     else:
-        users = users.filter(type__in= ['Home Owner', 'Community User', 'Service Provider'])
+        users = users.filter(type__in= ['Home Owner', 'Community User'])
         member_type = 'all'
         
     
@@ -153,6 +148,28 @@ def all_community(request):
     
     
     return render(request,'dashboard/community.html',{ 'title':'Community' ,'community':community})
+
+
+
+
+@login_required(login_url='login')
+def service_providers(request):
+    if not  request.user.is_superuser:
+        messages.error(request, 'You are not authorized to access this page.')
+        return redirect('home')
+    
+    providers = User.objects.order_by('-id').filter(type='Service Provider')[:2]
+    categories = Category.objects.order_by('-id').all()
+    
+    
+        
+    return render(request,'dashboard/service-provider.html',{'title':'Service Provider','providers':providers,'categories':categories})
+
+
+
+
+
+
 
 
 

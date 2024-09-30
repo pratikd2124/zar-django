@@ -1,7 +1,7 @@
 # main_app/views.py
 from django.shortcuts import render, redirect
 from home.models import Category,PagesData
-from .models import User,Community,ProfileGallery, SupportTickets, ContactPageDetails
+from .models import *
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -173,12 +173,6 @@ def profile(request):
     user = User.objects.get(email=request.user.email)
 
     
-    if request.GET.get('action') == 'delete':
-        if request.GET.get('image_id'):
-            img = ProfileGallery.objects.get(id=request.GET.get('image_id'))
-            img.delete()
-            messages.success(request, 'Profile updated successfully')
-            return redirect(request.META.get('HTTP_REFERER', '/home'))
     
     # Check the user type and render the appropriate template
     if user_type in ['Home Owner', 'Community User']:
@@ -199,17 +193,17 @@ def profile(request):
 
         
         return render(request, 'client/home-owner-profile.html')
+    elif user_type == 'Material Provider':
+        
+        end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
+        return render(request, 'client/material-provider-profile.html',{'title':'Profile','categories':end_nodes})
     else:
         if request.method == 'POST':
             if request.GET.get('type') == 'basic_info':
                 first_name = request.POST.get('first_name')
                 last_name = request.POST.get('last_name')
                 
-                brand_name = request.POST.get('brandName')
-                designation = request.POST.get('designation')
-                contact_person = request.POST.get('contactPerson')
                 mobile = request.POST.get('mobile')
-                email = request.POST.get('email')
                 firm_name = request.POST.get('firmName')
                 firm_address = request.POST.get('firmAddress')
                 country = request.POST.get('country')
@@ -219,18 +213,13 @@ def profile(request):
                 
                 
                 user.mobile = mobile
-                if user.type == 'Service Provider':
-                    user.firm_name = firm_name
-                    user.first_name = first_name
-                    user.last_name = last_name
+                user.firm_name = firm_name
+                user.first_name = first_name
+                user.last_name = last_name
                     
-                    
-                if user.type == 'Material Provider':
-                    user.brand_name = brand_name
-                    user.designation = designation
-                    user.contact_person = contact_person
+           
                 
-                user.firm_address = firm_address
+                user.address = firm_address
                 user.country = country
                 user.state = state
                 user.city = city
@@ -239,56 +228,22 @@ def profile(request):
                 
                 messages.success(request, 'Profile updated successfully')
                 return redirect(request.META.get('HTTP_REFERER', '/home'))
-            if  request.GET.get('type') == 'professional':
-                categories = request.POST.getlist('selected_categories')
-                bio = request.POST.get('bio')
-                facebook = request.POST.get('facebook')
-                instagram = request.POST.get('instagram')
-                linkedin = request.POST.get('linkedin')
-                
-                profilepic = request.FILES.get('profilepic')
-                brandlogo = request.FILES.get('brandlogo')
-                profileDoc = request.FILES.get('profileDocInput')
-                
-                if categories:
-                    user.category.clear()
-                    for category in categories[0].split(','):
-                        user.category.add(Category.objects.get(id=category))
-               
-                    
-                user.bio = bio
-                user.social_links ={
-                    'facebook':facebook,
-                    'instagram':instagram,
-                    'linkedin':linkedin,
-                }
-                
-                if profilepic:
-                    user.profile_pic = profilepic
-                if brandlogo:
-                    user.brand_logo = brandlogo
-                if profileDoc:
-                    user.profile_doc = profileDoc
-                    
-                user.save()
-                messages.success(request, 'Profile updated successfully')
-                return redirect(request.META.get('HTTP_REFERER', '/home'))
-            if request.GET.get('type') == 'gallery':
-                
-                if user.profile_gallery.count() >= 10:
-                    messages.error(request, 'You have reached the maximum limit of 10 images.')
-                    return redirect(request.META.get('HTTP_REFERER', '/home'))
-                gallery_images = request.FILES.getlist('img')
-                for gallery_image in gallery_images:
-                    img = ProfileGallery.objects.create(image=gallery_image)
-                    img.save()
-                    user.profile_gallery.add(img)
+            
+            if request.GET.get('type') == 'professional':
+                new_categories = request.POST.get('new_categories')
+                for cat in  new_categories.split(','):
+                    profile = ProfileInfo.objects.create(   
+                    category = Category.objects.get(id=cat)
+                    )
+                    profile.save()
+                    user.profile.add(profile)
                     user.save()
-                messages.success(request, 'Profile updated successfully')
-                return redirect(request.META.get('HTTP_REFERER', '/home'))
-        
+                    messages.success(request, 'New Category added successfully!!')
+                    messages.info(request, 'New Category Under Review!')
+                    return redirect(request.META.get('HTTP_REFERER', '/home'))
+                
         end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
-        return render(request, 'client/material-service-profile.html',{'title':'Profile','categories':end_nodes})
+        return render(request, 'client/service-provider-profile.html',{'title':'Profile','categories':end_nodes})
 
 
 
@@ -378,18 +333,8 @@ def submit_service_provider(request):
         pincode = request.POST.get('pincode')
         
         categories = request.POST.getlist('selected_categories')
-        bio = request.POST.get('bio')
-        facebook = request.POST.get('facebook')
-        instagram = request.POST.get('instagram')
-        linkedin = request.POST.get('linkedin')
-        
-        profilepic = request.FILES.get('profilepic')
-        brandlogo = request.FILES.get('brandlogo')
-        profileDoc = request.FILES.get('profileDocInput')
+       
 
-        gallery_images = request.FILES.get('gallery_images')
-
-        print(profilepic,brandlogo,profileDoc,gallery_images)
         
         if User.objects.filter(email=email).exists():
             messages.error(request, 'Email already exists')
@@ -401,36 +346,23 @@ def submit_service_provider(request):
                     last_name=last_name,
                     mobile=mobile,
                     firm_name=firm_name,
-                    firm_address=firm_address,
+                    address=firm_address,
                     country=country,
                     state=state,
                     city=city,
                     zip_code=pincode,
-                    bio=bio
                 )
         user.type = 'Service Provider'
-        if profilepic:
-            user.profile_pic = profilepic
-        if brandlogo:
-            user.brand_logo = brandlogo
-        if profileDoc:
-            user.profile_doc = profileDoc
-        if facebook or instagram or linkedin:
-            user.social_links = {
-                'facebook': facebook,
-                'instagram': instagram,
-                'linkedin': linkedin
-            }
-        for  category in categories[0].split(','):
-            user.category.add(Category.objects.get(id=category))
         user.save()
-        # for i in gallery_images:
-        #     image= ProfileGallery.objects.create(image=i)
-        #     image.save()
 
-        #     user.profile_gallery.add(image)
-        #     user.save()
-        
+        for  category in categories[0].split(','):
+            profile = ProfileInfo.objects.create(
+                category=Category.objects.get(id=category)
+            )
+            profile.save()
+            user.profile.add(profile)
+            user.save()
+    
         Send_Welcome_email(user)
         messages.success(request, 'Profile is Under Review !')
         return redirect('home')
@@ -439,11 +371,10 @@ def submit_service_provider(request):
 
 
     # Get all categories and recursively filter those whose root ancestor is 'Services'
-    end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
-
-
-    
+    end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)    
     return render(request, 'client/service-provider.html',{'categories':end_nodes} )
+
+
 
 def submit_material_provider(request):
   
@@ -460,18 +391,8 @@ def submit_material_provider(request):
         pincode = request.POST.get('pincode')
         
         categories = request.POST.getlist('selected_categories')
-        bio = request.POST.get('bio')
-        facebook = request.POST.get('facebook')
-        instagram = request.POST.get('instagram')
-        linkedin = request.POST.get('linkedin')
         
-        profilepic = request.FILES.get('profilepic')
-        brandlogo = request.FILES.get('brandlogo')
-        profileDoc = request.FILES.get('profileDocInput')
 
-        gallery_images = request.FILES.getlist('gallery_images')
-
-        print(profilepic,brandlogo,profileDoc,gallery_images)
         
         if User.objects.filter(email=email).exists():
             messages.error(request, 'Email already exists')
@@ -485,53 +406,28 @@ def submit_material_provider(request):
                     contact_person=contact_person_name,
                     mobile=mobile,
                     designation=designation,
-                    firm_address=firm_address,
+                    address=firm_address,
                     country=country,
                     state=state,
                     city=city,
                     zip_code=pincode,
-                    bio=bio
                 )
         user.type = 'Material Provider'
-        if profilepic:
-            user.profile_pic = profilepic
-        if brandlogo:
-            user.brand_logo = brandlogo
-        if profileDoc:
-            user.profile_doc = profileDoc
-        if facebook or instagram or linkedin:
-            user.social_links = {
-                'facebook': facebook,
-                'instagram': instagram,
-                'linkedin': linkedin
-            }
+        
         for  category in categories[0].split(','):
-            user.category.add(Category.objects.get(id=category))
-        user.save()
-        for i in gallery_images:
-            image= ProfileGallery.objects.create( image=i)
-            image.save()
-            user.profile_gallery.add(image)
+            profile = ProfileInfo.objects.create(
+                category=Category.objects.get(id=category)
+            )
+            profile.save()
+            user.profile.add(profile)
             user.save()
+        
         
         Send_Welcome_email(user)
         messages.success(request, 'Profile is Under Review !')
         return redirect('home')
-    # Get all categories and recursively filter those whose root ancestor is 'Services'
-    services_root = Category.objects.get(name__icontains='material')
 
-    # Get all categories and recursively filter those whose root ancestor is 'Services'
-    all_categories = Category.objects.all()
-
-    categories = []
-    for category in all_categories:
-        if get_root_category(category) == services_root:
-            categories.append({
-                'id': category.id,
-                'name': category.name,
-                'parent_id': category.parent_id
-            })
-
+    
     # Build the tree hierarchy for the filtered categories
     end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
     return render(request, 'client/material_provider_form.html',{'categories':end_nodes,'title':'Material Provider'} )

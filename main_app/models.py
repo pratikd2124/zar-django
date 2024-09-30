@@ -43,7 +43,7 @@ class ProfileInfo(models.Model):
     contact_person = models.CharField(max_length=100, blank=True, null=True)
     designation = models.CharField(max_length=100,blank=True, null=True)
     bio = RichTextField(blank=True, null=True)
-    category = models.ManyToManyField(Category,  null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE ,null=True, blank=True)
        
     profile_doc = models.FileField(upload_to='profile_docs/',blank=True, null=True)
     profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
@@ -73,7 +73,7 @@ class User(AbstractUser):
     
     #Service Provider Fields
     firm_name = models.CharField(max_length=100,blank=True, null=True)
-    firm_address = models.TextField(blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
     country = models.CharField(max_length=100,blank=True, null=True)
     state = models.CharField(max_length=100,blank=True, null=True)
     city = models.CharField(max_length=100,blank=True, null=True)

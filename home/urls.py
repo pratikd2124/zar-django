@@ -8,6 +8,7 @@ urlpatterns = [
     path('community',views.all_community,name='all_community'),
 
     path('brand',views.all_brand,name='brand_list'),
+    path('service-provider',views.service_providers,name='service_provider'),
     path('category',views.all_category,name='category_list'),
     
     path('send_passcode',views.send_passcode,name='send_passcode'),

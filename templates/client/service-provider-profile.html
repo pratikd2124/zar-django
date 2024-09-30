@@ -1,0 +1,582 @@
+{% extends 'client/template.html' %}
+
+{% block content %}
+{% load static %}
+
+{% load static %}
+
+<style>
+option{
+    color:black !important;
+}
+
+</style>
+
+    <div class="w-full flex py-8">
+        <div class="md:block hidden md:w-1/4 p-6 w-[30%]">
+            <aside class="w-1/4 p-6">
+                <div class="fixed p-6 border rounded-lg border-gray-700">
+                    <h2 class="text-lg font-bold mb-4">Edit Profile</h2>
+                    <ul class="space-y-5 text-sm tracking-wider">
+                        <li class="mb-2 cursor-pointer hover:text-gray-300" onclick="scrollToSection('basic-info')">
+                            Basic Information
+                        </li>
+                        <li class="mb-2 cursor-pointer hover:text-gray-300" onclick="scrollToSection('additional-info')">
+                            Additional Information
+                        </li>
+                        <li class="mb-2 cursor-pointer hover:text-gray-300" onclick="scrollToSection('profile')">
+                            Profile / Visual Uploads
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="md:w-3/5 w-full p-4 mb-12">
+            
+            <form method="POST" action="{% url 'profile' %}?type=basic_info"  class="w-full" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div id="basic-info" class="mb-4 space-y-4 border border-gray-800 rounded-xl p-6 grid lg:grid-cols-4 grid-cols-1 gap-6" style="">
+                    <!-- Name Field -->
+                    
+                    {% if user.type == 'Service Provider' %}
+                        
+                        
+                    <div class="relative w-full ">
+                        <label class="block mb-1">First Name</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </span>
+                        <input type="text" name="first_name" value="{{ user.first_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+
+                    <div class="relative w-full ">
+                        <label class="block mb-1">Last Name</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </span>
+                        <input type="text" name="last_name" value="{{ user.last_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    {% else %}
+                    <div class="relative w-full ">
+                        <label class="block mb-1">Brand Name</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </span>
+                        <input type="text" name="brand_name" value="{{ user.brand_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+
+                    <div class="relative w-full ">
+                        <label class="block mb-1">Contact Person Name</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </span>
+                        <input type="text" name="contact_person_name" value="{{ user.contact_person }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+
+                    {% endif %}
+
+                    <!-- Email Field -->
+                    <div class="relative w-full">
+                        <label class="block mb-1" title="Can't Change">Email <span style="color:red;font-size:10px">* Can't Edit *</span>  </label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                        </span>
+                        <input type="email" name="email" disabled title="Can't Change" value="{{ user.email }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    
+                    </div>
+
+                    <!-- Phone Field -->
+                    <div class="relative w-full">
+                        <label class="block mb-1">Phone Number</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25Z" />
+                            </svg>
+                        </span>
+                        <input type="tel" name="mobile" value="{{ user.mobile }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+
+                    
+                    {% if user.type == 'Service Provider' %}
+                        
+                        
+                    <!-- Firm Name Field -->
+                    <div class="relative w-full">
+                        <label class="block mb-1">Firm Name Service</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
+                            </svg>
+                        </span>
+                        <input type="text" name="firmName" value="{{ user.firm_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <!-- Address Field -->
+                    <div class="relative w-full">
+                        <label class="block mb-1">Firm Address</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                            </svg>
+                        </span>
+                        <textarea type="text" name="firmAddress" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>{{ user.address }}</textarea>
+                    </div>
+                    {% else %}
+                        
+                        
+                    <!-- Firm Name Field -->
+                    <div class="relative w-full">
+                        <label class="block mb-1">Designation</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
+                            </svg>
+                        </span>
+                        <input type="text" name="designation" value="{{ user.designation }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+
+                    <!-- Address Field -->
+                    <div class="relative w-full">
+                        <label class="block mb-1">Company Address</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                            </svg>
+                        </span>
+                        <input type="text" name="firmAddress" value="{{ user.firm_address }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    {% endif %}
+
+                    <!-- Country Select Field -->
+                    <div class="relative  mt-4  w-full">
+                        <label class="block mb-1">Country</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </span>
+                        <select name="country" id="country" onchange="fetchStates()" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Select Country</option>
+                            <!-- Add more country options here -->
+                        </select>
+                    </div>
+
+                    <!-- State Select Field -->
+                    <div class="relative  mt-4  w-full">
+                        <label class="block mb-1">State</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </span>
+                        <select name="state" id="state" onchange="fetchCities()" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="" readonly>Select State</option>
+                           
+                        </select>
+                    </div>
+
+                    <!-- City Select Field -->
+                    <div class="relative  mt-4  w-full">
+                        <label class="block mb-1">City</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </span>
+                        <select name="city" id="city" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Select City</option>
+                          
+                        </select>
+                    </div>
+
+                    <!-- Code Input Field -->
+                    <div class="relative  mt-4  w-full">
+                        <label class="block mb-1">Zip Code</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </span>
+                        <input type="number" name="pincode" value="{{ user.zip_code }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div></div>
+                </div>
+                <div class="w-full  flex justify-end space-x-2">
+                    <button type="submit" class="px-8 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">
+                        Update Profile
+                    </button>
+                </div>
+            </form>
+
+            <form method="POST" action="{% url 'profile' %}?type=professional" class="w-full"  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div id="additional-info" class="mb-4 space-y-4  border border-gray-800 rounded-xl p-6 grid  grid-cols-1" style="">
+                    <!-- Brief Bio Field -->
+                  
+
+                    <!-- Category Field -->
+                    <div class="relative w-[100%]">
+                        <label class="block mb-1">Category</label>
+                        <button type="button" class="rounded-lg bg-violet-700 p-2 px-4 hover:bg-violet-600 btn btn-primary mt-3" id="add-category-btn">Add Category</button>
+
+                        <!-- Hidden input to hold the list of selected categories -->
+                        <input type="hidden" name="new_categories" id="selected_categories" value="{% for i in user.category.all %}{{i.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
+                        
+                        <div id="category-container">
+                        </div>
+                    
+                    </div>
+
+                    
+
+                    <div class="flex justify-end space-x-2">
+                        <button type="submit" class="px-8 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="profile" class="mb-4 space-y-4 max-w-4xl">
+                <label class="block mb-1">Representatio</label>
+                <div class="border border-gray-800 rounded-xl p-6">
+
+                    <!-- Accordion Wrapper -->
+                    <div id="accordionExample" class="accordion">
+                
+                        {% for i in user.profile.all %}
+                        <!-- Accordion Item -->
+                        <div class="accordion-item mb-4">
+                
+                            <!-- Accordion Header -->
+                            <h2 class="accordion-header mb-0" id="heading{{ forloop.counter }}">
+                                <button 
+                                    class="accordion-button collapsed relative flex items-center w-full py-4 px-6 text-white bg-gray-800 border border-gray-700 rounded-xl text-left focus:outline-none transition"
+                                    type="button" 
+                                    data-accordion-target="#collapse{{ forloop.counter }}" 
+                                    aria-expanded="false" 
+                                    aria-controls="collapse{{ forloop.counter }}">
+                                    Profile {{ forloop.counter }}: {{ i.category.get_category_hierarchy }}
+                                </button>
+                            </h2>
+                
+                            <!-- Accordion Body -->
+                            <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-accordion-parent="#accordionExample">
+                                <div class="accordion-body py-4 px-6 bg-gray-900 text-white rounded-lg">
+                                    <!-- Editable Form for Each Profile -->
+                                    <div class="mb-4 w-[100%]">
+                                        <label class="block text-white mb-2">Brief Bio</label>
+                                        <textarea name="bio" id="bio-editor-{{ forloop.counter }}" placeholder="Write a brief bio" class="w-full h-full resize-none bg-transparent border-none focus:outline-none">{{ i.bio |safe }}</textarea>
+                                    </div>
+                                    
+                                    <!-- Social Links Fields -->
+                                    <div class="grid lg:grid-cols-3 grid-cols-1 gap-4">
+                                        <div class="relative w-full">
+                                            <label class="block mb-1">Facebook</label>
+                                            <input type="url" name="facebook" value="{{ i.social_links.facebook }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div class="relative w-full">
+                                            <label class="block mb-1">Instagram</label>
+                                            <input type="url" name="instagram" value="{{ i.social_links.instagram }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                        <div class="relative w-full">
+                                            <label class="block mb-1">LinkedIn</label>
+                                            <input type="url" name="linkedin" value="{{ i.social_links.linkedin }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        </div>
+                                    </div>
+                
+                                    <!-- File Upload Fields for Profile Picture, Brand Logo, and Document -->
+                                    <div class="my-4 grid lg:grid-cols-3 grid-cols-1 gap-4">
+                                        <!-- Profile Picture -->
+                                        <div class="relative w-full">
+                                            <label class="block mb-1">Profile Picture</label>
+                                            <input type="file" name="profilepic" accept="image/*" class="hidden" id="profilePicInput{{ forloop.counter }}" onchange="previewImage(event, 'profilePicPreview{{ forloop.counter }}')">
+                                            <div class="relative border border-dashed border-gray-500 h-64 rounded-lg bg-[#101010]">
+                                                <img id="profilePicPreview{{ forloop.counter }}" src="{% if i.profile_pic %}{{ i.profile_pic.url }}{% endif %}" alt="Profile Pic" class="mt-4 h-56 border mx-auto">
+                                                <div class="absolute right-2 bottom-2">
+                                                    <div class="flex gap-1">
+                                                        <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('profilePicInput{{ forloop.counter }}').click();">
+                                                            <i class="ri-edit-line"></i> Edit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                                        <!-- Brand Logo -->
+                                        <div class="relative w-full">
+                                            <label class="block mb-1">Brand Logo</label>
+                                            <input type="file" name="brandlogo" accept="image/*" class="hidden" id="brandPicInput{{ forloop.counter }}" onchange="previewImage(event, 'brandPicPreview{{ forloop.counter }}')">
+                                            <div class="relative border border-dashed border-gray-500 h-64 rounded-lg bg-[#101010]">
+                                                <img id="brandPicPreview{{ forloop.counter }}" src="{% if i.brand_logo %}{{ i.brand_logo.url }}{% endif %}" alt="Brand Logo" class="mt-4 h-32 rounded-md object-fit border mx-auto">
+                                                <div class="absolute right-2 bottom-2">
+                                                    <div class="flex gap-1">
+                                                        <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('brandPicInput{{ forloop.counter }}').click();">
+                                                            <i class="ri-edit-line"></i> Edit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                                        <!-- Profile Document -->
+                                        <div class="relative w-full">
+                                            <label class="block mb-1">Profile Document</label>
+                                            <small class="text-xs text-gray-600">Add a PDF document</small>
+                                            <input type="file" name="profileDocInput" accept="application/pdf" class="hidden" id="profileDocInput{{ forloop.counter }}">
+                                            <div id="profileDocContainer{{ forloop.counter }}" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
+                                                <a {% if i.profile_doc %} href="{{ i.profile_doc.url }}" download {% else %} href="#" {% endif %} class="p-2 rounded-md text-xs bg-white text-black border">
+                                                    {{ i.profile_doc.name }}
+                                                </a>
+                                                <button type="button" class="w-fit my-2 mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('profileDocInput{{ forloop.counter }}').click()">Upload</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <!-- Save Button for Each Profile -->
+                                    <div class="flex justify-end space-x-2">
+                                        <button type="submit" class="px-8 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                
+            </div>
+            {% comment %} <form method="POST" action="{% url 'profile' %}?type=gallery" style="display: flex; flex-direction: column;justify-content: center;" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
+                    <input type="file" name="img" multiple accept="image/**" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer"  id="profileDocInput">
+                        
+                </div>
+                <button type="submit" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" >Save </button>
+            </form>
+
+                <!-- Showcase Images Field -->
+                <div class="relative border border-gray-800 rounded-xl p-6">
+                    <div class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010]">
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            {% for image in user.profile_gallery.all %}
+                            <div class="flex flex-wrap">
+                                <div class="relative ">
+                                    <img src="{{ image.image.url }}" alt="Showcase" class="object-cover h-40 border rounded">
+                                    <a class="absolute top-0 right-0 bg-black/50  p-1.5 px-3" href="{% url 'profile' %}?action=delete&image_id={{image.id}}">x</a>
+                                </div>
+
+                            </div>
+                            {% endfor %}
+                        </div>
+                                                
+                    </div>
+                </div>
+            </div> {% endcomment %}
+                            
+    </div>
+    <script>
+        // Basic Accordion Functionality
+        document.querySelectorAll('[data-accordion-target]').forEach(button => {
+            button.addEventListener('click', () => {
+                const target = button.getAttribute('data-accordion-target');
+                const element = document.querySelector(target);
+    
+                if (element.classList.contains('collapse')) {
+                    element.classList.remove('collapse');
+                    element.classList.add('show');
+                } else {
+                    element.classList.add('collapse');
+                    element.classList.remove('show');
+                }
+            });
+        });
+    </script>
+    <script>
+        function previewImage(event, previewId) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById(previewId);
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+    <script>
+        
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+    <script>
+        CKEDITOR.replace('bio-editor');
+
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchCountries();
+        });
+        
+        function fetchCountries() {
+            fetch('https://countriesnow.space/api/v0.1/countries')
+                .then(response => response.json())
+                .then(data => {
+                    const countrySelect = document.getElementById('country');
+                    data.data.forEach(country => {
+                        const option = document.createElement('option');
+                        option.value = country.country;
+                        option.text = country.country;
+                        countrySelect.appendChild(option);
+                    });
+                    countrySelect.disabled = false;
+        
+                    // Set default selected country
+                    countrySelect.value = '{{user.country}}';
+                    console.log(                    countrySelect.value, '{{user.country}}'                    );
+                    fetchStates(); // Fetch states for the selected country
+
+                })
+                .catch(error => console.error('Error fetching countries:', error));
+        }
+        
+        function fetchStates() {
+            const country = document.getElementById('country').value;
+            if (!country) return;
+        
+            fetch('https://countriesnow.space/api/v0.1/countries/states', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    country: country
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const stateSelect = document.getElementById('state');
+                stateSelect.innerHTML = '<option readonly selected>Select State</option>';
+                data.data.states.forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state.name;
+                    option.text = state.name;
+                    stateSelect.appendChild(option);
+                });
+                stateSelect.disabled = false;
+        
+                // Set default selected state
+                stateSelect.value = '{{user.state}}';
+                console.log(                stateSelect.value === '{{user.state}}'                );
+                fetchCities(); // Fetch cities for the selected state
+            })
+            .catch(error => console.error('Error fetching states:', error));
+        }
+        
+        function fetchCities() {
+            const country = document.getElementById('country').value;
+            const state = document.getElementById('state').value;
+            if (!state || !country) return;
+        
+            fetch('https://countriesnow.space/api/v0.1/countries/state/cities', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    country: country,
+                    state: state
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const citySelect = document.getElementById('city');
+                citySelect.innerHTML = '<option readonly selected>Select City</option>';
+                data.data.forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.text = city;
+                    citySelect.appendChild(option);
+                });
+                citySelect.disabled = false;
+        
+                // Set default selected city
+                citySelect.value = '{{user.city}}';
+            })
+            .catch(error => console.error('Error fetching cities:', error));
+        }
+        
+    </script>
+
+
+    
+<script>
+    // Function to update the hidden input field with selected category IDs
+    function updateSelectedCategories() {
+        let selectedCategories = [];
+        document.querySelectorAll('.category-select').forEach(function(select) {
+            selectedCategories.push(select.value);
+        });
+        document.getElementById('selected_categories').value = selectedCategories.join(',');
+    }
+    
+    // Event listener for "Delete" buttons
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('delete-category-btn')) {
+            // Remove the category row
+            event.target.closest('.category-row').remove();
+            // Update hidden input field
+            updateSelectedCategories();
+        }
+    });
+    
+    // Event listener for "Add Category" button
+    document.getElementById('add-category-btn').addEventListener('click', function() {
+        // Get the category dropdown HTML
+        const categoryDropdownHTML = `
+        <div class="category-row flex items-center gap-2 mb-2">
+            <select name="category" class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 category-select">
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.get_category_hierarchy }}</option>
+                {% endfor %}
+            </select>
+            <button type="button" class="rounded-lg bg-red-600 p-2 px-4 hover:bg-red-500 transition-all ease-in-out btn delete-category-btn">Delete</button>
+        </div>
+        `;
+        
+        // Append new dropdown to the category container
+        document.getElementById('category-container').insertAdjacentHTML('beforeend', categoryDropdownHTML);
+        
+        // Update hidden input field
+        updateSelectedCategories();
+    });
+    
+    // Event listener for changes in category dropdowns
+    document.addEventListener('change', function(event) {
+        if (event.target.classList.contains('category-select')) {
+            // Update hidden input field when a new category is selected
+            updateSelectedCategories();
+        }
+    });
+    
+    // On page load, update the hidden input field with the initially selected categories
+    window.addEventListener('load', function() {
+        updateSelectedCategories();
+    });
+    </script>
+{% endblock content %}

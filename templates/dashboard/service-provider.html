@@ -11,24 +11,18 @@
                                 <div class="card-body">
                                     <div class="title-header option-title">
                                         
-                                        {% if member_type == 'homeOwner' %}
-                            <h5>Home Owner</h5>
+                                       
+                            <h5>Service Providers</h5>
                             <div class="d-inline-flex">
 
                                 <input type="text" id="searchInput" class="form-control" placeholder="Search..." onkeyup="filterRows()">
                             </div>
-                            <a href="{% url 'home_owner'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
+
+                            <a href="{% url 'service_provider'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
 
                                 <i data-feather="plus-square"></i>Add New
                             </a>
-                          
-                            {% else %}
-                            <h5>All Users</h5>
-                            <div class="d-inline-flex">
-
-                                <input type="text" id="searchInput" class="form-control" placeholder="Search..." onkeyup="filterRows()">
-                            </div>
-                            {% endif %} 
+                           
                                     </div>
 
                                     <div class="table-responsive table-product">
@@ -36,22 +30,15 @@
                                             <thead>
                                                 <tr class="item">
 
-                                                    {% if member_type == 'all'  %}
-
-                                                    <th>Type</th>
-
-                                                    {% endif %}
+                                                 
                                                         
                                                     <th>Name</th>
-                                                    
+                                                    <th>Category</th>
                                                     <th>Phone</th>
                                                     <th>Email</th>
                                                     <th>Joined</th>
                                                     <th>Impressions</th>
-                                                    <th>state</th>
-                                                        <th>City</th>
-                                                        <th>Zip Code</th>
-                                                        <th>Country</th>
+                                                   
                                                     <th>Status</th>
                                                         
                                                     <th>Option</th>
@@ -59,22 +46,66 @@
                                             </thead>
 
                                             <tbody>
-                                                {% for user in users %}
+                                                {% for user in providers %}
                                                 <tr class="item">
 
                                                  
-                                                    {% if member_type == 'all' %}
-
-                                                    <td>{{user.type}}</td>
-
-                                                    {% endif %}
-
+                                                  
                                                     <td>
                                                         <div class="user-name">
                                                             <span>{{user.first_name}} {{user.last_name}}</span>
                                                         </div>
                                                     </td>
-                                            
+                                                    <td>
+                                                        
+                                                        <div style="display: flex;flex-direction: column;flex-wrap: nowrap;" >
+
+
+                                                            {% for i in user.profile.all %}
+                                                            <div style="display: flex;align-items: center;    justify-content: space-between;" >
+                                                                
+                                                                <span>
+                                                                    {{ i.category.get_category_hierarchy }} 
+                                                                </span> 
+                                                                <a href="{% url 'user_info' i.category.get_category_hierarchy user.uid %}" target="_blank">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a> 
+
+                                                                {% if user.payment_status == 'pending'  %}
+                                                                
+                                                            
+                                                                <a href="#" class="align-items-center btn btn-theme d-flex" 
+                                                                    data-bs-toggle="modal" 
+                                                                    data-email="{{ user.email }}" 
+                                                                    data-id="{{ user.uid }}" 
+                                                                    data-bs-target="#sendLinkModal" 
+                                                                    onclick="setModalData('{{ user.email }}', '{{ user.uid }}','{{i.id}}')">
+                                                                        <i class="ri-mail-line"></i>
+                                                                    </a>
+                                                                {% elif user.payment_status == 'In Progress' %}
+                                                                    <a href="#" class="align-items-center btn btn-theme d-flex" 
+                                                                        data-bs-toggle="modal" 
+                                                                        data-email="{{ user.email }}" 
+                                                                        data-id="{{ user.uid }}" 
+                                                                        data-bs-target="#sendLinkModal2" 
+                                                                        onclick="setModalData2('{{ user.email }}', '{{ user.uid }}','{{i.id}}')">
+                                                                            <i class="ri-mail-line"></i>
+                                                                        </a>
+                                                                {% else %}
+                                                                    <a class="align-items-center btn btn-success d-flex" 
+                                                                        >
+                                                                            <i class="ri-check-double-line"></i>
+                                                                        </a>
+                                                                {% endif %}
+
+
+                                                            </div> 
+                                                            {% endfor %}
+                                                        
+
+                                                        </div>
+
+                                                    </td>
                                                         
                                                         
 
@@ -84,63 +115,23 @@
                                                     <td>{{user.date_joined}}</td>
                                                     <td>{{user.impress_brand.all.count}}</td>
 
-                                                    <td>{{user.state}}</td>
-                                                        <td>{{user.city}}</td>
-                                                        <td>{{user.zip_code}}</td>
-                                                        <td>{{user.country}}</td>
+                                                
 
-                                                    {% if user.type != 'Community User' %}
                                                     <td>{{user.payment_status}}</td>
-                                                    {%else %}
-                                                    <td>Not Applicable</td>
-                                                    {% endif %}
+                                                  
                                                     <td>
                                                         <ul>
                                                             
                                                           
-                                                          {% if user.payment_status == 'pending'  %}
-                                                            
                                                           
-                                                          <li>
-                                                            <a href="#" class="align-items-center btn btn-theme d-flex" 
-                                                                data-bs-toggle="modal" 
-                                                                data-email="{{ user.email }}" 
-                                                                data-id="{{ user.uid }}" 
-                                                                data-bs-target="#sendLinkModal" 
-                                                                onclick="setModalData('{{ user.email }}', '{{ user.uid }}')">
-                                                                    <i class="ri-mail-line"></i>
-                                                                </a>
-                                                            </li>
-                                                            {% elif user.payment_status == 'In Progress' %}
                                                             <li>
-                                                                <a href="#" class="align-items-center btn btn-theme d-flex" 
-                                                                    data-bs-toggle="modal" 
-                                                                    data-email="{{ user.email }}" 
-                                                                    data-id="{{ user.uid }}" 
-                                                                    data-bs-target="#sendLinkModal2" 
-                                                                    onclick="setModalData2('{{ user.email }}', '{{ user.uid }}')">
-                                                                        <i class="ri-mail-line"></i>
-                                                                    </a>
-                                                                </li>
-                                                            {% else %}
-                                                            <li>
-                                                                <a class="align-items-center btn btn-success d-flex" 
-                                                                    >
-                                                                        <i class="ri-check-double-line"></i>
-                                                                    </a>
-                                                                </li>
-                                                            {% endif %}
-                                                          
-
-                                                            {% if user.type == 'Home Owner' or user.type == 'Community User' %}
-                                                            <li>
-                                                                <a href="{% url 'update_user_info' user.uid %}" >
+                                                                <a href="{% url 'update_service' user.uid %}" >
                                                                     <i class="ri-pencil-line"></i>
                                                                 </a>
                                                             </li>
                                                             
+
                                                             
-                                                            {% endif %}
                                                             <li>
                                                                 <a href="{% url 'users_list' %}?action=delete&id={{ user.uid }}" onclick="confirmDelete(event, '{{ user.uid }}')">
                                                                     <i class="ri-delete-bin-line"></i>
@@ -177,6 +168,7 @@
                             <form method="POST" action="{% url 'send_passcode' %}?type=send_payment_link" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" id="hiddenUserId" name="user_id">  <!-- Hidden input for user ID -->
+                                <input type="hidden" id="hiddenProfileId" name="profile_id">  <!-- Hidden input for user ID -->
                                 <div class="mb-3">
                                     <label for="link" class="form-label">Payment Link</label>
                                     <input type="url" class="form-control" id="link" name="link" required>
@@ -202,7 +194,8 @@
                             <form method="POST" action="{% url 'send_passcode' %}?type=send_code" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" id="hiddenUserId2" name="user_id">  <!-- Hidden input for user ID -->
-                                
+                                <input type="hidden" id="hiddenProfileId" name="profile_id">  <!-- Hidden input for user ID -->
+
                                 <button type="submit" class="btn btn-primary">Send</button>
                             </form>
                         </div>
@@ -212,18 +205,21 @@
             
 
             <script>
-                function setModalData(email, id) {
+                function setModalData(email, id,profile) {
                     // Set the email and ID in the modal
                     document.getElementById('sendLinkModalLabelEmail').innerText = email;
                     // You may want to store the user ID in a hidden input for the form
                     document.getElementById('hiddenUserId').value = id;
+                    document.getElementById('hiddenProfileId').value = profile;
+
                 }
 
-                function setModalData2(email, id) {
+                function setModalData2(email, id, profile) {
                     // Set the email and ID in the modal
                     document.getElementById('sendLinkModal2LabelEmail').innerText = email;
                     // You may want to store the user ID in a hidden input for the form
                     document.getElementById('hiddenUserId2').value = id;
+                    document.getElementById('hiddenProfileId').value = profile;
                 }
             </script>
             <script>

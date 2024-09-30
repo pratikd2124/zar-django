@@ -53,6 +53,12 @@
                     </span>
                     <input required type="email" name="email" placeholder="Enter your email address" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
+                
+            </div>
+
+            <div id="step2" class="step step-2 max-w-lg md:mx-auto p-6 mx-4 border border-gray-700 rounded-lg mt-8" style="display:none;">
+                <h2 class="text-xl text-white mb-6">Professional Details</h2>
+
                 <div class="mb-4 relative">
                     <label class="block text-white mb-2">Firm Name</label>
                     <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
@@ -63,7 +69,7 @@
                     <input type="text" name="firmName" placeholder="Enter your firm name" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="mb-4 relative">
-                    <label class="block text-white mb-2">Firm Address</label>
+                    <label class="block text-white mb-2">Address</label>
                     <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -119,10 +125,6 @@
                     </span>
                     <input type="number" name="pincode" placeholder="e.g. 310023" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
-            </div>
-
-            <div id="step2" class="step step-2 max-w-lg md:mx-auto p-6 mx-4 border border-gray-700 rounded-lg mt-8" style="display:none;">
-                <h2 class="text-xl text-white mb-6">Professional Details</h2>
                 <div class="mb-4 relative">
                     <label class="block text-white mb-2">Category</label>
                     
@@ -145,89 +147,11 @@
                     <!-- Hidden input to store selected category IDs as a list -->
                     <input type="hidden" name="selected_categories" id="selected_categories" value="">
                 </div>
-                <div class="mb-4">
-                    <label class="block text-white mb-2">Brief Bio</label>
-                    <div class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white" style="min-height: 200px;">
-                        <textarea name="bio" id="bio-editor" placeholder="Write a brief bio" class="w-full h-full resize-none bg-transparent border-none focus:outline-none"></textarea>
-                    </div>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-white mb-2">Social Media Links</label>
-                    <div class="flex mb-2 relative">
-                        <span class="absolute inset-y-0 top-0 left-0 flex items-center pl-3 text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
-                            </svg>
-                        </span>
-                        <input type="text" name="facebook" placeholder="Enter Facebook link" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div class="flex mb-2 relative">
-                        <span class="absolute inset-y-0 top-0 left-0 flex items-center pl-3 text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
-                            </svg>
-                        </span>
-                        <input type="text" name="instagram" placeholder="Enter Instagram link" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div class="flex mb-2 relative">
-                        <span class="absolute inset-y-0 top-0 left-0 flex items-center pl-3 text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
-                            </svg>
-                        </span>
-                        <input type="text" name="linkedin" placeholder="Enter LinkedIn link" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                </div>
+
+              
             </div>
 
-            <div id="step3" class="step step-3 w-full max-w-7xl mx-auto pt-8 md:px-0 px-6" style="display:none;">
-                <h2 class="text-xl mb-4">Profile Information</h2>
-                <div class='grid lg:grid-cols-2 grid-cols-1 gap-6'>
-                    <div class='flex flex-col space-y-6'>
-                        <div class='lg:flex block gap-2'>
-                            <div class="mb-4 w-full border border-gray-700 rounded-lg p-8">
-                                <label class="block">Add a Profile Picture</label>
-                                <small class='text-xs text-gray-600'>Enter Brand or Profile pic for your display</small>
-                                <input type="file" accept="image/jpeg, image/png" name="profilepic" class="hidden" id="profilePicInput">
-                                <div id="profilePicContainer" class="border-dashed mt-2 flex flex-col rounded-lg border-2 border-gray-700 bg-[#171717] p-4 text-center">
-                                    Drag and Drop<br/> or
-                                    <button type="button" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('profilePicInput').click()">Upload</button>
-                                </div>
-                            </div>
-                            <div class="mb-4 w-full border border-gray-700 rounded-lg p-8">
-                                <label class="block">Add a Brand Logo</label>
-                                <small class='text-xs text-gray-600'>Enter Brand logo for your display</small>
-                                <input type="file" accept="image/jpeg, image/png" name="brandlogo" class="hidden" id="brandLogoInput">
-                                <div id="brandLogoContainer" class="border-dashed mt-2 flex flex-col rounded-lg border-2 border-gray-700 bg-[#171717] p-4 text-center">
-                                    Drag and Drop<br/> or
-                                    <button type="button" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('brandLogoInput').click()">Upload</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-4 border border-gray-700 rounded-lg p-8">
-                            <label class="block">Profile Document</label>
-                            <small class='text-xs text-gray-600'>Add a PDF document</small>
-                            <input type="file" name="profileDocInput" accept="application/pdf" class="hidden" id="profileDocInput">
-                            <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
-                                Drag and Drop<br/> or
-                                <button type="button" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('profileDocInput').click()">Upload</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-4 border border-gray-700 rounded-lg p-8 h-full">
-                        <label class="block">Showcase Gallery</label>
-                        <small class="text-xs text-gray-600">Add up to 10 images to showcase your company, team, and services</small>
-                        <input type="file" accept="image/jpeg, image/png" name="gallery_images" multiple class="hidden" id="showcaseGalleryInput" onchange="handleImageUpload(event)">
-                        <div id="showcaseGalleryContainer" class="border-dashed mt-2 rounded-lg h-[80%] border-2 border-gray-700 bg-[#171717] p-4 text-center">
-                            <div class="w-full flex flex-col h-full justify-center">
-                                Drag and Drop<br/> or
-                                <button type="button" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('showcaseGalleryInput').click()">Upload</button>
-                                <div id="uploadedImages" class="flex flex-wrap mt-4"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
             <div class='w-full xl:mt-24 2xl:mt-48 mt-16 flex lg:flex-row flex-col lg:justify-between justify-center gap-8 items-center rounded-lg bg-[#171717] p-6'>
                 <div class='lg:w-[33%] w-full text-center text-gray-400'>
@@ -237,7 +161,6 @@
                 <div class='lg:w-[33%] w-full text-center mx-auto flex gap-3'>
                     <span id="stepIndicator1" class='w-1/3 bg-white rounded-xl h-2'></span>
                     <span id="stepIndicator2" class='w-1/3 border rounded-xl h-2'></span>
-                    <span id="stepIndicator3" class='w-1/3 border rounded-xl h-2'></span>
                 </div>
                 <div class="lg:w-[33%] w-full flex justify-end gap-4">
                     <button type="button" id="prevBtn" onclick="prevStep()" class="border border-gray-200 text-sm text-white px-8 py-3 rounded-lg hover:text-black hover:bg-gray-100" style="display:none;">Back</button>
@@ -247,7 +170,6 @@
             </div>
         </form>
     </div>
-    <script src="{% static 'js/serviceprovider.js' %}"></script>
     
     <script>
         // Make sure CKEditor is initialized after the DOM has loaded
@@ -324,66 +246,100 @@
         }
     </script>
 
-<script>
-    // Add new category dropdown
-    document.getElementById('add-category').addEventListener('click', function() {
-        const container = document.getElementById('category-select-container');
-        const firstDropdown = container.querySelector('.category-select').cloneNode(true);
-        
-        // Clear the cloned dropdown and remove the remove button initially
-        const selectElement = firstDropdown.querySelector('select');
-        selectElement.value = ""; // Reset the selected value
-        firstDropdown.querySelector('.remove-category').classList.remove('hidden'); // Show the remove button for new dropdowns
-        
-        container.appendChild(firstDropdown);
-        updateHiddenInput();
-    });
-
-    // Remove category dropdown and update hidden input
-    document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('remove-category')) {
-            event.target.closest('.category-select').remove();
+    <script>
+        // Add new category dropdown
+        document.getElementById('add-category').addEventListener('click', function() {
+            const container = document.getElementById('category-select-container');
+            const firstDropdown = container.querySelector('.category-select').cloneNode(true);
+            
+            // Clear the cloned dropdown and remove the remove button initially
+            const selectElement = firstDropdown.querySelector('select');
+            selectElement.value = ""; // Reset the selected value
+            firstDropdown.querySelector('.remove-category').classList.remove('hidden'); // Show the remove button for new dropdowns
+            
+            container.appendChild(firstDropdown);
             updateHiddenInput();
-        }
-    });
-
-    // Update hidden input and filter options
-    document.addEventListener('change', function(event) {
-        if (event.target.classList.contains('category-dropdown')) {
-            updateHiddenInput();
-            updateDropdownOptions();
-        }
-    });
-
-    function updateHiddenInput() {
-        const selectedCategories = Array.from(document.querySelectorAll('.category-dropdown'))
-            .map(select => select.value)
-            .filter(value => value); // Filter out empty selections
-
-        document.getElementById('selected_categories').value = selectedCategories.join(',');
-    }
-
-    function updateDropdownOptions() {
-        const selectedValues = Array.from(document.querySelectorAll('.category-dropdown'))
-            .map(select => select.value)
-            .filter(value => value);
-
-        document.querySelectorAll('.category-dropdown').forEach(dropdown => {
-            const currentValue = dropdown.value;
-
-            // Disable already selected options in all dropdowns
-            dropdown.querySelectorAll('option').forEach(option => {
-                if (selectedValues.includes(option.value) && option.value !== currentValue) {
-                    option.disabled = true;
-                } else {
-                    option.disabled = false;
-                }
-            });
         });
+
+        // Remove category dropdown and update hidden input
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('remove-category')) {
+                event.target.closest('.category-select').remove();
+                updateHiddenInput();
+            }
+        });
+
+        // Update hidden input and filter options
+        document.addEventListener('change', function(event) {
+            if (event.target.classList.contains('category-dropdown')) {
+                updateHiddenInput();
+                updateDropdownOptions();
+            }
+        });
+
+        function updateHiddenInput() {
+            const selectedCategories = Array.from(document.querySelectorAll('.category-dropdown'))
+                .map(select => select.value)
+                .filter(value => value); // Filter out empty selections
+
+            document.getElementById('selected_categories').value = selectedCategories.join(',');
+        }
+
+        function updateDropdownOptions() {
+            const selectedValues = Array.from(document.querySelectorAll('.category-dropdown'))
+                .map(select => select.value)
+                .filter(value => value);
+
+            document.querySelectorAll('.category-dropdown').forEach(dropdown => {
+                const currentValue = dropdown.value;
+
+                // Disable already selected options in all dropdowns
+                dropdown.querySelectorAll('option').forEach(option => {
+                    if (selectedValues.includes(option.value) && option.value !== currentValue) {
+                        option.disabled = true;
+                    } else {
+                        option.disabled = false;
+                    }
+                });
+            });
+        }
+
+        // Initialize hidden input and dropdowns
+        updateHiddenInput();
+    </script>
+
+<script>
+    let currentStep = 1;
+    
+    function nextStep() {
+        if (currentStep === 1) {
+            // Move to step 2
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+            document.getElementById('prevBtn').style.display = 'inline-block'; // Show "Back" button
+            document.getElementById('nextBtn').style.display = 'none'; // Hide "Next" button
+            document.getElementById('submitBtn').style.display = 'inline-block'; // Show "Submit" button
+            document.getElementById('stepLabel').innerText = 'Final Information'; // Update label
+            document.getElementById('stepIndicator1').classList.remove('bg-white');
+            document.getElementById('stepIndicator2').classList.add('bg-white');
+            currentStep = 2;
+        }
     }
 
-    // Initialize hidden input and dropdowns
-    updateHiddenInput();
+    function prevStep() {
+        if (currentStep === 2) {
+            // Move to step 1
+            document.getElementById('step1').style.display = 'block';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('prevBtn').style.display = 'none'; // Hide "Back" button
+            document.getElementById('nextBtn').style.display = 'inline-block'; // Show "Next" button
+            document.getElementById('submitBtn').style.display = 'none'; // Hide "Submit" button
+            document.getElementById('stepLabel').innerText = 'Basic Information'; // Update label
+            document.getElementById('stepIndicator2').classList.remove('bg-white');
+            document.getElementById('stepIndicator1').classList.add('bg-white');
+            currentStep = 1;
+        }
+    }
 </script>
     {% endblock %}
 
