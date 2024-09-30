@@ -255,15 +255,14 @@ option{
 
                     <!-- Accordion Wrapper -->
                     <div id="accordionExample" class="accordion">
-                
                         {% for i in user.profile.all %}
                         <!-- Accordion Item -->
                         <div class="accordion-item mb-4">
-                
+                    
                             <!-- Accordion Header -->
                             <h2 class="accordion-header mb-0" id="heading{{ forloop.counter }}">
                                 <button 
-                                    class="accordion-button collapsed relative flex items-center w-full py-4 px-6 text-white bg-gray-800 border border-gray-700 rounded-xl text-left focus:outline-none transition"
+                                    class="accordion-button collapsed relative flex items-center w-full py-4 px-6 text-white bg-gray-800 border border-gray-700 rounded-xl text-left focus:outline-none transition-all duration-300"
                                     type="button" 
                                     data-accordion-target="#collapse{{ forloop.counter }}" 
                                     aria-expanded="false" 
@@ -271,9 +270,9 @@ option{
                                     Profile {{ forloop.counter }}: {{ i.category.get_category_hierarchy }}
                                 </button>
                             </h2>
-                
+                    
                             <!-- Accordion Body -->
-                            <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-accordion-parent="#accordionExample">
+                            <div id="collapse{{ forloop.counter }}" class="accordion-collapse max-h-0 overflow-hidden transition-all duration-300 ease-out" aria-labelledby="heading{{ forloop.counter }}" data-accordion-parent="#accordionExample">
                                 <div class="accordion-body py-4 px-6 bg-gray-900 text-white rounded-lg">
                                     <!-- Editable Form for Each Profile -->
                                     <div class="mb-4 w-[100%]">
@@ -296,7 +295,7 @@ option{
                                             <input type="url" name="linkedin" value="{{ i.social_links.linkedin }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         </div>
                                     </div>
-                
+                    
                                     <!-- File Upload Fields for Profile Picture, Brand Logo, and Document -->
                                     <div class="my-4 grid lg:grid-cols-3 grid-cols-1 gap-4">
                                         <!-- Profile Picture -->
@@ -314,7 +313,7 @@ option{
                                                 </div>
                                             </div>
                                         </div>
-                
+                    
                                         <!-- Brand Logo -->
                                         <div class="relative w-full">
                                             <label class="block mb-1">Brand Logo</label>
@@ -330,7 +329,7 @@ option{
                                                 </div>
                                             </div>
                                         </div>
-                
+                    
                                         <!-- Profile Document -->
                                         <div class="relative w-full">
                                             <label class="block mb-1">Profile Document</label>
@@ -344,7 +343,7 @@ option{
                                             </div>
                                         </div>
                                     </div>
-                
+                    
                                     <!-- Save Button for Each Profile -->
                                     <div class="flex justify-end space-x-2">
                                         <button type="submit" class="px-8 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">
@@ -352,10 +351,12 @@ option{
                                         </button>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                         {% endfor %}
                     </div>
+                    
                 </div>
                 
                 
@@ -390,21 +391,25 @@ option{
                             
     </div>
     <script>
-        // Basic Accordion Functionality
-        document.querySelectorAll('[data-accordion-target]').forEach(button => {
-            button.addEventListener('click', () => {
-                const target = button.getAttribute('data-accordion-target');
-                const element = document.querySelector(target);
-    
-                if (element.classList.contains('collapse')) {
-                    element.classList.remove('collapse');
-                    element.classList.add('show');
-                } else {
-                    element.classList.add('collapse');
-                    element.classList.remove('show');
-                }
+       // Accordion toggle functionality with sliding effect
+            document.querySelectorAll('[data-accordion-target]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const target = document.querySelector(button.getAttribute('data-accordion-target'));
+
+                    // Check if already open
+                    if (target.style.maxHeight) {
+                        target.style.maxHeight = null;  // Close the panel
+                    } else {
+                        // Close any other open panels
+                        document.querySelectorAll('.accordion-collapse').forEach(panel => {
+                            panel.style.maxHeight = null;
+                        });
+
+                        target.style.maxHeight = target.scrollHeight + 'px';  // Open the clicked panel
+                    }
+                });
             });
-        });
+
     </script>
     <script>
         function previewImage(event, previewId) {

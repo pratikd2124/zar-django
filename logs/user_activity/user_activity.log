@@ -4592,6 +4592,7 @@
 {"user": "ppdhumal269@gmail.com", "path": "/profile", "time_visited": "2024-09-30T17:29:48.767880+00:00", "country": "India"}
 {"user": "ppdhumal269@gmail.com", "path": "/profile", "time_visited": "2024-09-30T17:30:17.821061+00:00", "country": "India"}
 {"user": "ppdhumal269@gmail.com", "path": "/profile", "time_visited": "2024-09-30T17:30:32.974128+00:00", "country": "India"}
+<<<<<<< HEAD
 {"user": "ppdhumal269@gmail.com", "path": "/login", "time_visited": "2024-09-30T17:33:37.055998+00:00", "country": "India"}
 {"user": "ppdhumal269@gmail.com", "path": "/splash", "time_visited": "2024-09-30T17:33:37.449971+00:00", "country": "India"}
 {"user": "ppdhumal269@gmail.com", "path": "/", "time_visited": "2024-09-30T17:33:41.164962+00:00", "country": "India"}
@@ -4606,3 +4607,12 @@
 {"user": "ppdhumal269@gmail.com", "path": "/category/Materials/Furniture/International/China", "time_visited": "2024-09-30T17:34:22.158588+00:00", "country": "India"}
 {"user": "ppdhumal269@gmail.com", "path": "/material-provider/Materials/Furniture/International/China/562976", "time_visited": "2024-09-30T17:34:24.313599+00:00", "country": "India"}
 {"user": "ppdhumal269@gmail.com", "path": "/", "time_visited": "2024-09-30T17:34:31.892923+00:00", "country": "India"}
+=======
+{"user": "ppdhumal269@gmail.com", "path": "/login", "time_visited": "2024-09-30T17:53:12.816706+00:00", "country": "Unknown"}
+{"user": "ppdhumal269@gmail.com", "path": "/splash", "time_visited": "2024-09-30T17:53:16.499923+00:00", "country": "Unknown"}
+{"user": "ppdhumal269@gmail.com", "path": "/", "time_visited": "2024-09-30T17:53:22.547819+00:00", "country": "Unknown"}
+{"user": "ppdhumal269@gmail.com", "path": "/media/category_images/materials-img.jpg", "time_visited": "2024-09-30T17:53:23.201836+00:00", "country": "Unknown"}
+{"user": "ppdhumal269@gmail.com", "path": "/media/category_images/services-img.jpg", "time_visited": "2024-09-30T17:53:23.272950+00:00", "country": "Unknown"}
+{"user": "ppdhumal269@gmail.com", "path": "/profile", "time_visited": "2024-09-30T17:53:29.572794+00:00", "country": "Unknown"}
+{"user": "ppdhumal269@gmail.com", "path": "/profile", "time_visited": "2024-09-30T17:58:45.706836+00:00", "country": "Unknown"}
+>>>>>>> 102061aaa9dbd1570c5b93fdb2f2f0a4cf8e9ee2
