@@ -4444,3 +4444,18 @@
 {"user": "admin@admin.com", "path": "/dashboard/", "time_visited": "2024-09-29T19:01:31.672785+00:00", "country": "India"}
 {"user": "admin@admin.com", "path": "/dashboard/users", "time_visited": "2024-09-29T19:01:48.573578+00:00", "country": "India"}
 >>>>>>> 935d366d66fbe79162d7f6b90726cde53463b249
+{"user": "admin@admin.com", "path": "/admin/login/", "time_visited": "2024-09-30T15:14:14.477605+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/", "time_visited": "2024-09-30T15:14:14.859053+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/", "time_visited": "2024-09-30T15:14:17.925734+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-30T15:14:18.417225+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/74/change/", "time_visited": "2024-09-30T15:14:21.765073+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/74/change/", "time_visited": "2024-09-30T15:14:40.195062+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/74/change/", "time_visited": "2024-09-30T15:14:41.612795+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/74/change/", "time_visited": "2024-09-30T15:14:45.930204+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-30T15:14:46.498977+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/74/change/", "time_visited": "2024-09-30T15:14:54.265963+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-30T15:14:54.667912+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/74/change/", "time_visited": "2024-09-30T15:15:16.129991+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-30T15:15:17.069672+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/main_app/user/74/change/", "time_visited": "2024-09-30T15:15:34.996164+00:00", "country": "India"}
+{"user": "admin@admin.com", "path": "/admin/jsi18n/", "time_visited": "2024-09-30T15:15:35.425549+00:00", "country": "India"}

@@ -543,7 +543,7 @@ def update_user_info(request,id):
     return render(request,'dashboard/user-edit.html',{'title':'Update User Info','user':user})
 
 
-from main_app.models import ContactPageDetails
+# from main_app.models import ContactPageDetails
 @login_required(login_url='login')
 def contact_page(request):
     if not  request.user.is_superuser:

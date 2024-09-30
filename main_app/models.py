@@ -36,6 +36,26 @@ class ProfileGallery(models.Model):
     
 
 
+class ProfileInfo(models.Model):
+
+    name =  models.CharField(max_length=100,blank=True, null=True)
+    
+    contact_person = models.CharField(max_length=100, blank=True, null=True)
+    designation = models.CharField(max_length=100,blank=True, null=True)
+    bio = RichTextField(blank=True, null=True)
+    category = models.ManyToManyField(Category,  null=True, blank=True)
+       
+    profile_doc = models.FileField(upload_to='profile_docs/',blank=True, null=True)
+    profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+    brand_logo = models.ImageField(upload_to='brand_logos/', null=True, blank=True)
+    profile_gallery = models.ManyToManyField(ProfileGallery, blank=True,null=True)
+    social_links = models.JSONField(blank=True, null=True)
+
+    payment_status = models.CharField(max_length=100, default='pending')
+    is_active = models.BooleanField(default=False)
+
+
+
 class User(AbstractUser):
     uid = models.CharField(max_length=10, unique=True, blank=True, null=True)
     USER_TYPE_CHOICES = (
@@ -59,21 +79,21 @@ class User(AbstractUser):
     city = models.CharField(max_length=100,blank=True, null=True)
     zip_code = models.CharField(max_length=10,blank=True, null=True)
     
+    # delte it after testing
     contact_person = models.CharField(max_length=100, blank=True, null=True)
-
     brand_name =  models.CharField(max_length=100,blank=True, null=True)
     designation = models.CharField(max_length=100,blank=True, null=True)
     bio = RichTextField(blank=True, null=True)
     category = models.ManyToManyField(Category,  null=True, blank=True)
-    social_links = models.JSONField(blank=True, null=True)
     profile_doc = models.FileField(upload_to='profile_docs/',blank=True, null=True)
     profile_pic = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
     brand_logo = models.ImageField(upload_to='brand_logos/', null=True, blank=True)
     profile_gallery = models.ManyToManyField(ProfileGallery, blank=True,null=True)
-    
-    
-    
+    social_links = models.JSONField(blank=True, null=True)
     payment_status = models.CharField(max_length=100, default='pending')
+    
+    profile = models.ManyToManyField(ProfileInfo,  blank=True, null=True)
+    
     community = models.ForeignKey(Community, on_delete=models.CASCADE,blank=True, null=True)
         
     code = models.CharField(max_length=6, unique=True, blank=True, null=True)
