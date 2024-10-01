@@ -372,7 +372,7 @@ def submit_service_provider(request):
 
     # Get all categories and recursively filter those whose root ancestor is 'Services'
     end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)    
-    return render(request, 'client/service-provider.html',{'categories':end_nodes} )
+    return render(request, 'client/service-provider-registration.html',{'categories':end_nodes} )
 
 
 
@@ -430,7 +430,7 @@ def submit_material_provider(request):
     
     # Build the tree hierarchy for the filtered categories
     end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
-    return render(request, 'client/material_provider_form.html',{'categories':end_nodes,'title':'Material Provider'} )
+    return render(request, 'client/material-provider-registration.html',{'categories':end_nodes,'title':'Material Provider'} )
 
 
 
