@@ -39,16 +39,16 @@ def category_view(request,category_path):
         
     next_categories = Category.objects.filter(parent=category)
     
-    nav = category.get_category_hierarchy().split('/')
-    print(nav)
-    
+    nav = category.get_category_hierarchy().split('/')    
     nav_list = get_nav_list(nav)
     
     users = None
     if not next_categories:
         # users = User.objects.filter(category=category).filter(payment_status='Success')
-        users = User.objects.filter(is_active=True, payment_status='Success', category__in=[category])
+        users = User.objects.filter(profile__visible=True, profile__category__in=[category])
     return render(request, 'client/category.html', {'users':users,'category': category, 'nav_list':nav_list ,'title':category.name,'next_categories':next_categories})
+
+
 
 
 def validate(request):
@@ -109,7 +109,6 @@ def register(request):
             user.username = email
             user.mobile = mobile
             user.is_active = True
-            user.payment_status = 'Success'
             user.set_password(password)
             if request.session['type'] == 'New':
                 user.type = 'Community User'
@@ -193,8 +192,110 @@ def profile(request):
 
         
         return render(request, 'client/home-owner-profile.html')
+    
     elif user_type == 'Material Provider':
-        
+        if request.method == 'POST':
+            if request.GET.get('type') == 'basic_info':
+                brand_name = request.POST.get('brand_name')
+                designation = request.POST.get('designation')
+                contact_person = request.POST.get('contact_person_name')
+                mobile = request.POST.get('mobile')
+                firm_address = request.POST.get('firmAddress')
+                country = request.POST.get('country')
+                state = request.POST.get('state')
+                city = request.POST.get('city')
+                pincode = request.POST.get('pincode')
+                
+                user.brand_name = brand_name
+                user.designation = designation
+                user.contact_person = contact_person
+                
+                user.mobile = mobile
+                user.address = firm_address
+                user.country = country
+                user.state = state
+                user.city = city
+                user.zip_code = pincode
+                user.save()
+                messages.success(request, 'Profile updated successfully')
+                return redirect(request.META.get('HTTP_REFERER', '/home'))
+            
+            if request.GET.get('type') == 'professional':
+                new_categories = request.POST.get('new_categories')
+                
+                profile_id = request.GET.get('id')
+                if profile_id:
+                    profile = ProfileInfo.objects.get(id=profile_id)
+                    bio = request.POST.get(f'bio{profile_id}')
+                    
+                    brand_name = request.POST.get(f'brand_name{profile_id}')
+                    contact_person = request.POST.get(f'contact_person{profile_id}')
+                    contact_number = request.POST.get(f'contact_number{profile_id}')
+                    designation = request.POST.get(f'designation{profile_id}')
+                    linked = request.POST.get(f'linkedin{profile_id}')
+                    website = request.POST.get(f'website{profile_id}')
+                    facebook = request.POST.get(f'facebook{profile_id}')
+                    instagram = request.POST.get(f'instagram{profile_id}')
+                    twitter = request.POST.get(f'twitter{profile_id}')
+                    visible = request.POST.get(f'visible{profile_id}')
+                    profilepic = request.FILES.get(f'profilepic{profile_id}')
+                    brandlogo = request.FILES.get(f'brandlogo{profile_id}')
+                    profileDocInput = request.FILES.get(f'profileDocInput{profile_id}')
+                    
+                    
+                    profile.brand_name = brand_name
+                    profile.contact_person = contact_person
+                    profile.contact_number = contact_number
+                    profile.designation = designation
+                    profile.bio = bio
+                    profile.social_links= {
+                        "linkedin": linked,
+                        "website": website,
+                        "facebook": facebook,
+                        "instagram": instagram,
+                        "twitter": twitter
+                    }
+                    if profilepic:
+                        profile.profile_pic = profilepic
+                    if brandlogo:
+                        profile.brand_logo = brandlogo
+                    if profileDocInput:
+                        profile.profile_doc = profileDocInput
+                        
+                    if visible == 'Yes':
+                        profile.visible = True
+                    else:
+                        profile.visible = False
+
+                    profile.save()
+                    messages.success(request, 'Profile updated successfully')
+                    return redirect(request.META.get('HTTP_REFERER', '/home'))
+                
+                for cat in  new_categories.split(','):
+                    profile = ProfileInfo.objects.create(   
+                    category = Category.objects.get(id=cat)
+                    )
+                    profile.save()
+                    user.profile.add(profile)
+                    user.save()
+                    messages.success(request, 'New Category added successfully!!')
+                    messages.info(request, 'New Category Under Review!')
+                    return redirect(request.META.get('HTTP_REFERER', '/home'))
+            
+            if request.GET.get('type') == 'gallery':
+                profile_id = request.GET.get('id')
+                if profile_id:
+                    profile = ProfileInfo.objects.get(id=profile_id)
+                    image = request.FILES.getlist('img')
+                    if image:
+                        for img in image:
+                            profile_gallery = ProfileGallery.objects.create(image=img)
+                            profile.profile_gallery.add(profile_gallery)
+                            profile.save()
+                        messages.success(request, 'Gallery updated successfully')
+                        return redirect(request.META.get('HTTP_REFERER', '/home'))
+                    
+
         end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
         return render(request, 'client/material-provider-profile.html',{'title':'Profile','categories':end_nodes})
     else:
@@ -210,15 +311,12 @@ def profile(request):
                 state = request.POST.get('state')
                 city = request.POST.get('city')
                 pincode = request.POST.get('pincode')
-                
-                
+  
                 user.mobile = mobile
                 user.firm_name = firm_name
                 user.first_name = first_name
                 user.last_name = last_name
-                    
-           
-                
+
                 user.address = firm_address
                 user.country = country
                 user.state = state
@@ -231,6 +329,45 @@ def profile(request):
             
             if request.GET.get('type') == 'professional':
                 new_categories = request.POST.get('new_categories')
+                
+                profile_id = request.GET.get('id')
+                if profile_id:
+                    profile = ProfileInfo.objects.get(id=profile_id)
+                    bio = request.POST.get(f'bio{profile_id}')
+                    
+                    linked = request.POST.get(f'linkedin{profile_id}')
+                    website = request.POST.get(f'website{profile_id}')
+                    facebook = request.POST.get(f'facebook{profile_id}')
+                    instagram = request.POST.get(f'instagram{profile_id}')
+                    twitter = request.POST.get(f'twitter{profile_id}')
+                    visible = request.POST.get(f'visible{profile_id}')
+                    profilepic = request.FILES.get(f'profilepic{profile_id}')
+                    brandlogo = request.FILES.get(f'brandlogo{profile_id}')
+                    profileDocInput = request.FILES.get(f'profileDocInput{profile_id}')
+                    
+                    profile.bio = bio
+                    profile.social_links= {
+                        "linkedin": linked,
+                        "website": website,
+                        "facebook": facebook,
+                        "instagram": instagram,
+                        "twitter": twitter
+                    }
+                    if profilepic:
+                        profile.profile_pic = profilepic
+                    if brandlogo:
+                        profile.brand_logo = brandlogo
+                    if profileDocInput:
+                        profile.profile_doc = profileDocInput
+                    
+                    if visible == 'Yes':
+                        profile.visible = True
+                    else:
+                        profile.visible = False
+                    profile.save()
+                    messages.success(request, 'Profile updated successfully')
+                    return redirect(request.META.get('HTTP_REFERER', '/home'))
+                
                 for cat in  new_categories.split(','):
                     profile = ProfileInfo.objects.create(   
                     category = Category.objects.get(id=cat)
@@ -242,6 +379,19 @@ def profile(request):
                     messages.info(request, 'New Category Under Review!')
                     return redirect(request.META.get('HTTP_REFERER', '/home'))
                 
+            if request.GET.get('type') == 'gallery':
+                profile_id = request.GET.get('id')
+                if profile_id:
+                    profile = ProfileInfo.objects.get(id=profile_id)
+                    image = request.FILES.getlist('img')
+                    if image:
+                        for img in image:
+                            profile_gallery = ProfileGallery.objects.create(image=img)
+                            profile.profile_gallery.add(profile_gallery)
+                            profile.save()
+                        messages.success(request, 'Gallery updated successfully')
+                        return redirect(request.META.get('HTTP_REFERER', '/home'))
+                 
         end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
         return render(request, 'client/service-provider-profile.html',{'title':'Profile','categories':end_nodes})
 
@@ -445,24 +595,36 @@ def success_page(request):
 @login_required(login_url='login')
 def brand_info(request,category_path,uid):
     user = User.objects.get(uid = uid)
-    social_links= user.social_links
-    images = user.profile_gallery.all()
+    try :
+        category = Category.objects.filter(name=category_path.split('/')[-1])
+    except:
+        category = Category.objects.filter(name=category_path.split('/'),parent=category_path.split('/')[-2])
+        
+    profile = user.profile.get(category__in=category)
+    social_links= profile.social_links
+    images = profile.profile_gallery.all()
     nav_list = category_path.split('/')
     nav_list = get_nav_list(nav_list)
 
-    return render(request, 'client/brand_info.html',{'nav_list':nav_list,'images':images,'user':user,'title':str(user.brand_name ),'social_links':social_links,})
+    return render(request, 'client/brand_info.html',{'profile':profile,'nav_list':nav_list,'images':images,'user':user,'title':str(user.brand_name ),'social_links':social_links,})
 
 
 @login_required(login_url='login')
 def user_info(request,category_path,uid):
     user = User.objects.get(uid=uid)
-    social_links = user.social_links
+    try:
+        category = Category.objects.filter(name=category_path.split('/')[-1])
+    except:
+        category = Category.objects.filter(name=category_path.split('/'),parent=category_path.split('/')[-2])
+        
+    profile = user.profile.get(category__in=category)
+    social_links = profile.social_links
 
-    images = user.profile_gallery.all()
+    # images = user.profile_gallery.all()
     nav_list = category_path.split('/')
     nav_list = get_nav_list(nav_list)
 
-    return render(request, 'client/service_user_info.html',{'user':user,'title':str(user.first_name + ' ' + user.last_name),'social_links':social_links,'images':images,'nav_list':nav_list})
+    return render(request, 'client/service-provider-info.html',{'user':user,'title':str(user.first_name + ' ' + user.last_name),'social_links':social_links,'profile':profile,'nav_list':nav_list})
 
 
 

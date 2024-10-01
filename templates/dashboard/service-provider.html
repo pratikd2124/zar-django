@@ -71,7 +71,7 @@
                                                                     <i class="ri-eye-line"></i>
                                                                 </a> 
 
-                                                                {% if user.payment_status == 'pending'  %}
+                                                                {% if i.payment_status == 'pending'  %}
                                                                 
                                                             
                                                                 <a href="#" class="align-items-center btn btn-theme d-flex" 
@@ -82,7 +82,7 @@
                                                                     onclick="setModalData('{{ user.email }}', '{{ user.uid }}','{{i.id}}')">
                                                                         <i class="ri-mail-line"></i>
                                                                     </a>
-                                                                {% elif user.payment_status == 'In Progress' %}
+                                                                {% elif i.payment_status == 'In Progress' %}
                                                                     <a href="#" class="align-items-center btn btn-theme d-flex" 
                                                                         data-bs-toggle="modal" 
                                                                         data-email="{{ user.email }}" 

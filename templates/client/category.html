@@ -56,12 +56,18 @@
         
         {% if i.type == 'Service Provider' %}
             
+        
+        {% for j in i.profile.all  %}
+            
+        
+        {% if j.category == category %}
+            
             
             
         <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-[18rem] h-[24rem] mx-auto cursor-pointer group" onclick="handleCardClick()">
             <a href="{% url 'user_info' category.get_category_hierarchy i.uid %}">
-            <img src="{% if i.profile_pic %}
-                    {{i.profile_pic.url|default:''}} {% endif %}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+            <img src="{% if j.profile_pic %}
+                    {{j.profile_pic.url|default:''}} {% endif %}" alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
             <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
             <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>
             <div class='absolute z-10 top-5 right-5'>
@@ -77,16 +83,21 @@
             </div>
             </a>
         </section>
+        {% endif %}
 
+        {% endfor %}
 
         {% elif i.type == 'Material Provider' %}
 
+        {% for j in i.profile.all  %}
             
+        
+        {% if j.category == category %}
             
         <section class="relative font-card-title isolate bg-[#101010] flex flex-col justify-end overflow-hidden rounded-lg w-80 h-80 mx-auto cursor-pointer group" onclick="handleCardClick()">
             <a href="{% url 'brand_info' category.get_category_hierarchy i.uid  %}">
-            <img src="{% if i.brand_logo %}
-{{i.brand_logo.url }} {% endif %} " alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
+            <img src="{% if j.brand_logo %}
+{{j.brand_logo.url }} {% endif %} " alt="{{ altText }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 grayscale group-hover:grayscale-0 group-hover:scale-110" />
             <div class="absolute inset-0 bg-[#101010] bg-opacity-50 delay-300 transition-opacity duration-500 group-hover:bg-opacity-10"></div>
             <div class="absolute inset-0 group-hover:bg-black group-hover:bg-opacity-40"></div>
             <div class='absolute z-10 top-5 right-5'>
@@ -102,6 +113,8 @@
             </div>
             </a>
         </section>
+        {% endif %}
+        {% endfor %}
         {% endif %}
         {% endfor %}
 

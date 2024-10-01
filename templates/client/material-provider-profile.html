@@ -35,32 +35,11 @@ option{
             
             <form method="POST" action="{% url 'profile' %}?type=basic_info"  class="w-full" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div id="basic-info" class="mb-4 space-y-4 border border-gray-800 rounded-xl p-6 grid lg:grid-cols-2 grid-cols-1 gap-6" style="">
+                <div id="basic-info" class="mb-4 space-y-4 border border-gray-800 rounded-xl p-6 grid lg:grid-cols-4 grid-cols-1 gap-6" style="">
                     <!-- Name Field -->
                     
-                    {% if user.type == 'Service Provider' %}
                         
-                        
-                    <div class="relative w-full ">
-                        <label class="block mb-1">First Name</label>
-                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                        </span>
-                        <input type="text" name="first_name" value="{{ user.first_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-
-                    <div class="relative w-full ">
-                        <label class="block mb-1">Last Name</label>
-                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
-                        </span>
-                        <input type="text" name="last_name" value="{{ user.last_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    {% else %}
+                     
                     <div class="relative w-full ">
                         <label class="block mb-1">Brand Name</label>
                         <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
@@ -81,7 +60,16 @@ option{
                         <input type="text" name="contact_person_name" value="{{ user.contact_person }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
 
-                    {% endif %}
+                    <div class="relative w-full ">
+                        <label class="block mb-1">Designation</label>
+                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </span>
+                        <input type="text" name="designation" value="{{ user.designation }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+
 
                     <!-- Email Field -->
                     <div class="relative w-full">
@@ -107,44 +95,9 @@ option{
                     </div>
 
                     
-                    {% if user.type == 'Service Provider' %}
                         
                         
-                    <!-- Firm Name Field -->
-                    <div class="relative w-full">
-                        <label class="block mb-1">Firm Name Service</label>
-                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
-                            </svg>
-                        </span>
-                        <input type="text" name="firmName" value="{{ user.firm_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-
-                    <!-- Address Field -->
-                    <div class="relative w-full">
-                        <label class="block mb-1">Firm Address</label>
-                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                            </svg>
-                        </span>
-                        <input type="text" name="firmAddress" value="{{ user.firm_address }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    {% else %}
-                        
-                        
-                    <!-- Firm Name Field -->
-                    <div class="relative w-full">
-                        <label class="block mb-1">Designation</label>
-                        <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
-                            </svg>
-                        </span>
-                        <input type="text" name="designation" value="{{ user.designation }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
+                   
 
                     <!-- Address Field -->
                     <div class="relative w-full">
@@ -155,9 +108,8 @@ option{
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                             </svg>
                         </span>
-                        <input type="text" name="firmAddress" value="{{ user.firm_address }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        <input type="text" name="firmAddress" value="{{ user.address }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
-                    {% endif %}
 
                     <!-- Country Select Field -->
                     <div class="relative  mt-4  w-full">
@@ -211,12 +163,11 @@ option{
                         </span>
                         <input type="number" name="pincode" value="{{ user.zip_code }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
-                    <div></div>
-                    <div class="w-full  flex justify-end space-x-2">
-                        <button type="submit" class="px-8 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">
-                            Update Profile
-                        </button>
-                    </div>
+                </div>
+                <div class="w-full  flex justify-end space-x-2">
+                    <button type="submit" class="px-8 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">
+                        Update Profile
+                    </button>
                 </div>
             </form>
 
@@ -224,139 +175,23 @@ option{
                 {% csrf_token %}
                 <div id="additional-info" class="mb-4 space-y-4  border border-gray-800 rounded-xl p-6 grid  grid-cols-1" style="">
                     <!-- Brief Bio Field -->
-                    <div class="mb-4 w-[100%]">
-                        <label class="block text-white mb-2">Brief Bio</label>
-                        <textarea name="bio" id="bio-editor" placeholder="Write a brief bio" class="w-full h-full resize-none bg-transparent border-none focus:outline-none">{{user.bio |safe}}</textarea>
-                    </div>
+                  
 
                     <!-- Category Field -->
                     <div class="relative w-[100%]">
                         <label class="block mb-1">Category</label>
-                    
-                        <!-- Hidden input to hold the list of selected categories -->
-                        <input type="hidden" name="selected_categories" id="selected_categories" value="{% for i in user.category.all %}{{i.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
-                        
-                        <!-- Container for category dropdowns -->
-                        <div id="category-container">
-                            <!-- Loop through existing categories to display them -->
-                            {% for selected_category in user.category.all %}
-                            <div class="category-row flex items-center gap-2 mb-2">
-                                <select name="category" class="w-full text-md p-4 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 category-select">
-                                    {% for category in categories %}
-                                    <option value="{{ category.id }}" {% if category.id == selected_category.id %} selected {% endif %}>
-                                        {{ category.get_category_hierarchy }}
-                                    </option>
-                                    {% endfor %}
-                                </select>
-                                <button type="button" class="rounded-lg bg-red-600 p-2 px-4 hover:bg-red-500 transition-all ease-in-out btn delete-category-btn">
-                                    Delete
-                                </button>
-                                {% if user.category.all.count > 0 %}
-                                    <a href="{% url 'user_info' selected_category.get_category_hierarchy user.uid %}" target="_blank" class="">
-                                        <button type="button" class="text-xs my-2 rounded-lg bg-white text-black p-2 px-4 hover:bg-[#171717] hover:text-white transition-all duration-200 delay-200 border border-gray-700 ease-in-out btn delete-category-btn">
-                                            View
-                                        </button>
-                                    </a>
-                                
-                                {% endif %}
-                            </div>
-                            {% endfor %}
-                        </div>
-                    
-                        <!-- Button to add a new category dropdown -->
                         <button type="button" class="rounded-lg bg-violet-700 p-2 px-4 hover:bg-violet-600 btn btn-primary mt-3" id="add-category-btn">Add Category</button>
-                    </div>
+
+                        <!-- Hidden input to hold the list of selected categories -->
+                        <input type="hidden" name="new_categories" id="selected_categories" value="{% for i in user.category.all %}{{i.id}}{% if not forloop.last %},{% endif %}{% endfor %}">
+                        
+                        <div id="category-container">
+                        </div>
                     
-                    <div class="grid lg:grid-cols-3 grid-cols-1 gap-4">
-                        <!-- Social Links Fields -->
-                        <div class="relative w-full">
-                            <label class="block mb-1">Facebook</label>
-                            <input type="url" name="facebook" value="{{ user.social_links.facebook }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-                        <div class="relative w-full">
-                            <label class="block mb-1">Instagram</label>
-    
-                            <input type="url" name="instagram" value="{{ user.social_links.instagram }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-                        <div class="relative w-full">
-                            <label class="block mb-1">LinkedIn</label>
-    
-                            <input type="url" name="linkedin" value="{{ user.social_links.linkedin }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        </div>
-
-                    </div>
-                    <div class="my-4 border border-gray-700 rounded-lg h-auto md:h-80 p-2 grid lg:grid-cols-3 grid-cols-1 gap-4">
-                        <div class="relative w-full">
-                            <label class="block mb-1">Profile Picture</label>
-                            <input type="file" name="profilepic" accept="image/*" class="hidden" id="profilePicInput" onchange="previewImage(event, 'profilePicPreview')">
-                            <div class="relative border border-dashed border-gray-500  h-64 rounded-lg bg-[#101010]">
-                                <img id="profilePicPreview" src="{% if user.profile_pic %}{{ user.profile_pic.url }}{% endif %}" alt="Profile Pic" class="mt-4 h-56 border mx-auto">
-                                <div class="absolute right-2 bottom-2">
-                                    <div class="flex gap-1">
-                                        <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('profilePicInput').click();">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                                <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2Z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Brand Picture Field -->
-                        <div class="relative w-full">
-                            <label class="block mb-1">Brand Logo</label>
-                            <input type="file" name="brandlogo" accept="image/*" class="hidden" id="brandPicInput" onchange="previewImage(event, 'brandPicPreview')">
-                            <div class="relative border border-dashed border-gray-500 h-64 rounded-lg bg-[#101010]">
-                                <img id="brandPicPreview" src="{% if user.brand_logo %}{{ user.brand_logo.url }}{% endif %}" alt="Brand Pic" class="mt-4 w-auto h-32 rounded-md object-fit border mx-auto">
-                                <div class="absolute right-2 bottom-2">
-                                    <div class="flex gap-1">
-                                        <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('brandPicInput').click();">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                                <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2Z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                            <div class="relative w-full">
-                                
-                                <label class="block mt-2">Profile Document</label>
-                                <small class='text-xs text-gray-600'>Add a PDF document</small>
-                                <input type="file" name="profileDocInput" accept="application/pdf" class="hidden" id="profileDocInput">
-                                <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
-                                    <a {% if user.profile_doc %} href="{{ user.profile_doc.url }}"  download {% else %} href="#" {% endif %} class="p-2 rounded-md text-xs bg-white text-black border">
-                                        {{ user.profile_doc.name }}
-                                    </a>
-                                    
-                                    <button type="button" class="w-fit my-2 mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('profileDocInput').click()">Upload</button>
-                                </div>
-                            </div>
-
                     </div>
 
-                    <!-- Brand Picture Field -->
-                    {% comment %} <div class="relative w-full">
-                        <label class="block">Profile Document</label>
-                        <input type="file" name="profileDocInput" accept="application/pdf" class="hidden" id="profileDocInput">
-                        <div class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010]">
-                            {% if user.profile_doc %}
-                                <downlo src="{{ user.profile_doc.url }}" alt="Brand Pic" class="mt-4 w-auto h-32 rounded-md object-fit border mx-auto">
-                            {% endif %}
-                            <div class="absolute right-2 bottom-2">
-                                <div class="flex gap-1">
-                                    <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('brandPicInput').click();">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2Z" />
-                                        </svg>
-                                    </button>
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
+                    
+
                     <div class="flex justify-end space-x-2">
                         <button type="submit" class="px-8 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">
                             Save
@@ -365,44 +200,254 @@ option{
                 </div>
             </form>
 
-            {% csrf_token %}
             <div id="profile" class="mb-4 space-y-4 max-w-4xl">
-                <label class="block mb-1">Gallery (max 10)</label>
-                <div class="border border-gray-800 rounded-xl p-6" >
-                    
-                    <form method="POST" action="{% url 'profile' %}?type=gallery" style="display: flex; flex-direction: column;justify-content: center;" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
-                            <input type="file" name="img" multiple accept="image/**" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer"  id="profileDocInput">
-                                
-                        </div>
-                        <button type="submit" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" >Save </button>
-                    </form>
+                <label class="block mb-1">Representatio</label>
+                <div class="border border-gray-800 rounded-xl p-6">
 
-                        <!-- Showcase Images Field -->
-                        <div class="relative border border-gray-800 rounded-xl p-6">
-                            <div class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010]">
-                                <div class="mt-4 flex flex-wrap gap-2">
-                                    {% for image in user.profile_gallery.all %}
-                                    <div class="flex flex-wrap">
-                                        <div class="relative ">
-                                            <img src="{{ image.image.url }}" alt="Showcase" class="object-cover h-40 border rounded">
-                                            <a class="absolute top-0 right-0 bg-black/50  p-1.5 px-3" href="{% url 'profile' %}?action=delete&image_id={{image.id}}">x</a>
+                    <!-- Accordion Wrapper -->
+                    <div id="accordionExample" class="accordion">
+                        {% for i in user.profile.all %}
+                        <!-- Accordion Item -->
+                        <div class="accordion-item mb-4">
+                    
+                            <!-- Accordion Header -->
+                            <h2 class="accordion-header mb-0" id="heading{{ forloop.counter }}">
+                                <button 
+                                    class="accordion-button collapsed relative flex items-center w-full py-4 px-6 text-white bg-gray-800 border border-gray-700 rounded-xl text-left focus:outline-none transition-all duration-300"
+                                    type="button" 
+                                    data-accordion-target="#collapse{{ forloop.counter }}" 
+                                    aria-expanded="false" 
+                                    aria-controls="collapse{{ forloop.counter }}"
+                                    >
+                                    <span style="display:flex;justify-content: space-between;width: 100%;">
+                                    <span>Profile {{ forloop.counter }}: {{ i.category.get_category_hierarchy }}</span> 
+                                    {% if i.is_active %}
+                                    <span style="color:green">**  Verified</span>
+                                        {% else %}
+                                        <span style="color:red">** Not Verified</span>
+
+                                    {% endif %}
+                                        </span>
+                                </button>
+                            </h2>
+                    
+                            <!-- Accordion Body -->
+                            <div id="collapse{{ forloop.counter }}" class="accordion-collapse max-h-0 overflow-hidden transition-all duration-300 ease-out" aria-labelledby="heading{{ forloop.counter }}" data-accordion-parent="#accordionExample">
+                                <div class="accordion-body py-4 px-6 bg-gray-900 text-white rounded-lg">
+                                    <!-- Editable Form for Each Profile -->
+                                    <form action="{% url 'profile' %}?type=professional&id={{i.id}}" method="POST" class="space-y-4" enctype="multipart/form-data" >
+                                        {% csrf_token %}
+                                        <div class="relative  mt-4  w-full">
+                                            <label class="block mb-1">Visible to everyone   
+                                            {% if not i.is_active %}
+                                                <span style="font-size:12px;color:red">** Not Verified</span>
+                                            {% endif %}
+                                                  </label>
+                                            <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </span>
+                                            <select name="visible{{i.id}}" {% if not i.is_active %}
+                                            disabled
+                                        {% endif %}id="visible" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                <option value="No">No</option>
+                                                <option value="Yes" 
+                                                {% if i.visible  %}
+                                                    selected
+                                                {% endif %}
+                                                     >Yes</option>
+                                              
+                                            </select>
                                         </div>
 
-                                    </div>
-                                    {% endfor %}
+
+                                        <div class="relative  mt-4  w-full">
+                                            <label class="block mb-1">Brand Name</label>
+                                            <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </span>
+                                            <input type="text" name="brand_name{{i.id}}" value="{{ i.brand_name }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+
+                                        <div class="relative  mt-4  w-full">
+                                            <label class="block mb-1">Contact Person</label>
+                                            <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </span>
+                                            <input type="text" name="contact_person{{i.id}}" value="{{ i.contact_person }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                        <div class="relative  mt-4  w-full">
+                                            <label class="block mb-1">Contact Number</label>
+                                            <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </span>
+                                            <input type="text" name="contact_number{{i.id}}" value="{{ i.contact_number }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+                                     
+                                        <div class="relative  mt-4  w-full">
+                                            <label class="block mb-1">Designation</label>
+                                            <span class="absolute inset-y-0 top-8 left-0 flex items-center pl-3 text-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </span>
+                                            <input type="text" name="designation{{i.id}}" value="{{ i.designation }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                        </div>
+
+                                        <div class="mb-4 w-[100%]">
+                                            <label class="block text-white mb-2">Brief Bio</label>
+                                            <textarea name="bio{{i.id}}" id="bio-editor-{{ forloop.counter }}" placeholder="Write a brief bio" class="editor w-full h-full resize-none bg-transparent border-none focus:outline-none">{{ i.bio |safe }}</textarea>
+                                        </div>
+                                        
+                                        <!-- Social Links Fields -->
+                                        <div class="grid lg:grid-cols-3 grid-cols-1 gap-4">
+                                            <div class="relative w-full">
+                                                <label class="block mb-1">Facebook</label>
+                                                <input type="url" name="facebook{{i.id}}" value="{{ i.social_links.facebook }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            </div>
+                                            <div class="relative w-full">
+                                                <label class="block mb-1">Instagram</label>
+                                                <input type="url" name="instagram{{i.id}}" value="{{ i.social_links.instagram }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            </div>
+                                            <div class="relative w-full">
+                                                <label class="block mb-1">LinkedIn</label>
+                                                <input type="url" name="linkedin{{i.id}}" value="{{ i.social_links.linkedin }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            </div>
+                                            <div class="relative w-full">
+                                                <label class="block mb-1">Website</label>
+                                                <input type="url" name="website{{i.id}}" value="{{ i.social_links.website }}" class="w-full text-md p-4 pl-10 border border-slate-700 rounded-lg bg-gray-100/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                            </div>
+                                        </div>
+                        
+                                        <!-- File Upload Fields for Profile Picture, Brand Logo, and Document -->
+                                        <div class="my-4 grid lg:grid-cols-3 grid-cols-1 gap-4">
+                                            <!-- Profile Picture -->
+                                            <div class="relative w-full">
+                                                <label class="block mb-1">Profile Picture</label>
+                                                <input type="file" name="profilepic{{i.id}}" accept="image/*" class="hidden" id="profilePicInput{{ forloop.counter }}" onchange="previewImage(event, 'profilePicPreview{{ forloop.counter }}')">
+                                                <div class="relative border border-dashed border-gray-500 h-64 rounded-lg bg-[#101010]">
+                                                    <img id="profilePicPreview{{ forloop.counter }}" src="{% if i.profile_pic %}{{ i.profile_pic.url }}{% endif %}" alt="Profile Pic" class="mt-4 h-56 border mx-auto">
+                                                    <div class="absolute right-2 bottom-2">
+                                                        <div class="flex gap-1">
+                                                            <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('profilePicInput{{ forloop.counter }}').click();">
+                                                                <i class="ri-edit-line"></i> Edit
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                                            <!-- Brand Logo -->
+                                            <div class="relative w-full">
+                                                <label class="block mb-1">Brand Logo</label>
+                                                <input type="file" name="brandlogo{{i.id}}" accept="image/*" class="hidden" id="brandPicInput{{ forloop.counter }}" onchange="previewImage(event, 'brandPicPreview{{ forloop.counter }}')">
+                                                <div class="relative border border-dashed border-gray-500 h-64 rounded-lg bg-[#101010]">
+                                                    <img id="brandPicPreview{{ forloop.counter }}" src="{% if i.brand_logo %}{{ i.brand_logo.url }}{% endif %}" alt="Brand Logo" class="mt-4 h-32 rounded-md object-fit border mx-auto">
+                                                    <div class="absolute right-2 bottom-2">
+                                                        <div class="flex gap-1">
+                                                            <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('brandPicInput{{ forloop.counter }}').click();">
+                                                                <i class="ri-edit-line"></i> Edit
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                                            <!-- Profile Document -->
+                                            <div class="relative w-full">
+                                                <label class="block mb-1">Profile Document</label>
+                                                <small class="text-xs text-gray-600">Add a PDF document</small>
+                                                <input type="file" name="profileDocInput{{i.id}}" accept="application/pdf" class="hidden" id="profileDocInput{{ forloop.counter }}">
+                                                <div id="profileDocContainer{{ forloop.counter }}" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
+                                                    <a {% if i.profile_doc %} href="{{ i.profile_doc.url }}" download {% else %} href="#" {% endif %} class="p-2 rounded-md text-xs bg-white text-black border">
+                                                        {{ i.profile_doc.name }}
+                                                    </a>
+                                                    <button type="button" class="w-fit my-2 mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('profileDocInput{{ forloop.counter }}').click()">Upload</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                        <!-- Save Button for Each Profile -->
+                                        <div class="flex justify-end space-x-2">
+                                            <button type="submit" class="px-8 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">
+                                                Save
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <form method="POST" action="{% url 'profile' %}?type=gallery&id={{i.id}}" style="display: flex; flex-direction: column;justify-content: center;" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
+                                            <input type="file" name="img" multiple accept="image/**" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer"  id="profileDocInput">
+                                                
+                                        </div>
+                                        <button type="submit" class="w-fit mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" >Save </button>
+                                    </form>
+                        
+                                        <!-- Showcase Images Field -->
+                                        <div class="relative border border-gray-800 rounded-xl p-6">
+                                            <div class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010]">
+                                                <div class="mt-4 flex flex-wrap gap-2">
+                                                    {% for image in i.profile_gallery.all %}
+                                                    <div class="flex flex-wrap">
+                                                        <div class="relative ">
+                                                            <img src="{{ image.image.url }}" alt="Showcase" class="object-cover h-40 border rounded">
+                                                            <a class="absolute top-0 right-0 bg-black/50  p-1.5 px-3" href="{% url 'profile' %}?action=delete&image_id={{image.id}}">x</a>
+                                                        </div>
+                        
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                                                        
+                                            </div>
+                                        </div>
                                 </div>
-                                                        
+                                
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
+                    
                 </div>
-                        
-               
-        </div>
+                
+                
+            </div>
                             
     </div>
+    <script>
+       // Accordion toggle functionality with sliding effect
+            document.querySelectorAll('[data-accordion-target]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const target = document.querySelector(button.getAttribute('data-accordion-target'));
+
+                    // Check if already open
+                    if (target.style.maxHeight) {
+                        target.style.maxHeight = null;  // Close the panel
+                    } else {
+                        // Close any other open panels
+                        document.querySelectorAll('.accordion-collapse').forEach(panel => {
+                            panel.style.maxHeight = null;
+                        });
+
+                        target.style.maxHeight = target.scrollHeight + 'px';  // Open the clicked panel
+                    }
+                });
+            });
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    document.querySelectorAll('.cke_notification_close').forEach(function(element) {
+                        element.click();  // Programmatically click each element after 3 seconds
+                    });
+                }, 2000);  // 3000 milliseconds = 3 seconds
+            });
+    </script>
     <script>
         function previewImage(event, previewId) {
             var reader = new FileReader();
@@ -423,7 +468,11 @@ option{
         }
     </script>
     <script>
-        CKEDITOR.replace('bio-editor');
+        document.querySelectorAll('.editor').forEach(editor => {
+            let id = editor.getAttribute('id'); // Correct method to get the id
+            CKEDITOR.replace(id); // Replace the editor with CKEditor
+        });
+        
 
         
         document.addEventListener('DOMContentLoaded', function () {
