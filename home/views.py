@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from main_app.models import Community, User, SupportTickets,ProfileGallery,ConnectImpress
+from main_app.models import Community, User, SupportTickets,ProfileGallery,ConnectImpress,ProfileInfo
 from .models import Category,PagesData
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -264,10 +264,13 @@ def send_passcode(request):
     
     if request.method =='POST':
         uid =request.POST.get('user_id')
+        profile_id = request.POST.get('profile_id')
         user = User.objects.get(uid=uid)
+        profile = ProfileInfo.objects.get(id=profile_id)
         if request.GET.get('type')=='send_code':
             Send_Code_email(user.code,user.email)
-            user.payment_status = 'Code Sent'
+            
+            profile.payment_status = 'Code Sent'
             user.save()
             return redirect(request.META.get('HTTP_REFERER', '/dashboard'))
         
@@ -276,7 +279,7 @@ def send_passcode(request):
             Send_Payment_email(payment_link,user.email)
             
         user.code = user.generate_unique_code()
-        user.payment_status = 'In Progress'
+        profile.payment_status = 'In Progress'
         user.save()
         return redirect(request.META.get('HTTP_REFERER', '/dashboard'))
     return redirect(request.META.get('HTTP_REFERER', '/dashboard'))
@@ -438,66 +441,139 @@ def update_service(request,id):
     if not  request.user.is_superuser:
         messages.error(request, 'You are not authorized to access this page.')
         return redirect('home')
-    brand = User.objects.get(uid=id)
+    user = User.objects.get(uid=id)
     end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
     
+    
+    if request.GET.get('type')=='delete':
+        id  = request.GET.get('image_id')
+        profile_id = request.GET.get('profile_id')
+        if profile_id:
+            ProfileInfo.objects.get(id=profile_id).delete()
+            messages.success(request, 'Profile deleted successfully.')
+            return redirect(request.META.get('HTTP_REFERER'))
+        
+        if id:
+            img = ProfileGallery.objects.get(id=id).delete()
+            messages.success(request, 'Image deleted successfully.')
+            return redirect(request.META.get('HTTP_REFERER'))
+    
     if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        mobile = request.POST.get('mobile')
-        email = request.POST.get('email')
-        firm_name = request.POST.get('firmName')
-        firm_address = request.POST.get('firmAddress')
-        country = request.POST.get('country')
-        state = request.POST.get('state')
-        city = request.POST.get('city')
-        pincode = request.POST.get('pincode')
+
         
-        categories = request.POST.get('selected_categories')
-        bio = request.POST.get('bio')
-        facebook = request.POST.get('facebook')
-        instagram = request.POST.get('instagram')
-        linkedin = request.POST.get('linkedin')
-        
-        profilepic = request.FILES.get('profilepic')
-        brandlogo = request.FILES.get('brandlogo')
-        profileDoc = request.FILES.get('profileDocInput')
-        
-        brand.firm_name = firm_name
-        brand.first_name = first_name
-        brand.mobile = mobile
-        brand.email = email
-        brand.last_name = last_name
-        brand.firm_address = firm_address
-        brand.country =country
-        brand.state = state
-        brand.city = city
-        brand.zip_code = pincode
-        if categories:
-            brand.category.clear()
-            for category in categories.split(','):
-                brand.category.add( Category.objects.get(id=category))
-        brand.bio = bio
-        brand.social_links = {
-            'facebook': facebook,
-            'instagram': instagram,
-            'linkedin': linkedin
-        }
-        if profilepic:
-            brand.profile_pic = profilepic
-        
-        if brandlogo:
-            brand.brand_logo = brandlogo
-        
-        if profileDoc:
-            brand.profile_doc = profileDoc
-        
-        brand.save()
-        messages.success(request, 'Information updated successfully.')
-        return redirect(request.META.get('HTTP_REFERER'))
+            if request.GET.get('type') == 'basic_info':
+                first_name = request.POST.get('first_name')
+                last_name = request.POST.get('last_name')
+                
+                mobile = request.POST.get('mobile')
+                firm_name = request.POST.get('firmName')
+                firm_address = request.POST.get('firmAddress')
+                country = request.POST.get('country')
+                state = request.POST.get('state')
+                city = request.POST.get('city')
+                pincode = request.POST.get('pincode')
+                new_categories = request.POST.get('new_categories')
+                verified = request.POST.get('verified')
+                
+                
+                user.mobile = mobile
+                user.firm_name = firm_name
+                user.first_name = first_name
+                user.last_name = last_name
+
+                user.address = firm_address
+                user.country = country
+                user.state = state
+                user.city = city
+                user.zip_code = pincode
+                if verified == 'Yes':
+                    user.verified = True
+                else:
+                    user.verified = False
+                
+                user.save()
+                if new_categories:
+                    for cat in  new_categories.split(','):
+                        profile = ProfileInfo.objects.create(   
+                        category = Category.objects.get(id=cat)
+                        )
+                        profile.save()
+                        user.profile.add(profile)
+                        user.save()
+                        messages.success(request, 'New Category added successfully!!')
+                        messages.info(request, 'New Category Under Review!')
+                        return redirect(request.META.get('HTTP_REFERER', '/home'))
+                
+                
+                messages.success(request, 'Profile updated successfully')
+                return redirect(request.META.get('HTTP_REFERER', '/home'))
+            
+            if request.GET.get('type') == 'professional':
+                
+                profile_id = request.GET.get('id')
+                if profile_id:
+                    profile = ProfileInfo.objects.get(id=profile_id)
+                    bio = request.POST.get(f'bio{profile_id}')
+                    
+                    linked = request.POST.get(f'linkedin{profile_id}')
+                    website = request.POST.get(f'website{profile_id}')
+                    facebook = request.POST.get(f'facebook{profile_id}')
+                    instagram = request.POST.get(f'instagram{profile_id}')
+                    twitter = request.POST.get(f'twitter{profile_id}')
+                    visible = request.POST.get(f'visible{profile_id}')
+                    verified = request.POST.get(f'verified{profile_id}')
+                    payment_status = request.POST.get(f'payment_status{profile_id}')
+                    profilepic = request.FILES.get(f'profilepic{profile_id}')
+                    brandlogo = request.FILES.get(f'brandlogo{profile_id}')
+                    profileDocInput = request.FILES.get(f'profileDocInput{profile_id}')
+                    
+                    profile.bio = bio
+                    profile.social_links= {
+                        "linkedin": linked,
+                        "website": website,
+                        "facebook": facebook,
+                        "instagram": instagram,
+                        "twitter": twitter
+                    }
+                    if profilepic:
+                        profile.profile_pic = profilepic
+                    if brandlogo:
+                        profile.brand_logo = brandlogo
+                    if profileDocInput:
+                        profile.profile_doc = profileDocInput
+                    
+                    if verified == 'Yes':
+                        profile.is_active = True
+                    else:
+                        profile.is_active = False
+                        
+                    profile.payment_status = payment_status
+                    
+                    if visible == 'Yes':
+                        profile.visible = True
+                    else:
+                        profile.visible = False
+                    profile.save()
+                    messages.success(request, 'Profile updated successfully')
+                    return redirect(request.META.get('HTTP_REFERER', '/home'))
+                
+                
+                
+            if request.GET.get('type') == 'gallery':
+                profile_id = request.GET.get('id')
+                if profile_id:
+                    profile = ProfileInfo.objects.get(id=profile_id)
+                    image = request.FILES.getlist('img')
+                    if image:
+                        for img in image:
+                            profile_gallery = ProfileGallery.objects.create(image=img)
+                            profile.profile_gallery.add(profile_gallery)
+                            profile.save()
+                        messages.success(request, 'Gallery updated successfully')
+                        return redirect(request.META.get('HTTP_REFERER', '/home'))
     
     
-    return render(request,'dashboard/update-service.html',{'title':'Update Brand','brand':brand,'categories':end_nodes})
+    return render(request,'dashboard/update-service.html',{'title':'Update Brand','brand':user,'categories':end_nodes})
 
 
 @login_required(login_url='login')

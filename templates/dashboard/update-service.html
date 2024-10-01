@@ -13,14 +13,14 @@
                 <div class="card card-table">
                     <div class="card-body">
                         <div class="title-header option-title">
-                            <h5>Edit Service Provide - #{{brand.id}}</h5>
+                            <h5>Edit Service Provide - #{{brand.uid}}</h5>
                      
                         </div>
                         <div class="container py-5">
-                            <form method="POST" action="{% url 'update_service' brand.uid %}"  enctype="multipart/form-data" class="row g-3">
+                            <form method="POST" action="{% url 'update_service' brand.uid %}?type=basic_info"  enctype="multipart/form-data" class="row g-3">
                                 {% csrf_token %}
-                                <div class="col-md-6">
-                                    <label for="profilePic" class="form-label">Profile Pic</label>
+                                {% comment %}<div class="col-md-6">
+                                     <label for="profilePic" class="form-label">Profile Pic</label>
                                     <input type="file" name="profilepic" id="profilePic" class="form-control" onchange="previewImage('profilePic', 'profilePicimg')" />
                                     <div class="position-relative mt-2" id="profilePicimg" style="width: 20%;">
                                         {% if brand.profile_pic %}
@@ -42,10 +42,10 @@
                                                     onclick="removeImage('brandlogo')">X</button>
                                         {% endif %}
                                     </div>
-                                </div>
+                                </div> {% endcomment %}
                             
                                 <!-- Project Showcase -->
-                                <div class="col-md-12">
+                                {% comment %} <div class="col-md-12">
                                     <label for="projectShowcase" class="form-label">Project Showcase (up to 10 images)</label>
                                     {% if brand.profile_gallery.count > 0 %}
                                         <div class="d-flex flex-wrap mt-2 gap-2" id="galleryPreview">
@@ -58,10 +58,10 @@
                                         </div>
                                     {% endif %}
                                     <a href='{% url "update_gallery" brand.uid %}' target="_blank" class=" btn btn-secondary" style="width:20%;" >Edit Gallery</a>
-                                </div>
+                                </div> {% endcomment %}
 
                                 <!-- Full Name -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="name" class="form-label">First Name</label>
 
                                     <input
@@ -76,7 +76,7 @@
 
                                 <!-- Firm Name -->
                                 <!-- Contact Person Name -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="contact_person_name">Last Name</label>
                                     <input
                                         type="text"
@@ -90,7 +90,7 @@
                                 </div>
 
                                 <!-- Contact Number -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="mobile">Contact Number</label>
                                     <input
                                         type="text"
@@ -104,8 +104,8 @@
                                 </div>
 
                                 <!-- Company Email -->
-                                <div class="col-md-6">
-                                    <label for="email">Company Email</label>
+                                <div class="col-md-4">
+                                    <label for="email">Email</label>
                                     <input
                                         type="email"
                                         id="email"
@@ -118,12 +118,12 @@
                                 </div>
 
                                 <!-- Designation -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="designation">Firm Name</label>
                                     <input
                                         type="text"
-                                        id="firm_name"
-                                        name="firm_name"
+                                        id="firmName"
+                                        name="firmName"
                                         value="{{ brand.firm_name|default_if_none:'' }}"
                                         placeholder="Firm Name"
                                         class="form-control"
@@ -132,19 +132,19 @@
                                 </div>
 
                                 <!-- Firm Address -->
-                                <div class="col-md-6">
-                                    <label for="firm_address">Firm Address</label>
+                                <div class="col-md-4">
+                                    <label for="firmAddress">Firm Address</label>
                                     <textarea
-                                        id="firm_address"
-                                        name="firm_address"
+                                        id="firmAddress"
+                                        name="firmAddress"
                                         placeholder="Address"
                                         class="form-control"
                                         readonly
-                                    >{{ brand.firm_address |default_if_none:'' }}</textarea>
+                                    >{{ brand.address |default_if_none:'' }}</textarea>
                                 </div>
 
                                 <!-- Country -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="country">Country</label>
                                     <select id="country" name="country" class="form-select" disabled onchange="fetchStates()">
                                         <option readonly selected>Select Country</option>
@@ -153,7 +153,7 @@
                                 </div>
 
                                 <!-- State -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="state">State</label>
                                     <select id="state" name="state" class="form-select" disabled onchange="fetchCities()">
                                         <option value="" readonly selected>Select State</option>
@@ -162,7 +162,7 @@
                                 </div>
 
                                 <!-- City -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="city">City</label>
                                     <select id="city" name="city" class="form-select" disabled>
                                         <option value="" readonly selected>Select City</option>
@@ -172,7 +172,7 @@
 
 
                                 <!-- Pincode -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="pincode">Pincode</label>
                                     <input
                                         type="text"
@@ -184,86 +184,26 @@
                                         readonly
                                     />
                                 </div>
-
-                                <!-- Category -->
-                                <div class="col-md-6">
+                                <div class="mt-4 w-full col-md-6">
+                                    <label class="block mb-1">Account Verified </label>
+                                    <select name="verified" id="verified" class="form-select">
+                                        <option value="No">No</option>
+                                        <option value="Yes" {% if brand.is_active %}selected{% endif %}>Yes</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 " >
                                     <label for="category">Category</label>
                                     
                                     <!-- Hidden input to hold the list of selected categories -->
-                                    <input type="hidden" name="selected_categories" id="selected_categories" value="{% for category in brand.category.all %}{{ category.id }}{% if not forloop.last %},{% endif %}{% endfor %}">
+                                    <input type="hidden" name="new_categories" id="selected_categories" value="{% for category in brand.category.all %}{{ category.id }}{% if not forloop.last %},{% endif %}{% endfor %}">
                                     
                                     <!-- Container for category dropdowns -->
-                                    <div id="category-container">
-                                        <!-- Loop through existing categories to display them -->
-                                        {% for selected_category in brand.category.all %}
-                                        <div class="category-row">
-                                            <select name="category" class="form-select category-select">
-                                                {% for category in categories %}
-                                                <option value="{{ category.id }}" 
-                                                    {% if selected_category.id == category.id %} selected {% endif %}>
-                                                    {{ category.get_category_hierarchy }}
-                                                </option>
-                                                {% endfor %}
-                                            </select>
-                                            <button type="button" class="btn btn-danger delete-category-btn">Delete</button>
-                                        </div>
-                                        {% endfor %}
+                                    <div id="category-container" >
+                                      
+                                        <button type="button" class="btn btn-primary mt-3" id="add-category-btn">Add Category</button>
                                     </div>
-                                    
                                     <!-- Button to add a new category -->
-                                    <button type="button" class="btn btn-primary mt-3" id="add-category-btn">Add Category</button>
                                 </div>
-
-
-                                <!-- Bio -->
-                                <div class="col-12">
-                                    <label for="bio-editor">Bio</label>
-                                    <textarea name="bio" class="form-control" id="bio-editor" readonly>{{brand.bio|safe}}</textarea>
-                                </div>
-
-                                <!-- Social Media Links -->
-                                <div class="col-md-4">
-                                    <label for="facebook">Facebook</label>
-                                    <input
-                                        type="text"
-                                        id="facebook"
-                                        name="facebook"
-                                        value="{{ brand.social_links.facebook|default_if_none:'' }}"
-                                        placeholder="Facebook"
-                                        class="form-control"
-                                        readonly
-                                    />
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="instagram">Instagram</label>
-                                    <input
-                                        type="text"
-                                        id="instagram"
-                                        name="instagram"
-                                        value="{{ brand.social_links.instagram|default_if_none:'' }}"
-                                        placeholder="Instagram"
-                                        class="form-control"
-                                        readonly
-                                    />
-                                </div>
-
-                                <div class="col-md-4">
-                                    <label for="linkedin">LinkedIn</label>
-                                    <input
-                                        type="text"
-                                        id="linkedin"
-                                        name="linkedin"
-                                        value="{{ brand.social_links.linkedin|default_if_none:'' }}"
-                                        placeholder="LinkedIn"
-                                        class="form-control"
-                                        readonly
-                                    />
-                                </div>
-
-                                <!-- Profile Pic -->
-                                
-                                <!-- Buttons -->
                                 <div class="col-12 d-flex justify-content-end gap-2">
                                     <button
                                         type="button"
@@ -277,6 +217,176 @@
                                     </button>
                                 </div>
                             </form>
+
+                                <!-- Profile Pic -->
+                                <div id="profile" class="mb-4 space-y-4 max-w-4xl">
+                                    <label class="block mb-1">Representation</label>
+                                    <div class="border border-gray-800 rounded-xl p-6">
+                                
+                                        <!-- Accordion Wrapper -->
+                                        <div class="accordion" id="accordionExample">
+                                            {% for i in brand.profile.all %}
+                                            <!-- Accordion Item -->
+                                            <div class="accordion-item mb-4">
+                                                <!-- Accordion Header -->
+                                                <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                                                    <button 
+                                                        class="accordion-button collapsed" 
+                                                        type="button" 
+                                                        data-bs-toggle="collapse" 
+                                                        data-bs-target="#collapse{{ forloop.counter }}" 
+                                                        aria-expanded="false" 
+                                                        aria-controls="collapse{{ forloop.counter }}">
+                                                        <span style="display:flex;justify-content: space-between;width: 100%;">
+                                                            <span>Profile {{ forloop.counter }}: {{ i.category.get_category_hierarchy }}</span>
+                                                            {% if i.is_active %}
+                                                                <span style="color:green">** Verified</span>
+                                                            {% else %}
+                                                                <span style="color:red">** Not Verified</span>
+                                                            {% endif %}
+                                                        </span>
+                                                    </button>
+                                                </h2>
+                                
+                                                <!-- Accordion Body -->
+                                                <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#accordionExample">
+                                                    <div class="accordion-body">
+                                                        <!-- Editable Form for Each Profile -->
+                                                        <form action="{% url 'update_service' brand.uid %}?type=professional&id={{i.id}}" method="POST" class="space-y-4" enctype="multipart/form-data">
+                                                            {% csrf_token %}
+                                                            <div class="row">
+
+                                                                <div class="mt-4 w-full col-md-4">
+                                                                    <label class="block mb-1">Visible to everyone {% if not i.is_active %}<span style="font-size:12px;color:red">** Not Verified</span>{% endif %}</label>
+                                                                    <select name="visible{{i.id}}" id="visible" {% if not i.is_active %} disabled {% endif %} class="form-select">
+                                                                        <option value="No">No</option>
+                                                                        <option value="Yes" {% if i.visible %}selected{% endif %}>Yes</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mt-4 w-full col-md-4">
+                                                                    <label class="block mb-1">Verified </label>
+                                                                    <select name="verified{{i.id}}" id="verified" class="form-select">
+                                                                        <option value="No">No</option>
+                                                                        <option value="Yes" {% if i.is_active %}selected{% endif %}>Yes</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mt-4 w-full col-md-4">
+                                                                    <label class="block mb-1">Payment Status </label>
+                                                                    <select name="payment_status{{i.id}}" id="payment_status" class="form-select">
+                                                                        <option value="pending">Pending</option>
+                                                                        <option value="In Process" {% if i.payment_status == 'In Process' %}selected{% endif %}>In Process</option>
+                                                                        <option value="Code Sent" {% if i.payment_status == 'Code Sent' %}selected{% endif %}>Code Sent</option>
+                                                                        <option value="Success" {% if i.payment_status == 'Success' %}selected{% endif %}>Success</option>
+                                                                    </select>
+                                                                </div>
+
+                                                              
+                                                            </div>
+                                
+                                                            <div class="mb-4 w-100">
+                                                                <label class="block text-black mb-2">Brief Bio</label>
+                                                                <textarea name="bio{{i.id}}" id="bio-editor-{{ forloop.counter }}" class="form-control editor" rows="3">{{ i.bio |safe }}</textarea>
+                                                            </div>
+                                
+                                                            <!-- Social Links Fields -->
+                                                            <div class="row">
+                                                                <div class="col-lg-4 col-12 mb-3">
+                                                                    <label class="block mb-1">Facebook</label>
+                                                                    <input type="url" name="facebook{{i.id}}" value="{{ i.social_links.facebook }}" class="form-control">
+                                                                </div>
+                                                                <div class="col-lg-4 col-12 mb-3">
+                                                                    <label class="block mb-1">Instagram</label>
+                                                                    <input type="url" name="instagram{{i.id}}" value="{{ i.social_links.instagram }}" class="form-control">
+                                                                </div>
+                                                                <div class="col-lg-4 col-12 mb-3">
+                                                                    <label class="block mb-1">LinkedIn</label>
+                                                                    <input type="url" name="linkedin{{i.id}}" value="{{ i.social_links.linkedin }}" class="form-control">
+                                                                </div>
+                                                                <div class="col-lg-4 col-12 mb-3">
+                                                                    <label class="block mb-1">Website</label>
+                                                                    <input type="url" name="website{{i.id}}" value="{{ i.social_links.website }}" class="form-control">
+                                                                </div>
+                                                            </div>
+                                
+                                                            <!-- File Upload Fields for Profile Picture, Brand Logo, and Document -->
+                                                            <div class="row mb-4">
+                                                                <div class="col-md-4">
+                                                                    <label for="profilePic" class="form-label">Profile Pic</label>
+                                                                    <input type="file" name="profilepic{{i.id}}" accept="image/*" class="hidden profilePicInput" id="profilePicInput{{ forloop.counter }}" onchange="previewImage(event, 'profilePicPreview{{ forloop.counter }}')">
+                                                                    <div class="position-relative mt-2" id="profilePicimg" style="width: 20%;">
+                                                                       {% if i.profile_pic %}
+                                                                           <img src="{{ i.profile_pic.url }}" alt="Profile Preview" class="img-thumbnail" />
+                                                                           <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" 
+                                                                                   onclick="removeImage('profilePic')">X</button>
+                                                                       {% endif %}
+                                                                   </div>
+                                                               </div>
+                                                               
+                                                               <!-- Brand Logo -->
+                                                               <div class="col-md-4">
+                                                                   <label for="brandlogo" class="form-label">Brand Logo</label>
+                                                                   <input type="file" name="brandlogo{{i.id}}" accept="image/*" class="hidden brandPicInput" id="brandPicInput{{ forloop.counter }}" onchange="previewImage(event, 'brandPicPreview{{ forloop.counter }}')">
+                                                                   <div class="position-relative mt-2" id="brandlogoimg" style="width: 50%;">
+                                                                       {% if i.brand_logo %}
+                                                                           <img src="{{ i.brand_logo.url }}" alt="Brand Logo Preview" class="img-thumbnail" />
+                                                                           <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0" 
+                                                                                   onclick="removeImage('brandlogo')">X</button>
+                                                                       {% endif %}
+                                                                   </div>
+                                                               </div>
+                                                               <div class="col-md-4">
+                                                                <label for="brandlogo" class="form-label">File</label>
+                                                                <input type="file" name="profileDocInput{{i.id}}" accept="application/pdf" class="hidden" id="profileDocInput{{ forloop.counter }}">
+                                                                <div class="position-relative mt-2" id="brandlogoimg" style="width: 50%;">
+                                                                    {% if i.profile_doc %}
+                                                                        <a href="{{i.profile_doc.url}}" download class="btn btn-primary">Download</a>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                
+                                                            <!-- Save Button -->
+                                                            <div class="d-flex justify-content-end">
+                                                                <button type="submit" class="btn btn-primary m-1">Save</button>
+
+                                                                <a href="{% url 'update_service' brand.uid %}?type=delete&profile_id={{i.id}}" class="btn btn-danger m-1" onclick="return confirmDelete();">Delete</a>
+                                                            </div>
+                                                            
+                                                        </form>
+                                                        <hr>
+                                                        <h3>Gallery</h3>
+                                                        <form method="POST" action="{% url 'update_service' brand.uid %}?type=gallery&id={{i.id}}" style="display: flex; flex-direction: column;justify-content: center;" enctype="multipart/form-data">
+                                                            {% csrf_token %}
+                                                            <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
+                                                                <input type="file" name="img" multiple accept="image/**" class="w-fit mx-auto border rounded-lg  px-4 py-2 cursor-pointer"  id="profileDocInput">
+                                                                    
+                                                            </div>
+                                                            <button type="submit" class="w-fit mx-auto border rounded-lg text-black px-4 py-2 cursor-pointer" >Save </button>
+                                                        </form>
+                                                        <!-- Showcase Images -->
+                                                        <div class="border border-dark rounded p-3">
+                                                            <div class="row">
+                                                                {% for image in i.profile_gallery.all %}
+                                                                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                                                                    <div class="position-relative">
+                                                                        <img src="{{ image.image.url }}" class="img-fluid rounded" alt="Showcase Image">
+                                                                        <a href="{% url 'update_service' brand.uid %}?type=delete&image_id={{image.id}}" class="position-absolute top-0 end-0 bg-dark text-white p-2 rounded">x</a>
+                                                                    </div>
+                                                                </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <!-- Buttons -->
+                                
                         </div>
 
 
@@ -350,8 +460,20 @@
         // Clear the file input
         input.value = '';
     }
-    CKEDITOR.replace('bio-editor');
-
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            document.querySelectorAll('.cke_notification_close').forEach(function(element) {
+                element.click();  // Programmatically click each element after 3 seconds
+            });
+        }, 2000);  // 3000 milliseconds = 3 seconds
+    });
+    document.querySelectorAll('.editor').forEach(editor => {
+        let id = editor.getAttribute('id'); // Correct method to get the id
+        CKEDITOR.replace(id); // Replace the editor with CKEditor
+    });
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete this profile?');
+    }
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -499,6 +621,8 @@
     window.addEventListener('load', function() {
         updateSelectedCategories();
     });
+
+    
 </script>
 {% endblock content %}
     
