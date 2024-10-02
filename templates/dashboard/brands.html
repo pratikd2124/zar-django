@@ -43,15 +43,12 @@
                                                 <tr class="item">
                                                     <th>Logo</th>
                                                     <th>Brand Name</th>
-                                                    <th>Category Hierarchy</th>
+                                                    <th>Category </th>
                                                     <th>Contact Person</th>
                                                     <th>Contact Number</th>
                                                     <th>Impressions</th>
                                                     <th>Email</th>
-                                                    <th>State</th>
-                                                    <th>City</th>
-                                                    <th>Zip Code</th>
-                                                    <th>Country</th>
+                                                   
                                                     <th>Status</th>
                                                     <th>Option</th>
                                                 </tr>
@@ -69,14 +66,43 @@
                                                     
                                                     <td>
                                                     {% for i in cat.profile.all %}
-                                                    <div style="display: flex;align-items: center;" >
-
+                                                    <div style="display: flex;align-items: center;    justify-content: space-between;" >
+                                                                
                                                         <span>
                                                             {{ i.category.get_category_hierarchy }} 
                                                         </span> 
-                                                        <a href="{% url 'brand_info' i.category.get_category_hierarchy cat.uid %}" target="_blank">
+                                                        <a href="{% url 'user_info' i.category.get_category_hierarchy user.uid %}" target="_blank">
                                                             <i class="ri-eye-line"></i>
                                                         </a> 
+
+                                                        {% if i.payment_status == 'pending'  %}
+                                                        
+                                                    
+                                                        <a href="#" class="align-items-center btn btn-theme d-flex" 
+                                                            data-bs-toggle="modal" 
+                                                            data-email="{{ cat.email }}" 
+                                                            data-id="{{ cat.uid }}" 
+                                                            data-bs-target="#sendLinkModal" 
+                                                            onclick="setModalData('{{ cat.email }}', '{{ cat.uid }}','{{i.id}}')">
+                                                                <i class="ri-mail-line"></i>
+                                                            </a>
+                                                        {% elif i.payment_status == 'In Progress' %}
+                                                            <a href="#" class="align-items-center btn btn-theme d-flex" 
+                                                                data-bs-toggle="modal" 
+                                                                data-email="{{ cat.email }}" 
+                                                                data-id="{{ cat.uid }}" 
+                                                                data-bs-target="#sendLinkModal2" 
+                                                                onclick="setModalData2('{{ cat.email }}', '{{ cat.uid }}','{{i.id}}')">
+                                                                    <i class="ri-mail-line"></i>
+                                                                </a>
+                                                        {% else %}
+                                                            <a class="align-items-center btn btn-success d-flex" 
+                                                                >
+                                                                    <i class="ri-check-double-line"></i>
+                                                                </a>
+                                                        {% endif %}
+
+
                                                     </div> 
                                                     {% endfor %}
                                                         
@@ -85,39 +111,9 @@
                                                     <td class="mobile">{{ cat.mobile }}</td>
                                                     <td>{{ cat.impress_brand.all.count }}</td>
                                                     <td class="email">{{ cat.email }}</td>
-                                                    <td class="state">{{ cat.state }}</td>
-                                                    <td class="city">{{ cat.city }}</td>
-                                                    <td>{{ cat.zip_code }}</td>
-                                                    <td class="country">{{ cat.country }}</td>
                                                     <td class="payment-status">{{ cat.payment_status }}</td>
                                                     <td>
                                                         <ul>
-                                                            {% if cat.payment_status == 'pending'  %}
-                                                            
-                                                          
-                                                            <li>
-                                                              <a href="#" class="align-items-center btn btn-theme d-flex" 
-                                                                  data-bs-toggle="modal" 
-                                                                  data-email="{{ cat.email }}" 
-                                                                  data-id="{{ cat.uid }}" 
-                                                                  data-bs-target="#sendLinkModal" 
-                                                                  onclick="setModalData('{{ cat.email }}', '{{ cat.uid }}')">
-                                                                      <i class="ri-mail-line"></i>
-                                                                  </a>
-                                                              </li>
-                                                              {% elif cat.payment_status == 'In Progress' %}
-                                                              <li>
-                                                                  <a href="#" class="align-items-center btn btn-theme d-flex" 
-                                                                      data-bs-toggle="modal" 
-                                                                      data-email="{{ cat.email }}" 
-                                                                      data-id="{{ cat.uid }}" 
-                                                                      data-bs-target="#sendLinkModal2" 
-                                                                      onclick="setModalData2('{{ cat.email }}', '{{ cat.uid }}')">
-                                                                          <i class="ri-mail-line"></i>
-                                                                      </a>
-                                                                  </li>
-                                                              {% endif %}
-                                                              
                                                             <li>
                                                                 <a href="{% url 'edit_brand' cat.uid %}">
                                                                     <i class="ri-pencil-line"></i>

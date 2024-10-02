@@ -365,68 +365,6 @@ def update_brand(request,id):
         return redirect('brand_list')
     
     
-    if request.method == 'POST':
-        brand_name = request.POST.get('brand_name')
-        contact_person_name = request.POST.get('contact_person_name')
-        mobile = request.POST.get('mobile')
-        email = request.POST.get('email')
-        designation = request.POST.get('designation')
-        firm_address = request.POST.get('firm_address')
-        country = request.POST.get('country')
-        state = request.POST.get('state')
-        city = request.POST.get('city')
-        pincode = request.POST.get('pincode')
-        
-        categories = request.POST.get('selected_categories')
-        bio = request.POST.get('bio')
-        facebook = request.POST.get('facebook')
-        instagram = request.POST.get('instagram')
-        linkedin = request.POST.get('linkedin')
-        
-        profilepic = request.FILES.get('profilepic')
-        brandlogo = request.FILES.get('brandlogo')
-        profileDoc = request.FILES.get('profileDocInput')
-
-        brand.brand_name = brand_name
-        brand.contact_person = contact_person_name
-        brand.mobile = mobile
-        brand.email = email
-        brand.designation = designation
-        brand.firm_address = firm_address
-        brand.country =country
-        brand.state = state
-        brand.city = city
-        brand.zip_code = pincode
-        
-        if categories:
-            
-            brand.category.clear()
-            for category in categories.split(','):
-                brand.category.add( Category.objects.get(id=category))
-        brand.bio = bio
-        brand.social_links = {
-            'facebook': facebook,
-            'instagram': instagram,
-            'linkedin': linkedin
-        }
-        if profilepic:
-            brand.profile_pic = profilepic
-        
-        if brandlogo:
-            brand.brand_logo = brandlogo
-        
-        if profileDoc:
-            brand.profile_doc = profileDoc
-        
-        brand.save()
-        messages.success(request, 'Brand updated successfully.')
-        return redirect('brand_list')
-        
-        
-        
-        
-        
-        
 
     
     
