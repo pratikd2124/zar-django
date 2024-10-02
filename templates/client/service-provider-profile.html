@@ -11,7 +11,22 @@ option{
 }
 
 </style>
+<div id="profileModal" class="fixed flex inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-80">
+    <div class="bg-[#1a1a1a] border border-gray-700 p-6 rounded-lg shadow-lg w-full max-w-md">
+        <span class="float-right text-gray-500 text-2xl font-bold cursor-pointer" onclick="closeProfileModal()">&times;</span>
+        <p class="text-center mt-4">Please Add Profile Details in categories, until your profile is verified.</p>
+    </div>
+</div>
 
+<script>
+    function closeProfileModal() {
+        document.getElementById('profileModal').classList.add('hidden');
+    }
+
+    window.onload = function() {
+        document.getElementById('profileModal').classList.remove('hidden');
+    };
+</script>
     <div class="w-full flex py-8">
         <div class="md:block hidden md:w-1/4 p-6 w-[30%]">
             <aside class="w-1/4 p-6">
@@ -33,9 +48,9 @@ option{
         </div>
         <div class="md:w-3/5 w-full p-4 mb-12">
             
-            <form method="POST" action="{% url 'profile' %}?type=basic_info"  class="w-full" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'profile' %}?type=basic_info"  class="w-full border border-gray-800 rounded-xl p-6" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div id="basic-info" class="mb-4 space-y-4 border border-gray-800 rounded-xl p-6 grid lg:grid-cols-4 grid-cols-1 gap-6" style="">
+                <div id="basic-info" class="mb-4 space-y-4  grid lg:grid-cols-2 grid-cols-1 gap-6" style="">
                     <!-- Name Field -->
                     
                         
@@ -199,7 +214,7 @@ option{
             </form>
 
             <div id="profile" class="mb-4 space-y-4 max-w-4xl">
-                <label class="block mb-1">Representatio</label>
+                <label class="block mb-1">Representation</label>
                 <div class="border border-gray-800 rounded-xl p-6">
 
                     <!-- Accordion Wrapper -->
@@ -214,25 +229,38 @@ option{
                             <!-- Accordion Header -->
                             <h2 class="accordion-header mb-0" id="heading{{ forloop.counter }}">
                                 <button 
-                                    class="accordion-button collapsed relative flex items-center w-full py-4 px-6 text-white bg-gray-800 border border-gray-700 rounded-xl text-left focus:outline-none transition-all duration-300"
+                                    class="accordion-button collapsed relative  flex items-center w-full py-4 px-6 text-white bg-[#171717] border border-gray-700 rounded-xl text-left focus:outline-none transition-all duration-300"
                                     type="button" 
                                     data-accordion-target="#collapse{{ forloop.counter }}" 
                                     aria-expanded="false" 
                                     aria-controls="collapse{{ forloop.counter }}">
-                                    <span style="display:flex;justify-content: space-between;width: 100%;">
-                                    <span>Profile {{ forloop.counter }}: {{ i.category.get_category_hierarchy }}</span> {% if i.is_active %}
-                                    <span style="color:green">**  Verified</span>
-                                        {% else %}
-                                        <span style="color:red">** Not Verified</span>
+                                    <span class="flex md:items-center w-full md:flex-row md:justify-between" >
+                                        <span>Profile {{ forloop.counter }}: {{ i.category.get_category_hierarchy }}</span> {% if i.is_active %}
+                                        <span class="text-green-500 text-xs inline-flex item-center gap-1">
+                                            
+                                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                                              </svg>
+                                              <small>Verified</small>
+                                              
+                                               </span>
+                                            {% else %}
+                                            <span class="text-red-500 text-xs inline-flex item-center gap-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                  </svg>
+                                                  <small>Not Verified</small>
+                                                </span>
 
-                                    {% endif %}</span>
+                                        {% endif %}
+                                    </span>
                                 </button>
                             </h2>
                             
                             
                             <!-- Accordion Body -->
                             <div id="collapse{{ forloop.counter }}" class="accordion-collapse max-h-0 overflow-hidden transition-all duration-300 ease-out" aria-labelledby="heading{{ forloop.counter }}" data-accordion-parent="#accordionExample">
-                                <div class="accordion-body py-4 px-6 bg-gray-900 text-white rounded-lg">
+                                <div class="accordion-body py-4 px-6 border border-gray-800 text-white rounded-lg">
                                     <!-- Editable Form for Each Profile -->
                                     <form action="{% url 'profile' %}?type=professional&id={{i.id}}" method="POST" class="space-y-4" enctype="multipart/form-data" >
                                         {% csrf_token %}
@@ -290,51 +318,104 @@ option{
                                         <!-- File Upload Fields for Profile Picture, Brand Logo, and Document -->
                                         <div class="my-4 grid lg:grid-cols-3 grid-cols-1 gap-4">
                                             <!-- Profile Picture -->
-                                            <div class="relative w-full">
-                                                <label class="block mb-1">Profile Picture</label>
-                                                <input type="file" name="profilepic{{i.id}}" accept="image/*" class="hidden" id="profilePicInput{{ forloop.counter }}" onchange="previewImage(event, 'profilePicPreview{{ forloop.counter }}')">
-                                                <div class="relative border border-dashed border-gray-500 h-64 rounded-lg bg-[#101010]">
-                                                    <img id="profilePicPreview{{ forloop.counter }}" src="{% if i.profile_pic %}{{ i.profile_pic.url }}{% endif %}" alt="Profile Pic" class="mt-4 h-56 border mx-auto">
-                                                    <div class="absolute right-2 bottom-2">
-                                                        <div class="flex gap-1">
-                                                            <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('profilePicInput{{ forloop.counter }}').click();">
-                                                                <i class="ri-edit-line"></i> Edit
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                         
                                             <!-- Brand Logo -->
-                                            <div class="relative w-full">
-                                                <label class="block mb-1">Brand Logo</label>
-                                                <input type="file" name="brandlogo{{i.id}}" accept="image/*" class="hidden" id="brandPicInput{{ forloop.counter }}" onchange="previewImage(event, 'brandPicPreview{{ forloop.counter }}')">
-                                                <div class="relative border border-dashed border-gray-500 h-64 rounded-lg bg-[#101010]">
-                                                    <img id="brandPicPreview{{ forloop.counter }}" src="{% if i.brand_logo %}{{ i.brand_logo.url }}{% endif %}" alt="Brand Logo" class="mt-4 h-32 rounded-md object-fit border mx-auto">
+                                           
+                        
+                                            <!-- Profile Document -->
+                                            
+                                        </div>
+                                        <div class="grid lg:grid-cols-3 grid-cols-1 gap-2 border border-gray-800 rounded-xl p-6">
+
+                                            <!-- Profile Picture Upload -->
+                                            <div class="relative">
+                                                <label class="block mb-1">Profile Picture</label>
+                                                <input type="file" name="profilepic{{i.id}}" accept="image/*" class="hidden" id="profilePicInput{{ forloop.counter }}" onchange="previewImage(event, 'profilePicPreview{{ forloop.counter }}')">
+                                        
+                                                <div class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010]">
+                                                    <img id="profilePicPreview{{ forloop.counter }}" src="{% if i.profile_pic %}{{ i.profile_pic.url }}{% endif %}"
+                                                         alt="Profile Pic"
+                                                         class="mt-4 w-48 h-auto rounded-lg object-cover border mx-auto">
+                                        
+                                                    <!-- Action Buttons (Edit & Delete) -->
                                                     <div class="absolute right-2 bottom-2">
                                                         <div class="flex gap-1">
-                                                            <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('brandPicInput{{ forloop.counter }}').click();">
-                                                                <i class="ri-edit-line"></i> Edit
+                                                            <button type="button" class="text-xs inline-flex items-center gap-2 p-2 rounded-md border bg-black/60" onclick="document.getElementById('profilePicInput{{ forloop.counter }}').click();">
+                                                                <!-- Edit Icon -->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+                                                                    <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z"></path>
+                                                                </svg>
+                                                                Edit
                                                             </button>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                        
-                                            <!-- Profile Document -->
-                                            <div class="relative w-full">
-                                                <label class="block mb-1">Profile Document</label>
-                                                <small class="text-xs text-gray-600">Add a PDF document</small>
-                                                <input type="file" name="profileDocInput{{i.id}}" accept="application/pdf" class="hidden" id="profileDocInput{{ forloop.counter }}">
-                                                <div id="profileDocContainer{{ forloop.counter }}" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
-                                                    <a {% if i.profile_doc %} href="{{ i.profile_doc.url }}" download {% else %} href="#" {% endif %} class="p-2 rounded-md text-xs bg-white text-black border">
-                                                        {{ i.profile_doc.name }}
-                                                    </a>
-                                                    <button type="button" class="w-fit my-2 mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" onclick="document.getElementById('profileDocInput{{ forloop.counter }}').click()">Upload</button>
+                                        
+                                            <!-- Brand Logo Upload -->
+                                            <div class="relative">
+                                                <label class="block mb-1">Brand Logo</label>
+                                                <input type="file" name="brandlogo{{ i.id }}" accept="image/*" class="hidden" id="brandPicInput{{ forloop.counter }}" onchange="previewImage(event, 'brandPicPreview{{ forloop.counter }}')">
+
+                                        
+                                                <div class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010]">
+                                                    
+                                                         <img id="brandPicPreview{{ forloop.counter }}" src="{% if i.brand_logo %}{{ i.brand_logo.url }}{% endif %}" alt="Brand Logo" class="mt-4 h-32 rounded-md object-fit border mx-auto">
+                                        
+                                                    <!-- Action Buttons (Edit & Delete) -->
+                                                    <div class="absolute right-2 bottom-2">
+                                                        <div class="flex gap-1">
+                                                            <button type="button" class="text-xs inline-flex items-center gap-2 p-2 rounded-md border bg-black/60" onclick="document.getElementById('brandPicInput{{ forloop.counter }}').click();">
+                                                                <!-- Edit Icon -->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3" >
+                                                                    <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z"></path>
+                                                                </svg>
+                                                                Edit
+                                                            </button>
+                                                            
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        
+                                            <!-- PDF Upload -->
+                                            <div class="relative">
+                                                <label class="block mb-1">Upload PDF</label>
+                                        
+                                                <input type="file" name="profileDocInput{{ i.id }}" accept="application/pdf" class="hidden" id="profileDocInput{{ forloop.counter }}">
+    
+                                                
+                                                <div id="profileDocContainer{{ forloop.counter }}" class="relative border border-dashed border-gray-500 min-h-48 rounded-lg bg-[#101010] flex flex-col p-4 text-center">
+                                                     <!-- Document Link -->
+                                                     <a {% if i.profile_doc %} href="{{ i.profile_doc.url }}" download {% else %} href="#" {% endif %} 
+                                                     class="p-2 rounded-md text-xs bg-white text-black border">
+                                                      {% if i.profile_doc %}{{ i.profile_doc.name }}{% else %}No Document{% endif %}
+                                                  </a>
+                                      
+                                                  <!-- Upload Button -->
+                                                  <button type="button" class="w-fit my-2 mx-auto border rounded-lg text-white px-4 py-2 cursor-pointer" 
+                                                          onclick="document.getElementById('profileDocInput{{ forloop.counter }}').click()">
+                                                      Upload
+                                                  </button>
+                                                    <!-- Action Buttons (Edit & Delete) -->
+                                                    <div class="absolute right-2 bottom-2">
+                                                        <div class="flex gap-1">
+                                                            <button type="button" class="p-2 rounded-md border">
+                                                                <!-- Edit Icon -->
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+                                                                    <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z"></path>
+                                                                </svg>
+                                                            </button>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
                                         </div>
-                        
+                                        
                                         <!-- Save Button for Each Profile -->
                                         <div class="flex justify-end space-x-2">
                                             <button type="submit" class="px-8 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">
