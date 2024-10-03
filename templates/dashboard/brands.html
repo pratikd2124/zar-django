@@ -34,7 +34,9 @@
                                         <button type="submit" class="btn btn-success" >Search</button>
                                     </form>
                                     <div class="d-inline-flex">
-                                       
+                                        <a href="{% url 'export' %}?type=material_provider" target="_blank" class="align-items-center btn btn-theme d-flex">
+                                            <i data-feather="plus-download"></i>Export
+                                        </a>
                                         <a href="{% url 'submit_material_provider' %}" target="_blank" class="align-items-center btn btn-theme d-flex">
                                             <i data-feather="plus-square"></i>Add New
                                         </a>

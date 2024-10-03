@@ -10,7 +10,7 @@
                 <div class="flex flex-col items-center justify-center space-y-4 p-6">
                     <div class="w-full max-w-md mx-auto border border-gray-700 p-10 rounded-lg shadow-md">
                         
-                        {% if user.type == 'Service Provider' or user.type == 'Community User' or user.type == 'Home Owner' %}
+                        {% if user.type != 'Material Provider' %}
                             
                             
                         <div class="flex flex-col gap-2 py-2">

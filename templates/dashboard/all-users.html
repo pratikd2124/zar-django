@@ -116,7 +116,7 @@
                                                         <ul>
                                                             
                                                           
-                                                          {% if user.payment_status == 'pending'  %}
+                                                          {% if user.type != 'Community User' and user.payment_status == 'pending'  %}
                                                             
                                                           
                                                           <li>
@@ -129,7 +129,7 @@
                                                                     <i class="ri-mail-line"></i>
                                                                 </a>
                                                             </li>
-                                                            {% elif user.payment_status == 'In Process' %}
+                                                            {% elif  user.type != 'Community User' and user.payment_status == 'In Process' %}
                                                             <li>
                                                                 <a href="#" class="align-items-center btn btn-theme d-flex" 
                                                                     data-bs-toggle="modal" 

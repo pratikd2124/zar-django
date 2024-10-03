@@ -819,3 +819,47 @@ def contact_page(request):
     
     contact = ContactPageDetails.objects.first()
     return render(request,'dashboard/contact-page.html',{'title':'Contact Page','contact':contact})
+
+
+
+import csv
+from django.http import HttpResponse
+
+def export(request):
+    user_type = request.GET.get('type', None)
+    
+    # Filter users based on the type (if provided)
+    if user_type=='material_provider':
+        users = User.objects.filter(type='Material Provider')
+    else:
+        users = User.objects.all()
+    
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename="{user_type}_users.csv"'
+
+    writer = csv.writer(response)
+    
+    # Write the header row for the CSV
+    writer.writerow(['UID', 'Username', 'Email', 'Mobile', 'Firm Name', 'Address', 'Country', 
+                     'State', 'City', 'Zip Code', 'Bio', 'Payment Status', 'Is Active'])
+    
+    # Write data rows
+    for user in users:
+        writer.writerow([
+            user.uid,
+            user.username,
+            user.email,
+            user.mobile,
+            user.firm_name,
+            user.address,
+            user.country,
+            user.state,
+            user.city,
+            user.zip_code,
+            user.bio,
+            user.payment_status,
+            user.is_active
+        ])
+    
+    return response
