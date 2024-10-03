@@ -824,42 +824,134 @@ def contact_page(request):
 
 import csv
 from django.http import HttpResponse
+import csv
+
 
 def export(request):
     user_type = request.GET.get('type', None)
     
     # Filter users based on the type (if provided)
-    if user_type=='material_provider':
+    if user_type == 'material_provider':
         users = User.objects.filter(type='Material Provider')
+    elif user_type == 'service_provider':
+        users = User.objects.filter(type='Service Provider')
+    elif user_type == 'home_owner':
+        users = User.objects.filter(type='Home Owner')
     else:
-        users = User.objects.all()
+        users = User.objects.filter(type__in=['Community User','Home Owner'])
     
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = f'attachment; filename="{user_type}_users.csv"'
 
     writer = csv.writer(response)
+
+    # Helper function to handle null or blank values
+    def handle_na(value):
+        if not value:
+            return "N/A"
+        return value
     
-    # Write the header row for the CSV
-    writer.writerow(['UID', 'Username', 'Email', 'Mobile', 'Firm Name', 'Address', 'Country', 
-                     'State', 'City', 'Zip Code', 'Bio', 'Payment Status', 'Is Active'])
-    
-    # Write data rows
-    for user in users:
+    # Write header row
+    if user_type == 'material_provider':
         writer.writerow([
-            user.uid,
-            user.username,
-            user.email,
-            user.mobile,
-            user.firm_name,
-            user.address,
-            user.country,
-            user.state,
-            user.city,
-            user.zip_code,
-            user.bio,
-            user.payment_status,
-            user.is_active
+            'Account Type','UID', 'Username', 'Email', 'Brand Name', 'Category Path', 'Contact Person Name',
+            'Contact Number', 'Designation', 'Address', 'Country', 'State', 'City', 'Zip Code',
+            'Category Brand Name', 'Category Contact Person Name', 'Category Contact Number',
+            'Category Designation', 'Bio', 'Payment Status', 'Is Verified', 'Is Active',
+            'Facebook', 'Website', 'Instagram', 'LinkedIn'
         ])
+
+        # Write data rows
+        for user in users:
+            for profile in user.profile.all():
+                writer.writerow([
+                    user.type,
+                    handle_na(user.uid),
+                    handle_na(user.username),
+                    handle_na(user.email),
+                    handle_na(user.brand_name),
+                    handle_na(profile.category.get_category_hierarchy() if profile.category else None),
+                    handle_na(profile.contact_person),
+                    handle_na(profile.contact_number),
+                    handle_na(profile.designation),
+                    handle_na(user.address),
+                    handle_na(user.country),
+                    handle_na(user.state),
+                    handle_na(user.city),
+                    handle_na(user.zip_code),
+                    handle_na(profile.brand_name),
+                    handle_na(profile.contact_person),
+                    handle_na(profile.contact_number),
+                    handle_na(profile.designation),
+                    handle_na(profile.bio),
+                    handle_na(profile.payment_status),
+                    handle_na(profile.is_active),
+                    handle_na(user.is_active),
+                    handle_na(profile.social_links.get('facebook', "N/A") if profile.social_links else "N/A"),
+                    handle_na(profile.social_links.get('website', "N/A") if profile.social_links else "N/A"),
+                    handle_na(profile.social_links.get('instagram', "N/A") if profile.social_links else "N/A"),
+                    handle_na(profile.social_links.get('linkedin', "N/A") if profile.social_links else "N/A"),
+                ])
+        
+    elif user_type == 'service_provider':
+        writer.writerow([
+            'Account Type','UID', 'Username', 'Email', 'First Name','Last Name' ,'Category Path',
+            'Contact Number', 'Firm Name', 'Address', 'Country', 'State', 'City', 'Zip Code',
+             'Bio', 'Payment Status', 'Is Verified', 'Is Active',
+            'Facebook', 'Website', 'Instagram', 'LinkedIn'
+        ])
+    
+          # Write data rows
+        for user in users:
+            for profile in user.profile.all():
+                writer.writerow([
+                    user.type,
+                    handle_na(user.uid),
+                    handle_na(user.username),
+                    handle_na(user.email),
+                    handle_na(user.first_name),
+                    handle_na(user.last_name),
+                    handle_na(profile.category.get_category_hierarchy() if profile.category else None),
+
+                    handle_na(user.mobile),
+                    handle_na(user.firm_name),
+                    handle_na(user.address),
+                    handle_na(user.country),
+                    handle_na(user.state),
+                    handle_na(user.city),
+                    handle_na(user.zip_code),
+                 
+                    handle_na(profile.bio),
+                    handle_na(profile.payment_status),
+                    handle_na(profile.is_active),
+                    handle_na(user.is_active),
+                    handle_na(profile.social_links.get('facebook', "N/A") if profile.social_links else "N/A"),
+                    handle_na(profile.social_links.get('website', "N/A") if profile.social_links else "N/A"),
+                    handle_na(profile.social_links.get('instagram', "N/A") if profile.social_links else "N/A"),
+                    handle_na(profile.social_links.get('linkedin', "N/A") if profile.social_links else "N/A"),
+                ])
+        
+    else:
+        writer.writerow([
+            'Account Type','UID', 'Username', 'Email', 'First Name','Last Name', 
+            'mobile',
+            'Payment Status', 'Is Verified', 'Is Active',
+        ])
+
+        # Write data rows
+        for user in users:
+            for profile in user.profile.all():
+                writer.writerow([
+                    user.type,
+                    handle_na(user.uid),
+                    handle_na(user.username),
+                    handle_na(user.email),
+                    handle_na(user.first_name),
+                    handle_na(user.last_name),
+                    handle_na(user.mobile),
+                    handle_na(user.payment_status),
+                    handle_na(user.is_active),
+                ])    
     
     return response

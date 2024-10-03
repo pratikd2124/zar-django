@@ -18,11 +18,15 @@
                                 <input type="text" id="searchInput" name="search" class="form-control" placeholder="Search...">
                                 <button type="submit" class="btn btn-success" >Search</button>
                             </form>
-
-                            <a href="{% url 'service_provider'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
-
-                                <i data-feather="plus-square"></i>Add New
-                            </a>
+                            <div class="d-inline-flex">
+                                <a href="{% url 'export' %}?type=service_provider" target="_blank" class="mx-3 align-items-center btn btn-theme d-flex">
+                                    <i data-feather="plus-download"></i>Export
+                                </a>
+                                <a href="{% url 'service_provider'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
+                                    
+                                    <i data-feather="plus-square"></i>Add New
+                                </a>
+                            </div>
                            
                                     </div>
                                     <div class="pagination">

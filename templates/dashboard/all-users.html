@@ -13,11 +13,16 @@
                                         
                                         {% if member_type == 'homeOwner' %}
                             <h5>Home Owner</h5>
-                            
-                            <a href="{% url 'home_owner'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
+                            <div class="d-inline-flex">
 
-                                <i data-feather="plus-square"></i>Add New
-                            </a>
+                                <a href="{% url 'export' %}type=home_owner" target="_blank" class="mx-3 align-items-center btn btn-theme d-flex">
+                                    <i data-feather="plus-download"></i>Export
+                                </a>
+                                <a href="{% url 'home_owner'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
+                                    
+                                    <i data-feather="plus-square"></i>Add New
+                                </a>
+                            </div>
                           
                             {% else %}
                             <h5>All Users</h5>
@@ -25,6 +30,14 @@
 
                             </div>
                             {% endif %} 
+                            
+                            {% if member_type != 'homeOwner' %}
+                                
+                            
+                            <a href="{% url 'export' %}" target="_blank" class="mx-3 align-items-center btn btn-theme d-flex">
+                                <i data-feather="plus-download"></i>Export
+                            </a>
+                            {% endif %}
                             <form action="{% url 'users_list' %}" class="d-flex" method="GET">
 
                                 <input type="text" id="searchInput" name="search" class="form-control" placeholder="Search...">
@@ -65,11 +78,7 @@
                                                     <th>Phone</th>
                                                     <th>Email</th>
                                                     <th>Joined</th>
-                                                    <th>Impressions</th>
-                                                    <th>state</th>
-                                                        <th>City</th>
-                                                        <th>Zip Code</th>
-                                                        <th>Country</th>
+                                                    
                                                     <th>Status</th>
                                                         
                                                     <th>Option</th>
@@ -100,12 +109,7 @@
 
                                                     <td>{{user.email}}</td>
                                                     <td>{{user.date_joined}}</td>
-                                                    <td>{{user.impress_brand.all.count}}</td>
-
-                                                    <td>{{user.state}}</td>
-                                                        <td>{{user.city}}</td>
-                                                        <td>{{user.zip_code}}</td>
-                                                        <td>{{user.country}}</td>
+                                                   
 
                                                     {% if user.type != 'Community User' %}
                                                     <td>{{user.payment_status}}</td>
