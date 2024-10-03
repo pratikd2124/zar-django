@@ -13,7 +13,7 @@
 
 <div class=" text-white">
     <div class="w-full">
-        <form id="serviceForm" action="{% url 'service_provider' %}" method="POST" class="space-y-4" enctype="multipart/form-data">
+        <form id="serviceForm" action="{% url 'service_provider_register' %}" method="POST" class="space-y-4" enctype="multipart/form-data">
             {% csrf_token %}
             <div id="step1" class="step step-1 max-w-lg md:mx-auto p-6 mx-4 border border-gray-700 rounded-lg mt-8">
                 <h2 class="text-xl text-white mb-6">Basic Information</h2>
@@ -142,7 +142,7 @@
                     </div>
                 
                     <!-- Button to add new category dropdown -->
-                    <button type="button" id="add-category" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg">Add Category</button>
+                    <button type="button" id="add-category" class="mt-4 bg-violet-700 text-white px-4 py-2 rounded-lg">Add Category</button>
                 
                     <!-- Hidden input to store selected category IDs as a list -->
                     <input type="hidden" name="selected_categories" id="selected_categories" value="">

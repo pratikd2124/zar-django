@@ -516,7 +516,7 @@ def submit_service_provider(request):
             user.profile.add(profile)
             user.save()
     
-        Send_Welcome_email(user)
+        Send_Welcome_email(user,str(user.first_name + ' '+user.last_name ))
         messages.success(request, 'Profile is Under Review !')
         return redirect('home')
             
@@ -525,7 +525,7 @@ def submit_service_provider(request):
 
     # Get all categories and recursively filter those whose root ancestor is 'Services'
     end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)    
-    return render(request, 'client/service-provider-registration.html',{'categories':end_nodes,'title':'Service Provider Register'} )
+    return render(request, 'client/service-provider-register.html',{'categories':end_nodes,'title':'Service Provider Register'} )
 
 
 
@@ -576,7 +576,7 @@ def submit_material_provider(request):
             user.save()
         
         
-        Send_Welcome_email(user)
+        Send_Welcome_email(user,brand_name)
         messages.success(request, 'Profile is Under Review !')
         return redirect('home')
 
