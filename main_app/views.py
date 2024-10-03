@@ -115,8 +115,11 @@ def register(request):
 
                 
             user.save()
-            
-            Send_Welcome_email(user.email)
+            if user.type== 'Material Provider':
+                    name = user.brand_name
+            else:
+                    name = user.first_name + ' '+user.last_name
+            Send_Welcome_email(name)
             messages.success(request, 'Your account has been created successfully.')
             return redirect('login')
         else:

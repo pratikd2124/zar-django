@@ -98,11 +98,11 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         <!-- Page Header Start-->
         <div class="page-header">
             {% for message in messages %}
-            <div
-              class="alert {{ message.tags }} d-flex justify-content-center alert-dismissible shadow fade show">
-              
-              {{ message }}
-            </div>
+                <div
+                    class="alert {{ message.tags }} d-flex justify-content-center alert-dismissible shadow fade show"
+                    id="message-{{ forloop.counter }}">
+                    {{ message }}
+                </div>
             {% endfor %}
 
 
@@ -364,6 +364,23 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
 CKEDITOR.editorConfig = function( config ) {
     config.versionCheck = false;
 };
+    </script>
+    <script>
+        // Run this code once the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all alert divs
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function (alert, index) {
+                // Set a timeout to hide each message after 2 seconds
+                setTimeout(function () {
+                    alert.classList.remove('show'); // Bootstrap hides the alert when 'show' is removed
+                    alert.classList.add('fade');    // Add fade effect before hiding
+                    setTimeout(function () {
+                        alert.remove();             // Remove the element from DOM
+                    }, 150);                        // Give some time for the fade out animation
+                }, 2000);                           // 2000 milliseconds = 2 seconds
+            });
+        });
     </script>
 <!-- latest js -->
 <script src="../../static/backend_assets/assets/js/jquery-3.6.0.min.js"></script>

@@ -207,6 +207,7 @@ option{
                     <!-- Accordion Wrapper -->
                     <div id="accordionExample" class="accordion">
                         {% for i in user.profile.all %}
+
                         <!-- Accordion Item -->
                         <div class="accordion-item mb-4">
                     
@@ -228,8 +229,10 @@ option{
 
                                     {% endif %}
                                         </span>
+                                        <a href="{% url 'brand_info' i.category.get_category_hierarchy user.uid %} "class="px-8 mx-3 py-3 bg-violet-700 text-white font-semibold rounded-lg shadow-lg">View</a>
                                 </button>
                             </h2>
+
                     
                             <!-- Accordion Body -->
                             <div id="collapse{{ forloop.counter }}" class="accordion-collapse max-h-0 overflow-hidden transition-all duration-300 ease-out" aria-labelledby="heading{{ forloop.counter }}" data-accordion-parent="#accordionExample">
@@ -412,6 +415,7 @@ option{
                                 
                             </div>
                         </div>
+
                         {% endfor %}
                     </div>
                     

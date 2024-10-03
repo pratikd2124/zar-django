@@ -309,7 +309,11 @@ def send_passcode(request):
         if request.GET.get('type')=='send_code':
             user.code = user.generate_unique_code()
             user.save()
-            Send_Code_email(user.code,user.email)
+            if user.type== 'Material Provider':
+                    name = user.brand_name
+            else:
+                    name = str(user.first_name + ' '+user.last_name)
+            Send_Code_email(user.code,user.email,name)
             
             profile.payment_status = 'Code Sent'
             profile.save()
@@ -319,7 +323,11 @@ def send_passcode(request):
         payment_link = request.POST.get('link')
         if request.GET.get('type')=='send_payment_link':
             if payment_link:
-                Send_Payment_email(payment_link,user.email)
+                if user.type== 'Material Provider':
+                    name = user.brand_name
+                else:
+                    name = str(user.first_name + ' '+user.last_name)
+                Send_Payment_email(payment_link,user.email,name)
             else:
                 messages.error(request, 'Payment Link is Required.')
                 return redirect(request.META.get('HTTP_REFERER', '/dashboard'))
