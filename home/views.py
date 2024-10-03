@@ -304,8 +304,13 @@ def send_passcode(request):
     if request.method =='POST':
         uid =request.POST.get('user_id')
         profile_id = request.POST.get('profile_id')
+        
         user = User.objects.get(uid=uid)
-        profile = ProfileInfo.objects.get(id=profile_id)
+        if profile_id:
+            profile = ProfileInfo.objects.get(id=profile_id)
+        
+        payment_link = request.POST.get('link')
+        
         if request.GET.get('type')=='send_code':
             user.code = user.generate_unique_code()
             user.save()
@@ -314,13 +319,16 @@ def send_passcode(request):
             else:
                     name = str(user.first_name + ' '+user.last_name)
             Send_Code_email(user.code,user.email,name)
-            
-            profile.payment_status = 'Code Sent'
-            profile.save()
+            if profile_id:
+                profile.payment_status = 'Code Sent'
+                profile.save()
+            else:
+                user.payment_status = 'Code Sent'
+                user.save()
+                
             messages.success(request, 'Code Sent Successfully.')
             return redirect(request.META.get('HTTP_REFERER', '/dashboard'))
         
-        payment_link = request.POST.get('link')
         if request.GET.get('type')=='send_payment_link':
             if payment_link:
                 if user.type== 'Material Provider':
@@ -332,9 +340,16 @@ def send_passcode(request):
                 messages.error(request, 'Payment Link is Required.')
                 return redirect(request.META.get('HTTP_REFERER', '/dashboard'))
             
+            
         user.code = user.generate_unique_code()
-        profile.payment_status = 'In Process'
-        profile.save()
+        if profile_id:
+            profile.payment_status = 'In Process'
+            profile.save()
+        else:
+            user.payment_status = 'In Process'
+            user.save()
+            
+            
         messages.success(request, 'Payment Link Sent Successfully.')
         return redirect(request.META.get('HTTP_REFERER', '/dashboard'))
     return redirect(request.META.get('HTTP_REFERER', '/dashboard'))
@@ -750,11 +765,19 @@ def update_user_info(request,id):
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         mobile = request.POST.get('contact')
-        email = request.POST.get('email')       
+        email = request.POST.get('email')   
+        verified = request.POST.get('verified')  
+        payment_status = request.POST.get('payment_status')  
         user.first_name = first_name
         user.last_name = last_name
         user.mobile = mobile
         user.email = email
+        if verified == 'Yes':
+            user.is_active = True
+        else:
+            user.is_active = False
+        if payment_status:
+            user.payment_status = payment_status
         user.save()
         messages.success(request, 'Information updated successfully.')
         return redirect(request.META.get('HTTP_REFERER'))

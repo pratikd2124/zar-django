@@ -129,7 +129,7 @@
                                                                     <i class="ri-mail-line"></i>
                                                                 </a>
                                                             </li>
-                                                            {% elif user.payment_status == 'In Progress' %}
+                                                            {% elif user.payment_status == 'In Process' %}
                                                             <li>
                                                                 <a href="#" class="align-items-center btn btn-theme d-flex" 
                                                                     data-bs-toggle="modal" 
@@ -220,7 +220,7 @@
                             <form method="POST" action="{% url 'send_passcode' %}?type=send_code" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" id="hiddenUserId2" name="user_id">  <!-- Hidden input for user ID -->
-                                
+
                                 <button type="submit" class="btn btn-primary">Send</button>
                             </form>
                         </div>
@@ -230,14 +230,14 @@
             
 
             <script>
-                function setModalData(email, id) {
+                function setModalData(email, id,profile) {
                     // Set the email and ID in the modal
                     document.getElementById('sendLinkModalLabelEmail').innerText = email;
                     // You may want to store the user ID in a hidden input for the form
                     document.getElementById('hiddenUserId').value = id;
                 }
 
-                function setModalData2(email, id) {
+                function setModalData2(email, id,profile) {
                     // Set the email and ID in the modal
                     document.getElementById('sendLinkModal2LabelEmail').innerText = email;
                     // You may want to store the user ID in a hidden input for the form

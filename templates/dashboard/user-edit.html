@@ -40,7 +40,27 @@
                                     <input type="email" class="form-control" id="email" readonly name="email" value="{{user.email}}" required>
                                 </div>
 
-
+                                <div class="mt-4 w-full col-md-4">
+                                    <label class="block mb-1">Verified </label>
+                                    <select name="verified" id="verified" class="form-select">
+                                        <option value="No">No</option>
+                                        <option value="Yes" {% if user.is_active %}selected{% endif %}>Yes</option>
+                                    </select>
+                                </div>
+                                
+                                {% if user.type == 'Home Owner' %}
+                                    
+                                
+                                <div class="mt-4 w-full col-md-4">
+                                    <label class="block mb-1">Payment Status </label>
+                                    <select name="payment_status" id="payment_status" class="form-select">
+                                        <option value="pending">Pending</option>
+                                        <option value="In Process" {% if user.payment_status == 'In Process' %}selected{% endif %}>In Process</option>
+                                        <option value="Code Sent" {% if user.payment_status == 'Code Sent' %}selected{% endif %}>Code Sent</option>
+                                        <option value="Success" {% if user.payment_status == 'Success' %}selected{% endif %}>Success</option>
+                                    </select>
+                                </div>
+                                {% endif %}
 
                                 <!-- Profile Pic -->
                                 

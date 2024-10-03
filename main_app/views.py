@@ -119,7 +119,7 @@ def register(request):
                     name = user.brand_name
             else:
                     name = user.first_name + ' '+user.last_name
-            Send_Welcome_email(name)
+            Send_Welcome_email(user.email,name)
             messages.success(request, 'Your account has been created successfully.')
             return redirect('login')
         else:
@@ -442,7 +442,7 @@ def home_owner_view(request):
             user.intrest = interest
             user.save()
             messages.info(request, 'Form Submitted! Your Profile is Under Review !')
-            Send_Welcome_email(user)
+            Send_Welcome_email(user.email,(user.first_name+''+user.last_name))
             return redirect('home')
         
 
