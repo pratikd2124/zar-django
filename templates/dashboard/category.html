@@ -11,11 +11,32 @@
                                 <div class="card-body">
                                     <div class="title-header option-title">
                                         <h5>All Category</h5>
+                                        <form action="{% url 'category_list' %}" class="d-flex" method="GET">
+
+                                            <input type="text" id="searchInput" name="search" class="form-control" placeholder="Search...">
+                                            <button type="submit" class="btn btn-success" >Search</button>
+                                        </form>
                                         <a href="#" class="align-items-center btn btn-theme d-flex" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
                                             <i data-feather="plus-square"></i>Add New
                                         </a>
                                     </div>
-
+                                    <div class="pagination">
+                                        <span class="step-links">
+                                          {% if categories.has_previous %}
+                                            <a href="?page=1">&laquo; first</a>
+                                            <a href="?page={{ categories.previous_page_number }}">previous</a>
+                                          {% endif %}
+                                      
+                                          <span class="current">
+                                            Page {{ categories.number }} of {{ categories.paginator.num_pages }}.
+                                          </span>
+                                      
+                                          {% if categories.has_next %}
+                                            <a href="?page={{ categories.next_page_number }}">next</a>
+                                            <a href="?page={{ categories.paginator.num_pages }}">last &raquo;</a>
+                                          {% endif %}
+                                        </span>
+                                      </div>
                                     <div class="table-responsive category-table">
                                         <div>
                                             <table class="table all-package theme-table" id="table_id">
@@ -62,6 +83,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>

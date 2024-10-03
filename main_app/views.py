@@ -180,18 +180,18 @@ def profile(request):
             last_name = request.POST.get('last_name')
             mobile = request.POST.get('mobile')
             email = request.POST.get('email')
-            interest = request.POST.get('interest')
+            interest = request.POST.get('intrest')
             user.first_name = first_name
             user.last_name = last_name
             user.mobile = mobile
             user.email = email
             user.intrest = interest
             user.save()
-            messages.success(request, 'Profile updated successfully')
+            messages.success(request, 'Profile updated successfully',{'title':'Profile'})
             return redirect(request.META.get('HTTP_REFERER', '/home'))
 
         
-        return render(request, 'client/home-owner-profile.html')
+        return render(request, 'client/home-owner-profile.html',{'title':'Profile'})
     
     elif user_type == 'Material Provider':
         if request.method == 'POST':
@@ -414,7 +414,7 @@ def become_a_member(request):
     if request.user.is_authenticated:
         messages.error(request, 'You are already logined in.')
         return redirect('home')
-    return render(request, 'client/become-a-member.html')
+    return render(request, 'client/become-a-member.html',{'title':'Signup'})
 
 
 from .funtions import *
@@ -446,7 +446,7 @@ def home_owner_view(request):
         # Redirect to a success page or wherever after submission
         return redirect('home')
     
-    return render(request, 'client/home-owner.html')
+    return render(request, 'client/home-owner.html',{'title':'Register'})
 
 
 def get_root_category(category):
@@ -522,7 +522,7 @@ def submit_service_provider(request):
 
     # Get all categories and recursively filter those whose root ancestor is 'Services'
     end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)    
-    return render(request, 'client/service-provider-registration.html',{'categories':end_nodes} )
+    return render(request, 'client/service-provider-registration.html',{'categories':end_nodes,'title':'Service Provider Register'} )
 
 
 
@@ -580,7 +580,7 @@ def submit_material_provider(request):
     
     # Build the tree hierarchy for the filtered categories
     end_nodes = Category.objects.annotate(num_children=Count('children')).filter(num_children=0)
-    return render(request, 'client/material-provider-registration.html',{'categories':end_nodes,'title':'Material Provider'} )
+    return render(request, 'client/material-provider-registration.html',{'categories':end_nodes,'title':'Material Provider','title':'Material Provide Register'} )
 
 
 
@@ -593,21 +593,43 @@ def success_page(request):
 
 
 @login_required(login_url='login')
-def brand_info(request,category_path,uid):
-    user = User.objects.get(uid = uid)
-    try :
-        category = Category.objects.filter(name=category_path.split('/')[-1])
-    except:
-        category = Category.objects.filter(name=category_path.split('/'),parent=category_path.split('/')[-2])
-        
-    profile = user.profile.get(category__in=category)
-    social_links= profile.social_links
+def brand_info(request, category_path, uid):
+    try:
+        # Get the last category in the path or handle nested categories
+        category_name = category_path.split('/')[-1]
+        category = Category.objects.get(name=category_name)
+    except Exception as e:
+        # Handle nested category case
+        parent_category_name = category_path.split('/')[-2]
+        parent = Category.objects.get(name=parent_category_name)
+        category = Category.objects.get(name=category_name, parent=parent)
+
+    # Get the user by UID
+    user = User.objects.get(uid=uid)
+    print(user.profile.all())
+    # Filter the user's profiles by the selected category
+    profile = user.profile.filter(category=category).first()  # Getting the first profile that matches the category
+
+    # if not profile:
+    #     # Handle the case when no profile matches the category
+    #     return render(request, 'client/404.html', {'message': 'Profile not found for this category'})
+
+    # Access social links and profile gallery
+    social_links = profile.social_links
     images = profile.profile_gallery.all()
+
+    # Navigation list for breadcrumbs or UI purposes
     nav_list = category_path.split('/')
     nav_list = get_nav_list(nav_list)
 
-    return render(request, 'client/brand_info.html',{'profile':profile,'nav_list':nav_list,'images':images,'user':user,'title':str(user.brand_name ),'social_links':social_links,})
-
+    return render(request, 'client/brand_info.html', {
+        'profile': profile,
+        'nav_list': nav_list,
+        'images': images,
+        'user': user,
+        'title': str(user.brand_name),
+        'social_links': social_links,
+    })
 
 @login_required(login_url='login')
 def user_info(request,category_path,uid):
@@ -760,6 +782,9 @@ def connect_impression(request, brand_id):
         
         impression = ConnectImpress.objects.create(user = request.user,
                                                 brand = User.objects.get(uid=brand_id),   )
+        
+        
+        
         impression.save()
     except:
         pass

@@ -17,7 +17,7 @@
                      
                         </div>
                         <div class="container py-5">
-                            <form method="POST" action="{% url 'update_service' brand.uid %}?type=basic_info"  enctype="multipart/form-data" class="row g-3">
+                            <form method="POST" action="{% url 'edit_brand' brand.uid %}?type=basic_info"  enctype="multipart/form-data" class="row g-3">
                                 {% csrf_token %}
                                 {% comment %}<div class="col-md-6">
                                      <label for="profilePic" class="form-label">Profile Pic</label>
@@ -77,13 +77,13 @@
                                 <!-- Firm Name -->
                                 <!-- Contact Person Name -->
                                 <div class="col-md-4">
-                                    <label for="contact_person_name">LasContact Person Name</label>
+                                    <label for="contact_person_name">Contact Person Name</label>
                                     <input
                                         type="text"
                                         id="contact_person_name"
                                         name="contact_person_name"
-                                        value="{{ brand.contact_person_name |default_if_none:'' }}"
-                                        placeholder="LasContact Person Name"
+                                        value="{{ brand.contact_person |default_if_none:'' }}"
+                                        placeholder="Contact Person Name"
                                         class="form-control"
                                         readonly
                                     />
@@ -252,7 +252,7 @@
                                                 <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#accordionExample">
                                                     <div class="accordion-body">
                                                         <!-- Editable Form for Each Profile -->
-                                                        <form action="{% url 'update_service' brand.uid %}?type=professional&id={{i.id}}" method="POST" class="space-y-4" enctype="multipart/form-data">
+                                                        <form action="{% url 'edit_brand' brand.uid %}?type=professional&id={{i.id}}" method="POST" class="space-y-4" enctype="multipart/form-data">
                                                             {% csrf_token %}
                                                             <div class="row">
 
@@ -282,7 +282,56 @@
 
                                                               
                                                             </div>
-                                
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label for="pincode">Brand Name <span>(Specify new brand name or use Same for all. )</span></label>
+                                                                    <input
+                                                                        type="text"
+                                                                        id="pincode"
+                                                                        name="brand_name{{i.id}}"
+                                                                        value="{{ i.brand_name|default_if_none:'' }}"
+                                                                        placeholder="brand_name"
+                                                                        class="form-control"
+                                                                        
+                                                                    />
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label for="pincode">Contact Person  name <span>(Specify new name or use Same for all. )</span></label>
+                                                                    <input
+                                                                        type="text"
+                                                                        id="pincode"
+                                                                        name="contact_person{{i.id}}"
+                                                                        value="{{ i.contact_person|default_if_none:'' }}"
+                                                                        placeholder="Contact Person Name"
+                                                                        class="form-control"
+                                                                        
+                                                                    />
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label for="pincode">Contact Number <span>(Specify new or use Same for all. )</span></label>
+                                                                    <input
+                                                                        type="text"
+                                                                        id="pincode"
+                                                                        name="contact_number{{i.id}}"
+                                                                        value="{{ i.contact_number|default_if_none:'' }}"
+                                                                        placeholder="Contact Number"
+                                                                        class="form-control"
+                                                                        
+                                                                    />
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label for="pincode">Designation <span>(Specify new or use Same for all. )</span></label>
+                                                                    <input
+                                                                        type="text"
+                                                                        id="pincode"
+                                                                        name="designation{{i.id}}"
+                                                                        value="{{ i.designation|default_if_none:'' }}"
+                                                                        placeholder="Designation"
+                                                                        class="form-control"
+                                                                        
+                                                                    />
+                                                                </div>
+                                                            </div>
                                                             <div class="mb-4 w-100">
                                                                 <label class="block text-black mb-2">Brief Bio</label>
                                                                 <textarea name="bio{{i.id}}" id="bio-editor-{{ forloop.counter }}" class="form-control editor" rows="3">{{ i.bio |safe }}</textarea>
@@ -349,13 +398,13 @@
                                                             <div class="d-flex justify-content-end">
                                                                 <button type="submit" class="btn btn-primary m-1">Save</button>
 
-                                                                <a href="{% url 'update_service' brand.uid %}?type=delete&profile_id={{i.id}}" class="btn btn-danger m-1" onclick="return confirmDelete();">Delete</a>
+                                                                <a href="{% url 'edit_brand' brand.uid %}?type=delete&profile_id={{i.id}}" class="btn btn-danger m-1" onclick="return confirmDelete();">Delete</a>
                                                             </div>
                                                             
                                                         </form>
                                                         <hr>
                                                         <h3>Gallery</h3>
-                                                        <form method="POST" action="{% url 'update_service' brand.uid %}?type=gallery&id={{i.id}}" style="display: flex; flex-direction: column;justify-content: center;" enctype="multipart/form-data">
+                                                        <form method="POST" action="{% url 'edit_brand' brand.uid %}?type=gallery&id={{i.id}}" style="display: flex; flex-direction: column;justify-content: center;" enctype="multipart/form-data">
                                                             {% csrf_token %}
                                                             <div id="profileDocContainer" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
                                                                 <input type="file" name="img" multiple accept="image/**" class="w-fit mx-auto border rounded-lg  px-4 py-2 cursor-pointer"  id="profileDocInput">
@@ -370,7 +419,7 @@
                                                                 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                                                                     <div class="position-relative">
                                                                         <img src="{{ image.image.url }}" class="img-fluid rounded" alt="Showcase Image">
-                                                                        <a href="{% url 'update_service' brand.uid %}?type=delete&image_id={{image.id}}" class="position-absolute top-0 end-0 bg-dark text-white p-2 rounded">x</a>
+                                                                        <a href="{% url 'edit_brand' brand.uid %}?type=delete&image_id={{image.id}}" class="position-absolute top-0 end-0 bg-dark text-white p-2 rounded">x</a>
                                                                     </div>
                                                                 </div>
                                                                 {% endfor %}

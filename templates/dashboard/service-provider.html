@@ -13,10 +13,11 @@
                                         
                                        
                             <h5>Service Providers</h5>
-                            <div class="d-inline-flex">
+                            <form action="{% url 'service_provider' %}" class="d-flex" method="GET">
 
-                                <input type="text" id="searchInput" class="form-control" placeholder="Search..." onkeyup="filterRows()">
-                            </div>
+                                <input type="text" id="searchInput" name="search" class="form-control" placeholder="Search...">
+                                <button type="submit" class="btn btn-success" >Search</button>
+                            </form>
 
                             <a href="{% url 'service_provider'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
 
@@ -24,6 +25,23 @@
                             </a>
                            
                                     </div>
+                                    <div class="pagination">
+                                        <span class="step-links">
+                                          {% if providers.has_previous %}
+                                            <a href="?page=1">&laquo; first</a>
+                                            <a href="?page={{ providers.previous_page_number }}">previous</a>
+                                          {% endif %}
+                                      
+                                          <span class="current">
+                                            Page {{ providers.number }} of {{ providers.paginator.num_pages }}.
+                                          </span>
+                                      
+                                          {% if providers.has_next %}
+                                            <a href="?page={{ providers.next_page_number }}">next</a>
+                                            <a href="?page={{ providers.paginator.num_pages }}">last &raquo;</a>
+                                          {% endif %}
+                                        </span>
+                                      </div>
 
                                     <div class="table-responsive table-product">
                                         <table class="table all-package theme-table sortable" id="table">
@@ -80,7 +98,7 @@
                                                                     onclick="setModalData('{{ user.email }}', '{{ user.uid }}','{{i.id}}')">
                                                                         <i class="ri-mail-line"></i>
                                                                     </a>
-                                                                {% elif i.payment_status == 'In Progress' %}
+                                                                {% elif i.payment_status == 'In Process' %}
                                                                     <a href="#" class="align-items-center btn btn-theme d-flex" 
                                                                         data-bs-toggle="modal" 
                                                                         data-email="{{ user.email }}" 
@@ -131,7 +149,7 @@
 
                                                             
                                                             <li>
-                                                                <a href="{% url 'users_list' %}?action=delete&id={{ user.uid }}" onclick="confirmDelete(event, '{{ user.uid }}')">
+                                                                <a href="{% url 'users_list' %}?action=delete&id={{ user.uid }}" onclick="confirmDelete(event, '{{ user.first_name }} {{user.last_name}}')">
                                                                     <i class="ri-delete-bin-line"></i>
                                                                 </a>
                                                             </li>
@@ -143,6 +161,7 @@
                                         </table>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -192,7 +211,7 @@
                             <form method="POST" action="{% url 'send_passcode' %}?type=send_code" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" id="hiddenUserId2" name="user_id">  <!-- Hidden input for user ID -->
-                                <input type="hidden" id="hiddenProfileId" name="profile_id">  <!-- Hidden input for user ID -->
+                                <input type="hidden" id="hiddenProfileId2" name="profile_id">  <!-- Hidden input for user ID -->
 
                                 <button type="submit" class="btn btn-primary">Send</button>
                             </form>
@@ -217,7 +236,7 @@
                     document.getElementById('sendLinkModal2LabelEmail').innerText = email;
                     // You may want to store the user ID in a hidden input for the form
                     document.getElementById('hiddenUserId2').value = id;
-                    document.getElementById('hiddenProfileId').value = profile;
+                    document.getElementById('hiddenProfileId2').value = profile;
                 }
             </script>
             <script>

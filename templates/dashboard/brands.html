@@ -28,20 +28,40 @@
                             <div class="card-body">
                                 <div class="title-header option-title">
                                     <h5>Material Providers</h5>
+                                    <form action="{% url 'brand_list' %}" class="d-flex" method="GET">
+
+                                        <input type="text" id="searchInput" name="search" class="form-control" placeholder="Search...">
+                                        <button type="submit" class="btn btn-success" >Search</button>
+                                    </form>
                                     <div class="d-inline-flex">
-                                        <input type="text" id="searchInput" class="form-control" placeholder="Search..." onkeyup="filterRows()">
+                                       
                                         <a href="{% url 'submit_material_provider' %}" target="_blank" class="align-items-center btn btn-theme d-flex">
                                             <i data-feather="plus-square"></i>Add New
                                         </a>
                                     </div>
                                 </div>
-
+                                <div class="pagination">
+                                    <span class="step-links">
+                                      {% if brands.has_previous %}
+                                        <a href="?page=1">&laquo; first</a>
+                                        <a href="?page={{ brands.previous_page_number }}">previous</a>
+                                      {% endif %}
+                                  
+                                      <span class="current">
+                                        Page {{ brands.number }} of {{ brands.paginator.num_pages }}.
+                                      </span>
+                                  
+                                      {% if brands.has_next %}
+                                        <a href="?page={{ brands.next_page_number }}">next</a>
+                                        <a href="?page={{ brands.paginator.num_pages }}">last &raquo;</a>
+                                      {% endif %}
+                                    </span>
+                                  </div>
                                 <div class="table-responsive category-table">
                                     <div>
                                         <table class="table all-package theme-table sortable" id="table_id">
                                             <thead>
                                                 <tr class="item">
-                                                    <th>Logo</th>
                                                     <th>Brand Name</th>
                                                     <th>Category </th>
                                                     <th>Contact Person</th>
@@ -49,7 +69,7 @@
                                                     <th>Impressions</th>
                                                     <th>Email</th>
                                                    
-                                                    <th>Status</th>
+                                                    <th>Account Verfied</th>
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>
@@ -57,11 +77,7 @@
                                             <tbody id="tableBody">
                                                 {% for cat in brands %}
                                                 <tr class="item">
-                                                    <td>
-                                                        {% if cat.brand_logo %}
-                                                        <img src="{{ cat.brand_logo.url }}" alt="Current Image" class="img-fluid mt-2" style="max-width: 100px;">
-                                                        {% endif %}
-                                                    </td>
+                                                    
                                                     <td class="brand-name">{{ cat.brand_name }}</td>
                                                     
                                                     <td>
@@ -71,7 +87,7 @@
                                                         <span>
                                                             {{ i.category.get_category_hierarchy }} 
                                                         </span> 
-                                                        <a href="{% url 'user_info' i.category.get_category_hierarchy user.uid %}" target="_blank">
+                                                        <a href="{% url 'brand_info' i.category.get_category_hierarchy cat.uid %}" target="_blank">
                                                             <i class="ri-eye-line"></i>
                                                         </a> 
 
@@ -86,7 +102,7 @@
                                                             onclick="setModalData('{{ cat.email }}', '{{ cat.uid }}','{{i.id}}')">
                                                                 <i class="ri-mail-line"></i>
                                                             </a>
-                                                        {% elif i.payment_status == 'In Progress' %}
+                                                        {% elif i.payment_status == 'In Process' %}
                                                             <a href="#" class="align-items-center btn btn-theme d-flex" 
                                                                 data-bs-toggle="modal" 
                                                                 data-email="{{ cat.email }}" 
@@ -111,7 +127,13 @@
                                                     <td class="mobile">{{ cat.mobile }}</td>
                                                     <td>{{ cat.impress_brand.all.count }}</td>
                                                     <td class="email">{{ cat.email }}</td>
-                                                    <td class="payment-status">{{ cat.payment_status }}</td>
+                                                    <td class="account-verified"> 
+                                                    {% if cat.is_active %}
+                                                        Yes
+                                                        {% else %}
+                                                        No
+                                                    {% endif %}
+                                                         </td>
                                                     <td>
                                                         <ul>
                                                             <li>
@@ -137,81 +159,78 @@
                     </div>
                 </div>
             </div>
-            <div id="pagination" class="pagination"></div>
         </div>
             <!-- Container-fluid end -->
-            <div class="modal fade" id="sendLinkModal" tabindex="-1" aria-labelledby="sendLinkModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <span>
+    </div>
+    <div class="modal fade" id="sendLinkModal" tabindex="-1" aria-labelledby="sendLinkModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
 
-                                <h5 class="modal-title" id="sendLinkModalLabel">Send Payment Link to</h5>
-                                <h6 class="modal-title" id="sendLinkModalLabelEmail"></h6>  <!-- Update to use JS -->
-                            </span>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="sendLinkModalLabel">Send Payment Link to</h5>
+                        <h6 class="modal-title" id="sendLinkModalLabelEmail"></h6>  <!-- Update to use JS -->
+                    </span>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'send_passcode' %}?type=send_payment_link" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" id="hiddenUserId" name="user_id">  <!-- Hidden input for user ID -->
+                        <input type="hidden" id="hiddenProfileId" name="profile_id">  <!-- Hidden input for user ID -->
+                        <div class="mb-3">
+                            <label for="link" class="form-label">Payment Link</label>
+                            <input type="url" class="form-control" id="link" name="link" required>
                         </div>
-                        <div class="modal-body">
-                            <form method="POST" action="{% url 'send_passcode' %}?type=send_payment_link" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <input type="hidden" id="hiddenUserId" name="user_id">  <!-- Hidden input for user ID -->
-                                <div class="mb-3">
-                                    <label for="link" class="form-label">Payment Link</label>
-                                    <input type="url" class="form-control" id="link" name="link" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Send</button>
-                            </form>
-                        </div>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
                 </div>
             </div>
-            <div class="modal fade" id="sendLinkModal2" tabindex="-1" aria-labelledby="sendLinkModal2Label" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <span>
-
-                                <h5 class="modal-title" id="sendLinkModal2Label">Send Code</h5>
-                                <h6 class="modal-title" id="sendLinkModal2LabelEmail"></h6>  <!-- Update to use JS -->
-                            </span>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="POST" action="{% url 'send_passcode' %}?type=send_code" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <input type="hidden" id="hiddenUserId2" name="user_id">  <!-- Hidden input for user ID -->
-                                
-                                <button type="submit" class="btn btn-primary">Send</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
         </div>
-            
-<script>
-                function setModalData(email, id) {
-                    // Set the email and ID in the modal
-                    document.getElementById('sendLinkModalLabelEmail').innerText = email;
-                    // You may want to store the user ID in a hidden input for the form
-                    document.getElementById('hiddenUserId').value = id;
-                }
-</script>
-            
-<script>
-                function setModalData(email, id) {
-                    // Set the email and ID in the modal
-                    document.getElementById('sendLinkModalLabelEmail').innerText = email;
-                    // You may want to store the user ID in a hidden input for the form
-                    document.getElementById('hiddenUserId').value = id;
-                }
+    </div>
+    <div class="modal fade" id="sendLinkModal2" tabindex="-1" aria-labelledby="sendLinkModal2Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
 
-                function setModalData2(email, id) {
-                    // Set the email and ID in the modal
-                    document.getElementById('sendLinkModal2LabelEmail').innerText = email;
-                    // You may want to store the user ID in a hidden input for the form
-                    document.getElementById('hiddenUserId2').value = id;
-                }
-</script>
+                        <h5 class="modal-title" id="sendLinkModal2Label">Send Code</h5>
+                        <h6 class="modal-title" id="sendLinkModal2LabelEmail"></h6>  <!-- Update to use JS -->
+                    </span>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'send_passcode' %}?type=send_code" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" id="hiddenUserId2" name="user_id">  <!-- Hidden input for user ID -->
+                        <input type="hidden" id="hiddenProfileId2" name="profile_id">  <!-- Hidden input for user ID -->
+
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        function setModalData(email, id,profile) {
+            // Set the email and ID in the modal
+            document.getElementById('sendLinkModalLabelEmail').innerText = email;
+            // You may want to store the user ID in a hidden input for the form
+            document.getElementById('hiddenUserId').value = id;
+            document.getElementById('hiddenProfileId').value = profile;
+
+        }
+
+        function setModalData2(email, id, profile) {
+            // Set the email and ID in the modal
+            document.getElementById('sendLinkModal2LabelEmail').innerText = email;
+            // You may want to store the user ID in a hidden input for the form
+            document.getElementById('hiddenUserId2').value = id;
+            document.getElementById('hiddenProfileId2').value = profile;
+        }
+    </script>
 
 
 
@@ -225,18 +244,14 @@
             const contactPerson = row.querySelector(".contact-person").textContent.toLowerCase();
             const mobile = row.querySelector(".mobile").textContent.toLowerCase();
             const email = row.querySelector(".email").textContent.toLowerCase();
-            const city = row.querySelector(".city").textContent.toLowerCase();
-            const state = row.querySelector(".state").textContent.toLowerCase();
-            const country = row.querySelector(".country").textContent.toLowerCase();
-            const paymentStatus = row.querySelector(".payment-status").textContent.toLowerCase();
+            ;
+            const paymentStatus = row.querySelector(".account-verified").textContent.toLowerCase();
     
             if (brandName.includes(query) || 
                 contactPerson.includes(query) || 
                 mobile.includes(query) || 
                 email.includes(query) || 
-                city.includes(query) || 
-                state.includes(query) || 
-                country.includes(query) || 
+                
                 paymentStatus.includes(query)) {
                 row.style.display = "";
             } else {
