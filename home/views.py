@@ -53,7 +53,7 @@ def dashboard(request):
 
 
 
-
+from django.core.exceptions import ObjectDoesNotExist
 
 @login_required(login_url='login')
 def all_users(request):
@@ -63,9 +63,12 @@ def all_users(request):
     
     if request.GET.get('action') == 'delete':
         id = request.GET.get('id')
-        user = User.objects.get(uid=id)
-        user.delete()
-        messages.success(request, 'User deleted successfully.')
+        try:
+            user = User.objects.get(uid=id)  # Or the appropriate field
+            user.delete()
+            messages.success(request, 'User deleted successfully.')
+        except ObjectDoesNotExist:
+            messages.error(request, 'User not found.')
         return redirect(request.META.get('HTTP_REFERER'))
     
     
@@ -214,6 +217,9 @@ def all_category(request):
         if request.GET.get('type') == 'edit':
             category_id = request.POST.get('category_id')
             category = get_object_or_404(Category, id=category_id)
+            if Category.objects.filter(name=name,parent=Category.objects.get(id=parent_id)).exists():
+                messages.error(request, 'Category already exists')
+                return redirect('category_list')
             category.name = name
             if parent_id:
                 category.parent = get_object_or_404(Category, id=parent_id)
@@ -225,6 +231,9 @@ def all_category(request):
 
         # Create Category
         else:
+            if Category.objects.filter(name=name,parent=Category.objects.get(id=parent_id)).exists():
+                messages.error(request, 'Category already exists')
+                return redirect('category_list')
             category = Category.objects.create(name=name, image=image)
             if parent_id:
                 category.parent = get_object_or_404(Category, id=parent_id)

@@ -22,7 +22,7 @@
                                 <a href="{% url 'export' %}?type=service_provider" target="_blank" class="mx-3 align-items-center btn btn-theme d-flex">
                                     <i data-feather="plus-download"></i>Export
                                 </a>
-                                <a href="{% url 'service_provider'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
+                                <a href="{% url 'service_provider_register'  %}" target="_blank" class="align-items-center btn btn-theme d-flex">
                                     
                                     <i data-feather="plus-square"></i>Add New
                                 </a>
@@ -153,7 +153,7 @@
 
                                                             
                                                             <li>
-                                                                <a href="{% url 'users_list' %}?action=delete&id={{ user.uid }}" onclick="confirmDelete(event, '{{ user.first_name }} {{user.last_name}}')">
+                                                                <a href="#" onclick="confirmDelete(event, '{{ user.uid }}', '{{ user.first_name }} {{ user.last_name }}')">
                                                                     <i class="ri-delete-bin-line"></i>
                                                                 </a>
                                                             </li>
@@ -244,12 +244,12 @@
                 }
             </script>
             <script>
-                function confirmDelete(event, userId) {
+                function confirmDelete(event, userId, userName) {
                     // Prevent the default link behavior
                     event.preventDefault();
-            
+                    
                     // Show confirmation dialog
-                    const userConfirmed = confirm('Are you sure you want to delete user with ID: ' + userId + '?');
+                    const userConfirmed = confirm('Are you sure you want to delete user: ' + userName + '?');
             
                     // If the user clicks "OK", redirect to the delete URL
                     if (userConfirmed) {
@@ -257,6 +257,7 @@
                         window.location.href = deleteUrl;
                     }
                 }
+            
             </script>
             <script>
 

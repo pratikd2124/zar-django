@@ -1,7 +1,7 @@
 {% extends 'client/template.html' %}
 
 {% block content %}
-{% load static %}
+
 
 {% load static %}
 
@@ -378,28 +378,62 @@ option{
                                                 </div>
                                             </div>
                         
-                                            <!-- Brand Logo -->
+                                            <!-- Brand Logo in Form -->
                                             <div class="relative w-full">
                                                 <label class="block mb-1">Brand Logo</label>
-                                                <input type="file" name="brandlogo{{i.id}}" accept="image/*" class="hidden" id="brandPicInput{{ forloop.counter }}" onchange="previewImage(event, 'brandPicPreview{{ forloop.counter }}')">
                                                 <div class="relative border border-dashed border-gray-500 h-64 rounded-lg bg-[#101010]">
                                                     <img id="brandPicPreview{{ forloop.counter }}" src="{% if i.brand_logo %}{{ i.brand_logo.url }}{% endif %}" alt="Brand Logo" class="mt-4 h-32 rounded-md object-fit border mx-auto">
                                                     <div class="absolute right-2 bottom-2">
                                                         <div class="flex gap-1">
-                                                            <button type="button" class="p-2 rounded-md border" onclick="document.getElementById('brandPicInput{{ forloop.counter }}').click();">
+                                                            <button type="button" class="p-2 rounded-md border" onclick="openModal('{{ forloop.counter }}')">
                                                                 <i class="ri-edit-line"></i> Edit
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                        
+                                            <!-- Modal for uploading and previewing image in 1:1 and 3:4 -->
+                                            <div id="uploadModal{{ forloop.counter }}" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black bg-opacity-50 backdrop-blur">
+                                                <div class="bg-[#171717] p-5 rounded-lg shadow-lg w-[90%] max-w-lg">
+                                                    <div class="text-right">
+                                                        <button class="text-gray-600" onclick="closeModal('{{ forloop.counter }}')">&times;</button>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <h2 class="text-xl font-bold mb-2">Upload Brand Logo</h2>
+                                                    </div>
+                                                    <div>
+                                                        <label for="brandPicInput{{ forloop.counter }}" class="block mb-2">Choose Image</label>
+                                                        <input type="file" name="brandlogo{{i.id}}" accept="image/*" class="w-full p-2 border rounded-md" id="brandPicInput{{ forloop.counter }}" onchange="previewImage(event, '{{ forloop.counter }}')">
+                                                    </div>
+
+                                                    <div class="mt-4 flex justify-around">
+                                                        <div class="">
+                                                            <!-- Preview for 1:1 ratio -->
+                                                            <div class="w-24 h-24 border border-gray-300 rounded-md overflow-hidden">
+                                                                <img id="brandPicPreviewModal1x1{{ forloop.counter }}" class="object-cover w-full h-full" src="{% if i.brand_logo %}{{ i.brand_logo.url }}{% endif %}" alt="Brand Logo 1:1">
+                                                            </div>
+                                                            <span class="py-2 text-xs">Brand Tile view</span>
+                                                        </div>
+                                                        <div class="">
+                                                            <!-- Preview for 4:3 ratio -->
+                                                            <div class="w-auto h-24 border border-gray-300 rounded-md overflow-hidden">
+                                                                <img id="brandPicPreviewModal3x4{{ forloop.counter }}" class="object-cover w-full h-full" src="{% if i.brand_logo %}{{ i.brand_logo.url }}{% endif %}" alt="Brand Logo 3:4">
+                                                            </div>
+                                                            <span class="py-2 text-xs">Profile Tile view</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mt-4 flex justify-end">
+                                                        <button type="button" class="p-2 bg-blue-600 text-white rounded-md" onclick="closeModal('{{ forloop.counter }}')">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
                                             <!-- Profile Document -->
                                             <div class="relative w-full">
                                                 <label class="block mb-1">Profile Document</label>
-                                                <small class="text-xs text-gray-600">Add a PDF document</small>
                                                 <input type="file" name="profileDocInput{{i.id}}" accept="application/pdf" class="hidden" id="profileDocInput{{ forloop.counter }}">
-                                                <div id="profileDocContainer{{ forloop.counter }}" class="border-dashed mt-2 rounded-lg border-2 flex flex-col border-gray-700 bg-[#171717] p-4 text-center">
+                                                <div id="profileDocContainer{{ forloop.counter }}" class="border-dashed mt-2 min-h-48 rounded-lg border-2 flex flex-col border-gray-700 bg-[#101010] p-4 text-center">
                                                     <a {% if i.profile_doc %} href="{{ i.profile_doc.url }}" download {% else %} href="#" {% endif %} class="p-2 rounded-md text-xs bg-white text-black border">
                                                         {{ i.profile_doc.name }}
                                                     </a>
@@ -484,11 +518,20 @@ option{
             });
     </script>
     <script>
-        function previewImage(event, previewId) {
+        function openModal(counter) {
+            document.getElementById('uploadModal' + counter).classList.remove('hidden');
+        }
+    
+        function closeModal(counter) {
+            document.getElementById('uploadModal' + counter).classList.add('hidden');
+        }
+    
+        function previewImage(event, counter) {
             var reader = new FileReader();
             reader.onload = function(){
-                var output = document.getElementById(previewId);
-                output.src = reader.result;
+                // Set preview for both 1:1 and 3:4 ratios
+                document.getElementById('brandPicPreviewModal1x1' + counter).src = reader.result;
+                document.getElementById('brandPicPreviewModal3x4' + counter).src = reader.result;
             }
             reader.readAsDataURL(event.target.files[0]);
         }

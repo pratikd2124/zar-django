@@ -101,7 +101,7 @@
                     const formattedHierarchy = cat.hierarchy.replace(/\//g, ' › ');
 
                     categoryHtml += `<div class="p-2 px-3 rounded-lg text-sm hover:bg-gray-100 cursor-pointer hover:text-black">
-                                        <a href="/category/${cat.name}?id=${cat.id}">${formattedHierarchy}</a>
+                                        <a href="/category/${cat.hierarchy}">${formattedHierarchy}</a>
                                     </div>`;
                 });
                 document.getElementById('categories').innerHTML = categoryHtml;
