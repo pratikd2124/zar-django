@@ -1211,7 +1211,7 @@ def send_custom_email(request):
     if request.method == "POST":
         recipient_emails = request.POST.get('recipient_email')
         subject = request.POST.get('subject')
-        custom_message = request.POST.get('message')
+        custom_message = request.POST.get('emailmessage')
         recipient_names = request.POST.get('names')
 
         # Split the recipient emails by commas to send to multiple addresses
@@ -1256,9 +1256,28 @@ def send_custom_email(request):
 
 
 def email_list(request):
-    # Retrieve all emails from the database
-    emails = CustomEmail.objects.all().order_by('-created_at')
-    return render(request, 'dashboard/email_list.html', {'emails': emails})
+    # Retrieve the search query from the GET request
+    query = request.GET.get('q', '')
+
+    # Filter emails based on the search query
+    if query:
+        emails = CustomEmail.objects.filter(
+            Q(recipient_email__icontains=query) | Q(subject__icontains=query)
+        ).order_by('-created_at')
+    else:
+        emails = CustomEmail.objects.all().order_by('-created_at')
+
+    # Paginate the results
+    paginator = Paginator(emails, 10)  # Show 10 emails per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Pass the paginated emails and request to the template
+    context = {
+        'emails': page_obj,
+        'request': request  # Pass the request to retain the search query in pagination links
+    }
+    return render(request, 'dashboard/email_list.html', context)
 
 def view_email(request):
     # Get the email ID from the query parameters (e.g., /view-email?id=<id>)

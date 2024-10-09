@@ -1,7 +1,7 @@
 {% extends 'dashboard/template.html' %}
 
 {% block content %}
-<h1>Manage FAQ</h1>
+
 
 <div class="page-body">
     <div class="container-fluid">
@@ -9,6 +9,9 @@
             <div class="col-sm-12">
                 <div class="card card-table">
                     <div class="card-body">
+                        <div class="title-header option-title">
+                            Manage FAQ
+                        </div>
                         <button id="add-new-faq-btn" class="btn btn-primary mb-4">Add New FAQ</button>
 
                         <div class="table-responsive table-product">
@@ -37,42 +40,90 @@
                             </table>
                         </div>
 
-                        <!-- Add/Edit FAQ Form -->
-                        <div id="faq-form" style="display: {% if section_to_edit %}block{% else %}none{% endif %};">
-                            {% if section_to_edit %}
-                            <h2>Edit FAQ</h2>
-                            {% else %}
-                            <h2>Add New FAQ</h2>
-                            {% endif %}
-                            <form method="POST">
-                                {% csrf_token %}
+                       <!-- Add/Edit FAQ Form -->
+                        <div class="container py-5">
+                            <div id="faq-form" class="row g-3" style="display: {% if section_to_edit %}block{% else %}none{% endif %};">
                                 {% if section_to_edit %}
-                                <input type="hidden" name="section_id" value="{{ section_to_edit.id }}" />
+                                <h2 class="py-2">Edit FAQ</h2>
+                                {% else %}
+                                <h2 class="py-2">Add New FAQ</h2>
                                 {% endif %}
-                                
-                                <label for="question">Question</label>
-                                <input type="text" name="question" 
-                                    value="{% if section_to_edit %}{{ section_to_edit.question }}{% else %}''{% endif %}" 
-                                    required 
-                                />
+                                <form method="POST" class="row g-3">
+                                    {% csrf_token %}
+                                    {% if section_to_edit %}
+                                    <input type="hidden" name="section_id" value="{{ section_to_edit.id }}" />
+                                    {% endif %}
 
-                                <label for="answer">Answer</label>
-                                <!-- Hidden input to store Quill HTML content -->
-                                <input type="hidden" id="quill-answer" name="answer" value="{{ section_to_edit.answer }}">
+                                    <div class="col-md-6">
+                                        <label for="question">Question</label>
+                                        <input type="text" name="question" value="{% if section_to_edit %}{{ section_to_edit.question }}{% else %}''{% endif %}" class="form-control" required />
+                                    </div>
 
-                                <!-- Quill editor container -->
-                                <div id="quill-editor">
-                                    {{ section_to_edit.answer|safe }}  <!-- Load current content for editing -->
-                                </div>
-                                
-                                <label for="order">Order</label>
-                                <input type="number" name="order" value="{% if section_to_edit %}{{ section_to_edit.order }}{% else %}''{% endif %}" required />
+                                    <div class="col-md-6">
+                                        <label for="order">Order</label>
+                                        <input type="number" name="order" value="{% if section_to_edit %}{{ section_to_edit.order }}{% else %}''{% endif %}" class="form-control" required />
+                                    </div>
 
-                                <label for="is_enabled">Enabled</label>
-                                <input type="checkbox" name="is_enabled" {% if section_to_edit.is_enabled %}checked{% endif %} />
+                                    <div class="col-md-12">
+                                        <label for="answer">Answer</label>
+                                        <!-- Hidden input to store Quill HTML content -->
+                                        <input type="hidden" id="quill-answer" name="answer" value="{{ section_to_edit.answer }}">
+                                    </div>
 
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </form>
+                                    <!-- Quill editor container -->
+                                    
+                                        <div id="quill-editor">
+                                            {{ section_to_edit.answer|safe }}  <!-- Load current content for editing -->
+                                        </div>
+                                    
+
+                                    <div class="col-md-6">
+                                        <label for="is_enabled">Enabled</label>
+                                        <input type="checkbox" name="is_enabled" {% if section_to_edit.is_enabled %}checked{% endif %} class="form-check-input" />
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Add New FAQ Form (Initially Hidden) -->
+                            <div id="new-section-form" class="row g-3" style="display: none;">
+                                <h2>Add New FAQ</h2>
+                                <form method="POST" class="row g-3" >
+                                    {% csrf_token %}
+                                    <div class="col-md-6">
+                                        <label for="question">Question</label>
+                                        <input type="text" class="form-control" name="question" required />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="order">Order</label>
+                                        <input type="number" class="form-control" name="order" required />
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="answer">Answer</label>
+                                        <!-- Hidden input to store Quill HTML content -->
+                                        <input type="hidden" id="quill-answer-new" name="answer">
+                                    </div>
+
+                                    <!-- Quill editor container for new FAQ -->
+                                    
+                                        <div id="quill-editor-new"></div>
+                                    
+
+                                    <div class="col-md-6">
+                                        <label for="is_enabled">Enabled</label>
+                                        <input type="checkbox" name="is_enabled" class="form-check-input" />                                        
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Add FAQ</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
