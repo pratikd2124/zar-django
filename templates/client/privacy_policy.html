@@ -1,0 +1,45 @@
+{% extends 'client/template.html' %}
+
+{% block content %}
+
+<div class="min-h-screen text-white flex">
+    <div class="md:block hidden w-1/4 p-6">
+        <!-- Sidebar Container -->
+        <div class="fixed p-4 border rounded-lg border-gray-700">
+            <!-- Heading -->
+            <h2 class="text-lg font-semibold mb-6 gloock-regular tracking-wider">PRIVACY POLICY</h2>
+            <!-- List of Sections -->
+            <ul class="space-y-6 text-sm tracking-wider">
+                {% for section in privacy_sections %}
+                    <!-- Onclick event to smooth scroll -->
+                    <li class="cursor-pointer hover:text-gray-300" onclick="scrollToSection('{{ section.title|slugify }}')">
+                        {{ section.title }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto md:mx-2 p-8">
+        {% for section in privacy_sections %}
+            <!-- Use slugify to handle spaces and special characters -->
+            <section id="{{ section.title|slugify }}" class="mb-8">
+                <h3 class="text-2xl font-semibold mb-4 gloock-regular tracking-wider">{{ section.title }}</h3>
+                <p class="leading-relaxed">
+                    {{ section.content|safe }}
+                </p>
+            </section>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    function scrollToSection(id) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+</script>
+
+{% endblock content %}

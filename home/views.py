@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from main_app.models import Community, User, SupportTickets,ProfileGallery,ConnectImpress,ProfileInfo,ContactPageDetails
+from main_app.models import Community, User, SupportTickets,ProfileGallery,ConnectImpress,ProfileInfo,ContactPageDetails,TermsAndConditionsSection, PrivacyPolicySection, FAQSection,CustomEmail
 from .models import Category,PagesData
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -955,3 +955,317 @@ def export(request):
                 ])    
     
     return response
+
+
+# def detail_analytics(request,id):
+#     user = User.objects.get(uid=id)
+#     logs = get_all_user_activity_logs(user)
+#     print(logs)
+
+from google.oauth2 import service_account
+from google.analytics.data_v1beta import BetaAnalyticsDataClient
+from google.analytics.data_v1beta.types import RunReportRequest, DateRange, Metric, Dimension
+from django.shortcuts import render
+from collections import Counter
+
+# Your Google Analytics Measurement ID (should be numeric property ID)
+PROPERTY_ID = '456257370'  # Replace with your actual numeric property ID
+
+def initialize_analyticsreporting():
+    """Initializes a Google Analytics Data API client."""
+    
+    credentials = service_account.Credentials.from_service_account_file(
+        '/home/ubuntu/zar-django/ga-credential.json',
+        scopes=['https://www.googleapis.com/auth/analytics.readonly']
+    )
+    
+    # Build the service
+    client = BetaAnalyticsDataClient(credentials=credentials)
+    return client
+
+def get_report(client):
+    """Queries the Google Analytics Data API."""
+    
+    request = RunReportRequest(
+        property=f'properties/{PROPERTY_ID}',
+        date_ranges=[DateRange(start_date="7daysAgo", end_date="today")],
+        metrics=[Metric(name="sessions"), Metric(name="totalUsers"), Metric(name="screenPageViews")],
+        dimensions=[Dimension(name="date")]
+    )
+    
+    response = client.run_report(request)
+    return response
+
+def parse_response(response):
+    """Parses and formats the Google Analytics Data API response."""
+    
+    formatted_data = []
+    for row in response.rows:
+        formatted_data.append({
+            'date': row.dimension_values[0].value,
+            'sessions': row.metric_values[0].value,
+            'users': row.metric_values[1].value,
+            'pageviews': row.metric_values[2].value,
+        })
+    return formatted_data
+
+def detail_analytics(request, id):
+    # Initialize Google Analytics
+    user = User.objects.get(uid=id)
+    # client = initialize_analyticsreporting()
+    
+    # # Get the report data
+    # response = get_report(client)
+    
+    # # Parse the response to get relevant data
+    # analytics_data = parse_response(response)
+    data = get_all_user_activity_logs(user)
+    # Extract the page_visited values
+    page_visits = [item['page_visited'] for item in data]
+
+    # Use Counter to get unique page visits with their counts
+    page_count = Counter(page_visits)
+
+    # Output the result
+    for page, count in page_count.items():
+        print(f"{page}: {count}")
+    # Render the dashboard template
+    return render(request, 'dashboard/detail_analytics.html', {'title': 'Detailed Analytics', 'user': user, 'log': page_count})
+
+
+# views.py
+@login_required(login_url='login')
+def terms_view(request):
+    # Handle GET request to display sections and the form
+    sections = TermsAndConditionsSection.objects.all().order_by('order')
+
+    # Check if there's an 'edit' parameter in the URL
+    section_to_edit = None
+    edit_section_id = request.GET.get('edit')
+    if edit_section_id:
+        section_to_edit = get_object_or_404(TermsAndConditionsSection, id=edit_section_id)
+
+    if request.method == 'POST':
+        # Handling creating or updating terms sections
+        title = request.POST.get('title')
+        content = request.POST.get('content')  # Quill editor content is captured here
+        order = request.POST.get('order')
+        is_enabled = request.POST.get('is_enabled') == 'on'
+
+        section_id = request.POST.get('section_id')
+        if section_id:
+            # If section ID exists, update the section
+            section = get_object_or_404(TermsAndConditionsSection, id=section_id)
+            section.title = title
+            section.content = content
+            section.order = order
+            section.is_enabled = is_enabled
+            section.save()
+        else:
+            # Create new section
+            TermsAndConditionsSection.objects.create(
+                title=title, content=content, order=order, is_enabled=is_enabled
+            )
+
+        return redirect('terms')  # Adjust URL as necessary
+
+    # Render the template with context data
+    return render(request, 'dashboard/terms.html', {
+        'sections': sections,
+        'section_to_edit': section_to_edit,
+        'page': 'Manage Terms and Conditions'
+    })
+
+# View for managing Privacy Policy
+@login_required(login_url='login')
+def privacy_policy_view(request):
+    # Handle GET request to display sections and the form
+    sections = PrivacyPolicySection.objects.all().order_by('order')
+
+    # Check if there's an 'edit' parameter in the URL for editing a specific section
+    section_to_edit = None
+    edit_section_id = request.GET.get('edit')
+    if edit_section_id:
+        section_to_edit = get_object_or_404(PrivacyPolicySection, id=edit_section_id)
+
+    if request.method == 'POST':
+        # Handling creating or updating privacy policy sections
+        title = request.POST.get('title')
+        content = request.POST.get('content')  # Quill editor content is captured here
+        order = request.POST.get('order')
+        is_enabled = request.POST.get('is_enabled') == 'on'
+
+        section_id = request.POST.get('section_id')
+        if section_id:
+            # If section ID exists, update the section
+            section = get_object_or_404(PrivacyPolicySection, id=section_id)
+            section.title = title
+            section.content = content
+            section.order = order
+            section.is_enabled = is_enabled
+            section.save()
+        else:
+            # Create new section
+            PrivacyPolicySection.objects.create(
+                title=title, content=content, order=order, is_enabled=is_enabled
+            )
+
+        return redirect('manage_privacy_policy')
+
+    # Render the template with context data
+    return render(request, 'dashboard/manage_privacy_policy.html', {
+        'sections': sections,
+        'section_to_edit': section_to_edit,
+        'page': 'Manage Privacy Policy'
+    })
+
+# View for managing FAQ
+@login_required(login_url='login')
+def faq_view(request):
+    # Handle GET request to display sections and the form
+    sections = FAQSection.objects.all().order_by('order')
+
+    # Check if there's an 'edit' parameter in the URL for editing a specific section
+    section_to_edit = None
+    edit_section_id = request.GET.get('edit')
+    if edit_section_id:
+        section_to_edit = get_object_or_404(FAQSection, id=edit_section_id)
+
+    if request.method == 'POST':
+        # Handling creating or updating FAQ entries
+        question = request.POST.get('question')
+        answer = request.POST.get('answer')  # Quill editor content is captured here
+        order = request.POST.get('order')
+        is_enabled = request.POST.get('is_enabled') == 'on'
+
+        faq_id = request.POST.get('faq_id')
+        if faq_id:
+            # If FAQ ID exists, update the FAQ entry
+            faq = get_object_or_404(FAQSection, id=faq_id)
+            faq.question = question
+            faq.answer = answer
+            faq.order = order
+            faq.is_enabled = is_enabled
+            faq.save()
+        else:
+            # Create new FAQ entry
+            FAQSection.objects.create(
+                question=question, answer=answer, order=order, is_enabled=is_enabled
+            )
+
+        return redirect('manage_faq')
+
+    # Render the template with context data
+    return render(request, 'dashboard/manage_faq.html', {
+        'sections': sections,
+        'section_to_edit': section_to_edit,
+        'page': 'Manage FAQs'
+    })
+
+from django.apps import apps
+def delete_section(request, model_name, section_id):
+    # Dictionary to map model names to their respective redirect URLs
+    redirect_map = {
+        'TermsAndConditionsSection': 'terms',
+        'PrivacyPolicySection': 'privacy_policy',
+        'FAQSection': 'faq',
+    }
+
+    try:
+        # Dynamically get the model class from 'main_app' based on model_name
+        model = apps.get_model('main_app', model_name)
+    except LookupError:
+        # Handle the case where the model name is not found
+        return redirect('terms')  # Redirect to 'terms' by default if model is invalid
+
+    # Fetch the section and delete it
+    section = get_object_or_404(model, id=section_id)
+    section.delete()
+
+    # Get the appropriate redirect URL from the redirect_map, default to 'terms'
+    redirect_url = redirect_map.get(model_name, 'terms')
+
+    # Redirect to the specific page (terms, privacy_policy, or faq) after deletion
+    return redirect(redirect_url)
+
+
+def delete_faq(request, id):
+    section = get_object_or_404(FAQSection, id=id)
+    section.delete()
+    return redirect('manage_faq')
+
+def delete_privacy(request, id):
+    section = get_object_or_404(PrivacyPolicySection, id=id)
+    section.delete()
+    return redirect('manage_privacy_policy')
+
+
+
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.conf import settings
+from django.utils import timezone
+
+def send_custom_email(request):
+    if request.method == "POST":
+        recipient_emails = request.POST.get('recipient_email')
+        subject = request.POST.get('subject')
+        custom_message = request.POST.get('message')
+        recipient_names = request.POST.get('names')
+
+        # Split the recipient emails by commas to send to multiple addresses
+        recipient_list = [email.strip() for email in recipient_emails.split(',')]
+        name_list = [name.strip() for name in recipient_names.split(',')]
+
+        # Ensure that the number of names matches the number of emails
+        if len(name_list) != len(recipient_list):
+            # Handle error: names and emails don't match in number
+            return render(request, 'dashboard/send_email.html', {'error': 'Number of names and emails do not match'})
+
+        # Save the email data to the CustomEmail model
+        custom_email = CustomEmail(
+            recipient_email=recipient_emails,
+            name=recipient_names,
+            subject=subject,
+            message=custom_message,
+            created_at=timezone.now(),
+        )
+        custom_email.save()
+
+        # Send emails individually to each recipient
+        for name, email in zip(name_list, recipient_list):
+            # Render the email template with the dynamic data
+            email_html_message = render_to_string('email_templates/custom_email_template.html', {
+                'name': name,
+                'custom_message': custom_message,
+            })
+
+            # Send the email
+            send_mail(
+                subject,
+                '',  # Plain text version (optional)
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                html_message=email_html_message,
+            )
+
+        return redirect('send_email')  # Redirect to a success page after sending the email
+
+    return render(request, 'dashboard/send_email.html')
+
+
+def email_list(request):
+    # Retrieve all emails from the database
+    emails = CustomEmail.objects.all().order_by('-created_at')
+    return render(request, 'dashboard/email_list.html', {'emails': emails})
+
+def view_email(request):
+    # Get the email ID from the query parameters (e.g., /view-email?id=<id>)
+    email_id = request.GET.get('id')
+    
+    # Get the specific email entry or 404 if not found
+    email_entry = get_object_or_404(CustomEmail, id=email_id)
+    
+    return render(request, 'dashboard/view_email.html', {'email': email_entry})
+

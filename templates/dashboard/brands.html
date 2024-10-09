@@ -64,6 +64,7 @@
                                         <table class="table all-package theme-table sortable" id="table_id">
                                             <thead>
                                                 <tr class="item">
+                                                    {% comment %} <th>Analytics</th> {% endcomment %}
                                                     <th>Brand Name</th>
                                                     <th>Category </th>
                                                     <th>Contact Person</th>
@@ -79,7 +80,8 @@
                                             <tbody id="tableBody">
                                                 {% for cat in brands %}
                                                 <tr class="item">
-                                                    
+                                                    {% comment %} <td> <a href="{% url 'detail_analytics' cat.uid %}">view</a> </td> {% endcomment %}
+
                                                     <td class="brand-name">{{ cat.brand_name }}</td>
                                                     
                                                     <td>

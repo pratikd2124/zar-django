@@ -1,0 +1,235 @@
+{% extends 'dashboard/template.html' %}
+{% block content %}
+   <!-- index body start -->
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        <div class="title-header option-title">
+                            
+                            <h5>Detailed Analystic - {{user.email}}</h5>
+                            <div class="d-inline-flex">
+
+                                <a href="#" target="_blank" class="mx-3 align-items-center btn btn-theme d-flex">
+                                    <i data-feather="plus-download"></i>Export
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xxl-3 col-lg-6">
+                <div class="main-tiles border-5 border-0  card-hover card o-hidden">
+                    <div class="custome-1-bg b-r-4 card-body">
+                        <div class="media align-items-center static-top-widget">
+                            <div class="media-body p-0">
+                                <span class="m-0"> 
+                                {% if user.type == 'Material Provider' %}
+                                {{user.brand_name}}
+                                    {% else %}
+                                {{user.first_name}} {{user.last_name}}</span>
+                                {% endif %}
+                                             
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xxl-3 col-lg-6">
+                <div class="main-tiles border-5 border-0  card-hover card o-hidden">
+                    <div class="custome-2-bg b-r-4 card-body">
+                        <div class="media align-items-center static-top-widget">
+                            <div class="media-body p-0">
+                                <span class="m-0" title="{{ user.last_login|default:'N/A' }}"> {{ user.last_login|default:"N/A" }}</span>
+                                             
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xxl-3 col-lg-6">
+                <div class="main-tiles border-5 border-0  card-hover card o-hidden">
+                    <div class="custome-3-bg b-r-4 card-body">
+                        <div class="media align-items-center static-top-widget">
+                            <div class="media-body p-0">
+                                <span class="m-0">{{user.type}}</span>
+                                             
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xxl-3 col-lg-6">
+                <div class="main-tiles border-5 border-0  card-hover card o-hidden">
+                    <div class="custome-4-bg b-r-4 card-body">
+                        <div class="media align-items-center static-top-widget">
+                            <div class="media-body p-0">
+                                <span class="m-0">{{user.is_active}}</span>
+                                             
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+           
+                        
+
+{% comment %}            
+<div class="container mt-4">
+    <h1 class="mb-4">{{ title }}</h1>
+    
+    <!-- Summary Cards -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Sessions</h5>
+                    <h2 class="card-text" id="total-sessions">Loading...</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Users</h5>
+                    <h2 class="card-text" id="total-users">Loading...</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Pageviews</h5>
+                    <h2 class="card-text" id="total-pageviews">Loading...</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chart -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Analytics Over Time</h5>
+            <canvas id="analytics-chart"></canvas>
+        </div>
+    </div>
+    
+    <!-- Data Table -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Daily Breakdown</h5>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Sessions</th>
+                            <th>Users</th>
+                            <th>Pageviews</th>
+                        </tr>
+                    </thead>
+                    <tbody id="analytics-table-body">
+                        <!-- Table rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+               {% endcomment %}
+
+        </div>          
+    </div>     
+</div>
+       
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const analyticsData = {{ analytics_data|safe }};
+    
+    // Calculate totals
+    const totalSessions = analyticsData.reduce((sum, day) => sum + parseInt(day.sessions), 0);
+    const totalUsers = analyticsData.reduce((sum, day) => sum + parseInt(day.users), 0);
+    const totalPageviews = analyticsData.reduce((sum, day) => sum + parseInt(day.pageviews), 0);
+    
+    // Update summary cards
+    document.getElementById('total-sessions').textContent = totalSessions.toLocaleString();
+    document.getElementById('total-users').textContent = totalUsers.toLocaleString();
+    document.getElementById('total-pageviews').textContent = totalPageviews.toLocaleString();
+    
+    // Prepare data for chart
+    const dates = analyticsData.map(day => day.date);
+    const sessions = analyticsData.map(day => parseInt(day.sessions));
+    const users = analyticsData.map(day => parseInt(day.users));
+    const pageviews = analyticsData.map(day => parseInt(day.pageviews));
+    
+    // Create chart
+    const ctx = document.getElementById('analytics-chart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [
+                {
+                    label: 'Sessions',
+                    data: sessions,
+                    borderColor: 'rgb(54, 162, 235)',
+                    tension: 0.1
+                },
+                {
+                    label: 'Users',
+                    data: users,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                },
+                {
+                    label: 'Pageviews',
+                    data: pageviews,
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.1
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    
+    // Populate table
+    const tableBody = document.getElementById('analytics-table-body');
+    analyticsData.forEach(day => {
+        const row = tableBody.insertRow();
+        row.insertCell(0).textContent = day.date;
+        row.insertCell(1).textContent = parseInt(day.sessions).toLocaleString();
+        row.insertCell(2).textContent = parseInt(day.users).toLocaleString();
+        row.insertCell(3).textContent = parseInt(day.pageviews).toLocaleString();
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% endblock content %}
+       

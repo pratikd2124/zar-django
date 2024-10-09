@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+from django.contrib.auth.models import update_last_login
 
 # from .forms import HomeOwnerForm, ServiceProviderForm, MaterialProviderForm
 
@@ -150,10 +151,11 @@ def signin(request):
         password = request.POST.get('password')
         print(email,password)
         user = authenticate(request, username=email, password=password)
-        print(user,"!!!")
         
         if user is not None:
             login(request, user)
+            update_last_login(None, user)
+            print(user.is_superuser,user.last_login)
             if user.is_superuser:
                 messages.success(request, 'Login successful')
                 return redirect('dashboard')
@@ -711,17 +713,29 @@ def contact(request):
     
     return render(request, 'client/contact-us.html',{'title':'Contact Us','details':details})
 
-def privacy_policy(request):
-    content = PagesData.objects.first().privacy_policy
-    return render(request, 'client/custom-pages.html',{'title':'Privacy Policy','content':content})
+# def privacy_policy(request):
+#     content = PagesData.objects.first().privacy_policy
+#     return render(request, 'client/custom-pages.html',{'title':'Privacy Policy','content':content})
 
-def terms_and_conditions(request):
-    content = PagesData.objects.first().terms_and_conditions
-    return render(request, 'client/custom-pages.html',{'title':'Terms and Conditions','content':content})
+# def terms_and_conditions(request):
+#     content = PagesData.objects.first().terms_and_conditions
+#     return render(request, 'client/custom-pages.html',{'title':'Terms and Conditions','content':content})
 
-def faq(request):
-    content = PagesData.objects.first().faq
-    return render(request, 'client/custom-pages.html',{'title':'FAQ','content':content})
+# def faq(request):
+#     content = PagesData.objects.first().faq
+#     return render(request, 'client/custom-pages.html',{'title':'FAQ','content':content})
+
+def terms_and_conditions2(request):
+    sections = TermsAndConditionsSection.objects.filter(is_enabled=True).order_by('order')
+    return render(request, 'client/terms.html', {'sections': sections,'title':'Terms and Conditions'})
+
+def privacy_policy_view(request):
+    privacy_sections = PrivacyPolicySection.objects.filter(is_enabled=True)
+    return render(request, 'client/privacy_policy.html', {'privacy_sections': privacy_sections,'title':'Privacy Policy'})
+
+def faq_view(request):
+    faq_sections = FAQSection.objects.filter(is_enabled=True)
+    return render(request, 'client/faq.html', {'faq_sections': faq_sections,'title':'FAQ'})
 
 import random
 
@@ -730,7 +744,11 @@ def reset_password(request):
     
         if request.GET.get('action')=='resend_otp':
             user = User.objects.get(email=request.session['reset_email'])
-            Send_Code_email(user.code,user.email)
+            if user.type == 'Material Provider':
+                name = user.brand_name
+            else:
+                name = user.first_name + ' ' + user.last_name
+            Send_Code_email(user.code,user.email,name)
             messages.success(request, 'OTP re-sent successfully!')
             return redirect('reset_password')
         
@@ -763,7 +781,12 @@ def reset_password(request):
                 otp = random.randint(100000, 999999)
                 user.code = otp
                 user.save()
-                Send_Code_email(otp,user)
+                if user.type == 'Material Provider':
+                    name = user.brand_name
+                else:
+                    name = user.first_name + ' ' + user.last_name
+                
+                Send_Code_email(otp,user,name)
                 request.session['reset_email'] = email
                 messages.success(request, 'A reset code has been sent to your email.')
                 return redirect('reset_password')
@@ -786,7 +809,7 @@ def connect_impression(request, brand_id):
         impression = ConnectImpress.objects.create(user = request.user,
                                                 brand = User.objects.get(uid=brand_id),   )
         
-        
+        #send_mail() 10 min
         
         impression.save()
     except:

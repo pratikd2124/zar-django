@@ -4,6 +4,8 @@ from django.db import models
 import random
 from home.models import Category
 from ckeditor.fields import RichTextField
+from tinymce.models import HTMLField
+
 # Extending Django User model
 
 class Community(models.Model):
@@ -160,3 +162,52 @@ class ConnectImpress(models.Model):
         return f"{self.id}"
     
     
+class TermsAndConditionsSection(models.Model):
+    title = models.CharField(max_length=255)
+    content = HTMLField(blank=True, null=True)
+    is_enabled = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']  # Ensure sections are ordered
+
+    def __str__(self):
+        return self.title
+
+
+class PrivacyPolicySection(models.Model):
+    title = models.CharField(max_length=255)
+    content = HTMLField(blank=True, null=True)
+    is_enabled = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']  # Ensure sections are ordered
+
+    def __str__(self):
+        return self.title
+
+
+class FAQSection(models.Model):
+    question = models.CharField(max_length=255)
+    answer = HTMLField(blank=True, null=True)
+    is_enabled = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.question
+
+from django.utils import timezone
+
+class CustomEmail(models.Model):
+    name = models.CharField("Name", max_length=100, blank=True, null=True)
+    recipient_email = models.EmailField("Recipient Email", max_length=100)
+    subject = models.CharField("Subject", max_length=100)
+    message = HTMLField(blank=True, null=True)
+    created_at = models.DateTimeField("Created At", default=timezone.now)
+
+    def __str__(self):
+        return f"Email to {self.recipient_email} - {self.subject}"

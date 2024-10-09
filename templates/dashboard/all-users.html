@@ -67,12 +67,12 @@
                                             <thead>
                                                 <tr class="item">
 
+                                                    {% comment %} <th>Detailed Analytics</th> {% endcomment %}
                                                     {% if member_type == 'all'  %}
 
                                                     <th>Type</th>
 
                                                     {% endif %}
-                                                        
                                                     <th>Name</th>
                                                     
                                                     <th>Phone</th>
@@ -90,12 +90,12 @@
                                                 <tr class="item">
 
                                                  
+                                                    {% comment %} <td> <a href="{% url 'detail_analytics' user.uid %}">view</a> </td> {% endcomment %}
                                                     {% if member_type == 'all' %}
 
                                                     <td>{{user.type}}</td>
 
                                                     {% endif %}
-
                                                     <td>
                                                         <div class="user-name">
                                                             <span>{{user.first_name}} {{user.last_name}}</span>

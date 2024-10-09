@@ -49,6 +49,9 @@
 
     <!-- Slick Slider Css -->
     <link rel="stylesheet" href="../../static/backend_assets/assets/css/vendors/slick.css">
+    
+    <!-- Add Quill's CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <!-- App css -->
     <link rel="stylesheet" type="text/css" href="../../static/backend_assets/assets/css/style.css">
@@ -282,7 +285,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
                                 </li>
 
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'edit_pages' %}?page=FAQ">
+                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'manage_faq' %}">
                                         <i class="ri-questionnaire-line"></i>
                                         <span>FAQ</span>
                                     </a>
@@ -290,13 +293,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'edit_pages' %}?page=Privacy-Policy">
+                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'edit_pages' %}?page=Privacy">
                                         <i class="ri-file-shield-2-line"></i>
                                         <span>Privacy Policy</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'edit_pages' %}?page=Terms-and-Condition">
+                                    <a class="sidebar-link sidebar-title link-nav" href="{% url 'terms' %}">
                                         <i class="ri-pages-line"></i>
                                         <span>Terms & Condition</span>
                                     </a>

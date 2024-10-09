@@ -5,7 +5,7 @@ import ast
 
 LOG_DIR = '/home/ubuntu/zar-django/logs/user_activity'  # Update with your log folder path
 
-def parse_log_file(filepath):
+def parse_log_file(filepath,user=None):
     activity_data = []
     image_extensions = ('.jpg', '.png', '.webp', '.jpeg' ,'.ico','.pdf','.jfif')  # Extensions to exclude
     admin_paths = ['/admin', '/dashboard', '/splash','/profiletype']  # Admin and dashboard paths to exclude
@@ -16,35 +16,44 @@ def parse_log_file(filepath):
                 log_info = ast.literal_eval(line.strip())  # Parse the log line safely
                 page_visited = log_info['path']
 
-                # Skip logs that end with image file extensions
-                if page_visited.lower().endswith(image_extensions):
-                    continue
+                if not user:
+                    if page_visited.lower().endswith(image_extensions):
+                        continue
 
-                # Skip logs related to admin or dashboard
-                if any(admin_path in page_visited for admin_path in admin_paths):
-                    continue
+                    # Skip logs related to admin or dashboard
+                    if any(admin_path in page_visited for admin_path in admin_paths):
+                        continue
 
                 timestamp = datetime.fromisoformat(log_info['time_visited'])
                 user_id = log_info['user']
                 country = log_info.get('country', 'Unknown')  # Get country info if present
-                activity_data.append({
-                    'user': user_id,
-                    'page_visited': page_visited,
-                    'timestamp': timestamp,
-                    'country': country  # Add country to the activity data
-                })
+                if user:
+                    if str(user_id) == user.email:
+                        activity_data.append({
+                            'user': user_id,
+                            'page_visited': page_visited,
+                            'timestamp': timestamp,
+                            'country': country  # Add country to the activity data
+                        })
+                else:
+                    activity_data.append({
+                        'user': user_id,
+                        'page_visited': page_visited,
+                        'timestamp': timestamp,
+                        'country': country  # Add country to the activity data
+                    })
             except Exception as e:
                 print(f"Error parsing line in file {filepath}: {line.strip()} - {e}")
                 continue
     return activity_data
 
 
-def get_all_user_activity_logs():
+def get_all_user_activity_logs(user=None):
     all_logs = []
     for filename in os.listdir(LOG_DIR):
         filepath = os.path.join(LOG_DIR, filename)
         if os.path.isfile(filepath):
-            all_logs.extend(parse_log_file(filepath))
+            all_logs.extend(parse_log_file(filepath,user))
     return all_logs
 
 def analyze_user_activity_from_logs():

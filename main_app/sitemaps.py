@@ -8,7 +8,7 @@ class StaticViewSitemap(Sitemap):
 
     def items(self):
         # List all static views to be included in the sitemap
-        return ['home', 'contact_us', 'privacy_policy', 'faq', 'terms_and_conditions']
+        return ['home', 'contact_us', 'privacy_policy', 'faq', 'terms_and_conditions','become_a_member','service_provider_register','submit_material_provider','validate']
 
     def location(self, item):
         return reverse(item)
@@ -33,8 +33,13 @@ class BrandSitemap(Sitemap):
         return User.objects.filter(type='Material Provider')
 
     def location(self, obj):
-        # Replace with the appropriate view for brand details
-        return reverse('brand_info', args=[obj.category.first().get_category_hierarchy(), obj.uid])
+        # Check if the user has at least one category
+        category = obj.category.first()
+        if category:
+            return reverse('brand_info', args=[category.get_category_hierarchy(), obj.uid])
+        else:
+            # Fallback to a generic brand info URL if no category is associated
+            return reverse('brand_info', args=['no-category', obj.uid])
 
 class ServiceProviderSitemap(Sitemap):
     priority = 0.6
@@ -45,5 +50,10 @@ class ServiceProviderSitemap(Sitemap):
         return User.objects.filter(type='Service Provider')
 
     def location(self, obj):
-        # Replace with the appropriate view for service provider details
-        return reverse('user_info', args=[obj.category.first().get_category_hierarchy(), obj.uid])
+        # Check if the user has at least one category
+        category = obj.category.first()
+        if category:
+            return reverse('user_info', args=[category.get_category_hierarchy(), obj.uid])
+        else:
+            # Fallback to a generic service provider info URL if no category is associated
+            return reverse('user_info', args=['no-category', obj.uid])

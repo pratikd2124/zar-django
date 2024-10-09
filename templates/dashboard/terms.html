@@ -1,0 +1,159 @@
+{% extends 'dashboard/template.html' %}
+
+{% block content %}
+<h1>Manage Terms and Conditions</h1>
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        <div class="title-header option-title">
+                            {{ page }}
+                        </div>
+
+                        <!-- Add New Section Button -->
+                        <button id="add-new-section-btn" class="btn btn-primary mb-4">Add New Section</button>
+
+                        <!-- Table showing existing sections -->
+                        <div class="table-responsive table-product">
+                            <table class="table-auto w-full text-left border-collapse">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-2">Order</th>
+                                        <th class="px-4 py-2">Title</th>
+                                        <th class="px-4 py-2">Enabled</th>
+                                        <th class="px-4 py-2">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for section in sections %}
+                                    <tr>
+                                        <td class="border px-4 py-2">{{ section.order }}</td>
+                                        <td class="border px-4 py-2">{{ section.title }}</td>
+                                        <td class="border px-4 py-2">{{ section.is_enabled }}</td>
+                                        <td class="border px-4 py-2">
+                                            <a href="?edit={{ section.id }}" class="text-blue-600">Edit</a>
+                                            <a href="{% url 'delete_section' 'TermsAndConditionsSection' section.id %}" class="text-red-600">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="container py-5">
+
+                            <!-- Form to edit an existing section -->
+                                {% if section_to_edit %}
+                                <h2 class="py-2">Edit Section: {{ section_to_edit.title }}</h2>
+                                <form method="POST" class="row g-3">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="section_id" value="{{ section_to_edit.id }}" />
+    
+                                    <div class="col-md-6">
+    
+                                        <label for="title">Title</label>
+                                        <input type="text" name="title" value="{{ section_to_edit.title }}" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="order">Order</label>
+                                        <input type="number" name="order" value="{{ section_to_edit.order }}" class="form-control" required />
+                                    </div>
+                                    <div class="col-md-12">
+    
+                                        <label for="content">Content</label>
+                                        <!-- Hidden input to store Quill HTML content -->
+                                        <input type="hidden" name="content" value="{{ section_to_edit.content }}">
+                                    </div>
+    
+                                    <!-- Quill editor container -->
+                                    <div id="quill-editor">
+                                        {{ section_to_edit.content|safe }}  <!-- Load current content for editing -->
+                                    </div>
+    
+                                    <div class="col-md-6">
+                                        <label for="is_enabled">Enabled</label>
+                                        <input type="checkbox" name="is_enabled"  {% if section_to_edit.is_enabled %}checked{% endif %} />
+    
+                                    </div>
+    
+    
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </form>
+                                {% endif %}
+    
+                                <!-- Add New Section Form (Initially Hidden) -->
+                                <div id="new-section-form" class="row g-3" style="display: none;">
+                                    <h2>Add New Section</h2>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="col-md-6">
+                                            <label for="title">Title</label>
+                                            <input type="text" class="form-control" name="title" required />                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="order">Order</label>
+                                            <input type="number" class="form-control" name="order" required />
+                                        </div>
+
+                                        <label for="content">Content</label>
+                                        <!-- Hidden input to store Quill HTML content -->
+                                        <input type="hidden" name="content">
+    
+                                        <!-- Quill editor container for new section -->
+                                        <div id="quill-editor-new"></div>
+    
+                                        
+    
+                                        <label for="is_enabled">Enabled</label>
+                                        <input type="checkbox" name="is_enabled" />
+    
+                                        <button type="submit" class="btn btn-primary">Add Section</button>
+                                    </form>
+                                </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Quill's JS -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Initialize Quill editor and toggle Add New Section Form -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var quillEdit = new Quill('#quill-editor', {
+            theme: 'snow'  // Specify theme in configuration
+        });
+
+        var quillNew = new Quill('#quill-editor-new', {
+            theme: 'snow'  // Specify theme for new section
+        });
+
+        // Toggle the visibility of the "Add New Section" form
+        var addNewBtn = document.getElementById('add-new-section-btn');
+        var newSectionForm = document.getElementById('new-section-form');
+        addNewBtn.addEventListener('click', function() {
+            if (newSectionForm.style.display === 'none') {
+                newSectionForm.style.display = 'block';
+            } else {
+                newSectionForm.style.display = 'none';
+            }
+        });
+
+        // Handle form submission and pass the Quill content to the hidden input
+        var form = document.querySelector('form');
+        form.onsubmit = function() {
+            var content = document.querySelector('input[name="content"]');
+            var quillInstance = content.closest('form').querySelector('#quill-editor-new') ? quillNew : quillEdit;
+            content.value = quillInstance.root.innerHTML;  // Populate the hidden input with Quill HTML content
+        };
+    });
+</script>
+
+{% endblock %}

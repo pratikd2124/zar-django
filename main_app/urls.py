@@ -16,7 +16,7 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('splash', views.splash, name='splash'),
     path('logout', views.signout, name='logout'),
-    path('become_a_member', views.become_a_member, name='become_a_member'),
+    path('signup', views.become_a_member, name='become_a_member'),
     
     
     path('home-owner', views.home_owner_view, name='home_owner'),
@@ -30,9 +30,9 @@ urlpatterns = [
     
     path('success', views.success_page, name='success_page'),
     path('contact', views.contact, name='contact_us'),
-    path('privacy', views.privacy_policy, name='privacy_policy'),
-    path('faq', views.faq, name='faq'),
-    path('terms', views.terms_and_conditions, name='terms_and_conditions'),
+    path('privacy', views.privacy_policy_view, name='privacy_policy'),
+    path('faq', views.faq_view, name='faq'),
+    path('terms', views.terms_and_conditions2, name='terms_and_conditions'),
     
     path('api/suggestions', views.suggestions, name='suggestions'),
     path('reset-password', views.reset_password, name='reset_password'),

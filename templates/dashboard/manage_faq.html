@@ -1,0 +1,110 @@
+{% extends 'dashboard/template.html' %}
+
+{% block content %}
+<h1>Manage FAQ</h1>
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        <button id="add-new-faq-btn" class="btn btn-primary mb-4">Add New FAQ</button>
+
+                        <div class="table-responsive table-product">
+                            <table class="table-auto w-full text-left border-collapse">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-2">Order</th>
+                                        <th class="px-4 py-2">Question</th>
+                                        <th class="px-4 py-2">Enabled</th>
+                                        <th class="px-4 py-2">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for section in sections %}
+                                    <tr>
+                                        <td class="border px-4 py-2">{{ section.order }}</td>
+                                        <td class="border px-4 py-2">{{ section.question }}</td>
+                                        <td class="border px-4 py-2">{{ section.is_enabled }}</td>
+                                        <td class="border px-4 py-2">
+                                            <a href="?edit={{ section.id }}" class="text-blue-600">Edit</a>
+                                            <a href="{% url 'delete_faq' section.id %}" class="text-red-600">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Add/Edit FAQ Form -->
+                        <div id="faq-form" style="display: {% if section_to_edit %}block{% else %}none{% endif %};">
+                            {% if section_to_edit %}
+                            <h2>Edit FAQ</h2>
+                            {% else %}
+                            <h2>Add New FAQ</h2>
+                            {% endif %}
+                            <form method="POST">
+                                {% csrf_token %}
+                                {% if section_to_edit %}
+                                <input type="hidden" name="section_id" value="{{ section_to_edit.id }}" />
+                                {% endif %}
+                                
+                                <label for="question">Question</label>
+                                <input type="text" name="question" 
+                                    value="{% if section_to_edit %}{{ section_to_edit.question }}{% else %}''{% endif %}" 
+                                    required 
+                                />
+
+                                <label for="answer">Answer</label>
+                                <!-- Hidden input to store Quill HTML content -->
+                                <input type="hidden" id="quill-answer" name="answer" value="{{ section_to_edit.answer }}">
+
+                                <!-- Quill editor container -->
+                                <div id="quill-editor">
+                                    {{ section_to_edit.answer|safe }}  <!-- Load current content for editing -->
+                                </div>
+                                
+                                <label for="order">Order</label>
+                                <input type="number" name="order" value="{% if section_to_edit %}{{ section_to_edit.order }}{% else %}''{% endif %}" required />
+
+                                <label for="is_enabled">Enabled</label>
+                                <input type="checkbox" name="is_enabled" {% if section_to_edit.is_enabled %}checked{% endif %} />
+
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Quill.js script -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize Quill editor
+        var quill = new Quill('#quill-editor', {
+            theme: 'snow'  // Specify theme in configuration
+        });
+
+        // Function to update hidden input field with Quill editor content on form submission
+        var form = document.querySelector('form');
+        form.onsubmit = function() {
+            var answerInput = document.querySelector('#quill-answer');
+            answerInput.value = quill.root.innerHTML;  // Update hidden input with Quill HTML content
+        };
+
+        // Toggle form visibility
+        var addNewFaqBtn = document.getElementById('add-new-faq-btn');
+        var faqForm = document.getElementById('faq-form');
+        addNewFaqBtn.addEventListener('click', function() {
+            faqForm.style.display = (faqForm.style.display === 'none' ? 'block' : 'none');
+        });
+    });
+</script>
+{% endblock %}

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'home',
     'ckeditor',
     'django.contrib.sitemaps',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -146,11 +147,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default is the database
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True 
+EMAIL_HOST_USER='admin@zarluxury.com'
+EMAIL_HOST_PASSWORD='Zara#24Admin'
+EMAIL_HOST='smtp.hostinger.com'
+EMAIL_PORT=465
+DEFAULT_FROM_EMAIL = 'ZAR Luxury <admin@zarluxury.com>'
 
 CKEDITOR_FILENAME_GENERATOR = 'utils.get_filename'
 CKEDITOR_UPLOAD_PATH = "uploads/"

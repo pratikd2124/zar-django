@@ -1,0 +1,84 @@
+{% extends 'dashboard/template.html' %}
+
+{% block content %}
+<h1>Manage Privacy Policy</h1>
+
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        <button id="add-new-privacy-btn" class="btn btn-primary mb-4">Add New Section</button>
+
+                        <div class="table-responsive table-product">
+                            <table class="table-auto w-full text-left border-collapse">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-2">Order</th>
+                                        <th class="px-4 py-2">Title</th>
+                                        <th class="px-4 py-2">Enabled</th>
+                                        <th class="px-4 py-2">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for section in sections %}
+                                    <tr>
+                                        <td class="border px-4 py-2">{{ section.order }}</td>
+                                        <td class="border px-4 py-2">{{ section.title }}</td>
+                                        <td class="border px-4 py-2">{{ section.is_enabled }}</td>
+                                        <td class="border px-4 py-2">
+                                            <a href="?edit={{ section.id }}" class="text-blue-600">Edit</a>
+                                            <a href="{% url 'delete_privacy' section.id %}" class="text-red-600">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Add/Edit Privacy Policy Form -->
+                        <div id="privacy-form" style="display: {% if section_to_edit %}block{% else %}none{% endif %};">
+                            {% if section_to_edit %}
+                            <h2>Edit Section</h2>
+                            {% else %}
+                            <h2>Add New Section</h2>
+                            {% endif %}
+                            <form method="POST">
+                                {% csrf_token %}
+                                {% if section_to_edit %}
+                                <input type="hidden" name="section_id" value="{{ section_to_edit.id }}" />
+                                {% endif %}
+                                <label for="title">Title</label>
+                                <input type="text" name="title" value="{{ section_to_edit.title if section_to_edit else '' }}" required />
+
+                                <label for="content">Content</label>
+                                <textarea name="content" required>{{ section_to_edit.content if section_to_edit else '' }}</textarea>
+
+                                <label for="order">Order</label>
+                                <input type="number" name="order" value="{{ section_to_edit.order if section_to_edit else '' }}" required />
+
+                                <label for="is_enabled">Enabled</label>
+                                <input type="checkbox" name="is_enabled" {% if section_to_edit.is_enabled %}checked{% endif %} />
+
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var addNewPrivacyBtn = document.getElementById('add-new-privacy-btn');
+        var privacyForm = document.getElementById('privacy-form');
+        
+        addNewPrivacyBtn.addEventListener('click', function() {
+            privacyForm.style.display = (privacyForm.style.display === 'none' ? 'block' : 'none');
+        });
+    });
+</script>
+{% endblock %}

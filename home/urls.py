@@ -16,6 +16,16 @@ urlpatterns = [
     path('support-tickets',views.support_ticket,name='support_ticket'),
     path('edit-pages',views.edit_pages,name='edit_pages'),
     
+    path('terms/', views.terms_view, name='terms'),
+    path('terms/delete/<str:model_name>/<int:section_id>/', views.delete_section, name='delete_section'),
+
+    path('privacy-policy/', views.privacy_policy_view, name='manage_privacy_policy'),
+    path('faq/', views.faq_view, name='manage_faq'),
+    # path('delete/<str:model>/<int:section_id>/', views.delete_section, name='delete_section'),
+    
+    path('faq/delete/<int:id>/', views.delete_faq, name='delete_faq'),
+    path('privacy/delete/<int:id>/', views.delete_privacy, name='delete_privacy'),
+    
     path('edit-brand/<int:id>',views.update_brand,name='edit_brand'),
     path('edit-service-provide/<int:id>',views.update_service,name='update_service'),
     path('edit-gallery/<int:id>',views.update_gallery,name='update_gallery'),
@@ -23,4 +33,13 @@ urlpatterns = [
     
     path('contact_page',views.contact_page,name='contact_page'),
     path('export',views.export,name='export'),
+    
+    
+    path('analytics/<int:id>',views.detail_analytics,name='detail_analytics'),
+    
+    path('send-email/', views.send_custom_email, name='send_email'),
+    path('email-list/', views.email_list, name='email_list'),
+    path('view-email/', views.view_email, name='view_email'),
+    
+    
 ]   

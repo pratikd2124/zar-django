@@ -1,0 +1,58 @@
+{% extends 'dashboard/template.html' %}
+
+{% block content %}
+
+<!-- Include Quill.js script -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        {% if error %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endif %}
+                        <form method="POST" id="email-form">
+                            {% csrf_token %}
+                            <label for="names">Recipient Names (separate with commas):</label>
+                            <input type="text" id="names" name="names" required><br>
+
+                            <label for="recipient_email">Recipient Emails (separate with commas):</label>
+                            <input type="text" id="recipient_email" name="recipient_email" required><br>
+
+                            <label for="subject">Subject:</label>
+                            <input type="text" id="subject" name="subject" required><br>
+                        
+                            <label for="message">Message:</label>
+                            <!-- Quill editor container -->
+                            <div id="message"></div>
+                            <input type="hidden" id="message-input" name="message">
+                        
+                            <button type="submit">Send Email</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Initialize Quill editor
+    var quill = new Quill('#message', {
+        theme: 'snow'  // Choose 'snow' theme (or 'bubble')
+    });
+
+    // On form submission, transfer the Quill editor content to the hidden input
+    document.getElementById('email-form').onsubmit = function() {
+        var messageInput = document.querySelector('input[name=message]');
+        messageInput.value = quill.root.innerHTML;
+    };
+</script>
+{% endblock %}
+
+
+</html>
