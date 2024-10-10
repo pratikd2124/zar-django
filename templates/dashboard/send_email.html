@@ -2,35 +2,48 @@
 
 {% block content %}
 
-<!-- Include Quill.js script -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+
 <div class="page-body">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card card-table">
                     <div class="card-body">
+                          <!-- Button to link to email list -->
+                          <div style="text-align:left;display:flex;justify-content:end;" class="mb-3">
+                            <a href="{% url 'email_list' %}" class="btn btn-primary">View Email List</a>
+                        </div>
                         {% if error %}
-                            <p style="color: red">{{ error }}</p>
+                            <div class="alert alert-danger">{{ error }}</div>
                         {% endif %}
-                        <form method="POST" id="email-form">
+
+                        <form method="POST" id="email-form" class="space-y-4">
                             {% csrf_token %}
-                            <label for="names">Recipient Names (separate with commas):</label>
-                            <input type="text" id="names" name="names" required><br>
+                            
+                            <div class="form-group">
+                                <label for="names">Recipient Names (separate with commas):</label>
+                                <input type="text" id="names" name="names" class="form-control" required>
+                            </div>
 
-                            <label for="recipient_email">Recipient Emails (separate with commas):</label>
-                            <input type="text" id="recipient_email" name="recipient_email" required><br>
+                            <div class="form-group">
+                                <label for="recipient_email">Recipient Emails (separate with commas):</label>
+                                <input type="text" id="recipient_email" name="recipient_email" class="form-control" required>
+                            </div>
 
-                            <label for="subject">Subject:</label>
-                            <input type="text" id="subject" name="subject" required><br>
+                            <div class="form-group">
+                                <label for="subject">Subject:</label>
+                                <input type="text" id="subject" name="subject" class="form-control" required>
+                            </div>
                         
-                            <label for="message">Message:</label>
-                            <!-- Quill editor container -->
-                            <div id="message"></div>
-                            <input type="hidden" id="message-input" name="message">
+                            <div class="">
+                                <label for="email-message-content">Message:</label>
+                                <!-- Quill editor container -->
+                                <input type="hidden" id="emailmessage" name="emailmessage">
+                            </div>
+                            <div id="email-message-content" style="height: 300px;"></div>
                         
-                            <button type="submit">Send Email</button>
+                            <button type="submit" class="btn btn-primary">Send Email</button>
                         </form>
                     </div>
                 </div>
@@ -38,21 +51,32 @@
         </div>
     </div>
 </div>
-
-
+<!-- Include Quill.js script -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 <script>
-    // Initialize Quill editor
-    var quill = new Quill('#message', {
-        theme: 'snow'  // Choose 'snow' theme (or 'bubble')
-    });
+    (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Quill editor for email message
+            var quillEmail = new Quill('#email-message-content', {
+                theme: 'snow',  // Choose 'snow' theme (or 'bubble')
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{'list': 'ordered'}, {'list': 'bullet'}],
+                        ['link', 'image'],
+                        ['clean']                                         
+                    ]
+                }
+            });
 
-    // On form submission, transfer the Quill editor content to the hidden input
-    document.getElementById('email-form').onsubmit = function() {
-        var messageInput = document.querySelector('input[name=message]');
-        messageInput.value = quill.root.innerHTML;
-    };
+            // On form submission, transfer the Quill editor content to the hidden input
+            document.getElementById('email-form').onsubmit = function() {
+                var messageInput = document.querySelector('#emailmessage');
+                messageInput.value = quillEmail.root.innerHTML;
+            };
+        });
+    })();
 </script>
 {% endblock %}
-
-
-</html>

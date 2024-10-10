@@ -53,7 +53,7 @@ def dashboard(request):
 
 
 
-
+from django.core.exceptions import ObjectDoesNotExist
 
 @login_required(login_url='login')
 def all_users(request):
@@ -63,9 +63,12 @@ def all_users(request):
     
     if request.GET.get('action') == 'delete':
         id = request.GET.get('id')
-        user = User.objects.get(uid=id)
-        user.delete()
-        messages.success(request, 'User deleted successfully.')
+        try:
+            user = User.objects.get(uid=id)  # Or the appropriate field
+            user.delete()
+            messages.success(request, 'User deleted successfully.')
+        except ObjectDoesNotExist:
+            messages.error(request, 'User not found.')
         return redirect(request.META.get('HTTP_REFERER'))
     
     
@@ -214,6 +217,9 @@ def all_category(request):
         if request.GET.get('type') == 'edit':
             category_id = request.POST.get('category_id')
             category = get_object_or_404(Category, id=category_id)
+            if Category.objects.filter(name=name,parent=Category.objects.get(id=parent_id)).exists():
+                messages.error(request, 'Category already exists')
+                return redirect('category_list')
             category.name = name
             if parent_id:
                 category.parent = get_object_or_404(Category, id=parent_id)
@@ -225,6 +231,9 @@ def all_category(request):
 
         # Create Category
         else:
+            if Category.objects.filter(name=name,parent=Category.objects.get(id=parent_id)).exists():
+                messages.error(request, 'Category already exists')
+                return redirect('category_list')
             category = Category.objects.create(name=name, image=image)
             if parent_id:
                 category.parent = get_object_or_404(Category, id=parent_id)
@@ -1211,7 +1220,7 @@ def send_custom_email(request):
     if request.method == "POST":
         recipient_emails = request.POST.get('recipient_email')
         subject = request.POST.get('subject')
-        custom_message = request.POST.get('message')
+        custom_message = request.POST.get('emailmessage')
         recipient_names = request.POST.get('names')
 
         # Split the recipient emails by commas to send to multiple addresses
@@ -1256,9 +1265,28 @@ def send_custom_email(request):
 
 
 def email_list(request):
-    # Retrieve all emails from the database
-    emails = CustomEmail.objects.all().order_by('-created_at')
-    return render(request, 'dashboard/email_list.html', {'emails': emails})
+    # Retrieve the search query from the GET request
+    query = request.GET.get('q', '')
+
+    # Filter emails based on the search query
+    if query:
+        emails = CustomEmail.objects.filter(
+            Q(recipient_email__icontains=query) | Q(subject__icontains=query)
+        ).order_by('-created_at')
+    else:
+        emails = CustomEmail.objects.all().order_by('-created_at')
+
+    # Paginate the results
+    paginator = Paginator(emails, 10)  # Show 10 emails per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Pass the paginated emails and request to the template
+    context = {
+        'emails': page_obj,
+        'request': request  # Pass the request to retain the search query in pagination links
+    }
+    return render(request, 'dashboard/email_list.html', context)
 
 def view_email(request):
     # Get the email ID from the query parameters (e.g., /view-email?id=<id>)

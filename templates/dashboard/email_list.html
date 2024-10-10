@@ -1,48 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email List</title>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 10px;
-        }
-        th, td {
-            text-align: left;
-        }
-        a {
-            text-decoration: none;
-            color: blue;
-        }
-    </style>
-</head>
-<body>
-    <h1>Sent Emails</h1>
+{% extends 'dashboard/template.html' %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Recipient Emails</th>
-                <th>Subject</th>
-                <th>Created At</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for email in emails %}
-            <tr>
-                <td>{{ email.id }}</td>
-                <td>{{ email.recipient_email }}</td>
-                <td>{{ email.subject }}</td>
-                <td>{{ email.created_at }}</td>
-                <td><a href="{% url 'view_email' %}?id={{ email.id }}">View Email</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+{% block content %}
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        <h2>Email List</h2>
+
+                        <!-- Button to compose a new email -->
+                        <div class="mb-3" style="text-align:left;display:flex;justify-content:end;">
+                            <a href="{% url 'send_email' %}" class="btn btn-primary">Compose New Email</a>
+                        </div>
+
+                        <!-- Search box -->
+                        <form method="GET" class="mb-4">
+                            <div class="input-group">
+                                <input type="text" name="q" class="form-control" placeholder="Search Emails or Subject" value="{{ request.GET.q }}">
+                                <button class="btn btn-outline-secondary" type="submit">Search</button>
+                            </div>
+                        </form>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Recipient Emails</th>
+                                    <th>Subject</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for email in emails %}
+                                <tr>
+                                    <td>{{ email.id }}</td>
+                                    <td>{{ email.recipient_email }}</td>
+                                    <td>{{ email.subject }}</td>
+                                    <td>{{ email.created_at }}</td>
+                                    <td>
+                                        <a href="{% url 'view_email' %}?id={{ email.id }}" class="btn btn-info btn-sm">View Email</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                          <!-- Pagination -->
+                          <nav aria-label="">
+                            <ul class="pagination justify-content-center">
+                                {% if emails.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ emails.previous_page_number }}&q={{ request.GET.q }}">Previous</a>
+                                    </li>
+                                {% endif %}
+                        
+                                {% for num in emails.paginator.page_range %}
+                                    {% if emails.number == num %}
+                                        <li class="page-item active"><a class="page-link">{{ num }}</a></li>
+                                    {% else %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ num }}&q={{ request.GET.q }}">{{ num }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                        
+                                {% if emails.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ emails.next_page_number }}&q={{ request.GET.q }}">Next</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

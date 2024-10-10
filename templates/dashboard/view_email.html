@@ -1,49 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Details</title>
-    <style>
-        .email-details {
-            margin-top: 20px;
-        }
-        .email-details h2 {
-            margin-bottom: 10px;
-        }
-        .email-details p {
-            margin: 5px 0;
-        }
-        .email-message {
-            border: 1px solid #ccc;
-            padding: 15px;
-            margin-top: 15px;
-            background-color: #f9f9f9;
-        }
-    </style>
-</head>
-<body>
-    <h1>Email Details</h1>
+{% extends 'dashboard/template.html' %}
 
-    <div class="email-details">
-        <h2>Recipient Emails:</h2>
-        <p>{{ email.recipient_email }}</p>
+{% block content %}
+<div class="page-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        <h2>Email Details</h2>
 
-        <h2>Recipient Names:</h2>
-        <p>{{ email.name }}</p>
+                        <div class="email-details mt-4 row g-3">
+                            <div class="col-md-6">
+                                <label>Recipient Emails:</label>
+                                <p class="form-control" disabled>{{ email.recipient_email }}</p>
+                            </div>
 
-        <h2>Subject:</h2>
-        <p>{{ email.subject }}</p>
+                            <div class="col-md-6">
+                                <label>Recipient Names:</label>
+                                <p class="form-control" disabled>{{ email.name }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Subject:</label>
+                                <p class="form-control" disabled>{{ email.subject }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Created At:</label>
+                                <p class="form-control" disabled>{{ email.created_at }}</p>
+                            </div>
 
-        <h2>Created At:</h2>
-        <p>{{ email.created_at }}</p>
-
-        <h2>Message:</h2>
-        <div class="email-message">
-            {{ email.message|safe }} <!-- Display HTML content -->
+                            <label>Message:</label>
+                            <div class="email-message border rounded p-3 mt-2 bg-light text-dark">
+                                {{ email.message|safe }} <!-- Display HTML content -->
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <a href="{% url 'email_list' %}" class="btn btn-secondary mt-3">Back to Email List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <a href="{% url 'email_list' %}">Back to Email List</a>
-</body>
-</html>
+</div>
+{% endblock %}

@@ -95,43 +95,77 @@
     
             // Display categories
             if (data.categories.length) {
-                let categoryHtml = '<h3 class="font-bold">Categories</h3>';
+                let categoryHtml = '<h3 class="font-bold pb-1 border-b border-gray-700">Categories</h3>';
                 data.categories.forEach(cat => {
-                    categoryHtml += `<div class="p-2 rounded-lg hover:bg-gray-100 cursor-pointer hover:text-black"> <a href="/category/${cat.name}?id=${cat.id}"> ${cat.hierarchy}</a></div>`;
+                    // Replace '/' with ' › ' in the hierarchy path
+                    const formattedHierarchy = cat.hierarchy.replace(/\//g, ' › ');
+
+                    categoryHtml += `<div class="p-2 px-3 rounded-lg text-sm hover:bg-gray-100 cursor-pointer hover:text-black">
+                                        <a href="/category/${cat.hierarchy}">${formattedHierarchy}</a>
+                                    </div>`;
                 });
                 document.getElementById('categories').innerHTML = categoryHtml;
             }
+
     
            // Display brands
             if (data.brands.length) {
-                let brandHtml = '<h3 class="font-bold">Brands</h3>';
+                let brandHtml = '<h3 class="font-bold pb-1 border-b border-gray-700">Brands</h3>';
                 data.brands.forEach(brand => {
                     // Show brand name (non-clickable)
-                    brandHtml += `<div class="p-2 rounded-lg"><span class="font-bold">${brand.name}</span>`;
                     
-                    // List the categories under the brand name
-                    brand.categories.forEach(category => {
-                        brandHtml += `<div class="ml-4">-- <a href="/material-provider/${category.path}/${brand.id}">${category.path}/${brand.name}</a></div>`;
-                    });
+                    if(brand.categories.length > 1) {
+                        brandHtml += `<div class="p-2 px-3 rounded-lg">➔ <span class="font-bold px-1"> ${brand.name}</span>`;
+                        // List the parent category under the brand name
+                        brand.categories.forEach(category => {
+                            // Extract the parent category by splitting the path
+                            const parentCategory = category.path.split('/').pop(); // Get the last part of the path
+    
+                            // Display only the brand name and parent category
+                            brandHtml += `<div class="ml-4">➣ <a href="/material-provider/${category.path}/${brand.id}"> ${brand.name} (${parentCategory})</a></div>`;
+                        });
+                        brandHtml += `</div>`; // Closing the brand container
+                    }
+                    else{
+                        brand.categories.forEach(category => {
+                            brandHtml += `<div class="p-2 px-3 rounded-lg">➔<a href="/material-provider/${category.path}/${brand.id}" class="font-bold px-1"> ${brand.name}</a>`;
 
-                    brandHtml += `</div>`; // Closing the brand container
+                            
+                                brandHtml += `</div>`; // Closing the brand container
+                            
+                        });
+                    }
+
+                    
                 });
                 document.getElementById('brands').innerHTML = brandHtml;
             }
 
             // Display service providers
             if (data.serviceProviders.length) {
-                let serviceHtml = '<h3 class="font-bold">Service Providers</h3>';
+                let serviceHtml = '<h3 class="font-bold pb-1 border-b border-gray-700">Service Providers</h3>';
                 data.serviceProviders.forEach(provider => {
-                    // Show service provider name (non-clickable)
-                    serviceHtml += `<div class="p-2 rounded-lg"><span class="font-bold">${provider.name}</span>`;
+                    
+                    // If service provider has more than one category, display the provider name with parent categories
+                    if (provider.categories.length > 1) {
+                        serviceHtml += `<div class="p-2 px-3 rounded-lg">➔<span class="font-bold px-1"> ${provider.name}</span>`;
+                        
+                        // List the parent category under the service provider name
+                        provider.categories.forEach(category => {
+                            // Extract the parent category by splitting the path
+                            const parentCategory = category.path.split('/').pop(); // Get the last part of the path
 
-                    // List the categories under the service provider name
-                    provider.categories.forEach(category => {
-                        serviceHtml += `<div class="ml-4">-- <a href="/service-provider/${category.path}/${provider.id}">${category.path}/${provider.name}</a></div>`;
-                    });
-
-                    serviceHtml += `</div>`; // Closing the service provider container
+                            // Display only the service provider name and parent category
+                            serviceHtml += `<div class="ml-4">➣ <a href="/service-provider/${category.path}/${provider.id}"> ${provider.name} (${parentCategory})</a></div>`;
+                        });
+                        serviceHtml += `</div>`; // Closing the service provider container
+                    } 
+                    // If only one category, display just the service provider name
+                    else {
+                        provider.categories.forEach(category => {
+                            serviceHtml += `<div class="p-2 px-3 rounded-lg">➔<a href="/service-provider/${category.path}/${provider.id}" class="font-bold px-1">${provider.name}</a></div>`;
+                        });
+                    }
                 });
                 document.getElementById('service-providers').innerHTML = serviceHtml;
             }
