@@ -8,6 +8,12 @@ from main_app.funtions import Send_Code_email, Send_Welcome_email, Send_Payment_
 from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+#Anlytics import 
+from collections import Counter
+from google.oauth2 import service_account
+from google.analytics.data_v1beta import BetaAnalyticsDataClient
+from google.analytics.data_v1beta.types import RunReportRequest, DateRange, Metric, Dimension
+from django.shortcuts import render
 # Create your views here.
 import random
 from .analytics import *
@@ -32,7 +38,26 @@ def dashboard(request):
     
     material_provider_count = User.objects.filter(type='Material Provider').count()
 
+    """Passes the Google Analytics data to the template."""
     
+    # Set default date range
+    days_ago = request.GET.get('days_ago', '20')  # Default to 20 days
+    if days_ago == 'all':
+        start_date = "2024-08-20"  # Replace with your desired start date for 'all' data
+        end_date = "today"
+    else:
+        start_date = f"{int(days_ago)}daysAgo"
+        end_date = "today"
+    
+    
+    # Initialize the Google Analytics client
+    client = initialize_analytics_reporting()
+    
+    # Get the report data
+    response = get_ga4_report(client, start_date, end_date)
+    
+    # Parse the report data
+    sorted_chart_data = parse_ga4_response(response)
     
     
     return render(request, 'dashboard/index.html', {
@@ -45,7 +70,8 @@ def dashboard(request):
         'last_week_active_users_list': last_week_active_users_list_json,
         'monthly_active_users': monthly_active_users_list_json,
         'category_wise_visited_users_count': category_wise_visited_users_count_json,
-        'country_wise_users_count':country_wise_users_count
+        'country_wise_users_count':country_wise_users_count,
+        'sorted_chart_data': json.dumps(sorted_chart_data), 'days_ago': days_ago
     })
 
 
@@ -971,20 +997,17 @@ def export(request):
 #     logs = get_all_user_activity_logs(user)
 #     print(logs)
 
-from google.oauth2 import service_account
-from google.analytics.data_v1beta import BetaAnalyticsDataClient
-from google.analytics.data_v1beta.types import RunReportRequest, DateRange, Metric, Dimension
-from django.shortcuts import render
-from collections import Counter
+
 
 # Your Google Analytics Measurement ID (should be numeric property ID)
+KEY_FILE_LOCATION = os.path.join(os.path.dirname(__file__), 'config', 'gacredientials.json')
 PROPERTY_ID = '456257370'  # Replace with your actual numeric property ID
 
-def initialize_analyticsreporting():
+def initialize_analytics_reporting():
     """Initializes a Google Analytics Data API client."""
     
     credentials = service_account.Credentials.from_service_account_file(
-        '/home/ubuntu/zar-django/ga-credential.json',
+        KEY_FILE_LOCATION,
         scopes=['https://www.googleapis.com/auth/analytics.readonly']
     )
     
@@ -992,12 +1015,12 @@ def initialize_analyticsreporting():
     client = BetaAnalyticsDataClient(credentials=credentials)
     return client
 
-def get_report(client):
-    """Queries the Google Analytics Data API."""
+def get_ga4_report(client, start_date, end_date):
+    """Queries the Google Analytics Data API and fetches the report."""
     
     request = RunReportRequest(
         property=f'properties/{PROPERTY_ID}',
-        date_ranges=[DateRange(start_date="7daysAgo", end_date="today")],
+        date_ranges=[DateRange(start_date=start_date, end_date=end_date)],
         metrics=[Metric(name="sessions"), Metric(name="totalUsers"), Metric(name="screenPageViews")],
         dimensions=[Dimension(name="date")]
     )
@@ -1005,18 +1028,72 @@ def get_report(client):
     response = client.run_report(request)
     return response
 
-def parse_response(response):
-    """Parses and formats the Google Analytics Data API response."""
+
+def parse_ga4_response(response):
+    """Parses the Google Analytics Data API response for the template."""
     
-    formatted_data = []
+    chart_data = {
+        'dates': [],
+        'sessions': [],
+        'totalUsers': [],
+        'screenPageViews': []
+    }
+
     for row in response.rows:
-        formatted_data.append({
-            'date': row.dimension_values[0].value,
-            'sessions': row.metric_values[0].value,
-            'users': row.metric_values[1].value,
-            'pageviews': row.metric_values[2].value,
-        })
-    return formatted_data
+        chart_data['dates'].append(row.dimension_values[0].value)  # Collect dates
+        chart_data['sessions'].append(int(row.metric_values[0].value))  # Collect sessions
+        chart_data['totalUsers'].append(int(row.metric_values[1].value))  # Collect total users
+        chart_data['screenPageViews'].append(int(row.metric_values[2].value))  # Collect screen page views
+
+    # Combine the data into a list of tuples
+    combined_data = list(zip(chart_data['dates'], chart_data['sessions'], chart_data['totalUsers'], chart_data['screenPageViews']))
+
+    # Sort the combined data by date after converting the format from 'YYYYMMDD' to 'YYYY-MM-DD'
+    combined_data.sort(key=lambda x: datetime.strptime(x[0][:4] + '-' + x[0][4:6] + '-' + x[0][6:], '%Y-%m-%d'))
+
+    # Unzip the sorted data back into separate lists
+    sorted_chart_data = {
+        'dates': [],
+        'sessions': [],
+        'totalUsers': [],
+        'screenPageViews': []
+    }
+
+    for date, sessions, total_users, screen_page_views in combined_data:
+        sorted_chart_data['dates'].append(date[:4] + '-' + date[4:6] + '-' + date[6:])  # Convert back to 'YYYY-MM-DD'
+        sorted_chart_data['sessions'].append(sessions)
+        sorted_chart_data['totalUsers'].append(total_users)
+        sorted_chart_data['screenPageViews'].append(screen_page_views)
+
+    return sorted_chart_data
+
+# Django View to pass the data to template
+def analytics_view(request):
+    """Passes the Google Analytics data to the template."""
+    
+    # Set default date range
+    days_ago = request.GET.get('days_ago', '20')  # Default to 20 days
+    if days_ago == 'all':
+        start_date = "2024-08-20"  # Replace with your desired start date for 'all' data
+        end_date = "today"
+    else:
+        start_date = f"{int(days_ago)}daysAgo"
+        end_date = "today"
+    
+    
+    # Initialize the Google Analytics client
+    client = initialize_analytics_reporting()
+    
+    # Get the report data
+    response = get_ga4_report(client, start_date, end_date)
+    
+    # Parse the report data
+    sorted_chart_data = parse_ga4_response(response)
+
+        
+    # Pass data to the template
+    return render(request, 'client/google-analytics.html', {'sorted_chart_data': json.dumps(sorted_chart_data), 'days_ago': days_ago})
+
 
 def detail_analytics(request, id):
     # Initialize Google Analytics

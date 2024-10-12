@@ -155,6 +155,9 @@ class ContactPageDetails(models.Model):
 class ConnectImpress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     brand = models.ForeignKey(User, on_delete=models.CASCADE, related_name='impress_brand')
+    
+    mail_sent = models.BooleanField(default=False)
+    count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

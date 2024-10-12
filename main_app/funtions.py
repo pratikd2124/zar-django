@@ -118,3 +118,60 @@ def Send_Payment_email(link,email,name):
     )
     email.content_subtype = "html"
     email.send()
+    
+    
+    
+def send_mail_impression(x):
+    
+    EMAIL_HOST_USER = 'admin@zarluxury.com'
+    EMAIL_HOST_PASSWORD = 'Zara#24Admin'
+    EMAIL_HOST = 'smtp.hostinger.com'
+    EMAIL_PORT = 465
+    email_backend = EmailBackend(
+    host=EMAIL_HOST,
+    port=EMAIL_PORT,
+    username=EMAIL_HOST_USER,
+    password=EMAIL_HOST_PASSWORD,
+    use_ssl=True,  # Use TLS for port 587
+)
+    if x.brand.type=='Material Provider':
+        brand = x.brand.brand_name
+        
+    else:
+        brand = x.brand.first_name + ' ' + x.brand.last_name
+    
+    if  x.user.type == 'Material Provider':
+        User = x.user.brand_name
+        Category = x.user.type
+        email = x.user.email
+        phone = x.user.mobile
+    else:
+        User = x.user.first_name + ' ' + x.user.last_name
+        Category = x.user.type
+        email = x.user.email
+        phone = x.user.mobile
+     
+    context ={
+        'brand_name':brand,
+        'User':User,
+        'Category':Category,
+        'email':email,
+        'phone':phone,
+    }
+    subject = f"New Connection from ZAR"
+
+    # Use a raw string (r"""...""") to avoid formatting issues with curly braces
+    body = render_to_string('email_templates/connect-brand.html',context)
+
+    recipients = [x.brand.email]
+    from_email = '"ZAR Luxury" <admin@zarluxury.com>'
+
+    email = EmailMessage(
+        subject=subject,
+        body=body,
+        from_email=from_email,
+        to=recipients,
+        connection=email_backend,
+    )
+    email.content_subtype = "html"
+    email.send()

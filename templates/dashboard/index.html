@@ -99,7 +99,70 @@
                         <div class="col-xl-4 mb-2">
                             
                         </div>
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="py-2">User Visits Count</h3>
 
+                                    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+                                    <form method="GET" action="{% url 'dashboard' %}">
+                                        <label for="days_ago">Select Date Range:</label>
+                                        <select name="days_ago" id="days_ago" onchange="this.form.submit()">
+                                            <option value="10" {% if days_ago == '10' %}selected{% endif %}>Last 10 Days</option>
+                                            <option value="20" {% if days_ago == '20' %}selected{% endif %}>Last 20 Days</option>
+                                            <option value="30" {% if days_ago == '30' %}selected{% endif %}>Last 30 Days</option>
+                                            <option value="90" {% if days_ago == '90' %}selected{% endif %}>Last 90 Days</option>
+                                            <option value="all" {% if days_ago == 'all' %}selected{% endif %}>All Time</option>
+                                        </select>
+                                    </form>
+                                
+                                    <div id="chart"></div>
+                                    <script>
+                                        // Get data passed from Django view
+                                        var sorted_chart_data = JSON.parse('{{ sorted_chart_data|escapejs }}');
+                                
+                                        // Create Area Chart
+                                        var areaOptions = {
+                                            chart: {
+                                                type: 'area',
+                                                height: 350
+                                            },
+                                            series: [{
+                                                name: 'User Visits',
+                                                data: sorted_chart_data.sessions
+                                            }],
+                                            xaxis: {
+                                                categories: sorted_chart_data.dates,
+                                                title: { text: 'Date' },
+                                                tickAmount: Math.ceil(sorted_chart_data.dates.length / 10)
+                                            },
+                                            yaxis: {
+                                                title: { text: 'User Visits' }
+                                            },
+                                            fill: {
+                                                color: '#0000FF',
+                                                opacity: 0.3
+                                            },
+                                            stroke: {
+                                                curve: 'smooth'
+                                            },
+                                            dataLabels: {
+                                                enabled: false
+                                            },
+                                            tooltip: {
+                                                shared: true,
+                                                intersect: false
+                                            }
+                                        };
+                                
+                                        var areaChart = new ApexCharts(document.querySelector("#chart"), areaOptions);
+                                        areaChart.render();
+                                
+                                       
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
                      <!-- Recent orders start-->
                      <div class="col-xl-12">
                         <div class="card o-hidden card-hover">
@@ -421,6 +484,7 @@
         updateChart(chart, sortedData.labels, sortedData.data);
     });
 </script>
+
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

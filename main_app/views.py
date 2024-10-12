@@ -800,17 +800,32 @@ def reset_password(request):
         return redirect('login')
     
 from main_app.models import ConnectImpress
+from datetime import timedelta
 
 def connect_impression(request, brand_id):
     try:
         if ConnectImpress.objects.filter(user = request.user,brand = User.objects.get(uid=brand_id)).exists():
-            return JsonResponse({'status':True})
-        
+            impression = ConnectImpress.objects.get(user = request.user,brand = User.objects.get(uid=brand_id))
+            time_diff = timezone.now() - impression.updated_at
+            print(time_diff)
+            if time_diff > timedelta(minutes=10):
+                    # Resend mail, increase count and update the updated_at timestamp
+                    send_mail_impression(impression)
+                    impression.count += 1
+                    impression.mail_sent = True
+                    impression.updated_at = timezone.now()
+                    impression.save()
+            
+                    return JsonResponse({'status':True})
+            else:
+                return JsonResponse({'status':False})
         impression = ConnectImpress.objects.create(user = request.user,
                                                 brand = User.objects.get(uid=brand_id),   )
         
-        #send_mail() 10 min
-        
+        send_mail_impression(impression)
+        impression.count += 1
+        impression.mail_sent = True
+        impression.updated_at = timezone.now()
         impression.save()
     except:
         pass
