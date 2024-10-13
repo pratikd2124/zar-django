@@ -2555,12 +2555,12 @@ body {
 }
 
 body ::-moz-selection {
-    background-color: transparent;
+    /* background-color: transparent; */
     color: var(--theme-color)
 }
 
 body ::selection {
-    background-color: transparent;
+    /* background-color: transparent; */
     color: var(--theme-color)
 }
 

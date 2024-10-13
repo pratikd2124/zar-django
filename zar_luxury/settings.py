@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'ckeditor',
     'django.contrib.sitemaps',
     'tinymce',
+    'rest_framework',
+    'chatbot',
 ]
 
 MIDDLEWARE = [

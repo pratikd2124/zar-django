@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import  JsonResponse
 from main_app.models import Community, User, SupportTickets,ProfileGallery,ConnectImpress,ProfileInfo,ContactPageDetails,TermsAndConditionsSection, PrivacyPolicySection, FAQSection,CustomEmail
 from .models import Category,PagesData
 from django.contrib import messages

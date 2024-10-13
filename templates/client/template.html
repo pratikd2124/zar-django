@@ -118,6 +118,7 @@
 
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
 
+    <link rel="stylesheet" type="text/css" href="{% static 'custom/customcss.css' %}">
 
     
 
@@ -232,6 +233,8 @@
             
 
     </main>
+
+    {% include 'client/components/chatbot.html' %}
     {% include 'client/components/footer.html' %}
 
 
@@ -241,7 +244,8 @@
 
     {% else %}
 
-    
+    <script src="{% static 'custom/script.js' %}" defer></script>
+
         
     <script>
         document.addEventListener('DOMContentLoaded', function () {

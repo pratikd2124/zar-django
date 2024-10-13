@@ -41,5 +41,7 @@ urlpatterns = [
     path('email-list/', views.email_list, name='email_list'),
     path('view-email/', views.view_email, name='view_email'),
     
+
     
 ]   
+

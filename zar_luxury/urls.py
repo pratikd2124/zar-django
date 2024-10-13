@@ -33,6 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),  # Admin panel
     path('', include('main_app.urls')),  # Include the URLs from main_app (where your views are)
     path('dashboard/',include('home.urls')),
+    path('chatbot/',include('chatbot.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
         path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 

@@ -657,39 +657,100 @@ def user_info(request,category_path,uid):
 
 from django.http import JsonResponse
 
+import spacy
+import requests
+from django.db.models import Q
+
+nlp = spacy.load('en_core_web_sm')
+
+def process_nlp_query(query):
+    # Process the query using spaCy
+    doc = nlp(query)
+    keywords = [token.text for token in doc if token.is_alpha]
+    return keywords
+
+def reverse_geocode(lat, lon):
+    """
+    Function to reverse geocode latitude and longitude into a city, state, and country.
+    You can use Google Maps API, OpenStreetMap, or another service.
+    """
+    try:
+        url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}&addressdetails=1"
+        response = requests.get(url)
+        location_data = response.json()
+        
+        city = location_data.get('address', {}).get('city', '')
+        state = location_data.get('address', {}).get('state', '')
+        country = location_data.get('address', {}).get('country', '')
+        
+        return city, state, country
+    except Exception as e:
+        print(f"Error in reverse geocoding: {e}")
+        return None, None, None
+
 
 def suggestions(request):
     if request.method == 'GET':
         query = request.GET.get('query', '')
+        lat = request.GET.get('latitude', None)  # Detected latitude
+        lon = request.GET.get('longitude', None)  # Detected longitude
+        filters = request.GET.get('filters', '')  # Advanced filters
+        
+        # Extract keywords from query using NLP
+        keywords = process_nlp_query(query)
 
+        # Initialize city, state, country as empty strings
+        city, state, country = '', '', ''
+        
+        # Reverse geocode if latitude and longitude are provided
+        if lat and lon:
+            city, state, country = reverse_geocode(lat, lon)
+        
+        # Prepare location filters (only add if they exist)
+        location_filters = Q()
+        if city:
+            location_filters |= Q(city__icontains=city)
+        if state:
+            location_filters |= Q(state__icontains=state)
+        if country:
+            location_filters |= Q(country__icontains=country)
+        
         # Fetch categories matching the query
         categories = [
-                    {'name':category.name,'hierarchy': category.get_category_hierarchy(), 'id': category.id}
-                    for category in Category.objects.filter(name__icontains=query)
-                ]
-        # Fetch brands matching the query
-        brands =[{'name':brand.brand_name,'id':brand.uid,'categories':[{'name':i.name,'path':i.get_category_hierarchy() } for i in brand.category.all()]} for brand in User.objects.filter(type="Material Provider").filter(
-            Q(brand_name__icontains=query) | 
-            Q(bio__icontains=query) | 
-            Q(contact_person__icontains=query)
-        )]
+            {'name': category.name, 'hierarchy': category.get_category_hierarchy(), 'id': category.id}
+            for category in Category.objects.filter(name__icontains=query)
+        ]
 
-        # Fetch services matching the query
-        services = [{'name':(service.first_name +' '+service.last_name)  ,'id':service.uid,'categories':[{'name':i.name,'path':i.get_category_hierarchy() } for i in service.category.all()]} for service in User.objects.filter(type="Service Provider").filter(
-            Q(first_name__icontains=query) | 
-            Q(last_name__icontains=query) | 
-            Q(firm_name__icontains=query) | 
-            Q(bio__icontains=query)
-        )]
+        # Fetch brands matching the query and location
+        brands = [
+            {'name': brand.brand_name, 'id': brand.uid,
+             'categories': [{'name': i.name, 'path': i.get_category_hierarchy()} for i in brand.category.all()]}
+            for brand in User.objects.filter(type="Material Provider").filter(
+                Q(brand_name__icontains=query) |
+                Q(bio__icontains=query) |
+                Q(contact_person__icontains=query)
+            )  # Apply location filtering
+        ]
+
+        # Fetch services matching the query and location
+        services = [
+            {'name': (service.first_name + ' ' + service.last_name), 'id': service.uid,
+             'categories': [{'name': i.name, 'path': i.get_category_hierarchy()} for i in service.category.all()]}
+            for service in User.objects.filter(type="Service Provider").filter(
+                Q(first_name__icontains=query) |
+                Q(last_name__icontains=query) |
+                Q(firm_name__icontains=query) |
+                Q(bio__icontains=query)
+            )  # Apply location filtering
+        ]
 
         # Prepare the response data
         data = {
             'categories': categories,
             'brands': brands,
             'serviceProviders': services
-        }
+         }
         
-
         return JsonResponse(data)
 
     return JsonResponse({'error': 'Invalid request'}, status=400)
@@ -830,3 +891,4 @@ def connect_impression(request, brand_id):
     except:
         pass
     return JsonResponse({'status':True})
+

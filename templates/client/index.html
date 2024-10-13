@@ -70,14 +70,61 @@
     </div>
 
     <script>
-        async function fetchSuggestions(query) {
+        // Function to detect user location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+    
+        // Callback function if location is successfully obtained
+        function showPosition(position) {
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            
+            // Call fetchSuggestions and pass the location along with the query
+            fetchSuggestions(currentQuery, lat, lon);
+        }
+    
+        // Error handling for geolocation
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+    
+        let currentQuery = '';  // Store the current search query
+    
+        // Function to fetch suggestions with optional latitude and longitude
+        async function fetchSuggestions(query, lat = null, lon = null) {
+            currentQuery = query;  // Store the query for future reference
+    
             if (!query) {
                 document.getElementById('suggestions').classList.add('hidden');
                 return;
             }
     
+            // Build the query string with location if available
+            let url = `/api/suggestions?query=${encodeURIComponent(query)}`;
+            if (lat && lon) {
+                url += `&latitude=${lat}&longitude=${lon}`;
+            }
+    
             // Fetch data from your API
-            const response = await fetch(`/api/suggestions?query=${encodeURIComponent(query)}`);
+            const response = await fetch(url);
             const data = await response.json();
     
             // Display the suggestions
@@ -97,71 +144,46 @@
             if (data.categories.length) {
                 let categoryHtml = '<h3 class="font-bold pb-1 border-b border-gray-700">Categories</h3>';
                 data.categories.forEach(cat => {
-                    // Replace '/' with ' › ' in the hierarchy path
                     const formattedHierarchy = cat.hierarchy.replace(/\//g, ' › ');
-
                     categoryHtml += `<div class="p-2 px-3 rounded-lg text-sm hover:bg-gray-100 cursor-pointer hover:text-black">
                                         <a href="/category/${cat.hierarchy}">${formattedHierarchy}</a>
                                     </div>`;
                 });
                 document.getElementById('categories').innerHTML = categoryHtml;
             }
-
     
-           // Display brands
+            // Display brands
             if (data.brands.length) {
                 let brandHtml = '<h3 class="font-bold pb-1 border-b border-gray-700">Brands</h3>';
                 data.brands.forEach(brand => {
-                    // Show brand name (non-clickable)
-                    
                     if(brand.categories.length > 1) {
                         brandHtml += `<div class="p-2 px-3 rounded-lg">➔ <span class="font-bold px-1"> ${brand.name}</span>`;
-                        // List the parent category under the brand name
                         brand.categories.forEach(category => {
-                            // Extract the parent category by splitting the path
-                            const parentCategory = category.path.split('/').pop(); // Get the last part of the path
-    
-                            // Display only the brand name and parent category
+                            const parentCategory = category.path.split('/').pop();
                             brandHtml += `<div class="ml-4">➣ <a href="/material-provider/${category.path}/${brand.id}"> ${brand.name} (${parentCategory})</a></div>`;
                         });
-                        brandHtml += `</div>`; // Closing the brand container
-                    }
-                    else{
+                        brandHtml += `</div>`;
+                    } else {
                         brand.categories.forEach(category => {
-                            brandHtml += `<div class="p-2 px-3 rounded-lg">➔<a href="/material-provider/${category.path}/${brand.id}" class="font-bold px-1"> ${brand.name}</a>`;
-
-                            
-                                brandHtml += `</div>`; // Closing the brand container
-                            
+                            brandHtml += `<div class="p-2 px-3 rounded-lg">➔<a href="/material-provider/${category.path}/${brand.id}" class="font-bold px-1"> ${brand.name}</a></div>`;
                         });
                     }
-
-                    
                 });
                 document.getElementById('brands').innerHTML = brandHtml;
             }
-
+    
             // Display service providers
             if (data.serviceProviders.length) {
                 let serviceHtml = '<h3 class="font-bold pb-1 border-b border-gray-700">Service Providers</h3>';
                 data.serviceProviders.forEach(provider => {
-                    
-                    // If service provider has more than one category, display the provider name with parent categories
                     if (provider.categories.length > 1) {
                         serviceHtml += `<div class="p-2 px-3 rounded-lg">➔<span class="font-bold px-1"> ${provider.name}</span>`;
-                        
-                        // List the parent category under the service provider name
                         provider.categories.forEach(category => {
-                            // Extract the parent category by splitting the path
-                            const parentCategory = category.path.split('/').pop(); // Get the last part of the path
-
-                            // Display only the service provider name and parent category
+                            const parentCategory = category.path.split('/').pop();
                             serviceHtml += `<div class="ml-4">➣ <a href="/service-provider/${category.path}/${provider.id}"> ${provider.name} (${parentCategory})</a></div>`;
                         });
-                        serviceHtml += `</div>`; // Closing the service provider container
-                    } 
-                    // If only one category, display just the service provider name
-                    else {
+                        serviceHtml += `</div>`;
+                    } else {
                         provider.categories.forEach(category => {
                             serviceHtml += `<div class="p-2 px-3 rounded-lg">➔<a href="/service-provider/${category.path}/${provider.id}" class="font-bold px-1">${provider.name}</a></div>`;
                         });
@@ -169,13 +191,20 @@
                 });
                 document.getElementById('service-providers').innerHTML = serviceHtml;
             }
-
+    
             // If no suggestions, hide the dropdown
             if (!data.categories.length && !data.brands.length && !data.serviceProviders.length) {
                 suggestionsDiv.classList.add('hidden');
             }
         }
-       
+    
+        // Trigger location detection when needed (for example, when the user starts typing)
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const query = e.target.value;
+            getLocation();  // This will fetch the user's location and pass it to fetchSuggestions
+        });
+    
     </script>
+    
 {% endblock content %}
     

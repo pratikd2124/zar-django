@@ -1,0 +1,33 @@
+{% load static %}
+<button class="chatbot-toggler">
+    <span class="material-symbols-rounded"><img src="{% static 'images/robot.png' %}" style="width: 3rem;" alt="robot"></span>
+</button>
+
+    <div class="opening-screen">
+        <h1 style="color: black;font-size:25px;    font-weight: 900;">Zar Luxury</h1>
+        <img src="{% static 'images/robot.png' %}"  alt="Opening Image" class="opening-image">
+        <h5 style="color:black">Chat Bot Powered by <a href="https://Zenrevo.com" style="color:purple;">Zenrevo</a></h5>
+    </div>
+
+    <div class="chatbot">
+        <header>
+            <h2>Zar Luxury</h2>
+            <span class="close-btn material-symbols-outlined">X</span>
+        </header>
+        <ul class="chatbox">
+            <li class="chat incoming">
+                <span class="material-symbols-outlined">
+                    <img src="{% static 'images/ZAR-icon.ico' %}" style="width:2rem" alt="">
+                </span>
+                <p>Hi there! <br>How can I help you today?</p>
+            </li>
+        </ul>
+        <div class="chat-input">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <textarea placeholder="Enter a message..." class="block w-full p-4 ps-10 text-sm border border-gray-800 rounded-lg bg-gray-200/10 focus:outline-none focus:ring-1 focus:ring-blue-800 focus:border-blue-900" spellcheck="false" required></textarea>
+            <span id="send-btn" class="material-symbols-rounded">send</span>
+        </div>
+        <footer style="border: 1px solid black;">
+            <h2 style="color: black; display: flex; justify-content: center;">Powered by <a href="https://Zenrevo.com" target="_blank" style="color:purple;">Zenrevo</a></h2>
+        </footer>
+    </div>
