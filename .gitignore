@@ -7,3 +7,4 @@ db.sqlite3
 **/__pycache__/*db.sqlite3
 home/config/gacredientials.json
 
+home/config/gacredientials.json
